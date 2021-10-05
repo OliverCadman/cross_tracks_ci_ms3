@@ -31,7 +31,24 @@ Potential visitors to the website could include:
 
 #### User Stories
 
-1. 
+As a visitor using the website for the first time, I want...
+
+1. The purpose of the website to be clearly evident upon first visit, so I can be sure that my needs will be met.
+2. To be able to navigate the website intuitively and with ease, so that my time isn't wasted.
+3. To view the tracks easily using a minimal click count, so I can browse the tracks with ease.
+4. To be able to search for tracks based on different criteria (Genre, Artist Name, Year of Release), so I can search for tracks more granularly.
+5. To view comments on a particular track, so I find out what other users have to say about the music and engage with the community.
+
+
+As a returning visitor, I want...
+
+1. To be able to read and write comments on tracks which have been shared by others, so I can communicate and build relationships with other users of the website.
+2. The details of users who share a particular track to be clearly visible, so I can browse their profile and find out more about their musical tastes.
+3. To register and build my own profile, so I am able to locate my saved tracks.
+4. To be able to Add, Edit and Delete my own track information, so I can share tracks with other users of the website.
+5. To be able to save/like tracks which I come across when browsing, so they are saved to my profile.
+6. To be able to contact the site owner, so I can leave feedback. 
+
 
 
 ### Scope
