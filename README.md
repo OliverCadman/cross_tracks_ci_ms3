@@ -16,10 +16,22 @@ With this, the vision of Cross//Tracks is to provide users with the ability to f
 1. To create a robust platform, which they themselves can enjoy and discover music through.
 2. Implement CRUD (Create, Read, Update, Delete) functionality, allowing users to add, edit and delete their recommendations.
 3. Implement defensive design through application of data validation and authentication.
-4. To allow for simple and intuitive navigation of the website.
+4. To allow for simple and intuitive navigation, and understanding of the website.
 5. Establish Cross//Tracks as a trusted and recognisable brand to both new and returning visitors.
 6. Provide excellent UX to maximise visitor’s dwell time and minimise bounce rate, so as to maximise SEO and brand recognition.
-7. Employ a mobile-first design, whilst ensuring the website is responsive across all device sizes.
+7. Employ a mobile-first design, while ensuring the website is responsive across all device sizes.
+
+#### Target Audience
+
+Potential visitors to the website could include:
+
+1. Musicians/Music Fans - The Cross//Tracks website could serve as a solution, in the case when musicians (or fans of music) aren't able to meet in person and trade music and ideas. This case is particularly topical since the COVID-19 pandemic has resulted in the inability for people to meet up in person, and trade or enjoy music together.
+2. Younger people - The platform could be particularly attractive to the younger generation (16-25 years), who are generally more tech savvy, inclined to social media trends, and would welcome a social media platform centered around sharing and discovering music.
+
+
+#### User Stories
+
+1. 
 
 
 ### Scope
