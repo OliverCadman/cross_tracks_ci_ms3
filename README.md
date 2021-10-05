@@ -11,6 +11,16 @@ Having been an active member in the musical community for more than a decade, an
 
 With this, the vision of Cross//Tracks is to provide users with the ability to find music by recommendation, and to build a friendly community of like-minded musical aficionados, who can rely on eachother when they're in need of a new musical fix.
 
+#### Site Owner Goals
+
+1. To create a robust platform, which they themselves can enjoy and discover music through.
+2. Implement CRUD (Create, Read, Update, Delete) functionality, allowing users to add, edit and delete their recommendations.
+3. Implement defensive design through application of data validation and authentication.
+4. To allow for simple and intuitive navigation of the website.
+5. Establish Cross//Tracks as a trusted and recognisable brand to both new and returning visitors.
+6. Provide excellent UX to maximise visitor’s dwell time and minimise bounce rate, so as to maximise SEO and brand recognition.
+7. Employ a mobile-first design, whilst ensuring the website is responsive across all device sizes.
+
 
 ### Scope
 ### Structure
