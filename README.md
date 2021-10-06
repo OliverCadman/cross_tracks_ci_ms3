@@ -57,12 +57,13 @@ Below is a table to weight the importance of features in first release, against 
 | --- | --- | --- | --- |
 | Home Page, displaying all Tracks | 5 | 5 | In |
 | Register/Login/Logout | 5 | 5 | In |
-| Create, Read, Update, Delete Tracks | 5 | 5 | In |
+| Full CRUD Functionality | 5 | 5 | In |
+| Page for users to Create, Read, Update, Delete Tracks | 5 | 5 | In |
 | Display tracks on cards |  5 | 5 | In |
 | Click button on card to visit user's profile | 4 | 4 | In |
 | Search/Filter by Genre Functionality | 5 | 4 | In |
 | Profile Page for Users | 5 | 4 | In |
-| Upload and display profile picture | 3 | 3 | In |
+| Upload and display profile picture | 3 | 3 | Out |
 | Edit Profile Page | 5 | 5 | In |
 | Add user as friend | 4 | 2 | Out |
 | Message users directly | 3 | 1 | Out |
@@ -76,7 +77,30 @@ Below is a table to weight the importance of features in first release, against 
 
 ### Scope
 
-There are some trade-offs that will have to be made in order to complete the project in time for deployment.
+Unfortunately, some trade-offs will have to be considered in order complete the project in time for the production deployment deadline. Since the central focus of the platform is to share music, it would of course be ideal if users had the option to sample the tracks on display from the website directly. Perhaps there is a chance that this functionality can be achieved through the utilisation of Spotify's API; if there is sufficient time once the features for an MVP have been implemented, then efforts will indeed be made for a playback feature to be implemented. Furthermore, it would be ideal for users to be able to message eachother, so that communities can be grow and more music can be discovered. It is currently beyond the scope of the developer's skillset to implement a messaging service.
+
+Until then, below are the main features required for a Minimal Viable Product:
+
+1. Home Page displaying all tracks
+2. Ability to Register, Login and Logout
+3. Full CRUD Functionality to Add, Read, Edit and Delete Tracks.
+4. A page for users to add tracks to the platform.
+5. Cards to display tracks, with button to open modal/dropdown
+6. Modal window/dropdown to display more information and comments left about relative tracks.
+7. Search/Filter functionality
+8. Profile Page for Users
+9. Functionality for users to edit profile
+10. Contact Page
+11. 404 Page
+12. Admin Priveleges (to manage Genres and Tracks)
+
+Features for future releases:
+
+1. Enable users to play tracks directly from the website.
+2. Allow users to message eachother directly.
+3. Allow users to add eachother as friends.
+4. Display users Spotify playlists
+5. Upload and display a user profile picture
 
 
 ### Structure
