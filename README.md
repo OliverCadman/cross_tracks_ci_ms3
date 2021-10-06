@@ -49,9 +49,36 @@ As a returning visitor, I want...
 5. To be able to save/like tracks which I come across when browsing, so they are saved to my profile.
 6. To be able to contact the site owner, so I can leave feedback. 
 
+#### In or Out?
 
+Below is a table to weight the importance of features in first release, against the feasibility of implementation.
+
+| Feature/Opportunity | Importance (score out of 5) | Feasibility/Viability (score out of 5) | In or Out? |
+| --- | --- | --- | --- |
+| Home Page, displaying all Tracks | 5 | 5 | In |
+| Register/Login/Logout | 5 | 5 | In |
+| Create, Read, Update, Delete Tracks | 5 | 5 | In |
+| Display tracks on cards |  5 | 5 | In |
+| Click button on card to visit user's profile | 4 | 4 | In |
+| Search/Filter by Genre Functionality | 5 | 4 | In |
+| Profile Page for Users | 5 | 4 | In |
+| Upload and display profile picture | 3 | 3 | In |
+| Edit Profile Page | 5 | 5 | In |
+| Add user as friend | 4 | 2 | Out |
+| Message users directly | 3 | 1 | Out |
+| Play selected track directly from website | 4 | 1 | Out |
+| Display users Spotify playlist | 3 | 1 | Out |
+| Manage Tracks (as Admin) | 5 | 5 | In |
+| Manage Genres (as Admin) | 5 | 5 | In |
+| Contact Page | 4 | 5 | In |
+| 404 Page | 5 | 5 | In |
+| Fully Responsive Website | 5 | 5 | In |
 
 ### Scope
+
+There are some trade-offs that will have to be made in order to complete the project in time for deployment.
+
+
 ### Structure
 ### Skeleton
 ### Surface
