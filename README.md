@@ -104,6 +104,46 @@ Features for future releases:
 
 
 ### Structure
+
+The structure of the website is listed below, numbered in order from top to bottom level:
+
+1. Home Page
+    1. Navigation Bar/Brand Logo - A navigation bar will be displayed at the top level of the home page and all subsequent pages. This will collapse to a hamburger icon on mobile screen sizes.
+    2. Login Form - To provide a better UX, a small login form will be featured below the navigation bar, inviting the user to login (or register if they have not done so.)
+    3. Cards displaying added tracks - All tracks added by users will be featured in the centre of the page.
+    4. Modal window - Users can find out more about individual tracks by clicking on the cards, which will trigger a modal window showing more information about the relative track. Users will be able to like and comment on tracks, and a link to the profile of the user who added the track will also be displayed.
+    5. Filter by Genre - Tabs featuring Genre names will be present, filtering all tracks based on which Genre is selected.
+    6. Footer - Social Media/Spotify/Github Links will be displayed at the bottom level of the Home Page.
+
+2. Login Page - As well as being able to login directly from the home page, users will also be able to visit a dedicated Login Page.
+    1. Navigation Bar
+    2. Login Form
+    3. Footer
+
+3. Registration Page
+    1. Navigation Bar
+    2. Registration Form (with breadcrumbs to provide feedback)
+    3. Footer
+
+4. Profile Page - Here users can display and edit their own profile for other users to view. Profile pages can be visited by clicking a link on the modal windows featured in the website's Home Page. 
+    1. Navigation Bar
+    2. Profile Image
+    3. Details - First Name, Last Name, Age, About Me
+    4. Personal Tracklist, a list of all tracks added by this user
+    5. Subject to time before deadline: A spotify player featuring users spotify playlists (if they fill in their Spotify username upon registration)
+
+5. 'Add a Track' Page
+    1. Navigation Bar
+    2. Form to add details of a track
+    3. Footer
+
+6. Contact Page
+    1. Navigation Bar
+    2. Short paragraph inviting users to submit any questions of feedback
+    3. Contact Form
+    4. Footer
+    
+
 #### Database
 
 The noSQL database MongoDB Atlas will handle all the data being used in the Cross//Tracks website, including user details, track information and comments. 
