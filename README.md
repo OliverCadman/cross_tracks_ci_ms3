@@ -109,7 +109,7 @@ Features for future releases:
 The noSQL database MongoDB Atlas will handle all the data being used in the Cross//Tracks website, including user details, track information and comments. 
 
 The ERD (Entity Relationship Diagram) below depicts the data, and the relationship between specific items of data.
-![Entity Relationship Diagram for Cross//Tracks database](readme-images/er-diagram/cross-tracks-erd.pdf)
+![Entity Relationship Diagram for Cross//Tracks database](readme-images/er-diagram/cross-tracks-erd.png)
 
 
 
