@@ -161,7 +161,7 @@ The structure of the website is listed below, numbered in order from top to bott
 The noSQL database MongoDB Atlas will handle all the data being used in the Cross//Tracks website, including user details, track information and comments. 
 
 The ERD (Entity Relationship Diagram) below depicts the data, and the relationship between specific items of data.
-![Entity Relationship Diagram for Cross//Tracks database](readme-images/er-diagram/cross-tracks-erd.png)
+![Entity Relationship Diagram for Cross//Tracks database](documentation/readme-images/er-diagram/cross-tracks-erd.png)
 
 ### Skeleton
 #### Wireframes
