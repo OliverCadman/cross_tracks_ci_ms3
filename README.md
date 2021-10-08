@@ -7,7 +7,7 @@ The platform will allow users to browse a complete list of shared tracks, search
 ## UX
 ### Strategy
 #### Vision
-Having been an active member in the musical community for more than a decade, and being a life long lover of music, there have been many occasions where I have reached a plateau when trying to find new artists and music that I really enjoy and get stuck into. Discovering new music often involves endless scouring of music label websites, YouTube and Spotify. While it is indeed a fun past time, it is rare that an artist or track is discovered that truly speaks to me. However, there is of course another way to discover music, which is through word of mouth; of recommandation. It's much more often that I find great music when I am listening to, or talking about music with a friend. As well as being a more efficient way to discover great music, it's also a lot more enjoyable to appreciate music around other music lovers.
+Having been an active member in the musical community for more than a decade, and being a life long lover of music, there have been many occasions where I have reached a plateau when trying to find new artists and music that I really enjoy and get stuck into. Discovering new music often involves endless scouring of music label websites, YouTube and Spotify. While it is indeed a fun past time, it is rare that an artist or track is discovered that truly speaks to me. However, there is of course another way to discover music, which is through word of mouth; of recommendation. It's much more often that I find great music when I am listening to, or talking about music with a friend. As well as being a more efficient way to discover great music, it's also a lot more enjoyable to appreciate music around other music lovers.
 
 With this, the vision of Cross//Tracks is to provide users with the ability to find music by recommendation, and to build a friendly community of like-minded musical aficionados, who can rely on eachother when they're in need of a new musical fix.
 
@@ -25,8 +25,9 @@ With this, the vision of Cross//Tracks is to provide users with the ability to f
 
 Potential visitors to the website could include:
 
-1. Musicians/Music Fans - The Cross//Tracks website could serve as a solution, in the case when musicians (or fans of music) aren't able to meet in person and trade music and ideas. This case is particularly topical since the COVID-19 pandemic has resulted in the inability for people to meet up in person, and trade or enjoy music together.
+1. Music Fans - The Cross//Tracks website could serve as a solution, in the case where people who attend listening parties aren't able to meet in person and trade music and ideas. This case is particularly topical since the COVID-19 pandemic has resulted in the inability for people to meet up in person, and trade or enjoy music together.
 2. Younger people - The platform could be particularly attractive to the younger generation (16-25 years), who are generally more tech savvy, inclined to social media trends, and would welcome a social media platform centered around sharing and discovering music.
+3. Musicians - Musicians may use the website to market their own tracks using the Cross//Tracks platform.
 
 
 #### User Stories
@@ -35,9 +36,10 @@ As a visitor using the website for the first time, I want...
 
 1. The purpose of the website to be clearly evident upon first visit, so I can be sure that my needs will be met.
 2. To be able to navigate the website intuitively and with ease, so that my time isn't wasted.
-3. To view the tracks easily using a minimal click count, so I can browse the tracks with ease.
+3. To view tracks without having to register, so I can determine whether the website suits my needs.
 4. To be able to search for tracks based on different criteria (Genre, Artist Name, Year of Release), so I can search for tracks more granularly.
 5. To view comments on a particular track, so I find out what other users have to say about the music and engage with the community.
+6. To see a description of how to use the service, so I can be aware of all features on offer.
 
 
 As a returning visitor, I want...
@@ -48,6 +50,14 @@ As a returning visitor, I want...
 4. To be able to Add, Edit and Delete my own track information, so I can share tracks with other users of the website.
 5. To be able to save/like tracks which I come across when browsing, so they are saved to my profile.
 6. To be able to contact the site owner, so I can leave feedback. 
+7. To be able to reset my password so I can access the website if I forget my password.
+
+As a musician using the website, I want...
+
+1. To be able to display that I am an artist to other users of the platform, so I can market myself and grow my fanbase.
+2. To view and edit my tracks easily, so I can manage my online presence.
+3. A filter option for 'Cross//Tracks Artists', so users can easily find tracks added by me.
+4. View how many 'likes' my tracks have, so I can determine how well my fanbase is growing.
 
 #### In or Out?
 
@@ -61,8 +71,9 @@ Below is a table to weight the importance of features in first release, against 
 | Page for users to Create, Read, Update, Delete Tracks | 5 | 5 | In |
 | Display tracks on cards |  5 | 5 | In |
 | Click button on card to visit user's profile | 4 | 4 | In |
-| Search/Filter by Genre Functionality | 5 | 4 | In |
+| Search/Filter by Genre/Artist Functionality | 5 | 4 | In |
 | Profile Page for Users | 5 | 4 | In |
+| 'Like Button' for Tracks | 4 | 4 | In |
 | Upload and display profile picture | 3 | 3 | Out |
 | Edit Profile Page | 5 | 5 | In |
 | Add user as friend | 4 | 2 | Out |
@@ -88,11 +99,12 @@ Until then, below are the main features required for a Minimal Viable Product:
 5. Cards to display tracks, with button to open modal/dropdown
 6. Modal window/dropdown to display more information and comments left about relative tracks.
 7. Search/Filter functionality
-8. Profile Page for Users
-9. Functionality for users to edit profile
-10. Contact Page
-11. 404 Page
-12. Admin Priveleges (to manage Genres and Tracks)
+8. "Like Button", with likes displayed on track cards.
+9. Profile Page for Users
+10. Functionality for users to edit profile
+11. Contact Page
+12. 404 Page
+13. Admin Priveleges (to manage Genres and Tracks)
 
 Features for future releases:
 
@@ -151,8 +163,11 @@ The noSQL database MongoDB Atlas will handle all the data being used in the Cros
 The ERD (Entity Relationship Diagram) below depicts the data, and the relationship between specific items of data.
 ![Entity Relationship Diagram for Cross//Tracks database](readme-images/er-diagram/cross-tracks-erd.png)
 
-
-
-
 ### Skeleton
+#### Wireframes
+
+Links to the wireframes are below:
+
+[Home Page](documentation/wireframes/cross-tracks-homepage.pdf)
+
 ### Surface
