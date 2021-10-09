@@ -168,6 +168,8 @@ The ERD (Entity Relationship Diagram) below depicts the data, and the relationsh
 
 Links to the wireframes are below:
 
-[Home Page](documentation/wireframes/cross-tracks-homepage.pdf)
+* [Home Page](documentation/wireframes/cross-tracks-homepage.pdf)
+* [Add Track Page](documentation/wireframes/cross-tracks-add-track.pdf)
+* [Browse Tracks Page](documentation/wireframes/cross-tracks-add-track.pdf)
 
 ### Surface
