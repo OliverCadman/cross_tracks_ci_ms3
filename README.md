@@ -173,5 +173,8 @@ Links to the wireframes are below:
 * [Login Page](documentation/wireframes/cross-tracks-login.pdf)
 * [Add Track Page](documentation/wireframes/cross-tracks-add-track.pdf)
 * [Browse Tracks Page](documentation/wireframes/cross-tracks-search-tracks.pdf)
-
+* [My Tracks Page](documentation/wireframes/cross-tracks-my-tracks.pdf)
+* [User Profile](documentation/wireframes/cross-tracks-user-profile.pdf)
+* [User Profile (editable)](documentation/wireframes/cross-tracks-editable-profile.pdf)
+* [Edit Profile](documentation/wireframes/cross-tracks-profile-edit.pdf)
 ### Surface
