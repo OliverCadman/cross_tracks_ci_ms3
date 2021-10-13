@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,10 +12,64 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--MaterializeCSS CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>Cross//Tracks</title>
 </head>
 
 <body>
+    <!-- Dropdown Menu for Account Link -->
+    <ul id="account-dropdown-desktop" class="dropdown-content">
+        <li><a href="#!">My Profile</a></li>
+        <li><a href="#!">My Tracks</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Logout</a></li>
+    </ul>
+    <!--Navbar for Laptop/Desktop devices-->
+    <nav class="nav-extended">
+        <div class="nav-wrapper">
+
+            <a href="#" class="brand-logo">
+                Cross//Tracks
+            </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Add A Track</a>
+                </li>
+                <li>
+                    <a href="#">Browse All Tracks</a>
+                </li>
+                <li>
+                    <a class="dropdown-trigger" href="#!" data-target="account-dropdown-desktop">My Account</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Navbar for Mobile Devices -->
+    <ul id="mobile-demo" class="sidenav">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a href="#">Add A Track</a>
+        </li>
+        <li>
+            <a href="#">Browse All Tracks</a>
+        </li>
+        <li>
+            <a class="dropdown-trigger" href="#!" data-target="account-dropdown-mobile">My Account</a>
+        </li>
+    </ul>
+    <ul id="account-dropdown-mobile" class="dropdown-content">
+        <li><a href="#!">My Profile</a></li>
+        <li><a href="#!">My Tracks</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Logout</a></li>
+    </ul>
+
 
 
 
@@ -23,6 +78,7 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!--MaterializeCSS JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{url_for('static', filename='js/initialization.js')}}"></script>
 </body>
 
 </html>
