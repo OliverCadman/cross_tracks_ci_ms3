@@ -25,6 +25,10 @@ def create_app(default_config=Config):
     # Initialise Mongo Database
     mongo.init_app(app)
 
+    # Import and Register blueprints
+    from application.main.views import main as main_bp
+    app.register_blueprint(main_bp)
+
     return app
 
 
