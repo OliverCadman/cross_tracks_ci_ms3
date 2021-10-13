@@ -3,7 +3,7 @@ Sets the configuration variables needed for
 the application to run. 
 
 class 'Config' passed into create_app()
-function in "application/__init__.py"
+function in "application?__init__.py"
 
 """
 
