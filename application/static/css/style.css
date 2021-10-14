@@ -1,0 +1,69 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Quicksand:wght@300;400&display=swap');
+
+
+body {
+    height: 100%;
+    position: relative;
+}
+
+nav .brand-logo {
+    padding-left: 25px;
+    font-family: "Alata", sans-serif;
+    width: 97%;
+
+}
+
+nav a {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+
+
+
+.background-main {
+    background: url("../images/design2.png") no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero-header {
+    font-family: "Alata", sans-serif;
+}
+
+.hero-header p {
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.hero-inner {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    height: 300px;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+/* 
+.opaque-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.301);
+} */
