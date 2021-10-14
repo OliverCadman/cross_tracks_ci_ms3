@@ -27,7 +27,10 @@ def create_app(default_config=Config):
 
     # Import and Register blueprints
     from application.main.views import main as main_bp
+    from application.users.views import users as users
     app.register_blueprint(main_bp)
+    app.register_blueprint(users)
+
 
     return app
 
