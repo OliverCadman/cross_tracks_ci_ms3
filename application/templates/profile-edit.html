@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col s12">
+            {% if session.user %}
+            <p>Hello {{session.user}}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
