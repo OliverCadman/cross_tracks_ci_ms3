@@ -46,14 +46,17 @@ def register_user():
         new_user.register()
         flash("Registration Successful")
         session["user"] = request.form.get("username").lower()
-        return redirect(url_for('users.build_profile'))
+        
+        return redirect(url_for('users.build_profile', username=username))
     
     return render_template('register.html')
 
 
 
-@users.route("/profile-edit")
-def build_profile():
+@users.route("/profile-edit/<username>")
+def build_profile(username):
+    current_user = User.find_user_by_username(username)
+    
     return render_template('profile-edit.html')
 
 
