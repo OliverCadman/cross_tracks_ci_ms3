@@ -25,10 +25,10 @@
         <li><a href="{{url_for('users.logout')}}">Logout</a></li>
     </ul>
     <!--Navbar for Laptop/Desktop devices-->
-    <nav class="nav-extended browser-default">
+    <nav class="navbar nav-extended browser-default">
         <div class="browser-default">
 
-            <a href="#" class="brand-logo">
+            <a href="{{url_for('main.index')}}" class="brand-logo">
                 Cross//Tracks
             </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
@@ -44,17 +44,20 @@
                     <a href="#">Add A Track</a>
                 </li>
                 {% endif %}
+                {% if not session.user %}
                 <li>
-                    <a class="modal-trigger" href="#register-modal">Register</a>
+                    <a href="#register-modal" class="modal-trigger">Register</a>
                 </li>
                 <li>
                     <a class="modal-trigger" href="">Login</a>
                 </li>
+                {% endif %}
                 {% if session.user %}
                 <li>
                     <a class="dropdown-trigger" href="#!" data-target="account-dropdown-desktop">My Account</a>
                 </li>
                 {% endif %}
+
             </ul>
         </div>
     </nav>
@@ -67,26 +70,52 @@
         <li>
             <a href="#">Browse All Tracks</a>
         </li>
+        {% if session.user %}
         <li>
             <a href="#">Add A Track</a>
         </li>
+        {% endif %}
+        {% if not session.user %}
+        <li>
+            <a href="#register-modal" class="modal-trigger">Register</a>
+        </li>
+        <li>
+            <a href="#" class="modal-trigger">Login</a>
+        </li>
+        {% endif %}
         <li>
             <a class="dropdown-trigger" href="#!" data-target="account-dropdown-mobile">My Account</a>
         </li>
     </ul>
+    {% if session.user %}
     <ul id="account-dropdown-mobile" class="dropdown-content">
         <li><a href="#!">My Profile</a></li>
         <li><a href="#!">My Tracks</a></li>
         <li class="divider"></li>
         <li><a href="{{url_for('users.logout')}}">Logout</a></li>
     </ul>
+    {% endif %}
+    <main>
+        <div class="hero-section background-main">
 
-    {% block content %}
-    {% endblock %}
+            {% block content %}
+            {% endblock %}
+        </div>
 
+    </main>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="row flash-message">
+        {% for message in messages %}
+        <p>{{message}}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
     <!--Register Modal-->
-    <div id="register-modal" class="modal">
+    <div id="register-modal" class="modal bottom-sheet">
         <div class="modal-content">
             <h4>Register</h4>
             <form action="{{url_for('users.register_user')}}" method="POST">
@@ -117,19 +146,7 @@
             </form>
         </div>
     </div>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="row flash-message">
-        {% for message in messages %}
-        <p>{{message}}</p>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
 
-    <footer>
-
-    </footer>
 
 
 
