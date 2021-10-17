@@ -53,10 +53,31 @@ def register_user():
 
 
 
-@users.route("/profile-edit/<username>")
+@users.route("/profile-edit/<username>", methods=["GET", "POST"])
 def build_profile(username):
-    current_user = User.find_user_by_username(username)
+    """
+    build_profile() runs after initial registration, to gather information
+    to be displayed on user's profile page.
+    """
     
+    if request.method == "POST":
+
+        profile_info = {
+            "first_name": request.form.get("first_name"),
+            "last_name": request.form.get("last_name"),
+            "date_of_birth": request.form.get("date_of_birth"),
+            "city": request.form.get("city"),
+            "country": request.form.get("country"),
+            "about_user": request.form.get("about_user"),
+            "profile_image": request.form.get("profile_image"),
+            "spotify_userID": request.form.get("spotify_userID"),
+            "display_spotify_playlists": request.form.get("display_spotify_playlists"),
+            "is_artist": request.form.get("is_artist")
+
+        }
+
+        User.complete_user_profile(username, profile_info)
+
     return render_template('profile-edit.html')
 
 
