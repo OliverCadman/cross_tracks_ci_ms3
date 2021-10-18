@@ -7,13 +7,15 @@ updated and deleted to MongoDB, as well as password
 validation.
 
 """
-
-from datetime import _date
+import os
 from application import mongo
 from bson.objectid import ObjectId
-from werkzeug import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, login_user
+import re
 
-class User:
+
+class User(UserMixin):
     """
     Class represents the User instance
 
@@ -83,31 +85,39 @@ class User:
             Deletes user from database
      """
 
-    def __init__(self, _id, username, email_address, password,
+    def __init__(self, username, password, email_address,
                 first_name=None, last_name=None, date_of_birth=None,
                 city=None, country=None, about_user=None, 
-                profile_image=None, is_artist=None, spotify_userID=None,):
+                profile_image=None, is_artist=None, spotify_userID=None,
+                display_spotify_playlists=None, _id=None):
 
         """
         Initialise user instance
         """
-    
-        self.id = _id
+
         self.username = username
-        self.email = email_address
+        self.email_address = email_address
         self.password = generate_password_hash(password)
         self.first_name = first_name if isinstance(first_name, str) else str("")
         self.last_name = last_name if isinstance(last_name, str) else str("")
         self.date_of_birth = date_of_birth if isinstance(date_of_birth, str) else str("")
         self.city = city if isinstance(city, str) else str("")
         self.country = country if isinstance(country, str) else str("")
+        self.about_user = about_user if isinstance (about_user, str) else str("")
         self.profile_image = profile_image if isinstance(profile_image, bytes) else None
         self.is_artist = is_artist if isinstance(is_artist, bool) else False
         self.spotify_userID = spotify_userID if isinstance(spotify_userID, str) else str("")
+        self.display_spotify_playlists = display_spotify_playlists if isinstance(
+            display_spotify_playlists, bool) else False
+        self.id = _id
 
     
     
     def get_user_info(self):
+        """
+        Collects and prepares user input in
+        register and profile build functions.
+        """
 
         user_info = {
             "username": self.username,
@@ -118,12 +128,43 @@ class User:
             "date_of_birth": self.date_of_birth,
             "city": self.city,
             "country": self.country,
+            "about_user": self.about_user,
             "profile_image": self.profile_image,
             "is_artist": self.is_artist,
-            "spotify_userID": self.spotify_userID
+            "spotify_userID": self.spotify_userID,
+            "display_spotify_playlists": self.display_spotify_playlists,
+            
         }
 
         return user_info
+
+    @staticmethod
+    def find_user_by_id(id):
+        """
+        Queries MongoDB to locate a user by their ID
+        Utilised in users/views.py in functions:
+
+        edit_profile
+        """
+        return mongo.db.users.find_one({"_id": ObjectId(id)})
+
+    @staticmethod
+    def complete_user_profile(username, profile_info):
+
+        
+        mongo.db.users.update_one({"username": username}, {"$set": profile_info})
+
+
+
+    @staticmethod
+    def find_user_by_username(username):
+        """
+        Queries MongoDB for username
+        Utilised in users/views.py in register 
+        function, to determine if username
+        already exists.
+        """
+        return mongo.db.users.find_one({"username": username})
 
     def register(self):
         """
@@ -133,7 +174,52 @@ class User:
 
         user_data = self.get_user_info()
 
-        mongo.db.insert_one(user_data)
+        mongo.db.users.insert_one(user_data)
+
+
+    @staticmethod
+    def validate_password_match(password, confirm_password):
+
+        return password == confirm_password
+        
+        
+    @staticmethod
+    def validate_password_format(password):
+
+        pattern = "^[a-zA-Z0-9]{8,15}$"
+        return re.search(pattern, password)
+
+    @staticmethod
+    def allowed_file(filename):
+        ALLOWED_EXTENSIONS = set(["txt", "pdf", "png", "jpg", "jpeg", "gif"])
+        return "." in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+    @staticmethod
+    def add_profile_image(username, profile_image):
+
+        mongo.save_file(profile_image.filename, profile_image)
+        mongo.db.users.update_one({"username": username},
+                                  {"$set": profile_image})
+
+     
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def login(self):
+
+        login_request = User.find_user_by_username(self.username)
+
+        if login_request and check_password_hash(login_request["password"], self.password):
+           return login_user(User(self.username))
+        else: 
+            return False
+            
+
+
+    
+
+
+
 
     
 
