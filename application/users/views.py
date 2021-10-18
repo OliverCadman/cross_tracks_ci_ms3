@@ -91,6 +91,8 @@ def build_profile(username):
             profile_image.save(os.path.join(os.environ.get("UPLOAD_FOLDER")), filename)
         elif not profile_image:
              User.complete_user_profile(username, profile_info)
+             return redirect(url_for("users.user_profile", username = username))
+
         else:
             flash('Invalid filetype. Only txt, pdf, png, jpg, jpeg and gif files allowed')
             return redirect(url_for('users.build_profile', username=username))
@@ -139,13 +141,18 @@ def login():
     return render_template("login.html")       
         
                
-                
-
 @users.route("/logout")
 def logout():
     session.pop("user")
     flash("You have been logged out")
     return redirect(url_for('main.index'))
-    
+
+@users.route("/user-profile/<username>")
+def user_profile(username):
+
+    current_user = User.find_user_by_username(username)
+
+    if current_user:
+        return render_template("user-profile.html", username=current_user)    
    
 
