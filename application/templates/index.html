@@ -1,23 +1,66 @@
 {% extends "base.html" %}
 {% block content %}
 <section>
-    <div class="hero-section background-main">
-        <div class="container hero-container">
-            <div class="row">
-                <div class="col s12 hero-header">
-                    <h1 class="center-align">Cross//Tracks</h1>
-                    <p class="center-align">Make new connections through new music.</p>
-                    <div class="hero-inner">
-                        <button class="btn">Find Me A Track</button>
-                    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="container">
+        <div class="row flashes center-align">
+            <p>{{message}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="container hero-container">
+        <div class="row">
+            <div class="col s12 hero-header card-panel">
+                <h1 class="center-align">Cross//Tracks</h1>
+                <p class="center-align">Make new connections through new music.</p>
+                <div class="hero-inner">
+                    <button class="btn">Find Me A Track</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 info-card card-panel center-align">
+                <h2 class="info-header">About Us</h2>
+                <p>Cross//Tracks is an online community.</p>
+                <p>A hub where music can be shared, discovered and enjoyed.</p>
+            </div>
+            <div class="col s12 m6 card-panel info-card center-align">
+                <h2 class="info-header">Using Cross//Tracks</h2>
+                <ul>
+                    <li>
+                        Browse All Tracks (no need to register!)
+                    </li>
+                    <li>
+                        Filter Tracks by Genre, or Year of Release
+                    </li>
+                    <li>
+                        Share your tracks with the community
+                    </li>
+                    <li>
+                        Save tracks and collect them in your profile
+                    </li>
+                    <li>
+                        Message other users and make new friends
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 hide-on-med-and-up">
+                <p>Ready to Discover?</p>
+                <a class="btn">Sign Up Here</a>
             </div>
         </div>
     </div>
 
 
 
-    </div>
+
+
 </section>
 
 
