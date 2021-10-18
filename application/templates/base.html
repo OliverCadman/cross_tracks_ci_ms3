@@ -18,7 +18,7 @@
 <body>
     <!-- Dropdown Menu for Account Link -->
     <ul id="account-dropdown-desktop" class="dropdown-content">
-        <li><a href="#!">My Profile</a></li>
+        <li><a href="{{url_for('users.user_profile', username=session['user'])}}">My Profile</a></li>
         <li><a href="#!">My Tracks</a></li>
         <li class="divider"></li>
         <li><a href="{{url_for('users.logout')}}">Logout</a></li>
@@ -88,14 +88,14 @@
     </ul>
     {% if session.user %}
     <ul id="account-dropdown-mobile" class="dropdown-content">
-        <li><a href="#!">My Profile</a></li>
+        <li><a href="{{url_for('users.user_profile', username=session['user'])}}">My Profile</a></li>
         <li><a href="#!">My Tracks</a></li>
         <li class="divider"></li>
         <li><a href="{{url_for('users.logout')}}">Logout</a></li>
     </ul>
     {% endif %}
     <main>
-        <div class="hero-section background-main">
+        <div>
 
             {% block content %}
             {% endblock %}
