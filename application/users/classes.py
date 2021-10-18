@@ -85,7 +85,7 @@ class User(UserMixin):
             Deletes user from database
      """
 
-    def __init__(self, username, password, email_address,
+    def __init__(self, username, password, email_address=None,
                 first_name=None, last_name=None, date_of_birth=None,
                 city=None, country=None, about_user=None, 
                 profile_image=None, is_artist=None, spotify_userID=None,
@@ -96,8 +96,8 @@ class User(UserMixin):
         """
 
         self.username = username
-        self.email_address = email_address
         self.password = generate_password_hash(password)
+        self.email_address = email_address if isinstance(email_address, str) else str("")
         self.first_name = first_name if isinstance(first_name, str) else str("")
         self.last_name = last_name if isinstance(last_name, str) else str("")
         self.date_of_birth = date_of_birth if isinstance(date_of_birth, str) else str("")
@@ -137,6 +137,9 @@ class User(UserMixin):
         }
 
         return user_info
+
+    def get_id(self):
+        return self.username
 
     @staticmethod
     def find_user_by_id(id):
@@ -201,19 +204,11 @@ class User(UserMixin):
         mongo.db.users.update_one({"username": username},
                                   {"$set": profile_image})
 
-     
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    @staticmethod
+    def check_password(password_hash, password):
+        return check_password_hash(password_hash, password)
 
-    def login(self):
-
-        login_request = User.find_user_by_username(self.username)
-
-        if login_request and check_password_hash(login_request["password"], self.password):
-           return login_user(User(self.username))
-        else: 
-            return False
-            
+  
 
 
     

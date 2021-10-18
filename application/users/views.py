@@ -101,9 +101,42 @@ def build_profile(username):
 
     return render_template('profile-edit.html')
 
+@login_manager.user_loader
+def load_user(username):
 
+    user = mongo.db.users.find_one({"username": username.lower()})
+
+    if not user:
+        return None
+    else:
+        return User(username=user["username"])
+
+
+@users.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        login_username = request.form.get("username")
+        login_password = request.form.get("password")
+
+        user = User.find_user_by_username(login_username.lower())
+        if user:
+            password_check = User.check_password(
+                             user["password"],
+                             login_password)
+            if password_check:
+                session["user"] = login_username
+                flash("Welcome back {}".format(login_username))
+                return redirect(url_for("main.index"))
+            
+            else:
+                flash("Invalid username/password")
+                return redirect(url_for("users.login"))
+        else:
+            flash("Invalid username/password")
+            return redirect(url_for("users.login"))
 
         
+    return render_template("login.html")       
         
                
                 
