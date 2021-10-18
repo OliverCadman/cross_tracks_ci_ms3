@@ -6,12 +6,19 @@ Sub-module to handle routes and data input relative
 to user details.
 """
 
+import os
 from flask import (Blueprint, render_template,
                    url_for, flash, redirect, request,
                    session)
 from application.users.classes import User
+from werkzeug.utils import secure_filename
+from application import (login_manager, mongo)
+from flask_login import current_user 
+
+
 
 users = Blueprint('users', __name__)
+
 
 
 @users.route("/register", methods=["GET", "POST"])
@@ -53,13 +60,14 @@ def register_user():
 
 
 
+
 @users.route("/profile-edit/<username>", methods=["GET", "POST"])
 def build_profile(username):
     """
     build_profile() runs after initial registration, to gather information
     to be displayed on user's profile page.
     """
-    
+
     if request.method == "POST":
 
         profile_info = {
@@ -69,21 +77,39 @@ def build_profile(username):
             "city": request.form.get("city"),
             "country": request.form.get("country"),
             "about_user": request.form.get("about_user"),
-            "profile_image": request.form.get("profile_image"),
             "spotify_userID": request.form.get("spotify_userID"),
             "display_spotify_playlists": request.form.get("display_spotify_playlists"),
             "is_artist": request.form.get("is_artist")
 
         }
 
-        User.complete_user_profile(username, profile_info)
+        profile_image = request.files["profile_image"]
+        filename = secure_filename(profile_image.filename)
+
+
+        if profile_image and User.allowed_file(profile_image.filename):
+            profile_image.save(os.path.join(os.environ.get("UPLOAD_FOLDER")), filename)
+        elif not profile_image:
+             User.complete_user_profile(username, profile_info)
+        else:
+            flash('Invalid filetype. Only txt, pdf, png, jpg, jpeg and gif files allowed')
+            return redirect(url_for('users.build_profile', username=username))
+            
+
+      
+            
 
     return render_template('profile-edit.html')
 
 
+
+        
+        
+               
+                
+
 @users.route("/logout")
 def logout():
-
     session.pop("user")
     flash("You have been logged out")
     return redirect(url_for('main.index'))
