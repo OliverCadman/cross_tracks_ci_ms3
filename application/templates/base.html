@@ -40,7 +40,7 @@
                 </li>
                 {% if session.user %}
                 <li>
-                    <a href="#">Add A Track</a>
+                    <a href="{{url_for('tracks.add_track')}}">Add A Track</a>
                 </li>
                 {% endif %}
                 {% if not session.user %}
@@ -59,44 +59,42 @@
 
             </ul>
         </div>
-    </nav>
-
-    <!--Navbar for Mobile Devices -->
-    <ul id="mobile-demo" class="sidenav">
-        <li>
-            <a href="#">Home</a>
-        </li>
-        <li>
-            <a href="#">Browse All Tracks</a>
-        </li>
+        <!--Navbar for Mobile Devices -->
+        <ul id="mobile-demo" class="sidenav">
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="#">Browse All Tracks</a>
+            </li>
+            {% if session.user %}
+            <li>
+                <a href="{{url_for('tracks.add_track')}}">Add A Track</a>
+            </li>
+            {% endif %}
+            {% if not session.user %}
+            <li>
+                <a href="#register-modal" class="modal-trigger">Register</a>
+            </li>
+            <li>
+                <a href="{{url_for('users.login')}}">Login</a>
+            </li>
+            {% endif %}
+            <li>
+                <a class="dropdown-trigger" href="#!" data-target="account-dropdown-mobile">My Account</a>
+            </li>
+        </ul>
         {% if session.user %}
-        <li>
-            <a href="#">Add A Track</a>
-        </li>
+        <ul id="account-dropdown-mobile" class="dropdown-content">
+            <li><a href="{{url_for('users.user_profile', username=session['user'])}}">My Profile</a></li>
+            <li><a href="#!">My Tracks</a></li>
+            <li class="divider"></li>
+            <li><a href="{{url_for('users.logout')}}">Logout</a></li>
+        </ul>
         {% endif %}
-        {% if not session.user %}
-        <li>
-            <a href="#register-modal" class="modal-trigger">Register</a>
-        </li>
-        <li>
-            <a href="{{url_for('users.login')}}">Login</a>
-        </li>
-        {% endif %}
-        <li>
-            <a class="dropdown-trigger" href="#!" data-target="account-dropdown-mobile">My Account</a>
-        </li>
-    </ul>
-    {% if session.user %}
-    <ul id="account-dropdown-mobile" class="dropdown-content">
-        <li><a href="{{url_for('users.user_profile', username=session['user'])}}">My Profile</a></li>
-        <li><a href="#!">My Tracks</a></li>
-        <li class="divider"></li>
-        <li><a href="{{url_for('users.logout')}}">Logout</a></li>
-    </ul>
-    {% endif %}
+    </nav>
     <main>
-        <div>
-
+        <div class="content">
             {% block content %}
             {% endblock %}
         </div>
