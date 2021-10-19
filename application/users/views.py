@@ -11,6 +11,7 @@ from flask import (Blueprint, render_template,
                    url_for, flash, redirect, request,
                    session)
 from application.users.classes import User
+from application.helpers.users import calculate_user_age
 from werkzeug.utils import secure_filename
 from application import (login_manager, mongo)
 from flask_login import current_user 
@@ -152,7 +153,15 @@ def user_profile(username):
 
     current_user = User.find_user_by_username(username)
 
+    user_dob = current_user["date_of_birth"]
+    user_age = None
+    
+    if user_dob:
+        user_dob = tuple(map(int, user_dob.split('-')))
+        user_age = calculate_user_age(user_dob)
+       
+
     if current_user:
-        return render_template("user-profile.html", username=current_user)    
+        return render_template("user-profile.html", username=current_user, date_of_birth=user_age)    
    
 
