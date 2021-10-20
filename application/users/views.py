@@ -11,6 +11,7 @@ from flask import (Blueprint, render_template,
                    url_for, flash, redirect, request,
                    session)
 from application.users.classes import User
+from application.tracks.classes import Track
 from application.helpers.users import calculate_user_age
 from werkzeug.utils import secure_filename
 from application import (login_manager, mongo)
@@ -83,25 +84,11 @@ def build_profile(username):
             "is_artist": request.form.get("is_artist")
 
         }
+        
+        User.complete_user_profile(username, profile_info)
+        return redirect(url_for("users.user_profile", username = username))
 
-        profile_image = request.files["profile_image"]
-        filename = secure_filename(profile_image.filename)
-
-
-        if profile_image and User.allowed_file(profile_image.filename):
-            profile_image.save(os.path.join(os.environ.get("UPLOAD_FOLDER")), filename)
-        elif not profile_image:
-             User.complete_user_profile(username, profile_info)
-             return redirect(url_for("users.user_profile", username = username))
-
-        else:
-            flash('Invalid filetype. Only txt, pdf, png, jpg, jpeg and gif files allowed')
-            return redirect(url_for('users.build_profile', username=username))
             
-
-      
-            
-
     return render_template('profile-edit.html')
 
 @login_manager.user_loader
@@ -150,18 +137,32 @@ def logout():
 
 @users.route("/user-profile/<username>")
 def user_profile(username):
-
+    """
+    Invokes function to query MongoDB user collection
+    by username in URL parameter. Displays user's details
+    collected in build_profile function, as well as 
+    user's tracks.
+    """
     current_user = User.find_user_by_username(username)
 
     user_dob = current_user["date_of_birth"]
     user_age = None
     
+    # Converts D.O.B string into tuple, preparing for calculate_user_age
     if user_dob:
         user_dob = tuple(map(int, user_dob.split('-')))
         user_age = calculate_user_age(user_dob)
-       
 
-    if current_user:
-        return render_template("user-profile.html", username=current_user, date_of_birth=user_age)    
+    # Display user's tracks
+    user_id = User.get_id(username)
+
+    if user_id is not None:
+
+        users_tracks = Track.get_users_tracks(user_id)
+
+    return render_template("user-profile.html", username=current_user,
+                             date_of_birth=user_age, users_tracks=users_tracks)
+
+        
    
 
