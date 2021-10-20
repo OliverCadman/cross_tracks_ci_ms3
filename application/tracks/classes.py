@@ -15,8 +15,8 @@ import datetime
 class Track:
 
     def __init__(self, track_name, artist_name, album_name,
-                 genre, year_of_release, added_by, image_URL=None,
-                 likes=None, likes_count=None, _id=None):
+                 genre, year_of_release, added_by, image_url=None,
+                 likes=None, likes_count=None, _id=None, date_added=None):
 
 
         self._id = _id
@@ -26,9 +26,10 @@ class Track:
         self.genre = genre
         self.year_of_release = year_of_release
         self.added_by = added_by
-        self.image_URL = image_URL,
+        self.image_url = image_url if isinstance(image_url, str) else str("")
         self.likes = likes if isinstance(likes, list) else []
         self.likes_count = likes_count if isinstance(likes_count, int) else None
+        self.date_added = date_added if isinstance(date_added, str) else None
 
     
     def get_track_info(self):
@@ -42,7 +43,7 @@ class Track:
             "genre": self.genre,
             "added_by": self.added_by,
             "year_of_release": self.year_of_release,
-            "image_URL": self.image_URL,
+            "image_url": self.image_url,
             "likes": self.likes,
             "likes_count": self.likes_count,
             "date_added": date_added
@@ -75,6 +76,20 @@ class Track:
 
         genres = mongo.db.genres.find().sort("genre_name", 1)
         return genres
+
+    @staticmethod
+    def get_users_tracks(id):
+
+        if ObjectId.is_valid(id):
+            users_tracks = mongo.db.tracks.find({"added_by": ObjectId(id)})
+            return users_tracks
+        else:
+            return False
+
+
+
+
+
 
 
         
