@@ -7,11 +7,12 @@ updated and deleted to MongoDB, as well as password
 validation.
 
 """
-import os
+
 from application import mongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user
+from datetime import date
 import re
 
 
@@ -138,8 +139,12 @@ class User(UserMixin):
 
         return user_info
 
-    def get_id(self):
-        return self.username
+    @staticmethod
+    def get_id(username):
+        
+        user_id = mongo.db.users.find_one({"username":username})["_id"]
+
+        return user_id
 
     @staticmethod
     def find_user_by_id(id):
@@ -156,7 +161,6 @@ class User(UserMixin):
 
         
         mongo.db.users.update_one({"username": username}, {"$set": profile_info})
-
 
 
     @staticmethod
@@ -208,14 +212,5 @@ class User(UserMixin):
     def check_password(password_hash, password):
         return check_password_hash(password_hash, password)
 
-  
-
-
-    
-
-
-
-
-    
 
     
