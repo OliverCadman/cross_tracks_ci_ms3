@@ -134,14 +134,14 @@ nav li a {
 
 /* ------ Browse Tracks Page ------- */
 
-/* Top-level links display user options */
+/* Top-level links displaying user options */
 .user-option-list {
     display: flex;
     justify-content: center;
 }
+
 .user-option-list ul li {
     display: inline-block;
-    text-align: center;
 }
 
 .user-option-icon {
@@ -161,10 +161,57 @@ nav li a {
 /* Tablet Devices */
 @media only screen and (min-width: 600px) {
 
+/* ------ Browse Tracks Page ------ */
+/* Top-level links displaying user options */
+
+.user-option-icon {
+    margin: 0 10px 0 30px;
+    color: grey;
+}
+
+.user-option {
+    font-size: 1.5rem;
+    color: grey;
+}
+
+.user-option-list ul li {
+    display: inline-block;
+    margin: 0 30px;
+}
+
+.user-option-list ul li:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
+
 }
 
 /* Laptop/Desktop Devices */
 @media only screen and (min-width: 992px) {
+
+
+/* ------ Browse Tracks Page ------ */
+/* Top-level links displaying user options */
+
+.user-option-icon {
+    margin: 0 10px 0 30px;
+    color: grey;
+}
+
+
+/* Latest Tracks */
+.card-image {
+  max-height: 150px;
+}
+
+.card-image img {
+    height: 100% !important;
+}
+
+.track-card {
+    margin: 0 5px;
+}
+
 
 }
 
