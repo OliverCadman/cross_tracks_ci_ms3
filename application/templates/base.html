@@ -36,7 +36,7 @@
                     <a href="{{url_for('main.index')}}">Home</a>
                 </li>
                 <li>
-                    <a href="#">Browse All Tracks</a>
+                    <a href="{{url_for('tracks.browse_tracks')}}">Browse All Tracks</a>
                 </li>
                 {% if session.user %}
                 <li>
@@ -65,7 +65,7 @@
                 <a href="{{url_for('main.index')}}">Home</a>
             </li>
             <li>
-                <a href="#">Browse All Tracks</a>
+                <a href="{{url_for('tracks.browse_tracks')}}">Browse All Tracks</a>
             </li>
             {% if session.user %}
             <li>
@@ -183,6 +183,8 @@
     <!--MaterializeCSS JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{url_for('static', filename='js/initialization.js')}}"></script>
+    {% block scripts %}
+    {% endblock %}
 </body>
 
 </html>
