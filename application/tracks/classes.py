@@ -86,6 +86,16 @@ class Track:
         else:
             return False
 
+    @staticmethod
+    def get_all_tracks():
+
+        return mongo.db.tracks.find()
+
+    @staticmethod
+    def get_latest_tracks():
+
+        return mongo.db.tracks.find().sort("_id", -1).limit(6)
+
 
 
 
