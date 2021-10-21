@@ -131,3 +131,24 @@ nav li a {
 .messaging-details {
     display: inline;
 }
+
+/* ------ Browse Tracks Page ------- */
+
+/* Top-level links display user options */
+.user-option-list {
+    display: flex;
+    justify-content: center;
+}
+.user-option-list ul li {
+    display: inline-block;
+    text-align: center;
+}
+
+.user-option-icon {
+    margin: 0 30px;
+    font-size: 2rem;
+}
+
+.user-option {
+    display: inline;
+}
