@@ -21,4 +21,37 @@
         </ul>
     </div>
 </div>
+<div class="row">
+    <div class="col s12 section-header">
+        <h1>Latest Tracks</h1>
+    </div>
+</div>
+<div class="row">
+    {% if latest_tracks %}
+    {% for track in latest_tracks %}
+    <div class="col s12 m4">
+        <div class="card horizontal">
+            <div class="card-image">
+                {% if not track.image_url == '' %}
+                <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
+                {% else %}
+                <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
+                    class="track-image">
+                {% endif %}
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p class="track-name">
+                        {{track.track_name}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+
+
 {% endblock %}
