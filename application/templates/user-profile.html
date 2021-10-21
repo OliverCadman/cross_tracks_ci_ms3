@@ -18,8 +18,9 @@
                 {% if (username.first_name and username.last_name) or username.first_name %}
                 <div class="user-fullname">
                     <p>{{username.first_name}} {{username.last_name}}</p>
-                   
-                        <p>{{date_of_birth}}</p>
+                    {% if user_age %}
+                    <p>{{user_age}}</p>
+                    {% endif %}
                 </div>
                 {% endif %}
                 {% if username.about_user %}
@@ -36,19 +37,38 @@
                 <div class="user-tracks-header">
                     <h2>My Tracks</h2>
                     {% if users_tracks %}
-                        {% for track in users_tracks %}
-                            <div class="card-panel">
+                    {% for track in users_tracks %}
+                    <div class="card horizontal">
+                        <div class="card-stacked">
+                            <div class="card-content">
                                 <div class="row">
                                     <div class="col s6">
-                                    {{track.track_name}}
-                                    </div>
+                                        {%if not track.image_url == ''%}
+                                        <img src="{{track.image_url}}" alt="Image of track's album cover" width="200">
+                                    
+                                        {% else %}
+                                        <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of track's album cover" width="200">
+                                        {% endif %}
+                                        </div>
                                     <div class="col s6">
-                                    {{track.artist_name}}
-                                    <img src="{{track.image_url}}" width="100">
+                                         <p>{{track.track_name}}</p>
+                                         <p>{{track.artist_name}}</p>
+                                         <p>{{track.album_name}}</p>
+                                    </div>
+                                    <div class="spotify-player">
+                                       
+                                        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+                                        <script>
+                                            window.onSpotifyWebPlaybackSDKReady = () => {
+                                                const token = 
+                                            }
+                                        </script>
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
                     {% endif %}
                 </div>
             </div>
