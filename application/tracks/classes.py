@@ -96,6 +96,21 @@ class Track:
 
         return mongo.db.tracks.find().sort("_id", -1).limit(6)
 
+    @staticmethod 
+    def bind_users_to_tracks():
+
+        return mongo.db.tracks.aggregate([
+            {
+                "$lookup": {
+                    "from": "users",
+                    'localField': "added_by",
+                    'foreignField': "_id",
+                    'as': 'user'
+                }
+            }
+        ])
+
+
 
 
 
