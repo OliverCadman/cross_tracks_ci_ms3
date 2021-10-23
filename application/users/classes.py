@@ -105,7 +105,7 @@ class User(UserMixin):
         self.city = city if isinstance(city, str) else str("")
         self.country = country if isinstance(country, str) else str("")
         self.about_user = about_user if isinstance (about_user, str) else str("")
-        self.profile_image = profile_image if isinstance(profile_image, bytes) else None
+        self.profile_image = profile_image if isinstance(profile_image, str) else str('')
         self.is_artist = is_artist if isinstance(is_artist, bool) else False
         self.spotify_userID = spotify_userID if isinstance(spotify_userID, str) else str("")
         self.display_spotify_playlists = display_spotify_playlists if isinstance(
@@ -138,6 +138,12 @@ class User(UserMixin):
         }
 
         return user_info
+    
+    @staticmethod
+    def get_all_users():
+
+        return mongo.db.users.find()
+
 
     @staticmethod
     def get_id(username):
@@ -155,6 +161,7 @@ class User(UserMixin):
         edit_profile
         """
         return mongo.db.users.find_one({"_id": ObjectId(id)})
+
 
     @staticmethod
     def complete_user_profile(username, profile_info):
@@ -200,6 +207,15 @@ class User(UserMixin):
     def allowed_file(filename):
         ALLOWED_EXTENSIONS = set(["txt", "pdf", "png", "jpg", "jpeg", "gif"])
         return "." in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+    @staticmethod
+    def check_image_filesize(filesize):
+        max_img_filesize = 0.5 * 1024 * 1024
+
+        if int(filesize) <= max_img_filesize:
+            return True
+        else:
+            return False
 
     @staticmethod
     def add_profile_image(username, profile_image):
