@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+
+<!-- User Profile Picture and Email Address-->
 <div class="container">
     <div class="row profile-image-row">
         <div class="col s12 m6">
             <div class="profile-image-wrapper">
-                <img src="{{url_for('static', filename='images/default-user-image.png')}}" alt="User Profile Image"
-                    class="profile-image">
+                {% if username['profile_image']%}
+                 <img src="{{url_for('users.display_profile_image', filename=username['profile_image'])}}" alt="User Profile Image"
+                     class="profile-image">
+                     {% else %}
+                    <img src="{{url_for('static', filename='images/default-user-image.png')}}" alt="Default Profile Image" class="profile-image">
+                {% endif %}
+
             </div>
             {% if username.email_address %}
             <div class="messaging-details">
@@ -13,6 +20,7 @@
             </div>
             {% endif %}
         </div>
+        <!-- Username, and Age with brief description (if found in database)-->
         <div class="col s12 m6">
             <div class="user-info">
                 {% if (username.first_name and username.last_name) or username.first_name %}
@@ -31,6 +39,7 @@
             </div>
         </div>
     </div>
+    <!-- User's Tracks -->
     <div class="row">
         <div class="col s12 m6">
             <div class="user-tracks">
@@ -45,7 +54,6 @@
                                     <div class="col s6">
                                         {%if not track.image_url == ''%}
                                         <img src="{{track.image_url}}" alt="Image of track's album cover" width="200">
-                                    
                                         {% else %}
                                         <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of track's album cover" width="200">
                                         {% endif %}
