@@ -7,15 +7,21 @@ to user details.
 """
 
 import os
+import io
 from flask import (Blueprint, render_template,
                    url_for, flash, redirect, request,
                    session)
 from application.users.classes import User
 from application.tracks.classes import Track
-from application.helpers.users import calculate_user_age
+from application import Config
 from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
+from application.helpers.users import calculate_user_age
 from application import (login_manager, mongo)
 from flask_login import current_user 
+if os.path.exists("env.py"):
+    import env
+
 
 
 
@@ -63,6 +69,7 @@ def register_user():
 
 
 
+
 @users.route("/profile-edit/<username>", methods=["GET", "POST"])
 def build_profile(username):
     """
@@ -72,21 +79,50 @@ def build_profile(username):
 
     if request.method == "POST":
 
-        profile_info = {
-            "first_name": request.form.get("first_name"),
-            "last_name": request.form.get("last_name"),
-            "date_of_birth": request.form.get("date_of_birth"),
-            "city": request.form.get("city"),
-            "country": request.form.get("country"),
-            "about_user": request.form.get("about_user"),
-            "spotify_userID": request.form.get("spotify_userID"),
-            "display_spotify_playlists": request.form.get("display_spotify_playlists"),
-            "is_artist": request.form.get("is_artist")
+        if 'profile_image' in request.files:
 
-        }
+            allowed_filesize = User.allowed_image_filesize(request.cookies.get('filesize'))
+            if not allowed_filesize:
+                flash('Your file is too large!')
+                return redirect(url_for("users.build_profile", username=username))
+
+            profile_image = request.files['profile_image']
+
+            if profile_image.filename == '':
+                flash("Your image must have a filename!")
+                return redirect('users.build_profile', username=username)
+
+            allowed_image = User.allowed_file(profile_image.filename)
+
+            if not allowed_image:
+                flash("Images can have extensions 'jpg', 'jpeg', 'gif', 'png' and 'pdf' only.")
+                return redirect(url_for('users.build_profile', username=username))
+
+            else:
+                secured_image_filename = secure_filename(profile_image.filename)
+                profile_image.save(os.path.join(os.environ.get("UPLOAD_FOLDER"), secured_image_filename))
+                print('image saved')
+                
+                
+            profile_info = {
+                "first_name": request.form.get("first_name"),
+                "last_name": request.form.get("last_name"),
+                "date_of_birth": request.form.get("date_of_birth"),
+                "city": request.form.get("city"),
+                "country": request.form.get("country"),
+                "about_user": request.form.get("about_user"),
+                "spotify_userID": request.form.get("spotify_userID"),
+                "display_spotify_playlists": request.form.get("display_spotify_playlists"),
+                "is_artist": request.form.get("is_artist"),
+                "profile_image": secured_image_filename
+                }
+
+            User.complete_user_profile(username, profile_info)
+
+            return redirect(url_for("users.user_profile", username = username))
         
-        User.complete_user_profile(username, profile_info)
-        return redirect(url_for("users.user_profile", username = username))
+       
+  
 
             
     return render_template('profile-edit.html')
@@ -116,7 +152,7 @@ def login():
             if password_check:
                 session["user"] = login_username
                 flash("Welcome back {}".format(login_username))
-                return redirect(url_for("main.index"))
+                return redirect(url_for("users.user_profile", username=session["user"]))
             
             else:
                 flash("Invalid username/password")
@@ -161,7 +197,7 @@ def user_profile(username):
         users_tracks = Track.get_users_tracks(user_id)
 
     return render_template("user-profile.html", username=current_user,
-                             date_of_birth=user_age, users_tracks=users_tracks)
+                             user_age=user_age, users_tracks=users_tracks)
 
         
    
