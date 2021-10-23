@@ -7,7 +7,7 @@ to user details.
 """
 
 import os
-import io
+
 from flask import (Blueprint, render_template,
                    url_for, flash, redirect, request,
                    session)
@@ -81,7 +81,7 @@ def build_profile(username):
 
         if 'profile_image' in request.files:
 
-            allowed_filesize = User.allowed_image_filesize(request.cookies.get('filesize'))
+            allowed_filesize = User.check_image_filesize(request.cookies.get('filesize'))
             if not allowed_filesize:
                 flash('Your file is too large!')
                 return redirect(url_for("users.build_profile", username=username))
@@ -99,9 +99,7 @@ def build_profile(username):
                 return redirect(url_for('users.build_profile', username=username))
 
             else:
-                secured_image_filename = secure_filename(profile_image.filename)
-                profile_image.save(os.path.join(os.environ.get("UPLOAD_FOLDER"), secured_image_filename))
-                print('image saved')
+                mongo.save_file(profile_image.filename, profile_image)
                 
                 
             profile_info = {
@@ -114,7 +112,7 @@ def build_profile(username):
                 "spotify_userID": request.form.get("spotify_userID"),
                 "display_spotify_playlists": request.form.get("display_spotify_playlists"),
                 "is_artist": request.form.get("is_artist"),
-                "profile_image": secured_image_filename
+                "profile_image": profile_image.filename
                 }
 
             User.complete_user_profile(username, profile_info)
@@ -171,6 +169,13 @@ def logout():
     flash("You have been logged out")
     return redirect(url_for('main.index'))
 
+
+@users.route("/file/<path:filename>")
+def display_profile_image(filename):
+    print(filename)
+    return mongo.send_file(filename)
+
+
 @users.route("/user-profile/<username>")
 def user_profile(username):
     """
@@ -188,6 +193,8 @@ def user_profile(username):
     if user_dob:
         user_dob = tuple(map(int, user_dob.split('-')))
         user_age = calculate_user_age(user_dob)
+
+    user_profile_image = current_user["profile_image"]
 
     # Display user's tracks
     user_id = User.get_id(username)
