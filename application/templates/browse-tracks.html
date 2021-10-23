@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="browse-background">
 <div class="row">
     <div class="col s12 user-option-list">
         <ul>
@@ -27,8 +28,8 @@
     </div>
 </div>
 <div class="row">
-    {% if latest_tracks %}
-    {% for track in latest_tracks %}
+    {% if tracks_and_users %}
+    {% for track in tracks_and_users %}
     <div class="col s12 m4">
         <div class="card horizontal">
             <div class="card-image">
@@ -41,16 +42,48 @@
             </div>
             <div class="card-stacked">
                 <div class="card-content">
-                    <p class="track-name">
-                        {{track.track_name}}
-                    </p>
+                    <span class="card-title"> {{track.track_name}}</span>
+                        <div class="card-information-wrapper">
+                            <div class="track-card-information">
+                                <p class="artist-name">
+                                    {{track.artist_name}}
+                                </p>
+                                <p class="album-name">
+                                    {{track.album_name}}
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                        alt="User profile image" class="user-image-card">
+                                    <small>Added by:</small> {{track['user'][0]['username']}}
+                                </p>
+                            </div>
+                            <div class="more-info-btn">
+                                <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
+          <div class="modal" id="track_modal_{{track._id}}">
+              <div class="modal-content">
+                  <h3>
+                      {{track.track_name}}
+                  </h3>
+              </div>
+          </div>
     </div>
     {% endfor %}
+    <!-- Track Modal -->
     {% endif %}
 </div>
+</div>
+
+
+
+
+
 
 
 
