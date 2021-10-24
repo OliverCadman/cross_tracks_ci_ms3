@@ -13,8 +13,12 @@ from application.config import Config
 from flask_login import LoginManager
 
 
+
 # Instantiate Mongo Database and assign to variable
 mongo = PyMongo()
+
+# Instantiate Prettify and assign to variable
+prettify = Prettify()
 
 # Instantiate Flask Login Manager
 login_manager = LoginManager()
@@ -32,6 +36,7 @@ def create_app(default_config=Config):
 
     # Initialise Flask Login Manager
     login_manager.init_app(app)
+
 
     # Import and Register blueprints
     from application.main.views import main as main_bp
