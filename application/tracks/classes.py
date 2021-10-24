@@ -28,7 +28,7 @@ class Track:
         self.added_by = added_by
         self.image_url = image_url if isinstance(image_url, str) else str("")
         self.likes = likes if isinstance(likes, list) else []
-        self.likes_count = likes_count if isinstance(likes_count, int) else None
+        self.likes_count = likes_count if isinstance(likes_count, int) else 0
         self.date_added = date_added if isinstance(date_added, str) else None
 
     
@@ -54,6 +54,11 @@ class Track:
     
     def add_track(self):
 
+        """
+        TODO: Add conditional to query mongoDB for track, to determine if it is already
+        in the database.
+        """
+
         track_data = self.get_track_info()
 
         mongo.db.tracks.insert(track_data)
@@ -70,7 +75,33 @@ class Track:
 
         track_name = self.track_name
 
-        
+
+    def add_like(self, username):
+
+        self.likes.append(username)
+
+        self.likes_count += 1
+
+        mongo.db.tracks.update_one({
+            "_id": self._id
+            },
+            {"$set": self.get_track_info() }
+        )
+
+
+    @classmethod
+    def get_track_by_id(cls, _id):
+
+        if ObjectId().is_valid(_id):
+            data = mongo.db.tracks.find_one({"_id": ObjectId(_id)})
+
+        if data is not None:
+            return cls(**data)
+        else:
+            data = None
+            return False
+
+    
     @staticmethod
     def get_genres():
 
@@ -109,6 +140,8 @@ class Track:
                 }
             }
         ])
+
+    
 
 
 
