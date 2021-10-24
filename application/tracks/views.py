@@ -1,7 +1,8 @@
 from flask import (Blueprint, render_template, url_for, flash, request, session)
+from werkzeug.utils import redirect
 from application.tracks.classes import Track
 from application.users.classes import User
-from application import prettify
+
 
 
 tracks = Blueprint("tracks", __name__)
@@ -35,11 +36,31 @@ def browse_tracks():
 
     tracks_and_users = Track.bind_users_to_tracks()
  
-
-
     return render_template("browse-tracks.html", tracks_and_users=tracks_and_users)
+
 
 @tracks.route('/track-modal', methods=["GET", "POST"])
 def track_modal():
     render_template('browse-tracks.html/' + '#track-modal')
+
+@tracks.route('/like-track/<track_id>/<username>')
+def like_track(track_id, username):
+
+    current_track = Track.get_track_by_id(track_id)
+
+    print(current_track)
+
+    
+
+    current_user = User.get_user(username)
+
+    print(current_user)
+
+    
+    
+    
+
+
+    return redirect(url_for("tracks.browse_tracks"))
+    
     
