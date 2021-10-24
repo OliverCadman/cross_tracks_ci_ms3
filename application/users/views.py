@@ -17,8 +17,7 @@ from application import Config
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 from application.helpers.users import calculate_user_age
-from application import (login_manager, mongo)
-from flask_login import current_user 
+from application import mongo
 if os.path.exists("env.py"):
     import env
 
@@ -84,22 +83,23 @@ def build_profile(username):
             allowed_filesize = User.check_image_filesize(request.cookies.get('filesize'))
             if not allowed_filesize:
                 flash('Your file is too large!')
-                return redirect(url_for("users.build_profile", username=username))
+                return redirect(url_for("users.build_profile", username=session["user"]))
 
             profile_image = request.files['profile_image']
+            if profile_image:
 
-            if profile_image.filename == '':
-                flash("Your image must have a filename!")
-                return redirect('users.build_profile', username=username)
+                if profile_image.filename == '':
+                    flash("Your image must have a filename!")
+                    return redirect(url_for('users.build_profile', username=session["user"]))
 
-            allowed_image = User.allowed_file(profile_image.filename)
+                allowed_image = User.allowed_file(profile_image.filename)
 
-            if not allowed_image:
-                flash("Images can have extensions 'jpg', 'jpeg', 'gif', 'png' and 'pdf' only.")
-                return redirect(url_for('users.build_profile', username=username))
+                if not allowed_image:
+                    flash("Images can have extensions 'jpg', 'jpeg', 'gif', 'png' and 'pdf' only.")
+                    return redirect(url_for('users.build_profile', username=username))
 
-            else:
-                mongo.save_file(profile_image.filename, profile_image)
+                else:
+                    mongo.save_file(profile_image.filename, profile_image)
                 
                 
             profile_info = {
@@ -119,21 +119,8 @@ def build_profile(username):
 
             return redirect(url_for("users.user_profile", username = username))
         
-       
-  
-
-            
     return render_template('profile-edit.html')
 
-@login_manager.user_loader
-def load_user(username):
-
-    user = mongo.db.users.find_one({"username": username.lower()})
-
-    if not user:
-        return None
-    else:
-        return User(username=user["username"])
 
 
 @users.route("/login", methods=["GET", "POST"])
@@ -208,4 +195,3 @@ def user_profile(username):
 
         
    
-
