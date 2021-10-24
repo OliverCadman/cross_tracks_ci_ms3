@@ -90,7 +90,7 @@ class User(UserMixin):
                 first_name=None, last_name=None, date_of_birth=None,
                 city=None, country=None, about_user=None, 
                 profile_image=None, is_artist=None, spotify_userID=None,
-                display_spotify_playlists=None, _id=None):
+                display_spotify_playlists=None, _id=None, liked_tracks=None):
 
         """
         Initialise user instance
@@ -111,6 +111,8 @@ class User(UserMixin):
         self.display_spotify_playlists = display_spotify_playlists if isinstance(
             display_spotify_playlists, bool) else False
         self.id = _id
+        self.liked_tracks = liked_tracks if isinstance(liked_tracks, list) else []
+        
 
     
     
@@ -134,16 +136,35 @@ class User(UserMixin):
             "is_artist": self.is_artist,
             "spotify_userID": self.spotify_userID,
             "display_spotify_playlists": self.display_spotify_playlists,
+            "liked_tracks": self.liked_tracks
             
         }
 
         return user_info
-    
+
+
+    @classmethod
+    def get_user(cls, username):
+        """
+        Queries MongoDB to locate a user by their ID
+        Utilised in users/views.py in functions:
+
+        edit_profile
+        """
+
+        user_data = mongo.db.users.find_one({"username": username})
+
+        if user_data is not None:
+            return cls(**user_data)
+        else:
+            user_data = None
+            return False
+
+
     @staticmethod
     def get_all_users():
 
         return mongo.db.users.find()
-
 
     @staticmethod
     def get_id(username):
@@ -151,16 +172,6 @@ class User(UserMixin):
         user_id = mongo.db.users.find_one({"username":username})["_id"]
 
         return user_id
-
-    @staticmethod
-    def find_user_by_id(id):
-        """
-        Queries MongoDB to locate a user by their ID
-        Utilised in users/views.py in functions:
-
-        edit_profile
-        """
-        return mongo.db.users.find_one({"_id": ObjectId(id)})
 
 
     @staticmethod
@@ -223,6 +234,13 @@ class User(UserMixin):
         mongo.save_file(profile_image.filename, profile_image)
         mongo.db.users.update_one({"username": username},
                                   {"$set": profile_image})
+
+    
+    @staticmethod
+    def return_profile_image(filename):
+
+        return mongo.send_file(filename)
+
 
     @staticmethod
     def check_password(password_hash, password):
