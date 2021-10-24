@@ -143,6 +143,19 @@ class User(UserMixin):
         return user_info
 
 
+
+
+    def add_liked_track(self, track_id):
+
+        self.liked_tracks.append(ObjectId(track_id))
+
+        mongo.db.users.update_one({
+            "_id": ObjectId(self.id),
+        }, {
+            "$set": self.get_user_info()
+        })
+
+
     @classmethod
     def get_user(cls, username):
         """
