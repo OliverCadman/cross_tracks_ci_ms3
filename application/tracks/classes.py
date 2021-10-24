@@ -28,7 +28,7 @@ class Track:
         self.added_by = added_by
         self.image_url = image_url if isinstance(image_url, str) else str("")
         self.likes = likes if isinstance(likes, list) else []
-        self.likes_count = likes_count if isinstance(likes_count, int) else 0
+        self.likes_count = likes_count if isinstance(likes_count, int) else None
         self.date_added = date_added if isinstance(date_added, str) else None
 
     
