@@ -58,10 +58,20 @@
                                 <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
                             </div>
                             <div>
+                                {% set username = track['user'][0]['username'] %}
                                 <p>
-                                    <small>Added by:</small> {{track['user'][0]['username']}}
-                                    <img src="{{url_for('static', filename='images/default-user-image.png')}}"
-                                        alt="User profile image" class="user-image-card">
+                                    <small>Added by:</small> {{username}}
+                                    {% if track['user'][0]['profile_image'] %}
+                                    <a href="{{url_for('users.user_profile', username=username)}}">
+                                         <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                             alt="User profile image" class="user-image-card">
+                                    </a>
+                                        {% else %}
+                                        <a href="{{url_for('users.user_profile', username=username)}}">
+                                         <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                            alt="User profile image" class="user-image-card">
+                                        </a>
+                                    {% endif %}
                                 </p>
                             </div>
                         </div>
