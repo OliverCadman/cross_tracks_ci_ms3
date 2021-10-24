@@ -17,9 +17,6 @@ from flask_login import LoginManager
 # Instantiate Mongo Database and assign to variable
 mongo = PyMongo()
 
-# Instantiate Prettify and assign to variable
-prettify = Prettify()
-
 # Instantiate Flask Login Manager
 login_manager = LoginManager()
 
