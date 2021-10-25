@@ -160,6 +160,18 @@ class User():
             "$set": self.prepare_liked_track()
         })
 
+    
+    def remove_liked_track(self, track_id):
+
+        if ObjectId(track_id) in self.liked_tracks:
+            self.liked_tracks.remove(ObjectId(track_id))
+            mongo.db.users.update_one({
+                "_id": ObjectId(self.id),
+            }, {
+                "$set": self.prepare_liked_track()
+            })
+
+
 
     @classmethod
     def get_user(cls, username):
