@@ -11,12 +11,11 @@ validation.
 from application import mongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, login_user
 from datetime import date
 import re
 
 
-class User(UserMixin):
+class User():
     """
     Class represents the User instance
 
@@ -135,24 +134,30 @@ class User(UserMixin):
             "profile_image": self.profile_image,
             "is_artist": self.is_artist,
             "spotify_userID": self.spotify_userID,
-            "display_spotify_playlists": self.display_spotify_playlists,
-            "liked_tracks": self.liked_tracks
+            "display_spotify_playlists": self.display_spotify_playlists
             
         }
 
         return user_info
 
+    def prepare_liked_track(self):
 
+        liked_track_info = {
+            "liked_tracks": self.liked_tracks
+        }
+        
+        return liked_track_info
 
 
     def add_liked_track(self, track_id):
 
         self.liked_tracks.append(ObjectId(track_id))
+        # print("liked tracks:", self.liked_tracks)
 
         mongo.db.users.update_one({
             "_id": ObjectId(self.id),
         }, {
-            "$set": self.get_user_info()
+            "$set": self.prepare_liked_track()
         })
 
 
@@ -179,6 +184,7 @@ class User(UserMixin):
 
         return mongo.db.users.find()
 
+    
     @staticmethod
     def get_id(username):
         
