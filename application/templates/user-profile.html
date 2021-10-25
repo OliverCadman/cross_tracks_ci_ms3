@@ -2,35 +2,50 @@
 {% block content %}
 
 <!-- User Profile Picture and Email Address-->
-<div class="container">
-    <div class="row profile-image-row">
-        <div class="col s12 m6">
-            <div class="profile-image-wrapper">
-                {% if username['profile_image']%}
-                 <img src="{{url_for('users.display_profile_image', filename=username['profile_image'])}}" alt="User Profile Image"
-                     class="profile-image">
-                     {% else %}
-                    <img src="{{url_for('static', filename='images/default-user-image.png')}}" alt="Default Profile Image" class="profile-image">
-                {% endif %}
-
+    <div class="row user-info">
+        <div class="col s12 m6 profile-image-email">
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s6">
+                             <div class="profile-image-wrapper">
+                                 {% if username['profile_image']%}
+                                 <img src="{{url_for('users.display_profile_image', filename=username['profile_image'])}}"
+                                     alt="User Profile Image" class="profile-image">
+                                 {% else %}
+                                 <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                     alt="Default Profile Image" class="profile-image">
+                                 {% endif %}
+                             </div>
+                        </div>
+                         <div class="col s6">
+                             {% if username.email_address %}
+                             <div class="messaging-details">
+                                 {{username.email_address}}
+                             </div>
+                             {% endif %}
+                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 profile-tabs"></div>
+                    </div>
+                </div>
             </div>
-            {% if username.email_address %}
-            <div class="messaging-details">
-                {{username.email_address}}
-            </div>
-            {% endif %}
         </div>
         <!-- Username, and Age with brief description (if found in database)-->
-        <div class="col s12 m6">
-            <div class="user-info">
+        <div class="col s12 m6 user-info">
+            <div>
                 {% if (username.first_name and username.last_name) or username.first_name %}
                 <div class="user-fullname">
                     <p>{{username.first_name}} {{username.last_name}}</p>
+                    {% endif %}
+                    {% if (username.city and username.country) or (username.city or username.country) %}
+                    <p>{{username.city}}, {{username.country}}</p>
+                    {% endif %}
                     {% if user_age %}
                     <p>{{user_age}}</p>
                     {% endif %}
                 </div>
-                {% endif %}
                 {% if username.about_user %}
                 <div class="about-user">
                     {{username.about_user}}
@@ -63,15 +78,6 @@
                                          <p>{{track.artist_name}}</p>
                                          <p>{{track.album_name}}</p>
                                     </div>
-                                    <div class="spotify-player">
-                                       
-                                        <script src="https://sdk.scdn.co/spotify-player.js"></script>
-                                        <script>
-                                            window.onSpotifyWebPlaybackSDKReady = () => {
-                                                const token = 
-                                            }
-                                        </script>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,8 +89,11 @@
         </div>
     </div>
     <div class="row">
+        <h5>My Liked Tracks</h5>
         <div class="col s12 m6">
-
+            {% for track in liked_tracks %}
+                {{track.track_name}}
+            {% endfor %}
         </div>
     </div>
 </div>
