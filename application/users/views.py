@@ -18,6 +18,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 from application.helpers.users import calculate_user_age
 from application import mongo
+from bson.objectid import ObjectId
 if os.path.exists("env.py"):
     import env
 
@@ -173,6 +174,21 @@ def user_profile(username):
     """
     current_user = User.find_user_by_username(username)
 
+    all_tracks = Track.get_all_tracks()
+   
+    liked_tracks = []
+
+    # Iterate over all tracks and iterate over user's liked tracks
+    # Check for matching ObjectIDs between 'tracks' collection
+    # and 'liked_tracks' array in 'user' document.
+    if "liked_tracks" in current_user:
+        for track in all_tracks:
+            for liked_track in current_user["liked_tracks"]:
+                if liked_track == ObjectId(track["_id"]):
+                    liked_tracks.append(track)
+                    print(liked_tracks)
+
+
     user_dob = current_user["date_of_birth"]
     user_age = None
     
@@ -191,7 +207,8 @@ def user_profile(username):
         users_tracks = Track.get_users_tracks(user_id)
 
     return render_template("user-profile.html", username=current_user,
-                             user_age=user_age, users_tracks=users_tracks)
+                             user_age=user_age, users_tracks=users_tracks,
+                             liked_tracks=liked_tracks)
 
         
    
