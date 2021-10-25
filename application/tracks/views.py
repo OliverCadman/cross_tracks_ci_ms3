@@ -2,7 +2,7 @@ from flask import (Blueprint, render_template, url_for, flash, request, session)
 from werkzeug.utils import redirect
 from application.tracks.classes import Track
 from application.users.classes import User
-
+import pprint
 
 
 tracks = Blueprint("tracks", __name__)
@@ -46,21 +46,14 @@ def track_modal():
 @tracks.route('/like-track/<track_id>/<username>')
 def like_track(track_id, username):
 
-    current_track = Track.get_track_by_id(track_id)
+   
 
-    print(current_track)
+    selected_track_object = Track.get_track_object(track_id)
+    selected_track = selected_track_object._id
 
-    
 
     current_user = User.get_user(username)
-
-    print(current_user)
-
     
-    
-    
-
-
     return redirect(url_for("tracks.browse_tracks"))
     
     
