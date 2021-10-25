@@ -53,6 +53,18 @@ def like_track(track_id, username):
 
 
     current_user = User.get_user(username)
+
+    if current_user.liked_tracks or current_user.liked_tracks == []:
+        users_liked_tracks = current_user.liked_tracks
+
+
+        if selected_track in users_liked_tracks:
+            current_user.remove_liked_track(track_id)
+            selected_track_object.remove_like(username)
+            return redirect(url_for("tracks.browse_tracks"))
+        else:
+            current_user.add_liked_track(track_id)
+            selected_track_object.add_like(username)
     
     return redirect(url_for("tracks.browse_tracks"))
     
