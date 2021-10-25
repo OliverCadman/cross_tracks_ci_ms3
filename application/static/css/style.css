@@ -15,17 +15,23 @@ body {
 
 
 /* Navbar and Footer styling */
+
+.top-level-background,
+.nav-wrapper {
+    background-color: #7b89b4 !important;
+}
+
 nav .brand-logo {
     padding-left: 25px;
     font-family: "Alata", sans-serif;
-    color: #222222;
+    color: #fafafa;
 
 }
 
 nav li a {
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
-    color: #222222;
+    color: #fafafa;
 }
 
 .domestic-links {
@@ -123,7 +129,7 @@ nav li a {
 }
 
 .profile-image {
-    width: 100px;
+    width: 200px;
     border: 2px solid #222222;
     border-radius: 50%;
 }
@@ -138,6 +144,7 @@ nav li a {
 .user-option-list {
     display: flex;
     justify-content: center;
+    
 }
 
 .user-option-list ul li {
@@ -153,6 +160,14 @@ nav li a {
     display: inline;
 }
 
+/* Track Cards */
+
+.card-content {
+    padding: 10px !important;
+}
+
+
+
 
 
 /* Media Queries - In accordance with materializeCSS size prefixes */
@@ -165,13 +180,13 @@ nav li a {
 /* Top-level links displaying user options */
 
 .user-option-icon {
-    margin: 0 10px 0 30px;
-    color: grey;
+    margin: 0 10px 0 10px;
+    color: #fafafa;
 }
 
 .user-option {
     font-size: 1.5rem;
-    color: grey;
+    color: #eeeeee;
 }
 
 .user-option-list ul li {
@@ -184,35 +199,74 @@ nav li a {
     transition: 0.3s ease-in-out;
 }
 
+.browse-background {
+    background: url('../images/design1.png') no-repeat fixed;
+    background-size: cover;
+    background-position: top;
+}
+
+.card-image {
+    max-height: 100px;
+}
+
 }
 
 /* Laptop/Desktop Devices */
 @media only screen and (min-width: 992px) {
 
-
+.loggedin-user-details,
+.loggedin-user-details p {
+    display: inline;
+    color:#222222;
+}
 /* ------ Browse Tracks Page ------ */
 /* Top-level links displaying user options */
 
+
 .user-option-icon {
     margin: 0 10px 0 30px;
-    color: grey;
+
+}
+
+.card-title {
+    white-space: nowrap;
 }
 
 
 /* Latest Tracks */
 .card-image {
-  max-height: 150px;
+  max-height: 200px;
 }
 
 .card-image img {
     height: 100% !important;
 }
+.track-name {
+    font-size: 1.5rem;
+    text-align: left;
+}
 
-.track-card {
-    margin: 0 5px;
+.user-image-card {
+    width: 50px;
+    display: inline;
+    border: 2px solid #222222;
+    border-radius: 50%;
+}
+
+.modal-user-details {
+    margin-bottom: 1.3rem;
+}
+
+.message-user-modal {
+    margin-left: 2rem;
 }
 
 
+.album-cover {
+    width: 100%;
+}
+
+/* ------ Profile Page ------- */
 }
 
 /* Large Desktop devices */
