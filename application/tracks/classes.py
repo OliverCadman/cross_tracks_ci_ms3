@@ -28,7 +28,7 @@ class Track:
         self.added_by = added_by
         self.image_url = image_url if isinstance(image_url, str) else str("")
         self.likes = likes if isinstance(likes, list) else []
-        self.likes_count = likes_count if isinstance(likes_count, int) else None
+        self.likes_count = likes_count if isinstance(likes_count, int) else 0
         self.date_added = date_added if isinstance(date_added, str) else None
 
     
@@ -83,14 +83,34 @@ class Track:
         self.likes_count += 1
 
         mongo.db.tracks.update_one({
-            "_id": self._id
-            },
-            {"$set": self.get_track_info() }
+            "_id": self._id},
+            {"$set": self.get_track_info()}
         )
+
+    def remove_like(self, username):
+
+        if username in self.likes:
+            print("username:", username)
+            self.likes.remove(username)
+
+            self.likes_count -= 1
+
+            mongo.db.tracks.update_one({
+            "_id": self._id},
+            {"$set": self.get_track_info()})
+
+            return True
+        else:
+            return False
+
+
+    @staticmethod
+    def get_track_id(id):
+        return mongo.db.tracks.find_one({"_id": ObjectId(id)})
 
 
     @classmethod
-    def get_track_by_id(cls, _id):
+    def get_track_object(cls, _id):
 
         if ObjectId().is_valid(_id):
             data = mongo.db.tracks.find_one({"_id": ObjectId(_id)})
@@ -140,6 +160,7 @@ class Track:
                 }
             }
         ])
+
 
     
 
