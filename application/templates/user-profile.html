@@ -2,11 +2,12 @@
 {% block content %}
 
 <!-- User Profile Picture and Email Address-->
+<section>
     <div class="row user-info">
         <div class="col s12 m6 profile-image-email">
             <div class="row">
                 <div class="col s12">
-                    <div class="row">
+                    <div class="row profile-banner">
                         <div class="col s6">
                              <div class="profile-image-wrapper">
                                  {% if username['profile_image']%}
@@ -19,20 +20,23 @@
                              </div>
                         </div>
                          <div class="col s6">
-                             {% if username.email_address %}
-                             <div class="messaging-details">
-                                 {{username.email_address}}
+                             <div class="username-wrapper">
+                                 {{username.username}}
                              </div>
-                             {% endif %}
+                             <div class="messaging-wrapper">
+                              <i class="fas fa-envelope profile-mail-icon"></i> {{username.email_address}}
+                             </div>
                          </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12">
+                  <div class="edit-profile-btn-wrapper">
                     {% if username['username'] == session.user %}
-                        <a href="#edit-profile" class="btn modal-trigger">Edit My Profile</a>
+                    <a href="#edit-profile" class="btn modal-trigger">Edit My Profile</a>
                     {% endif %}
+                  </div>
                 </div>
             </div>
         </div>
@@ -43,14 +47,17 @@
                 <div class="user-fullname">
                     <p>{{username.first_name}} {{username.last_name}}</p>
                     {% endif %}
-                    {% if (username.city and username.country) or (username.city or username.country) %}
-                    <p>{{username.city}}, {{username.country}}</p>
-                    {% endif %}
-                    {% if user_age %}
-                    <p>{{user_age}}</p>
-                    {% endif %}
+                </div>
+                <div class="user-location-age">
+                     {% if (username.city and username.country) or (username.city or username.country) %}
+                      <p><i class="fas fa-home profile-location-icon"></i>{{username.city}}, {{username.country}}</p>
+                     {% endif %}
+                     {% if user_age %}
+                        <p>{{user_age}} years old</p>
+                     {% endif %}
                 </div>
                 {% if username.about_user %}
+                <hr class="block-divider">
                 <div class="about-user">
                     {{username.about_user}}
                 </div>
@@ -58,10 +65,12 @@
             </div>
         </div>
     </div>
+    </section>
+    <section>
     <!-- User's Tracks -->
     <div class="row">
         <div class="col s12 m6">
-          <h5></h5>
+          <h5>My Tracks</h5>
           <div class="row">
               {% if users_tracks %}
                 {% for track in users_tracks %}
@@ -80,6 +89,11 @@
                 {% endfor %}
               {% endif %}
           </div>
+          {% if not users_tracks %}
+          <div class="col s12 m6 no-tracks-found">
+              <h1>No Tracks</h1>
+          </div>
+          {% endif %}
         </div>
         <div class="col s12 m6">
           <h5>My Liked Tracks</h5>
@@ -104,6 +118,8 @@
         </div>
     </div>
 </div>
+</section>
+<aside>
 <div class="modal" id="edit-profile">
      <div class="row">
          <div class="col s12">
@@ -174,6 +190,7 @@
              </form>
          </div>
 </div>
+</aside>
 {% block scripts %}
 <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
 {% endblock %}
