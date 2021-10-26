@@ -133,7 +133,9 @@ class Track:
 
         if ObjectId.is_valid(id):
             users_tracks = mongo.db.tracks.find({"added_by": ObjectId(id)})
-            return users_tracks
+            # Return cursor only if it contains data
+            if users_tracks.count() > 0:
+                return users_tracks
         else:
             return False
 
