@@ -1,7 +1,8 @@
-from flask import (Blueprint, render_template, url_for, flash, request, session)
+from flask import (Blueprint, render_template, url_for, flash, request, session, jsonify)
 from werkzeug.utils import redirect
 from application.tracks.classes import Track
 from application.users.classes import User
+
 import pprint
 
 
@@ -61,11 +62,16 @@ def like_track(track_id, username):
         if selected_track in users_liked_tracks:
             current_user.remove_liked_track(track_id)
             selected_track_object.remove_like(username)
-            return redirect(url_for("tracks.browse_tracks"))
+
+            num_of_likes = selected_track_object.likes_count
+
+            return jsonify(num_of_likes)
         else:
             current_user.add_liked_track(track_id)
             selected_track_object.add_like(username)
+
+            num_of_likes = selected_track_object.likes_count
     
-    return redirect(url_for("tracks.browse_tracks"))
+    return jsonify(num_of_likes)
     
     
