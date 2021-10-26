@@ -6,11 +6,19 @@
 body {
     padding: 0;
     margin: 0;
-    border: 0;
+    height: 100%;
+}
+
+html {
+   height: 100%;
 }
 
 .row {
     margin-bottom: 0;
+}
+
+.content {
+    min-height: 71vh;
 }
 
 
@@ -125,7 +133,7 @@ nav li a {
 /* -------- User Profile Page --------- */
 
 .profile-image-wrapper {
-    margin-top: 75px;
+    margin: 30px 0 30px 15px;
 }
 
 .profile-image {
@@ -134,8 +142,18 @@ nav li a {
     border-radius: 50%;
 }
 
+.username-wrapper,
+.messaging-wrapper {
+    font-family: 'Alata', sans-serif;
+    color: #ffffff;
+}
+
 .messaging-details {
     display: inline;
+}
+
+.update-profile-image>form>input {
+    display: none;
 }
 
 /* ------ Browse Tracks Page ------- */
@@ -232,7 +250,6 @@ nav li a {
     white-space: nowrap;
 }
 
-
 /* Latest Tracks */
 .card-image {
   max-height: 200px;
@@ -267,6 +284,44 @@ nav li a {
 }
 
 /* ------ Profile Page ------- */
+
+.profile-image-email {
+    border-right: 8px solid #eeeeee;
+}
+
+.profile-tabs {
+    border: 1px solid white;
+    height: 40px;
+}
+
+
+.user-info {
+    background-color: #7b89b4;
+}
+
+.profile-banner {
+    background-color: #3c4c8b;
+    height: 150px;
+}
+
+.username-wrapper {
+    font-size: 2.5rem;
+    text-decoration: underline;
+}
+
+.edit-profile-btn-wrapper {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.edit-profile-btn-wrapper a {
+    background-color: #D8D6D7;
+    color: #222222;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+}
+
 }
 
 /* Large Desktop devices */
