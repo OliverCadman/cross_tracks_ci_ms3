@@ -116,47 +116,42 @@
                                  data-tooltip="Username cannot be changed"></i></label>
                      </div>
                      <div class="input-field col s6">
-                         <input type="text" id="first_name" name="first_name">
+                         <input type="text" value="{{username.first_name}}" id="first_name" name="first_name">
                          <label for="first_name">First Name</label>
                      </div>
                      <div class="input-field col s6">
-                         <input type="text" id="last_name" name="last_name">
+                         <input type="text" value="{{username.last_name}}" id="last_name" name="last_name">
                          <label for="last_name">Last Name</label>
                      </div>
                      <div class="input-field col s4">
-                         <input type="date" id="date_of_birth" name="date_of_birth">
+                         <input type="date" value="{{username.date_of_birth}}" id="date_of_birth" name="date_of_birth">
                          <label for="date_of_birth">Date of Birth</label>
                      </div>
                      <div class="input-field col s4">
-                         <input type="text" id="city" name="city">
+                         <input type="text" value="{{username.city}}"id="city" name="city">
                          <label for="city">City</label>
                      </div>
                      <div class="input-field col s4">
-                         <input type="text" id="country" name="country">
+                         <input type="text" value="{{username.country}}" id="country" name="country">
                          <label for="country">Country</label>
                      </div>
                      <div class="input-field col s6">
-                         <textarea type="text" id="about_user" name="about_user"></textarea>
+                         <textarea type="text" id="about_user" name="about_user">{{username.about_user}}</textarea>
                          <label for="about_user">Tell us who you are and what you like!</label>
                      </div>
-                     <div class="file-field input-field col s6">
-                         <div class="btn">
-                             <span>Profile Image</span>
-                             <input type="file" name="profile_image" id="profile_image" oninput="checkFilesize(this)">
-                         </div>
-                         <div class="file-path-wrapper">
-                             <input type="text" placeholder="No file selected" class="file-path validate">
-                         </div>
-                     </div>
                      <div class="input-field col s4">
-                         <input type="text" id="spotify_userID" name="spotify_userID">
+                         <input type="text" value="{{username.spotify_userID}}" id="spotify_userID" name="spotify_userID">
                          <label for="spotify_userID">Spotify ID</label>
                      </div>
                      <div class="switch col s4">
                          <p>Display your Spotify Playlists?</p>
                          <label for="display_spotify_playlist">
                              No
+                             {% if username.display_spotify_playlists == "on" %}
+                             <input type="checkbox" id="display_spotify_playlist" name="display_spotify_playlists" checked>
+                             {% else %}
                              <input type="checkbox" id="display_spotify_playlist" name="display_spotify_playlists">
+                             {% endif %}
                              <span class="lever"></span>
                              Yes
                          </label>
@@ -165,7 +160,11 @@
                          <p>Are you an Artist?</p>
                          <label for="is_artist">
                              No
+                             {% if username.is_artist == "on" %}
+                             <input type="checkbox" id="is_artist" name="is_artist" checked>
+                             {% else %}
                              <input type="checkbox" id="is_artist" name="is_artist">
+                             {% endif %}
                              <span class="lever"></span>
                              Yes
                          </label>
