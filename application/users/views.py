@@ -62,7 +62,7 @@ def register_user():
         flash("Registration Successful")
         session["user"] = request.form.get("username").lower()
         
-        return redirect(url_for('users.build_profile', username=username))
+        return redirect(url_for('users.build_profile', username=session["user"]))
     
     return render_template('register.html')
 
@@ -70,64 +70,69 @@ def register_user():
 
 
 
-@users.route("/profile-edit/<username>", methods=["GET", "POST"])
+@users.route("/build-profile/<username>", methods=["GET", "POST"])
 def build_profile(username):
     """
     build_profile() runs after initial registration, to gather information
     to be displayed on user's profile page.
     """
+    
 
     if request.method == "POST":
 
         if 'profile_image' in request.files:
 
-            allowed_filesize = User.check_image_filesize(request.cookies.get('filesize'))
-            if not allowed_filesize:
-                flash('Your file is too large!')
-                return redirect(url_for("users.build_profile", username=session["user"]))
-
             profile_image = request.files['profile_image']
+            
+            profile_image.seek(0, os.SEEK_END)
+            if profile_image.tell() == 0:
+                print("no file")
+
+            allowed_image = User.allowed_file(profile_image.filename)
+            
             if profile_image:
 
-                if profile_image.filename == '':
-                    flash("Your image must have a filename!")
-                    return redirect(url_for('users.build_profile', username=session["user"]))
+                allowed_filesize = User.check_image_filesize(request.cookies.get('filesize'))
+                if not allowed_filesize:
+                    flash('Your file is too large!')
+                    return redirect(url_for("users.build_profile", username=session["user"]))
 
-                allowed_image = User.allowed_file(profile_image.filename)
-
-                if not allowed_image:
+                elif not allowed_image:
                     flash("Images can have extensions 'jpg', 'jpeg', 'gif', 'png' and 'pdf' only.")
-                    return redirect(url_for('users.build_profile', username=username))
+                    return redirect(url_for('users.build_profile', username=session["user"]))
 
                 else:
                     mongo.save_file(profile_image.filename, profile_image)
+                    profile_image_info = {
+                        "profile_image": profile_image.filename
+                    }
+                    User.complete_user_profile(username, profile_image_info)
                 
                 
-            profile_info = {
-                "first_name": request.form.get("first_name"),
-                "last_name": request.form.get("last_name"),
-                "date_of_birth": request.form.get("date_of_birth"),
-                "city": request.form.get("city"),
-                "country": request.form.get("country"),
-                "about_user": request.form.get("about_user"),
-                "spotify_userID": request.form.get("spotify_userID"),
-                "display_spotify_playlists": request.form.get("display_spotify_playlists"),
-                "is_artist": request.form.get("is_artist"),
-                "profile_image": profile_image.filename
-                }
+        profile_info = {
+            "first_name": request.form.get("first_name"),
+            "last_name": request.form.get("last_name"),
+            "date_of_birth": request.form.get("date_of_birth"),
+            "city": request.form.get("city"),
+            "country": request.form.get("country"),
+            "about_user": request.form.get("about_user"),
+            "spotify_userID": request.form.get("spotify_userID"),
+            "display_spotify_playlists": request.form.get("display_spotify_playlists"),
+            "is_artist": request.form.get("is_artist"),
+            }
 
-            User.complete_user_profile(username, profile_info)
+        User.complete_user_profile(username, profile_info)
 
-            return redirect(url_for("users.user_profile", username = username))
+        return redirect(url_for("users.user_profile", username = username))
         
-    return render_template('profile-edit.html')
+    return render_template('build-profile.html', username=username)
 
 
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        login_username = request.form.get("username")
+        login_username = request.form.get("username").lower()
         login_password = request.form.get("password")
 
         user = User.find_user_by_username(login_username.lower())
@@ -160,7 +165,7 @@ def logout():
 
 @users.route("/file/<path:filename>")
 def display_profile_image(filename):
-    print(filename)
+ 
     return mongo.send_file(filename)
 
 
@@ -174,19 +179,26 @@ def user_profile(username):
     """
     current_user = User.find_user_by_username(username)
 
-    all_tracks = Track.get_all_tracks()
+    all_tracks = Track.bind_users_to_tracks()
    
     liked_tracks = []
+
+    if current_user:
 
     # Iterate over all tracks and iterate over user's liked tracks
     # Check for matching ObjectIDs between 'tracks' collection
     # and 'liked_tracks' array in 'user' document.
-    if "liked_tracks" in current_user:
-        for track in all_tracks:
-            for liked_track in current_user["liked_tracks"]:
-                if liked_track == ObjectId(track["_id"]):
-                    liked_tracks.append(track)
-                    print(liked_tracks)
+        if "liked_tracks" in current_user:
+            for track in all_tracks:
+                for liked_track in current_user["liked_tracks"]:
+                    if liked_track == ObjectId(track["_id"]):
+                        liked_tracks.append(track)
+
+
+
+    
+
+
 
 
     user_dob = current_user["date_of_birth"]
@@ -205,6 +217,7 @@ def user_profile(username):
     if user_id is not None:
 
         users_tracks = Track.get_users_tracks(user_id)
+        print(users_tracks)
 
     return render_template("user-profile.html", username=current_user,
                              user_age=user_age, users_tracks=users_tracks,
