@@ -257,6 +257,14 @@ def request_password_reset():
             flash("We're sorry, we couldn't find your email. ")
             return redirect("users.login")
 
+        token = get_user_token(email_input)
+
+        msg = Message()
+        msg.subject = "Cross//Tracks: Reset your Password"
+        msg.sender = os.environ.get("MAIL_USERNAME")
+        msg.recipients = [user["email_address"]]
+        msg.html = render_template('password-reset-email.html', token=token, user=user["first_name"])
+        mailing.send(msg)
 
     return render_template('login.html')
 
