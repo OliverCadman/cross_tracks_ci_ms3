@@ -121,7 +121,7 @@
                                     <i class="fas fa-info-circle"></i>
                                     </a>
                                     {% if username["username"] == session.user %}
-                                    <a href="#" class="btn"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{url_for('tracks.remove_liked_track', track_id=track._id, username=session.user)}}" class="btn remove-like"><i class="fas fa-trash-alt"></i></a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -252,5 +252,6 @@
 </aside>
 {% block scripts %}
 <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
+<script src="{{url_for('static', filename='js/remove-like-ajax.js')}}"></script>
 {% endblock %}
 {% endblock %}
