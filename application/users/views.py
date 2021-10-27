@@ -85,14 +85,15 @@ def build_profile(username):
             profile_image = request.files['profile_image']
             
             profile_image.seek(0, os.SEEK_END)
+
             if profile_image.tell() == 0:
                 print("no file")
-
-            allowed_image = User.allowed_file(profile_image.filename)
             
-            if profile_image:
+            elif profile_image:
 
+                allowed_image = User.allowed_file(profile_image.filename)
                 allowed_filesize = User.check_image_filesize(request.cookies.get('filesize'))
+                
                 if not allowed_filesize:
                     flash('Your file is too large!')
                     return redirect(url_for("users.build_profile", username=session["user"]))
@@ -195,12 +196,6 @@ def user_profile(username):
                         liked_tracks.append(track)
 
 
-
-    
-
-
-
-
     user_dob = current_user["date_of_birth"]
     user_age = None
     
@@ -222,6 +217,11 @@ def user_profile(username):
     return render_template("user-profile.html", username=current_user,
                              user_age=user_age, users_tracks=users_tracks,
                              liked_tracks=liked_tracks)
+
+
+@users.route('/request-password-reset', methods=["GET", "POST"])
+def request_password_reset():
+    pass
 
         
    
