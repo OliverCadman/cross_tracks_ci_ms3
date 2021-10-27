@@ -1,6 +1,10 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alata&family=Quicksand:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Quicksand:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500&family=Open+Sans:wght@500&family=Roboto:wght@300;400&display=swap');
+
+
+
 
 
 body {
@@ -38,8 +42,9 @@ nav .brand-logo {
 
 nav li a {
     font-family: "Quicksand", sans-serif;
-    font-weight: bold;
+    font-weight: 300;
     color: #fafafa;
+    font-size: 1.3rem;
 }
 
 .domestic-links {
@@ -147,6 +152,18 @@ nav li a {
     font-family: 'Alata', sans-serif;
     color: #ffffff;
 }
+
+.user-fullname,
+.user-location-age {
+    font-family: 'Alata', sans-serif;
+    color: #e2d3ca;
+}
+
+.about-user {
+    font-family: 'Quicksand', sans-serif;
+}
+
+
 
 .messaging-details {
     display: inline;
@@ -299,6 +316,30 @@ nav li a {
     background-color: #7b89b4;
 }
 
+.profile-image-wrapper {
+    position: relative;
+}
+
+.is-artist-wrapper {
+    font-family: 'Quicksand';
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #D4AF37;
+    position: absolute;
+    top: 0;
+    right: 10%;
+    margin-right: 40px;
+
+}
+
+.is-artist-wrapper p {
+    display: inline;
+}
+
+.is-artist-wrapper p i {
+    margin-right: 5px;
+}
+
 .profile-banner {
     background-color: #3c4c8b;
     height: 150px;
@@ -307,6 +348,32 @@ nav li a {
 .username-wrapper {
     font-size: 2.5rem;
     text-decoration: underline;
+}
+
+.user-fullname {
+    font-size: 2rem;
+    
+}
+
+.user-location-age {
+    font-size: 1.5rem;
+}
+
+.about-user {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.profile-mail-icon,
+.profile-location-icon {
+    font-size: 1.5rem;
+    margin-right: .4rem
+}
+
+.block-divider {
+    width: 50%;
+    border-top: 3px solid #ffffff;
+    display: inline-block;
 }
 
 .edit-profile-btn-wrapper {
@@ -320,6 +387,21 @@ nav li a {
     color: #222222;
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
+}
+
+/* User's Tracks Section */
+
+/* User's Liked Tracks Section */
+
+.liked-track-container {
+    height: 500px;
+    border: 2px solid black;
+    overflow: auto;
+    padding: 20px;
+}
+
+.card-image.profile {
+    max-height: 150px;
 }
 
 }
