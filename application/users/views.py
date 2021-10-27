@@ -19,6 +19,10 @@ from werkzeug.datastructures import FileStorage
 from application.helpers.users import calculate_user_age
 from application import mongo
 from bson.objectid import ObjectId
+from time import time
+from flask_mail import Message
+from application import mailing
+import jwt
 if os.path.exists("env.py"):
     import env
 
@@ -153,15 +157,16 @@ def login():
             flash("Invalid username/password")
             return redirect(url_for("users.login"))
 
-        
     return render_template("login.html")       
         
                
+
 @users.route("/logout")
 def logout():
     session.pop("user")
     flash("You have been logged out")
     return redirect(url_for('main.index'))
+
 
 
 @users.route("/file/<path:filename>")
@@ -219,9 +224,51 @@ def user_profile(username):
                              liked_tracks=liked_tracks)
 
 
+# https://medium.com/@stevenrmonaghan/password-reset-with-flask-mail-protocol-ddcdfc190968
+
 @users.route('/request-password-reset', methods=["GET", "POST"])
 def request_password_reset():
-    pass
+    """
+    Handles form on modal in login.html
+    =========================================
+    Checks email input against User collection in MongoDB.
+    If successful, creates JSON web token using get_user_token()
+    Instance of Flask mail is created with properties:
+
+    Subject
+    Sender - Environment variable
+    Recipients - The email provided by the user
+    HTML - 'password-reset-email.html'
+           Called from render_template(). 
+           Takes in JWT and user's first name as argument
+
+    Email is then sent with a link provided to visit
+    'reset-password.html', with the token included in
+    GET request.
+    """
+    
+    if request.method == "POST":
+
+        email_input = request.form.get("email_address")
+
+        # Query MongoDB to check user input against email address in DB
+        user = User.find_user_by_email(email_input)
+        if not user:
+            flash("We're sorry, we couldn't find your email. ")
+            return redirect("users.login")
+
+
+    return render_template('login.html')
+
+
+
+
+
+
+
+
+
+
 
         
    
