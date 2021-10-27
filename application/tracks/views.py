@@ -35,6 +35,8 @@ def add_track(username):
 def browse_tracks():
 
     tracks_and_users = Track.bind_users_to_tracks()
+
+    print(tracks_and_users)
  
     return render_template("browse-tracks.html", tracks_and_users=tracks_and_users)
 
@@ -57,16 +59,16 @@ def like_track(track_id, username):
             current_user.remove_liked_track(track_id)
             selected_track_object.remove_like(username)
 
-            num_of_likes = selected_track_object.likes_count
-
-            return jsonify(num_of_likes)
+            return jsonify(num_of_likes=selected_track_object.likes_count, 
+                  likes_list=selected_track_object.likes, username=current_user.username)
         else:
             current_user.add_liked_track(track_id)
             selected_track_object.add_like(username)
 
-            num_of_likes = selected_track_object.likes_count
     
-    return jsonify(num_of_likes)
+        return jsonify(num_of_likes=selected_track_object.likes_count, 
+                  likes_list=selected_track_object.likes, username=username)
+
 
 @tracks.route("/remove-like/<track_id>/<username>")
 def remove_liked_track(track_id, username):
