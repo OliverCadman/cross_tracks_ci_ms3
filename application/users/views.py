@@ -226,6 +226,16 @@ def user_profile(username):
 
 # https://medium.com/@stevenrmonaghan/password-reset-with-flask-mail-protocol-ddcdfc190968
 
+def get_user_token(email, expires=500):
+    """
+    Generates and returns JSON Web Token to be used for authorization
+    """
+    return jwt.encode({
+        'reset_password': email,
+        'exp': time() + expires}, 
+         key = os.environ.get("SECRET_KEY"))
+
+
 @users.route('/request-password-reset', methods=["GET", "POST"])
 def request_password_reset():
     """
@@ -265,6 +275,7 @@ def request_password_reset():
         msg.recipients = [user["email_address"]]
         msg.html = render_template('password-reset-email.html', token=token, user=user["first_name"])
         mailing.send(msg)
+        
 
     return render_template('login.html')
 
