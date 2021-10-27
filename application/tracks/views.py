@@ -3,7 +3,6 @@ from werkzeug.utils import redirect
 from application.tracks.classes import Track
 from application.users.classes import User
 
-import pprint
 
 
 tracks = Blueprint("tracks", __name__)
@@ -40,14 +39,9 @@ def browse_tracks():
     return render_template("browse-tracks.html", tracks_and_users=tracks_and_users)
 
 
-@tracks.route('/track-modal', methods=["GET", "POST"])
-def track_modal():
-    render_template('browse-tracks.html/' + '#track-modal')
 
 @tracks.route('/like-track/<track_id>/<username>')
 def like_track(track_id, username):
-
-   
 
     selected_track_object = Track.get_track_object(track_id)
     selected_track = selected_track_object._id
@@ -73,5 +67,24 @@ def like_track(track_id, username):
             num_of_likes = selected_track_object.likes_count
     
     return jsonify(num_of_likes)
+
+@tracks.route("/remove-like/<track_id>/<username>")
+def remove_liked_track(track_id, username):
+
+    selected_track_object = Track.get_track_object(track_id)
+    selected_track = selected_track_object._id
+
+    current_user = User.get_user(username)
+
+    if current_user.liked_tracks or current_user.liked_tracks == []:
+
+        if selected_track in current_user.liked_tracks:
+            current_user.remove_liked_track(track_id)
+            selected_track_object.remove_like(username)
+
+    return jsonify(selected_track_object.track_name, current_user.username)
+
+
+
     
     
