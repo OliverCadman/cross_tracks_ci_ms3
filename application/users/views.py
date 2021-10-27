@@ -279,6 +279,10 @@ def request_password_reset():
 
     return render_template('login.html')
 
+@users.route("/reset-password", methods=["GET", "POST"])
+def reset_password():
+    return render_template('reset-password.html')
+
 
 
 
