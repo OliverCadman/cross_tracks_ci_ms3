@@ -109,7 +109,12 @@
                      <div class="col s12 m6">
                         <div class="card horizontal profile">
                             <div class="card-image profile">
-                                <img src="{{track.image_url}}" alt="Album cover of track" width="90">
+                                {% if not track.image_url == '' %}
+                                <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
+                                {% else %}
+                                <img src="{{url_for('static', filename='images/design3.png')}}"
+                                    alt="Image of Cover Art for Track" class="track-image">
+                                {% endif %}
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">
@@ -183,7 +188,7 @@
 <div class="modal" id="edit-profile">
      <div class="row">
          <div class="col s12">
-             <form action="{{url_for('users.build_profile', username=session['user'])}}" method="POST"
+             <form action="{{url_for('users.edit_profile', username=session['user'])}}" method="POST"
                  enctype="multipart/form-data">
                  <div class="row">
                      <div class="input-field col s12">
