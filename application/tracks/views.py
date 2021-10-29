@@ -1,6 +1,8 @@
 from flask import (Blueprint, render_template, url_for, flash, request, redirect, session, jsonify)
 from application.tracks.classes import Track
 from application.users.classes import User
+from application.comments.classes import Comment
+from bson.objectid import ObjectId
 
 
 
@@ -88,7 +90,23 @@ def remove_liked_track(track_id, username):
 
 @tracks.route("/add-comment/<track_id>/<username>/", methods=["GET", "POST"])
 def add_comment(track_id, username):
-    print(track_id, username)
+
+    user = User.find_user_by_username(username)
+    user_id = user["_id"]
+
+
+
+    
+    if request.method == "POST":
+
+        user_input = request.form.get("comment_body")
+
+        new_comment = Comment(user_input, ObjectId(user_id), ObjectId(track_id))
+        
+        new_comment.add_comment()
+
+
+
 
 
     return redirect(url_for('tracks.browse_tracks'))
