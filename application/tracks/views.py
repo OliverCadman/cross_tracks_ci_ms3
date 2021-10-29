@@ -1,5 +1,4 @@
-from flask import (Blueprint, render_template, url_for, flash, request, session, jsonify)
-from werkzeug.utils import redirect
+from flask import (Blueprint, render_template, url_for, flash, request, redirect, session, jsonify)
 from application.tracks.classes import Track
 from application.users.classes import User
 
@@ -85,6 +84,14 @@ def remove_liked_track(track_id, username):
             selected_track_object.remove_like(username)
 
     return jsonify(selected_track_object.track_name, current_user.username)
+
+
+@tracks.route("/add-comment/<track_id>/<username>/", methods=["GET", "POST"])
+def add_comment(track_id, username):
+    print(track_id, username)
+
+
+    return redirect(url_for('tracks.browse_tracks'))
 
 
 
