@@ -76,14 +76,30 @@
     <div class="row">
         <div class="col s12 m6">
           <h5>My Tracks</h5>
+          <div class="track-container">
           <div class="row">
               {% if users_tracks %}
                 {% for track in users_tracks %}
                     <div class="col s12 m6">
                        <div class="card horizontal">
                 <div class="card-stacked">
-                    <div class="card-content">
-                        <span class="card-title">{{track.track_name}}</span>
+                    <div class="card-content track-info-container">
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <span class="card-title">{{track.track_name}}</span>
+                            </div>
+                            <div class="col s12 m6">
+                                <div class="track-image-wrapper">
+                                    {% if not track.image_url == '' %}
+                                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
+                                        class="track-image">
+                                    {% else %}
+                                    <img src="{{url_for('static', filename='images/design3.png')}}"
+                                        alt="Image of Cover Art for Track" class="track-image">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-information-wrapper">
                             <div class="track-card-information">
                                 <p class="artist-name">
@@ -93,13 +109,13 @@
                                     {{track.album_name}}
                                 </p>
                             </div>
-                            <div class="info-edit-delete-icons">
+                            <div class="card-action info-edit-delete-wrapper">
                                 <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger">
                                     <i class="fas fa-info-circle"></i>
                                 </a>
                                     {% if username["username"] == session.user %}
                                     <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="#delete_track_modal_{{track._id}}" class="btn"><i class="fas fa-trash-alt"></i></a>
                                     {% endif %}
                             </div>
                             <div>
@@ -107,17 +123,8 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    {% if not track.image_url == '' %}
-                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
-                    {% else %}
-                    <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
-                        class="track-image">
-                    {% endif %}
                     </div>
                     </div>
-                    </div>
-
                 <!-- Track Info Modal -->
                 <div class="modal" id="more_info_modal_{{track._id}}">
                     <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
@@ -147,7 +154,7 @@
                 <div class="modal" id="edit_track_modal_{{track._id}}">
                     <div class="row">
                         <div class="col s12 card-panel">
-                            <form action="#" method="POST">
+                            <form action="{{url_for('tracks.edit_track', track_id=track._id, username=username['username'])}}" method="POST">
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <input type="text" value="{{track.track_name}} "id="track_name" name="track_name"
@@ -191,15 +198,17 @@
                 {% endfor %}
               {% endif %}
           </div>
+          
           {% if not users_tracks %}
           <div class="col s12 m6 no-tracks-found">
               <h1>No Tracks</h1>
           </div>
           {% endif %}
         </div>
+        </div>
         <div class="col s12 m6">
           <h5>My Liked Tracks</h5>
-          <div class="liked-track-container">
+          <div class="track-container">
           <div class="row">
               {% if liked_tracks %}
                 {% for track in liked_tracks %}
