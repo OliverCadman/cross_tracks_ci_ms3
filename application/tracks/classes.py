@@ -63,7 +63,18 @@ class Track:
 
         mongo.db.tracks.insert(track_data)
 
-    
+    @staticmethod
+    def edit_track(track_id, track_data):
+        
+        try:
+            mongo.db.tracks.update_one(
+                {"_id": ObjectId(track_id)},
+                {"$set": track_data})
+
+        except Exception as e:
+            print(e)
+
+        
     def get_artist_name(self):
 
         artist_name = self.artist_name
@@ -86,6 +97,7 @@ class Track:
             "_id": self._id},
             {"$set": self.get_track_info()}
         )
+
 
     def remove_like(self, username):
 
@@ -160,8 +172,46 @@ class Track:
                     'foreignField': "_id",
                     'as': 'user'
                 }
+            }, {
+                "$lookup": {
+                    "from": "comments",
+                    "localField": "_id",
+                    "foreignField": "track_id",
+                    "as": "comments"
+                },
+            }, 
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "comments.author",
+                    "foreignField": "_id",
+                    "as": "comment_added_by"
+                }
             }
         ])
+
+    
+    @staticmethod
+    def bind_users_to_comments():
+
+        return mongo.db.comments.aggregate([
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "author",
+                    "foreignField": "_id",
+                    "as": "user_details"
+                }},
+
+                { "$lookup": {
+                    "from": "comments",
+                    "localField": "_id",
+                    "foreignField": "track_id",
+                    "as": "comments"
+                }},
+            
+        ])
+
 
 
     
