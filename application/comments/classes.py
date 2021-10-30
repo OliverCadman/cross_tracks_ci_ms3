@@ -1,5 +1,7 @@
 from application import mongo
+from bson.objectid import ObjectId
 import datetime
+import re
 
 class Comment:
 
@@ -49,3 +51,33 @@ class Comment:
                 mongo.db.comments.insert_one(comment)
             except:
                 print('Server error, unable to insert document')
+
+    @staticmethod
+    def check_for_whitespace(comment):
+
+        regex_pattern = re.compile("(.|\s)*\S(.|\s)*")
+        whitespace_check = re.match(regex_pattern, comment)
+
+        return whitespace_check
+
+
+    @staticmethod 
+    def bind_users_to_comments():
+
+        return mongo.db.comments.aggregate([
+            {
+                "$lookup": {
+                    "from": "users",
+                    'localField': "author",
+                    'foreignField': "_id",
+                    'as': 'author'
+                }
+            }
+        ])
+
+
+    @staticmethod
+    def delete_track_from_collection(track_id):
+
+        mongo.db.comments.delete_many({"track_id": ObjectId(track_id)})
+
