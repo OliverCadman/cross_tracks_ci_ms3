@@ -201,9 +201,25 @@
                  <div class="modal" id="delete_track_modal_{{track._id}}">
                       <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                      <div class="modal-content">
-                         <div class="confirm-delete-message center-align">
-                             <p>Deleting "{{track.track_name}}"</p>
-                             <p>Are you sure you want to continue?</p>
+                         <div class="row">
+                             <div class="col s12 m6 confirm-delete-container">
+                                <div class="confirm-delete-message center-align">
+                                    <p>Deleting "{{track.track_name}}"</p>
+                                </div>
+                                <div class="confirm-delete-wrapper center-align">
+                                    <p>Are you sure you want to continue?</p>
+                                    <a href="#" class="btn">Delete</a>
+                                    <button type="button" class="btn modal-close">Cancel</button>
+                                </div>
+                             </div>
+                             <div class="col m6 hide-on-mobile-only">
+                                 {% if not track.image_url == '' %}
+                                 <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
+                                 {% else %}
+                                 <img src="{{url_for('static', filename='images/design3.png')}}"
+                                     alt="Image of Cover Art for Track" class="album-cover">
+                                 {% endif %}
+                             </div>
                          </div>
                      </div>
                  </div>
