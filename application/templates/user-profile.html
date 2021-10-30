@@ -96,10 +96,13 @@
                                     {{track.album_name}}
                                 </p>
                             </div>
-                            <div class="more-info-btn">
-                                <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
-                                    {% if username == session["user"] %}
-                                    <a href="#" class="btn">Edit</a>
+                            <div class="info-edit-delete-icons">
+                                <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                                    {% if username["username"] == session.user %}
+                                    <a href="#" class="btn"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn"><i class="fas fa-trash-alt"></i></a>
                                     {% endif %}
                             </div>
                             <div>
