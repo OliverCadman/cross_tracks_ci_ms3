@@ -477,6 +477,20 @@ nav li a {
     padding: 10px;
 }
 
+/* Delete User Modal */
+
+.delete-action-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-action-btn {
+    /* Overrides Materialize class property */
+    margin: 0 5px !important;
+}
+
+
 /* Delete Track Modal */
 
 .confirm-delete-container {
