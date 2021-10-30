@@ -133,6 +133,46 @@ def edit_track(track_id, username):
 
     return redirect(url_for('users.user_profile', username=username))
 
+
+@tracks.route("/delete-track/<track_id>/<username>", methods=["GET", "POST"])
+def delete_track(track_id, username):
+
+    # Get Track
+    current_track = Track.get_track_id(track_id)
+    # Delete track
+    
+    # Remove track from list of user's liked tracks
+    all_users = User.get_all_users()
+
+    # Remove track from comments collection
+
+    if not session["user"]:
+        redirect(url_for("users.login"))
+
+    try:
+        Track.delete_track(track_id)
+    except Exception as e:
+        print(e)
+
+    try:
+        Comment.delete_track_from_collection(track_id)
+    except Exception as e:
+        print(e)
+
+    for every_user in all_users:
+        # Confirm that 'liked_tracks' field exists in database
+        if 'liked_tracks' in every_user:
+            User.pull_from_list("liked_tracks", track_id)
+
+
+    return redirect(url_for('users.user_profile', username=username))
+
+
+
+
+
+
+
      
 
     
