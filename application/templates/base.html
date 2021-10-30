@@ -24,8 +24,8 @@
         <li><a href="{{url_for('users.logout')}}">Logout</a></li>
     </ul>
     <!--Navbar for Laptop/Desktop devices-->
-    <nav class="navbar nav-extended browser-default">
-        <div class="browser-default">
+    <nav class="nav-extended">
+        <div class="nav-wrapper browser-default">
 
             <a href="{{url_for('main.index')}}" class="brand-logo">
                 Cross//Tracks
@@ -59,6 +59,7 @@
 
             </ul>
         </div>
+         </nav>
         <!--Navbar for Mobile Devices -->
         <ul id="mobile-demo" class="sidenav">
             <li>
@@ -80,20 +81,26 @@
                 <a href="{{url_for('users.login')}}">Login</a>
             </li>
             {% endif %}
+            {% if session.user %}
             <li>
                 <a class="dropdown-trigger" href="#!" data-target="account-dropdown-mobile">My Account</a>
             </li>
+            {% endif %}
         </ul>
-        {% if session.user %}
+      
         <ul id="account-dropdown-mobile" class="dropdown-content">
             <li><a href="{{url_for('users.user_profile', username=session['user'])}}">My Profile</a></li>
             <li><a href="#!">My Tracks</a></li>
             <li class="divider"></li>
             <li><a href="{{url_for('users.logout')}}">Logout</a></li>
         </ul>
-        {% endif %}
-    </nav>
+
     <main>
+        <div class="row top-level-background">
+            <div class="col s12">
+
+            </div>
+        </div>
         <div class="content">
             {% block content %}
             {% endblock %}
@@ -162,7 +169,7 @@
                         </div>
                         <div class=" col s6 password-input">
                             <label for="password">Choose a password:</label>
-                            <input type="password" id="password" name="password" pattern="^[a-zA-Z0-9]{8,15}$"
+                            <input type="password" id="password" name="password" pattern="^[a-zA-Z0-9]{8,18}$"
                                 class="validate" required>
                         </div>
                         <div class="col s6 confirm-password-input">
@@ -178,11 +185,12 @@
         </div>
     </div>
     <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256- 
+    DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
+   </script>
     <!--MaterializeCSS JavaScript-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{url_for('static', filename='js/initialization.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     {% block scripts %}
     {% endblock %}
 </body>
