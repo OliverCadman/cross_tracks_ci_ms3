@@ -1,59 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="browse-background">
-<div class="row">
-    <div class="col s12 user-option-list top-level-background">
-        <ul>
-            <li>
-                <a href="#"><i class="fas fa-search user-option-icon"></i>
-                    <p class="user-option hide-on-small-only">Search Tracks</p>
-                </a>
-            </li>
-            {% if session.user %}
-            <li>
-                <a href="{{url_for('tracks.add_track', username=session['user'])}}"><i class="fas fa-plus-square user-option-icon"></i>
-                    <p class="user-option hide-on-small-only">Add Your Tracks</p>
-                </a>
-            </li>
-            <li>
-                <a href="{{url_for('users.user_profile', username=session['user'])}}"><i class="fas fa-user-circle user-option-icon"></i>
-                    <p class="user-option hide-on-small-only">Your Profile</p>
-                </a>
-            </li>
-            {% endif %}
-        </ul>
+    <div class="row">
+        <div class="col s12 user-option-list top-level-background">
+            <ul>
+                <li>
+                    <a href="#"><i class="fas fa-search user-option-icon"></i>
+                        <p class="user-option hide-on-small-only">Search Tracks</p>
+                    </a>
+                </li>
+                {% if session.user %}
+                <li>
+                    <a href="{{url_for('tracks.add_track', username=session['user'])}}"><i
+                            class="fas fa-plus-square user-option-icon"></i>
+                        <p class="user-option hide-on-small-only">Add Your Tracks</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('users.user_profile', username=session['user'])}}"><i
+                            class="fas fa-user-circle user-option-icon"></i>
+                        <p class="user-option hide-on-small-only">Your Profile</p>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col s12 section-header">
-        <h1>Latest Tracks</h1>
-        
+    <div class="row">
+        <div class="col s12 section-header">
+            <h1>Latest Tracks</h1>
+            <div class="center-align">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{message}}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+            </div>
+        </div>
     </div>
-</div>
-<div class="row">
-    {% if tracks_and_users %}
-    {% for track in tracks_and_users %}
-    {% set username = track['user'][0]['username'] %}
-    <div class="col s12 m4 hide-on-small-only">
-        <div class="card horizontal">
-            <div class="card-stacked">
-                <div class="card-content">
-                    <span class="card-title">{{track.track_name}}</span>
-                    {% if session.user %}
-                    {% if session.user in track.likes %}
-                    <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}" class="modal-trigger like_track"><i
-                                class="fas fa-star"
-                                id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
-                    {% else %}
-                    <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                            class="modal-trigger like_track"><i class="far fa-star"
-                                id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
-                    {% endif %}
-                    {% else %}
-                     <span><a href="{{url_for('users.login')}}"
-                            class="modal-trigger"><i
-                                class="far fa-star"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
-                    {% endif %}
+    <div class="row">
+        {% if tracks_and_users %}
+        {% for track in tracks_and_users %}
+        {% set username = track['user'][0]['username'] %}
+        <div class="col m4 hide-on-small-only">
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <span class="card-title">{{track.track_name}}</span>
+                        {% if session.user %}
+                        {% if session.user in track.likes %}
+                        <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                                class="modal-trigger like_track"><i class="fas fa-star"
+                                    id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                        {% else %}
+                        <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                                class="modal-trigger like_track"><i class="far fa-star"
+                                    id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                        {% endif %}
+                        {% else %}
+                        <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i
+                                    class="far fa-star"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                        {% endif %}
+                      
                         <div class="card-information-wrapper">
                             <div class="track-card-information">
                                 <p class="artist-name">
@@ -65,66 +76,78 @@
                             </div>
                             <div class="more-info-btn">
                                 <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
+                                    {% if username == session["user"] %}
+                                    <a href="#" class="btn">Edit</a>
+                                    {% endif %}
                             </div>
                             <div>
                                 <p>
-                                    <small>Added by:</small> {{username}}
+                                    <small>Added by:</small>
+                                    {% if not username == session["user"] %}
+                                        {{username}}
+                                    {% else %}
+                                        Me
+                                    {% endif %}
                                     {% if track['user'][0]['profile_image'] %}
                                     <a href="{{url_for('users.user_profile', username=username)}}">
-                                         <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                                             alt="User profile image" class="user-image-card">
-                                    </a>
-                                        {% else %}
-                                        <a href="{{url_for('users.user_profile', username=username)}}">
-                                         <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                        <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
                                             alt="User profile image" class="user-image-card">
-                                        </a>
+                                    </a>
+                                    {% else %}
+                                    <a href="{{url_for('users.user_profile', username=username)}}">
+                                        <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                            alt="User profile image" class="user-image-card">
+                                    </a>
                                     {% endif %}
                                 </p>
                             </div>
                         </div>
+                    </div>
                 </div>
+                <div>
+                    {% if not track.image_url == '' %}
+                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
+                    {% else %}
+                    <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
+                        class="track-image">
+                    {% endif %}
+                    </div>
             </div>
-            <div class="card-image">
-                {% if not track.image_url == '' %}
-                <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
-                {% else %}
-                <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
-                    class="track-image">
-                {% endif %}
-            </div>
-        </div>
-          
-    </div>
-    <div class="col s12 hide-on-med-and-up">
-        <div class="card">
-            <div class="card-image">
-                {% if not track.image_url == '' %}
-                <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
-                {% else %}
-                <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
-                    class="track-image">
-                {% endif %}
-            </div>
-            <div class="card-title">
-                <span>{{track.track_name}}</span>
-            </div>
-            <div class="card-content">
-                <p>{{track.artist_name}}</p>
-                <p>{{track.album_name}}</p>
-                <p>{{track.genre}}</p>
-            </div>
-            <div class="card-action">
-                <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal" id="track_modal_{{track._id}}">
-        <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
-        <div class="modal-content">
-            <div class="row">
-                <div class="col s12 modal-user-details">
+        </div>
+        <div class="col s12 hide-on-med-and-up">
+            <div class="card">
+                <div class="card-image">
+                    {% if not track.image_url == '' %}
+                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
+                    {% else %}
+                    <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
+                        class="track-image">
+                    {% endif %}
+                </div>
+                <div class="card-title">
+                    <span>{{track.track_name}}</span>
+                </div>
+                {% if session.user %}
+                {% if session.user in track.likes %}
+                <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                        class="modal-trigger like_track"><i class="fas fa-star"
+                            id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                {% else %}
+                <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                        class="modal-trigger like_track"><i class="far fa-star"
+                            id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                {% endif %}
+                {% else %}
+                <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i
+                            class="far fa-star"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                {% endif %}
+                <div class="card-content">
+                    <p>{{track.artist_name}}</p>
+                    <p>{{track.album_name}}</p>
+                    <p>{{track.genre}}</p>
+                </div>
+                <div class="card-action">
                     <p>
                         <small>Added by:</small> {{username}}
                         {% if track['user'][0]['profile_image'] %}
@@ -138,33 +161,81 @@
                                 alt="User profile image" class="user-image-card">
                         </a>
                         {% endif %}
-                        <span class="message-user-modal"><a href="#" class="btn">Message {{username}}</a></span>
                     </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m6 album-cover-modal">
-                    <h4 class="track-modal-header">{{track.track_name}}</h4>
-                    {% if not track.image_url == '' %}
-                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
-                    {% else %}
-                    <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
-                        class="album-cover">
+                    <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
+                    {% if username == session["user"] %}
+                        <a href="#" class="btn">Edit</a>
                     {% endif %}
-                </div>
-                <div class="col s12 m6">
-                    <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
-                    <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
-                    <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
-                    <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
                 </div>
             </div>
         </div>
+
+        <div class="modal" id="track_modal_{{track._id}}">
+            <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12 modal-user-details">
+                        <p>
+                            <small>Added by:</small> {{username}}
+                            {% if track['user'][0]['profile_image'] %}
+                            <a href="{{url_for('users.user_profile', username=username)}}">
+                                <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                    alt="User profile image" class="user-image-card">
+                            </a>
+                            {% else %}
+                            <a href="{{url_for('users.user_profile', username=username)}}">
+                                <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                    alt="User profile image" class="user-image-card">
+                            </a>
+                            {% endif %}
+                            <span class="message-user-modal"><a href="#" class="btn">Message {{username}}</a></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m6 album-cover-modal">
+                        <h4 class="track-modal-header">{{track.track_name}}</h4>
+                        {% if not track.image_url == '' %}
+                        <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
+                        {% else %}
+                        <img src="{{url_for('static', filename='images/design3.png')}}"
+                            alt="Image of Cover Art for Track" class="album-cover">
+                        {% endif %}
+                    </div>
+                    <div class="col s12 m6">
+                        <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
+                        <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
+                        <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
+                        <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
+                    </div>
+                      {% for comment_object in track["comments"]%}
+                      <div class="col s12 m6">
+                          <div class="comments-wrapper">
+                              <div class="comment">
+                                 {{comment_object["comment"]}}
+                              </div>
+                              <div class="date-added">
+                                 {{comment_object["date_added"].strftime('%Y-%m-%d %H:%M')}}
+                              </div>
+                          </div>
+                      </div>
+                      {% endfor %}
+                    <div class="col s12 m6 input-field">
+                        <form action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}" method="POST" id="comment_form">
+                            <textarea rows="2" cols=10 id="comment_body" name="comment_body" class="materialize-textarea"></textarea>
+                            <label for="comment_body">Leave a comment:</label>
+                            <div class="submit-comment-btn">
+                                <button type="submit" class="btn right-align">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- Track Modal -->
+        {% endif %}
     </div>
-    {% endfor %}
-    <!-- Track Modal -->
-    {% endif %}
-</div>
 </div>
 
 
@@ -174,6 +245,7 @@
 {% block scripts %}
 <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
+<script src="{{url_for('static', filename='js/comment-regex-error.js')}}"></script>
 {% endblock %}
 
 
