@@ -80,17 +80,44 @@
               {% if users_tracks %}
                 {% for track in users_tracks %}
                     <div class="col s12 m6">
-                        <div class="card horizontal">
-                            <div class="card-image">
-                                {% if not track.image_url == '' %}
-                                <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
-                                {% else %}
-                                <img src="{{url_for('static', filename='images/design3.png')}}"
-                                    alt="Image of Cover Art for Track" class="track-image">
-                                {% endif %}
+                       <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <span class="card-title">{{track.track_name}}</span>
+                        {% if track.comments|length > 0 %}
+                        {{track.comments|length}}
+                        {% endif %}
+                        <div class="card-information-wrapper">
+                            <div class="track-card-information">
+                                <p class="artist-name">
+                                    {{track.artist_name}}
+                                </p>
+                                <p class="album-name">
+                                    {{track.album_name}}
+                                </p>
+                            </div>
+                            <div class="more-info-btn">
+                                <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
+                                    {% if username == session["user"] %}
+                                    <a href="#" class="btn">Edit</a>
+                                    {% endif %}
+                            </div>
+                            <div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    {% if not track.image_url == '' %}
+                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
+                    {% else %}
+                    <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
+                        class="track-image">
+                    {% endif %}
+                    </div>
+            </div>
+                        </div>
+  
                 {% endfor %}
               {% endif %}
           </div>
