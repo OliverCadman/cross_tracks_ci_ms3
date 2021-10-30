@@ -1,8 +1,10 @@
+from os import error
 from flask import (Blueprint, render_template, url_for, flash, request, redirect, session, jsonify)
 from application.tracks.classes import Track
 from application.users.classes import User
 from application.comments.classes import Comment
 from bson.objectid import ObjectId
+import pprint
 
 
 
@@ -37,7 +39,7 @@ def browse_tracks():
 
     tracks_and_users = Track.bind_users_to_tracks()
 
-    print(tracks_and_users)
+    
  
     return render_template("browse-tracks.html", tracks_and_users=tracks_and_users)
 
@@ -94,22 +96,25 @@ def add_comment(track_id, username):
     user = User.find_user_by_username(username)
     user_id = user["_id"]
 
-
-
-    
     if request.method == "POST":
 
         user_input = request.form.get("comment_body")
 
+        if not Comment.check_for_whitespace(user_input):
+            error_message = "Your comment is empty!"
+            flash(error_message)
+            return redirect(url_for("tracks.browse_tracks"))
+
         new_comment = Comment(user_input, ObjectId(user_id), ObjectId(track_id))
         
         new_comment.add_comment()
+        success_message = "Thanks for leaving your comment!"
+        flash(success_message)
+        return redirect(url_for('tracks.browse_tracks'))
 
-
-
-
-
-    return redirect(url_for('tracks.browse_tracks'))
+@tracks.route("/edit-track/<track_id>", methods=["GET", "POST"])
+def edit_track(track_id):
+    pass
 
 
 
