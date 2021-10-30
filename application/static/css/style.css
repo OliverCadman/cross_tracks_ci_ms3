@@ -197,8 +197,43 @@ nav li a {
 
 /* Track Cards */
 
+
 .card-content {
     padding: 10px !important;
+}
+
+.user-image-card {
+    width: 50px;
+    display: inline;
+    border: 2px solid #222222;
+    border-radius: 50%;
+}
+
+.album-cover {
+    width: 100%;
+}
+
+/* Track Modals */
+
+.track-modal-header {
+    font-size: 1.4rem;
+}
+
+.close-modal-icon {
+    font-size: 1.5rem;
+}
+
+
+/* --------- Login Page ----------- */
+
+.close-modal-icon {
+    float: right;
+    margin: 10px 10px 0 0;
+}
+
+.required-input::after {
+    content: '*';
+    color: red;
 }
 
 
@@ -241,8 +276,29 @@ nav li a {
 }
 
 .card-image {
-    max-height: 100px;
+    width: 100%;
 }
+
+/* ------ User Profile ------ */
+
+/* 'My Tracks' cards */
+
+
+.track-image-wrapper img {
+    width: 100%
+}
+
+.info-edit-delete-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.info-edit-delete-wrapper a {
+    margin: 0 5px;
+}
+
+
 
 }
 
@@ -264,12 +320,13 @@ nav li a {
 }
 
 .card-title {
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    font-size: 1.3rem;
 }
 
 /* Latest Tracks */
 .card-image {
-  max-height: 200px;
+  width: 100%;
 }
 
 .card-image img {
@@ -280,11 +337,8 @@ nav li a {
     text-align: left;
 }
 
-.user-image-card {
-    width: 50px;
-    display: inline;
-    border: 2px solid #222222;
-    border-radius: 50%;
+.track-image {
+    width: 150px;
 }
 
 .modal-user-details {
@@ -295,9 +349,22 @@ nav li a {
     margin-left: 2rem;
 }
 
+.comments-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
 
-.album-cover {
-    width: 100%;
+.submit-comment-btn {
+    display: inline;
+    float: right;
+}
+
+
+/* ------ Login Page ------ */
+
+.close-modal-icon {
+    font-size: 1.3rem;
 }
 
 /* ------ Profile Page ------- */
@@ -393,15 +460,32 @@ nav li a {
 
 /* User's Liked Tracks Section */
 
-.liked-track-container {
+.track-container {
     height: 500px;
     border: 2px solid black;
     overflow: auto;
     padding: 20px;
 }
 
-.card-image.profile {
+/* .card.horizontal.profile {
     max-height: 150px;
+} */
+
+.card-action.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* Delete Track Modal */
+
+.confirm-delete-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 415px;
+
 }
 
 }
