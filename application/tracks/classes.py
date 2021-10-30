@@ -74,17 +74,10 @@ class Track:
         except Exception as e:
             print(e)
 
-        
-    def get_artist_name(self):
+    @staticmethod
+    def delete_track(track_id):
 
-        artist_name = self.artist_name
-
-        mongo.db.tracks.find_one({"artist_name": artist_name})
-
-    
-    def get_track_name(self):
-
-        track_name = self.track_name
+        mongo.db.tracks.delete_one({"_id": ObjectId(track_id)})
 
 
     def add_like(self, username):
