@@ -40,6 +40,7 @@
                   <div class="edit-profile-btn-wrapper">
                     {% if username['username'] == session.user %}
                     <a href="#edit-profile" class="btn modal-trigger">Edit My Profile</a>
+                    <a href="#delete_profile_modal" class="btn modal-trigger">Delete my Profile</a>
                     {% endif %}
                   </div>
                 </div>
@@ -208,7 +209,7 @@
                                 </div>
                                 <div class="confirm-delete-wrapper center-align">
                                     <p>Are you sure you want to continue?</p>
-                                    <a href="#" class="btn">Delete</a>
+                                    <a href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}" class="btn">Delete</a>
                                     <button type="button" class="btn modal-close">Cancel</button>
                                 </div>
                              </div>
@@ -320,6 +321,7 @@
 </div>
 </section>
 <aside>
+<!-- Edit Profile Modal -->
 <div class="modal" id="edit-profile">
      <div class="row">
          <div class="col s12">
@@ -390,6 +392,19 @@
              </form>
          </div>
 </div>
+</div>
+<div class="modal" id="delete_profile_modal">
+    <div class="modal-content">
+        <div class="delete-modal-alert-wrapper center-align">
+            <h5>Delete Account</h5>
+            <p>Are you sure you want to delete your account?</p>
+            <p>We'll be sad to see you go!</p>
+        </div>
+        <div class="modal-footer delete-action-btn-wrapper">
+            <a href="#" class="btn delete-action-btn">Yes, I'm sure</a>
+            <button class="btn delete-action-btn modal-close">No, I change my mind!</button>
+        </div>
+    </div>
 </aside>
 {% block scripts %}
 <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
