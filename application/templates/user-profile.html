@@ -115,7 +115,7 @@
                                 </a>
                                     {% if username["username"] == session.user %}
                                     <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-edit"></i></a>
-                                    <a href="#delete_track_modal_{{track._id}}" class="btn"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-trash-alt"></i></a>
                                     {% endif %}
                             </div>
                             <div>
@@ -152,6 +152,7 @@
 
                 <!-- Track Edit Modal -->
                 <div class="modal" id="edit_track_modal_{{track._id}}">
+                     <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                     <div class="row">
                         <div class="col s12 card-panel">
                             <form action="{{url_for('tracks.edit_track', track_id=track._id, username=username['username'])}}" method="POST">
@@ -195,6 +196,17 @@
                         </div>
                     </div>
                 </div>
+
+                 <!-- Track Delete Modal -->
+                 <div class="modal" id="delete_track_modal_{{track._id}}">
+                      <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
+                     <div class="modal-content">
+                         <div class="confirm-delete-message center-align">
+                             <p>Deleting "{{track.track_name}}"</p>
+                             <p>Are you sure you want to continue?</p>
+                         </div>
+                     </div>
+                 </div>
                 {% endfor %}
               {% endif %}
           </div>
@@ -282,6 +294,7 @@
                              </div>
                          </div>
                      </div>
+
                 {% endfor %}
               {% endif %}
           </div>
