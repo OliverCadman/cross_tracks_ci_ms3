@@ -14,6 +14,7 @@ from flask import (Blueprint, render_template,
 from application.users.classes import User
 from application.tracks.classes import Track
 from application import Config
+from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 from application.helpers.users import calculate_user_age
@@ -22,7 +23,7 @@ from bson.objectid import ObjectId
 from time import time
 from flask_mail import Message
 from application import mailing
-import jwt
+
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 if os.path.exists("env.py"):
     import env
@@ -158,7 +159,7 @@ def login():
 @users.route("/edit-profile/<username>", methods = ["GET", "POST"])
 def edit_profile(username):
 
-    user = User.get_user(username)
+    user = User.find_user_by_username(username)
 
     if request.method == "POST":
         
@@ -219,9 +220,13 @@ def user_profile(username):
     collected in build_profile function, as well as 
     user's tracks.
     """
+
     current_user = User.find_user_by_username(username)
 
     all_tracks = Track.bind_users_to_tracks()
+
+    # Acquire genres to display in edit track modal
+    genres = Track.get_genres()
    
     liked_tracks = []
 
@@ -257,7 +262,7 @@ def user_profile(username):
 
     return render_template("user-profile.html", username=current_user,
                              user_age=user_age, users_tracks=users_tracks,
-                             liked_tracks=liked_tracks)
+                             liked_tracks=liked_tracks, genres=genres)
 
 
 # https://medium.com/@stevenrmonaghan/password-reset-with-flask-mail-protocol-ddcdfc190968
@@ -270,9 +275,12 @@ def get_reset_token(email, expires_sec=500):
     user = User.find_user_by_email(email)
     user_id = str(user["_id"])
 
+
+    SECRET_KEY = "/G..;U7|cf1>^B&"
    
-    s = Serializer(os.environ.get("SECRET_KEY"), expires_sec)
-    return (s.dumps({"user_id": user_id}).decode('utf-8'))
+    s = Serializer('SECRET_KEY', expires_sec)
+    token = s.dumps({"user_id": user_id}).decode('utf-8')
+    return token
 
 @users.route('/request-password-reset', methods=["GET", "POST"])
 def request_password_reset():
@@ -330,9 +338,10 @@ def verify_reset_token(token):
     page.
     """
 
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-    s = Serializer(SECRET_KEY)
-    
+    SECRET_KEY = "/G..;U7|cf1>^B&"
+   
+    s = Serializer('SECRET_KEY')
+    user_id = None
     try:
         user_id = s.loads(token)["user_id"]
     except Exception as e:
@@ -347,7 +356,7 @@ def verify_reset_token(token):
 def reset_password(token):
 
     user = verify_reset_token(token)
-    
+    print(user)
 
     # if request.method == "POST":
 
@@ -356,16 +365,20 @@ def reset_password(token):
 
     #     if not User.validate_password_format(password):
     #         flash("Please include at least one capital letter and one number")
-    #         return redirect(url_for("users.reset_password"))
+    #         return render_template('reset-password.html')
 
     #     if not User.validate_password_match(password, confirm_password):
     #         flash("Passwords do not match!")
-    #         return redirect(url_for("users.reset_password"))
+    #         return render_template('reset-password.html')
 
-        
+    #     username = user["username"]
+    #     edited_password = {
+    #         "password": generate_password_hash(password)
+    #     }
 
-
-
+    #     User.edit_profile(username, edited_password)
+    #     flash("Password changed successfully!")
+    #     return redirect("main.index")
     
     return render_template('reset-password.html')
 
