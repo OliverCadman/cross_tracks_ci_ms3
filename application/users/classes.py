@@ -176,20 +176,16 @@ class User():
     @staticmethod
     def pull_from_list(array, id):
 
+        
         mongo.db.users.update_many({array: ObjectId(id)},{"$pull": {array: ObjectId(id)}})
 
 
-
-    
     @staticmethod
     def edit_profile(username, edited_info):
         
        mongo.db.users.update_one({"username": username},{"$set": edited_info })
 
     
-
-        
-
 
     @classmethod
     def get_user(cls, username):
@@ -310,6 +306,12 @@ class User():
     @staticmethod
     def check_password(password_hash, password):
         return check_password_hash(password_hash, password)
+
+    
+    @staticmethod
+    def delete_user(user_id):
+
+        mongo.db.users.delete_one({"_id": ObjectId(user_id)})
 
 
 
