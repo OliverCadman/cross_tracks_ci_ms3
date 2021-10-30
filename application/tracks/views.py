@@ -112,9 +112,30 @@ def add_comment(track_id, username):
         flash(success_message)
         return redirect(url_for('tracks.browse_tracks'))
 
-@tracks.route("/edit-track/<track_id>", methods=["GET", "POST"])
-def edit_track(track_id):
-    pass
+
+@tracks.route("/edit-track/<track_id>/<username>", methods=["GET", "POST"])
+def edit_track(track_id, username):
+ 
+
+    if request.method == "POST":
+
+        edited_info = {
+            "track_name": request.form.get("track_name"),
+            "artist_name": request.form.get("artist_name"),
+            "album_name": request.form.get("album_name"),
+            "genre": request.form.get("genre"),
+            "year_of_release": request.form.get("year_of_release"),
+            "image_url": request.form.get("image_url")
+        }
+
+        Track.edit_track(track_id, edited_info)
+
+
+    return redirect(url_for('users.user_profile', username=username))
+
+     
+
+    
 
 
 
