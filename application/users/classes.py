@@ -12,6 +12,7 @@ from application import mongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
+import jwt
 import re
 
 
@@ -85,7 +86,7 @@ class User():
             Deletes user from database
      """
 
-    def __init__(self, username, password, email_address=None,
+    def __init__(self, username, password=None, email_address=None,
                 first_name=None, last_name=None, date_of_birth=None,
                 city=None, country=None, about_user=None, 
                 profile_image=None, is_artist=None, spotify_userID=None,
@@ -96,7 +97,7 @@ class User():
         """
 
         self.username = username
-        self.password = generate_password_hash(password)
+        self.password = generate_password_hash(password) if isinstance(password, str) else str("")
         self.email_address = email_address if isinstance(email_address, str) else str("")
         self.first_name = first_name if isinstance(first_name, str) else str("")
         self.last_name = last_name if isinstance(last_name, str) else str("")
@@ -134,7 +135,8 @@ class User():
             "profile_image": self.profile_image,
             "is_artist": self.is_artist,
             "spotify_userID": self.spotify_userID,
-            "display_spotify_playlists": self.display_spotify_playlists
+            "display_spotify_playlists": self.display_spotify_playlists,
+            "liked_tracks": self.liked_tracks
             
         }
 
@@ -171,6 +173,22 @@ class User():
                 "$set": self.prepare_liked_track()
             })
 
+    @staticmethod
+    def pull_from_list(array, id):
+
+        mongo.db.users.update_many({array: ObjectId(id)},{"$pull": {array: ObjectId(id)}})
+
+
+
+    
+    @staticmethod
+    def edit_profile(username, edited_info):
+        
+       mongo.db.users.update_one({"username": username},{"$set": edited_info })
+
+    
+
+        
 
 
     @classmethod
@@ -182,7 +200,7 @@ class User():
         edit_profile
         """
 
-        user_data = mongo.db.users.find_one({"username": username})
+        user_data = mongo.db.users.find_one({"username": username.lower()})
 
         if user_data is not None:
             return cls(**user_data)
@@ -210,6 +228,16 @@ class User():
 
         
         mongo.db.users.update_one({"username": username}, {"$set": profile_info})
+
+    @staticmethod
+    def find_user_by_email(email_address):
+
+        return mongo.db.users.find_one({"email_address": email_address})
+
+    @staticmethod
+    def find_user_by_id(id):
+
+        return mongo.db.users.find_one({"_id": ObjectId(id)})
 
 
     @staticmethod
@@ -242,13 +270,14 @@ class User():
     @staticmethod
     def validate_password_format(password):
 
-        pattern = "^[a-zA-Z0-9]{8,15}$"
+        pattern = "^[a-zA-Z0-9]{8,18}$"
         return re.search(pattern, password)
 
     @staticmethod
     def allowed_file(filename):
         ALLOWED_EXTENSIONS = set(["txt", "pdf", "png", "jpg", "jpeg", "gif"])
-        return "." in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+        if filename != '':
+            return "." in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
     @staticmethod
     def check_image_filesize(filesize):
@@ -270,12 +299,21 @@ class User():
     @staticmethod
     def return_profile_image(filename):
 
-        return mongo.send_file(filename)
+        try:
+            profile_image = mongo.send_file(filename)
+        except Exception as e:
+            print(f'Error: {e}')
+
+        return profile_image
 
 
     @staticmethod
     def check_password(password_hash, password):
         return check_password_hash(password_hash, password)
+
+
+
+
 
 
     
