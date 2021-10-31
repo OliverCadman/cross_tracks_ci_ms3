@@ -396,14 +396,14 @@ def delete_profile(username):
 
         user_profile_image = current_user["profile_image"]
         if user_profile_image != '':
-            profile_filename =  Track.find_file_by_filename(user_profile_image)
+            profile_filename =  User.find_file_by_filename(user_profile_image)
             print(profile_filename)
 
             filename_id = profile_filename["_id"]
 
             if filename_id:
                 try:
-                    Track.delete_profile_file(filename_id)
+                    User.delete_profileimage_file(filename_id)
                 except Exception as e:
                     print(e)
 
