@@ -313,6 +313,19 @@ class User():
 
         mongo.db.users.delete_one({"_id": ObjectId(user_id)})
 
+    
+    @staticmethod
+    def find_file_by_filename(filename):
+
+        return mongo.db.fs.files.find_one({"filename": filename})
+
+
+    @staticmethod
+    def delete_profileimage_file(_id):
+
+        mongo.db.fs.files.delete_one({"_id": ObjectId(_id)})
+        mongo.db.fs.chunks.delete_one({"files_id": ObjectId(_id)})
+
 
 
 
