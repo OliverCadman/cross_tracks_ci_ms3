@@ -13,6 +13,7 @@ from flask import (Blueprint, render_template,
                    session)
 from application.users.classes import User
 from application.tracks.classes import Track
+from application.comments.classes import Comment
 from application import Config
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
@@ -188,9 +189,6 @@ def edit_profile(username):
         return redirect(url_for("users.user_profile", username=session["user"]))
 
 
-
-        
-               
 
 @users.route("/logout")
 def logout():
@@ -381,6 +379,57 @@ def reset_password(token):
     #     return redirect("main.index")
     
     return render_template('reset-password.html')
+
+
+@users.route('/delete_profile/<username>')
+def delete_profile(username):
+
+    if not session["user"]:
+        return redirect(url_for("users.login"))
+
+    current_user = User.find_user_by_username(username)
+
+    
+    if current_user:
+
+        user_id = current_user["_id"]
+
+        user_profile_image = current_user["profile_image"]
+        if user_profile_image != '':
+            profile_filename =  Track.find_file_by_filename(user_profile_image)
+            print(profile_filename)
+
+            filename_id = profile_filename["_id"]
+
+            if filename_id:
+                try:
+                    Track.delete_profile_file(filename_id)
+                except Exception as e:
+                    print(e)
+
+
+        try:
+            User.delete_user(user_id)
+        except Exception as e:
+            print(e)
+
+        try:
+            Track.decrement_likes_count(username)
+            Track.remove_user_from_likes_list(username)
+        except Exception as e:
+            print(e)
+
+        try:
+            Comment.delete_comments_by_user_id(user_id)
+        except Exception as e:
+            print(e)
+
+        session.pop("user")
+        flash('Your account has been deleted')
+        return redirect(url_for("main.index"))
+
+        
+    return redirect(url_for("users.user_profile", username=username))
 
 
 
