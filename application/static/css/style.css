@@ -14,7 +14,7 @@ body {
 }
 
 html {
-   height: 100%;
+    height: 100%;
 }
 
 .row {
@@ -179,7 +179,7 @@ nav li a {
 .user-option-list {
     display: flex;
     justify-content: center;
-    
+
 }
 
 .user-option-list ul li {
@@ -223,6 +223,25 @@ nav li a {
     font-size: 1.5rem;
 }
 
+.comment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.edit-delete-comment-btns button {
+    display: inline;
+}
+
+.comment-divider {
+    border-top: 1px solid rgb(0, 0, 0, 0.05);
+}
+
+/* .comment p,
+.comment span {
+    display: inline;
+} */
+
 
 /* --------- Login Page ----------- */
 
@@ -244,267 +263,312 @@ nav li a {
 
 
 /* Tablet Devices */
-@media only screen and (min-width: 600px) {
+@media screen and (min-width: 600px) {
 
-/* ------ Browse Tracks Page ------ */
-/* Top-level links displaying user options */
+    /* ------ Browse Tracks Page ------ */
+    /* Top-level links displaying user options */
 
-.user-option-icon {
-    margin: 0 10px 0 10px;
-    color: #fafafa;
-}
+    .user-option-icon {
+        margin: 0 10px 0 10px;
+        color: #fafafa;
+    }
 
-.user-option {
-    font-size: 1.5rem;
-    color: #eeeeee;
-}
+    .user-option {
+        font-size: 1.5rem;
+        color: #eeeeee;
+    }
 
-.user-option-list ul li {
-    display: inline-block;
-    margin: 0 30px;
-}
+    .user-option-list ul li {
+        display: inline-block;
+        margin: 0 30px;
+    }
 
-.user-option-list ul li:hover {
-    transform: scale(1.1);
-    transition: 0.3s ease-in-out;
-}
+    .user-option-list ul li:hover {
+        transform: scale(1.1);
+        transition: 0.3s ease-in-out;
+    }
 
-.browse-background {
-    background: url('../images/design1.png') no-repeat fixed;
-    background-size: cover;
-    background-position: top;
-}
+    .browse-background {
+        background: url('../images/design1.png') no-repeat fixed;
+        background-size: cover;
+        background-position: top;
+    }
 
-.card-image {
-    width: 100%;
-}
+    .card-image {
+        width: 100%;
+    }
 
-/* ------ User Profile ------ */
+    /* ------ User Profile ------ */
 
-/* 'My Tracks' cards */
+    /* 'My Tracks' cards */
 
 
-.track-image-wrapper img {
-    width: 100%
-}
+    .track-image-wrapper img {
+        width: 100%
+    }
 
-.info-edit-delete-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
+    .info-edit-delete-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
 
-.info-edit-delete-wrapper a {
-    margin: 0 5px;
-}
+    .info-edit-delete-wrapper a {
+        margin: 0 5px;
+    }
 
 
 
 }
 
 /* Laptop/Desktop Devices */
-@media only screen and (min-width: 992px) {
+@media screen and (min-width: 992px) {
 
-.loggedin-user-details,
-.loggedin-user-details p {
-    display: inline;
-    color:#222222;
-}
-/* ------ Browse Tracks Page ------ */
-/* Top-level links displaying user options */
+    .loggedin-user-details,
+    .loggedin-user-details p {
+        display: inline;
+        color: #222222;
+    }
 
+    /* ------ Browse Tracks Page ------ */
+    /* Top-level links displaying user options */
 
-.user-option-icon {
-    margin: 0 10px 0 30px;
+    .search-bar {
+        position: absolute;
+        height: 0;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        transition: all 0.5s ease-in-out;
+        background-color: rgb(22, 22, 22);
+        min-width: 25%;
+        overflow: scroll;
 
-}
+    }
 
-.card-title {
-    /* white-space: nowrap; */
-    font-size: 1.3rem;
-}
+    .tab-content {
+        position: absolute;
 
-/* Latest Tracks */
-.card-image {
-  width: 100%;
-}
-
-.card-image img {
-    height: 100% !important;
-}
-.track-name {
-    font-size: 1.5rem;
-    text-align: left;
-}
-
-.track-image {
-    width: 150px;
-}
-
-.modal-user-details {
-    margin-bottom: 1.3rem;
-}
-
-.message-user-modal {
-    margin-left: 2rem;
-}
-
-.comments-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-.submit-comment-btn {
-    display: inline;
-    float: right;
-}
+    }
 
 
-/* ------ Login Page ------ */
+    .show-search-bar {
+        height: 50%;
+        transform: scaleX(1);
+    }
 
-.close-modal-icon {
-    font-size: 1.3rem;
-}
+    .tabs {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+    }
 
-/* ------ Profile Page ------- */
+    /* Style the buttons that are used to open the tab content */
+    .tabs button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
 
-.profile-image-email {
-    border-right: 8px solid #eeeeee;
-}
+    .user-option-icon {
+        margin: 0 10px 0 30px;
+    }
 
-.profile-tabs {
-    border: 1px solid white;
-    height: 40px;
-}
+    #search_tracks {
+        width: 225px;
+    }
+
+    .card-title {
+        /* white-space: nowrap; */
+        font-size: 1.3rem;
+    }
+
+    /* Latest Tracks */
+    .card-image {
+        width: 100%;
+    }
+
+    .card-image img {
+        height: 100% !important;
+    }
+
+    .track-name {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    .track-image {
+        width: 150px;
+    }
+
+    .modal-user-details {
+        margin-bottom: 1.3rem;
+    }
+
+    .message-user-modal {
+        margin-left: 2rem;
+    }
+
+    .comments-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .submit-comment-btn {
+        display: inline;
+        float: right;
+    }
 
 
-.user-info {
-    background-color: #7b89b4;
-}
+    /* ------ Login Page ------ */
 
-.profile-image-wrapper {
-    position: relative;
-}
+    .close-modal-icon {
+        font-size: 1.3rem;
+    }
 
-.is-artist-wrapper {
-    font-family: 'Quicksand';
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #D4AF37;
-    position: absolute;
-    top: 0;
-    right: 10%;
-    margin-right: 40px;
+    /* ------ Profile Page ------- */
 
-}
+    .profile-image-email {
+        border-right: 8px solid #eeeeee;
+    }
 
-.is-artist-wrapper p {
-    display: inline;
-}
+    .profile-tabs {
+        border: 1px solid white;
+        height: 40px;
+    }
 
-.is-artist-wrapper p i {
-    margin-right: 5px;
-}
 
-.profile-banner {
-    background-color: #3c4c8b;
-    height: 150px;
-}
+    .user-info {
+        background-color: #7b89b4;
+    }
 
-.username-wrapper {
-    font-size: 2.5rem;
-    text-decoration: underline;
-}
+    .profile-image-wrapper {
+        position: relative;
+    }
 
-.user-fullname {
-    font-size: 2rem;
-    
-}
+    .is-artist-wrapper {
+        font-family: 'Quicksand';
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: #D4AF37;
+        position: absolute;
+        top: 0;
+        right: 10%;
+        margin-right: 40px;
 
-.user-location-age {
-    font-size: 1.5rem;
-}
+    }
 
-.about-user {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
+    .is-artist-wrapper p {
+        display: inline;
+    }
 
-.profile-mail-icon,
-.profile-location-icon {
-    font-size: 1.5rem;
-    margin-right: .4rem
-}
+    .is-artist-wrapper p i {
+        margin-right: 5px;
+    }
 
-.block-divider {
-    width: 50%;
-    border-top: 3px solid #ffffff;
-    display: inline-block;
-}
+    .profile-banner {
+        background-color: #3c4c8b;
+        height: 150px;
+    }
 
-.edit-profile-btn-wrapper {
-    padding-bottom: 1rem;
-    display: flex;
-    justify-content: flex-end;
-}
+    .username-wrapper {
+        font-size: 2.5rem;
+        text-decoration: underline;
+    }
 
-.edit-profile-btn-wrapper a {
-    background-color: #D8D6D7;
-    color: #222222;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-}
+    .user-fullname {
+        font-size: 2rem;
 
-/* User's Tracks Section */
+    }
 
-/* User's Liked Tracks Section */
+    .user-location-age {
+        font-size: 1.5rem;
+    }
 
-.track-container {
-    height: 500px;
-    border: 2px solid black;
-    overflow: auto;
-    padding: 20px;
-}
+    .about-user {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
 
-/* .card.horizontal.profile {
+    .profile-mail-icon,
+    .profile-location-icon {
+        font-size: 1.5rem;
+        margin-right: .4rem
+    }
+
+    .block-divider {
+        width: 50%;
+        border-top: 3px solid #ffffff;
+        display: inline-block;
+    }
+
+    .edit-profile-btn-wrapper {
+        padding-bottom: 1rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .edit-profile-btn-wrapper a {
+        background-color: #D8D6D7;
+        color: #222222;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 600;
+    }
+
+    /* User's Tracks Section */
+
+    /* User's Liked Tracks Section */
+
+    .track-container {
+        height: 500px;
+        border: 2px solid black;
+        overflow: auto;
+        padding: 20px;
+    }
+
+    /* .card.horizontal.profile {
     max-height: 150px;
 } */
 
-.card-action.action-buttons {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
+    .card-action.action-buttons {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
 
-/* Delete User Modal */
+    /* Delete User Modal */
 
-.delete-action-btn-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .delete-action-btn-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.delete-action-btn {
-    /* Overrides Materialize class property */
-    margin: 0 5px !important;
-}
+    .delete-action-btn {
+        /* Overrides Materialize class property */
+        margin: 0 5px !important;
+    }
 
 
-/* Delete Track Modal */
+    /* Delete Track Modal */
 
-.confirm-delete-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 415px;
+    .confirm-delete-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 415px;
 
-}
+    }
 
 }
 
 /* Large Desktop devices */
-@media only screen and (min-width: 1200px) {
-
-}
+@media only screen and (min-width: 1200px) {}
