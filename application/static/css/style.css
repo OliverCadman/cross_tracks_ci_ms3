@@ -195,6 +195,34 @@ nav li a {
     display: inline;
 }
 
+ .search-bar-mobile {
+    position: relative;
+
+ }
+
+ .search-bar-mobile-wrapper {
+      position: absolute;
+      height: 0;
+      top: 0;
+      left: 0;
+      z-index: 4;
+      transition: all 0.3s ease-in-out;
+      background-color: rgb(22, 22, 22, 0.5);
+      min-width: 100%;
+      overflow: scroll;
+      display: flex;
+      justify-content: center;
+ }
+
+.show-search-bar {
+     height: 45px;
+     transform: scaleX(1);
+}
+
+.search-input-mobile {
+    text-align: center;
+}
+
 /* Track Cards */
 
 
@@ -333,37 +361,6 @@ nav li a {
     /* ------ Browse Tracks Page ------ */
     /* Top-level links displaying user options */
 
-    .search-bar {
-        position: absolute;
-        height: 0;
-        top: 0;
-        left: 0;
-        z-index: 4;
-        transition: all 0.5s ease-in-out;
-        background-color: rgb(22, 22, 22);
-        min-width: 25%;
-        overflow: scroll;
-
-    }
-
-    .tab-content {
-        position: absolute;
-
-    }
-
-
-    .show-search-bar {
-        height: 50%;
-        transform: scaleX(1);
-    }
-
-    .tabs {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-        display: flex;
-        justify-content: center;
-    }
 
     /* Style the buttons that are used to open the tab content */
     .tabs button {
