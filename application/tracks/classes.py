@@ -10,6 +10,9 @@ updated and deleted using MongoDB.
 from application import mongo
 from bson.objectid import ObjectId
 import datetime
+import json
+from bson.json_util import loads, dumps
+from bson import json_util
 
 
 class Track:
@@ -204,6 +207,45 @@ class Track:
                 }},
             
         ])
+    
+    @staticmethod
+    def delete_users_tracks(user_id):
+
+        mongo.db.tracks.delete_many({"added_by": ObjectId(user_id)})
+
+
+
+    @staticmethod
+    def remove_user_from_likes_list(username):
+
+        mongo.db.tracks.update_many({"likes": username}, {"$pull": {"likes": username}})
+
+    @staticmethod
+    def decrement_likes_count(username):
+
+        mongo.db.tracks.update_many({},
+        [{"$set": {}}])
+
+
+    @staticmethod
+    def decrement_likes_count(username):
+    
+        mongo.db.tracks.update_many({
+            "likes": username },
+            { "$inc": { "likes_count": -1 }
+        })
+
+
+    @staticmethod
+    def search_tracks(query):
+
+        return list(mongo.db.tracks.find({"$text": {"$search": query}}))
+
+
+
+
+
+        
 
 
 
