@@ -242,6 +242,10 @@ class Track:
         return list(mongo.db.tracks.find({"$text": {"$search": query}}))
 
 
+    @staticmethod
+    def parse_json(data):
+        
+        return json.loads(dumps(data))
 
 
 
