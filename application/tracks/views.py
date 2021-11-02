@@ -38,6 +38,19 @@ def add_track(username):
 def browse_tracks():
 
     tracks_and_users = Track.bind_users_to_tracks()
+    genres = Track.get_genres()
+    all_users = User.get_all_users()
+
+    user_list = []
+    for user in all_users:
+        user_list.append(user["username"])
+
+    genre_list = []
+    for genre in genres: 
+        genre_list.append(genre["genre_name"])
+    
+    if request.headers.get("Content-Type") == "application/json":
+        return jsonify(genre_list=genre_list, user_list=user_list)
 
     
  
@@ -166,6 +179,37 @@ def delete_track(track_id, username):
 
 
     return redirect(url_for('users.user_profile', username=username))
+
+
+@tracks.route("/search-track", methods=["GET", "POST"])
+def search_track():
+
+    query = None
+    if request.method == "POST":
+
+        query = str(request.get_data())
+        print("query: ", query)
+        if query == '':
+            flash("Please search by genre or username")
+            return redirect(url_for("tracks.browse_tracks"))
+
+        results = Track.search_tracks(query)
+        
+        results_list = []
+        if results:
+            for result in results:
+                json_encoded_result = Track.parse_json(result)
+                results_list.append(json_encoded_result)
+            
+            print(results_list)
+        
+            return jsonify(results_list=results_list)
+        
+        else:
+            new_results_list = []
+            return jsonify(new_results_list = new_results_list)
+
+   
 
 
 
