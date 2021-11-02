@@ -5,9 +5,7 @@
         <div class="col s12 user-option-list top-level-background">
             <ul>
                 <li>
-                    <i class="fas fa-search user-option-icon" id="search-bar-icon"></i>
-                    <input type="text" name="search_tracks" placeholder="Search by Genre or Username"
-                        class="hide-on-small-only">
+                    <i class="fas fa-search user-option-icon search-bar-icon"></i>
                 </li>
                 {% if session.user %}
                 <li>
@@ -25,40 +23,43 @@
                 {% endif %}
             </ul>
         </div>
-        <div class="col s12 hide-on-med-and-up search-bar-mobile">
-            <div class="search-bar-mobile-wrapper" id="search-bar-mobile-wrapper">
-                <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks">
-                    <input type="text" placeholder="Search by Genre or Username" name="search_input" id="search_input"
-                        class="search-input-mobile" oninput="searchTracks()">
-                </form>
-                <div class="results-container">
+            <div class="search-bar-wrapper" id="search-bar-wrapper">
+                <div class="row">
+                    <div class="col s12">
+                        <i class="fas fa-times-circle" id="close-search-wrapper"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
+                            <input type="text" placeholder="Search by Genre or Username" name="search_input"
+                                id="search_input" class="search-input-mobile" oninput="searchTracks()" >
+                        </form>
+                    </div>
+                </div>
+                <div class="container results-container">
                     <div class="row">
-                        <div class="col s12 results-wrapper">
+                        <div class="results-wrapper">
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
+        <div class="row">
         <div class="col s12 section-header">
             <h1>Latest Tracks</h1>
             <div class="center-align">
                 {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
+                    {% if messages %}
+                        {% for message in messages %}
                 {{message}}
                 {% endfor %}
-                {% endif %}
+                    {% endif %}
                 {% endwith %}
 
             </div>
-            {% if results %}
-            {% for result in results %}
-            {{result["track_name"]}}
-            {% endfor %}
-            {% endif %}
+          
         </div>
     </div>
     <div class="row">
@@ -282,42 +283,49 @@
                 'data': inputField.value
             },
             success: function (res) {
-                console.log(res.results_list[0].added_by)
-                let results = res.results_list
                 let resultsWrapper = document.getElementsByClassName('results-wrapper')[0]
+                empty(resultsWrapper)
+              
+
+                let results = res.results_list
+                let newResults = res.new_results_list
+                
 
                 if (results) {
                     console.log('results: ', results.length)
                     results.map((item, index) => {
                         if (item) {
-                            console.log(item.length)
-                            resultDisplay = `
-                            <div class="card">
-                                <div class="card-image">
-                                    ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
-                                        class="track-image">` : `<img
-                                        src="{{url_for('static', filename='images/design3.png')}}"
-                                        alt="Image of Cover Art for Track" class="track-image">`}
+                            let resultDisplay = `
+                            <div class="col s12 m6">
+                                <div class="card horizontal">
+                                    <div class="card-image">
+                                        ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
+                                            class="track-image">` : `<img
+                                            src="{{url_for('static', filename='images/design3.png')}}"
+                                            alt="Image of Cover Art for Track" class="track-image">`}
+                                    </div>
+                                    <div class="card-title">
+                                        <span>${item.track_name}</span>
+                                    </div>
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <p>${item.artist_name}</p>
+                                            <p>${item.album_name}</p>
+                                            <p>${item.genre}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-title">
-                                    <span>${item.track_name}</span>
-                                </div>
-                                <div class="card-content">
-                                    <p>${item.artist_name}</p>
-                                    <p>${item.album_name}</p>
-                                    <p>${item.genre}</p>
-                                </div>
-                            
                             </div>
                             `
                             resultsWrapper.innerHTML += resultDisplay
+                            let searchActive = false;
                         } else {
                             console.log("item length: ", item.length)
                             console.log('done')
                         }
                     })
-                } else {
-                    console.log('new results: ', results.length)
+                } else if (newResults) {
+                        
                 }
 
 
@@ -327,6 +335,15 @@
                 console.log(err)
             }
         });
+        
+        // https://stackoverflow.com/questions/27108725/ajax-jquery-live-search-is-duplicating-the-output-results
+        function empty(element) {
+            let children = Array.prototype.slice.call(element.childNodes);
+
+            children.forEach(function(child) {
+                element.removeChild(child)
+            })
+        }
 
     };
 </script>
