@@ -7,13 +7,9 @@
 
 
 
-body {
+html, body {
     padding: 0;
     margin: 0;
-    height: 100%;
-}
-
-html {
     height: 100%;
 }
 
@@ -175,6 +171,11 @@ nav li a {
 
 /* ------ Browse Tracks Page ------- */
 
+.browse-background {
+    height: 100%;
+    position: relative;
+}
+
 /* Top-level links displaying user options */
 .user-option-list {
     display: flex;
@@ -200,27 +201,30 @@ nav li a {
 
  }
 
- .search-bar-mobile-wrapper {
+ .search-bar-wrapper {
       position: absolute;
       height: 0;
       top: 0;
       left: 0;
       z-index: 4;
       transition: all 0.3s ease-in-out;
-      background-color: rgb(22, 22, 22, 0.5);
+      background-color: rgb(22, 22, 22, 0.9);
       min-width: 100%;
       overflow: scroll;
-      display: flex;
-      justify-content: center;
  }
 
 .show-search-bar {
-     height: 45px;
+     height: 100%;
      transform: scaleX(1);
 }
 
 .search-input-mobile {
     text-align: center;
+}
+
+#close-search-wrapper {
+    font-size: 2rem;
+    color: #eeeeee;
 }
 
 /* Track Cards */
@@ -375,6 +379,15 @@ nav li a {
 
     .user-option-icon {
         margin: 0 10px 0 30px;
+    }
+
+    #search-tracks-form {
+        display: flex;
+        justify-content: center;
+    }
+
+    #search_input {
+        width: 50%;
     }
 
     #search_tracks {
