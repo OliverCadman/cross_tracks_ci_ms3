@@ -1,26 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="browse-background">
-
-        <div id="search-bar" class="search-bar">
-            <div class="tabs">
-                <button class="tab-link" data-type="genre-link" id="default">Genres</button>
-                <button class="tab-link" data-type="user-link">Users</button>
-
-            </div>
-            <div id="genre-tag-container" class="tab-content">
-
-            </div>
-            <div id="user-tag-container" class="tab-content">
-
-            </div>
-        </div>
-   
     <div class="row">
         <div class="col s12 user-option-list top-level-background">
             <ul>
                 <li>
                     <i class="fas fa-search user-option-icon" id="search-bar-icon"></i>
+                    <input type="text" name="search_tracks" placeholder="Search by Genre or Username"
+                        class="hide-on-small-only">
                 </li>
                 {% if session.user %}
                 <li>
@@ -38,20 +25,40 @@
                 {% endif %}
             </ul>
         </div>
+        <div class="col s12 hide-on-med-and-up search-bar-mobile">
+            <div class="search-bar-mobile-wrapper" id="search-bar-mobile-wrapper">
+                <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks">
+                    <input type="text" placeholder="Search by Genre or Username" name="search_input" id="search_input"
+                        class="search-input-mobile" oninput="searchTracks()">
+                </form>
+                <div class="results-container">
+                    <div class="row">
+                        <div class="col s12 results-wrapper">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col s12 section-header">
             <h1>Latest Tracks</h1>
             <div class="center-align">
                 {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            {{message}}
-                        {% endfor %}
-                    {% endif %}
+                {% if messages %}
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
+                {% endif %}
                 {% endwith %}
 
             </div>
+            {% if results %}
+            {% for result in results %}
+            {{result["track_name"]}}
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
     <div class="row">
@@ -107,7 +114,7 @@
                     <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
                         class="track-image">
                     {% endif %}
-                    </div>
+                </div>
             </div>
 
         </div>
@@ -163,7 +170,7 @@
                     </p>
                     <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
                     {% if username == session["user"] %}
-                        <a href="#" class="btn">Edit</a>
+                    <a href="#" class="btn">Edit</a>
                     {% endif %}
                 </div>
             </div>
@@ -207,25 +214,27 @@
                         <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
                         <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
                     </div>
-                      {% for comment_object in track["comments"]%}
-                      <div class="col s12 m6">
-                          <div class="comments-wrapper">
-                              <div class="comment">
-                                 <p>{{comment_object["comment"]}}</p>
-                                 <span class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
-                              </div>
-                              {% if track["comment_added_by"][0]["username"] == session.user %}
-                              <div class="edit-delete-comment-btns">
-                                <a href="#"><i class="fas fa-edit"></i></a>
+                    {% for comment_object in track["comments"]%}
+                    <div class="col s12 m6">
+                        <div class="comments-wrapper">
+                            <div class="comment">
+                                <p>{{comment_object["comment"]}}</p>
+                                <span
+                                    class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                            </div>
+                            {% if track["comment_added_by"][0]["username"] == session.user %}
+                            <div class="edit-delete-comment-btns">
+                                <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
                                 <a href="#"><i class="fas fa-trash-alt"></i></a>
-                              </div>
-                              {% endif %}
-                          </div>
-                          <hr class="comment-divider">
-                      </div>
-                      {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <hr class="comment-divider">
+                    </div>
+                    {% endfor %}
                     <div class="col s12 m6 input-field">
-                        <form action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}" method="POST">
+                        <form action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}"
+                            method="POST">
                             <textarea rows="2" cols=10 name="comment_body" class="materialize-textarea"></textarea>
                             <label for="comment_body">Leave a comment:</label>
                             <div class="submit-comment-btn">
@@ -243,19 +252,84 @@
 </div>
 
 
-<!-- <script>
-    $SCRIPT_ROOT = {{ request.script_root | tojson }};
-</script> -->
+
 
 
 
 {% block scripts %}
 <script src="{{url_for('static', filename='js/search-bar.js')}}"></script>
+<script src="{{url_for('static', filename='js/edit-comment.js')}}"></script>
 <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
 <script src="{{url_for('static', filename='js/comment-regex-error.js')}}"></script>
 
+
 {% endblock %}
+<script>
+    let submitButton = document.getElementById("search-submit-btn")
+
+    function searchTracks() {
+        inputField = document.getElementById("search_input")
+
+        searchTrackURL = "{{url_for('tracks.search_track')}}"
+        console.log(JSON.stringify(inputField.value))
+
+        $.ajax({
+            url: searchTrackURL,
+            type: 'POST',
+            contentType: 'application/json;charset=UTF-8',
+            data: {
+                'data': inputField.value
+            },
+            success: function (res) {
+                console.log(res.results_list[0].added_by)
+                let results = res.results_list
+                let resultsWrapper = document.getElementsByClassName('results-wrapper')[0]
+
+                if (results) {
+                    console.log('results: ', results.length)
+                    results.map((item, index) => {
+                        if (item) {
+                            console.log(item.length)
+                            resultDisplay = `
+                            <div class="card">
+                                <div class="card-image">
+                                    ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
+                                        class="track-image">` : `<img
+                                        src="{{url_for('static', filename='images/design3.png')}}"
+                                        alt="Image of Cover Art for Track" class="track-image">`}
+                                </div>
+                                <div class="card-title">
+                                    <span>${item.track_name}</span>
+                                </div>
+                                <div class="card-content">
+                                    <p>${item.artist_name}</p>
+                                    <p>${item.album_name}</p>
+                                    <p>${item.genre}</p>
+                                </div>
+                            
+                            </div>
+                            `
+                            resultsWrapper.innerHTML += resultDisplay
+                        } else {
+                            console.log("item length: ", item.length)
+                            console.log('done')
+                        }
+                    })
+                } else {
+                    console.log('new results: ', results.length)
+                }
+
+
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+
+    };
+</script>
 
 
 {% endblock %}
