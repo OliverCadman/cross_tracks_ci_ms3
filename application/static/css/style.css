@@ -7,7 +7,8 @@
 
 
 
-html, body {
+html,
+body {
     padding: 0;
     margin: 0;
     height: 100%;
@@ -133,12 +134,30 @@ nav li a {
 
 /* -------- User Profile Page --------- */
 
+.profile-banner {
+    background-color: #3c4c8b;
+
+}
+
+.user-info {
+    background-color: #7b89b4;
+}
+
+.username-container {
+    margin-top: 3rem;
+    border-left: 3px solid #eeeeee;
+}
+
+.profile-image-container {
+    width: 36% !important;
+}
+
 .profile-image-wrapper {
     margin: 30px 0 30px 15px;
 }
 
 .profile-image {
-    width: 200px;
+    width: 80px;
     border: 2px solid #222222;
     border-radius: 50%;
 }
@@ -149,10 +168,35 @@ nav li a {
     color: #ffffff;
 }
 
+.edit-profile-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.edit-profile-btn-wrapper a {
+    margin: 10px 5px;
+    font-size: 10px;
+
+}
+
+.username-wrapper {
+    font-size: 1.5rem;
+}
+
+.messaging-wrapper {
+    font-size: .8rem;
+}
+
 .user-fullname,
 .user-location-age {
     font-family: 'Alata', sans-serif;
     color: #e2d3ca;
+}
+
+.user-fullname {
+    font-size: 1.5rem;
 }
 
 .about-user {
@@ -167,6 +211,16 @@ nav li a {
 
 .update-profile-image>form>input {
     display: none;
+}
+
+/* "My Tracks" */
+
+.my-tracks-section {
+    background-color: rgba(190, 192, 96, 0.9)
+}
+
+.my-tracks-header {
+    font-family: "Quicksand", sans-serif;
 }
 
 /* ------ Browse Tracks Page ------- */
@@ -196,26 +250,26 @@ nav li a {
     display: inline;
 }
 
- .search-bar-mobile {
+.search-bar-mobile {
     position: relative;
 
- }
+}
 
- .search-bar-wrapper {
-      position: absolute;
-      height: 0;
-      top: 0;
-      left: 0;
-      z-index: 4;
-      transition: all 0.3s ease-in-out;
-      background-color: rgb(22, 22, 22, 0.9);
-      min-width: 100%;
-      overflow: scroll;
- }
+.search-bar-wrapper {
+    position: absolute;
+    width: 0;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    transition: all 0.3s ease-in-out;
+    background-color: rgb(22, 22, 22, 0.9);
+    min-height: 100%;
+    overflow: scroll;
+}
 
 .show-search-bar {
-     height: 100%;
-     transform: scaleX(1);
+    width: 100%;
+    transform: scale(1);
 }
 
 .search-input-mobile {
@@ -229,9 +283,29 @@ nav li a {
 
 /* Track Cards */
 
+.card {
+    background: #5d6ca7;
+    color: #eeeeee;
+    border-radius: 20px;
+}
+
+.card-title {
+    font-family: 'Alata', sans-serif;
+    white-space: nowrap;
+}
 
 .card-content {
     padding: 10px !important;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.1rem;
+}
+
+.track-image {
+    border-radius: 0 20px 0 0;
+}
+
+.card-content a {
+    color: #E0C0AC;
 }
 
 .user-image-card {
@@ -243,6 +317,25 @@ nav li a {
 
 .album-cover {
     width: 100%;
+}
+
+.comment-count {
+    margin-left: 15px;
+}
+
+.more-info-btn a {
+    background-color: #E0C0AC;
+    color: #5d6ca7;
+
+}
+
+.more-info-btn a i:first-of-type {
+    margin: 0 5px;
+}
+
+.more-info-btn a:hover {
+    background-color: #bcc9ff;
+    color: rgba(26, 25, 25, 0.815)
 }
 
 /* Track Modals */
@@ -320,10 +413,29 @@ nav li a {
         transition: 0.3s ease-in-out;
     }
 
+    /* Search Bar and Window */
+    .search-bar-wrapper {
+        width: 0;
+        max-height: 50%;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        transition: all 0.3s ease-in-out;
+        background-color: rgb(22, 22, 22, 0.9);
+        overflow: scroll;
+    }
+
+    .show-search-bar {
+        width: 40%;
+        transform: scale(1);
+    }
+
+
     .browse-background {
-        background: url('../images/design1.png') no-repeat fixed;
+        background: url('../images/design1.png') no-repeat;
         background-size: cover;
         background-position: top;
+
     }
 
     .card-image {
@@ -381,18 +493,19 @@ nav li a {
         margin: 0 10px 0 30px;
     }
 
+    /* 
     #search-tracks-form {
         display: flex;
         justify-content: center;
-    }
+    } */
 
-    #search_input {
+    /* #search_input {
         width: 50%;
     }
 
     #search_tracks {
         width: 225px;
-    }
+    } */
 
     .card-title {
         /* white-space: nowrap; */
@@ -454,11 +567,6 @@ nav li a {
         height: 40px;
     }
 
-
-    .user-info {
-        background-color: #7b89b4;
-    }
-
     .profile-image-wrapper {
         position: relative;
     }
@@ -484,7 +592,6 @@ nav li a {
     }
 
     .profile-banner {
-        background-color: #3c4c8b;
         height: 150px;
     }
 
