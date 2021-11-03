@@ -1,65 +1,65 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="row">
-        <div class="col s12 user-option-list top-level-background">
-            <ul>
-                <li>
-                    <i class="fas fa-search user-option-icon search-bar-icon"></i>
-                </li>
-                {% if session.user %}
-                <li>
-                    <a href="{{url_for('tracks.add_track', username=session['user'])}}"><i
-                            class="fas fa-plus-square user-option-icon"></i>
-                        <p class="user-option hide-on-small-only">Add Your Tracks</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url_for('users.user_profile', username=session['user'])}}"><i
-                            class="fas fa-user-circle user-option-icon"></i>
-                        <p class="user-option hide-on-small-only">Your Profile</p>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-        </div>
-        <div class="browse-background">
-              <div class="search-bar-wrapper" id="search-bar-wrapper">
-                  <div class="row">
-                      <div class="col s12">
-                          <i class="fas fa-times-circle" id="close-search-wrapper"></i>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col s12">
-                          <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
-                              <input type="text" placeholder="Search by Genre or Username" name="search_input"
-                                  id="search_input" class="search-input-mobile" oninput="searchTracks()">
-                          </form>
-                      </div>
-                  </div>
-                  <div class="container results-container">
-                      <div class="row">
-                          <div class="results-wrapper">
-
-                          </div>
-                      </div>
-                  </div>
-              </div>
+<div class="row">
+    <div class="col s12 user-option-list top-level-background">
+        <ul>
+            <li>
+                <i class="fas fa-search user-option-icon search-bar-icon"></i>
+            </li>
+            {% if session.user %}
+            <li>
+                <a href="{{url_for('tracks.add_track', username=session['user'])}}"><i
+                        class="fas fa-plus-square user-option-icon"></i>
+                    <p class="user-option hide-on-small-only">Add Your Tracks</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{url_for('users.user_profile', username=session['user'])}}"><i
+                        class="fas fa-user-circle user-option-icon"></i>
+                    <p class="user-option hide-on-small-only">Your Profile</p>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="browse-background">
+    <div class="search-bar-wrapper" id="search-bar-wrapper">
         <div class="row">
+            <div class="col s12">
+                <i class="fas fa-times-circle" id="close-search-wrapper"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
+                    <input type="text" placeholder="Search by Genre or Username" name="search_input" id="search_input"
+                        class="search-input-mobile" oninput="searchTracks()">
+                </form>
+            </div>
+        </div>
+        <div class="container results-container">
+            <div class="row">
+                <div class="results-wrapper">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col s12 section-header">
             <h1>Latest Tracks</h1>
             <div class="center-align">
                 {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
+                {% if messages %}
+                {% for message in messages %}
                 {{message}}
                 {% endfor %}
-                    {% endif %}
+                {% endif %}
                 {% endwith %}
 
             </div>
-          
+
         </div>
     </div>
     <div class="row">
@@ -67,7 +67,7 @@
         {% for track in tracks_and_users %}
         {% set username = track['user'][0]['username'] %}
         <div class="col m4 hide-on-small-only">
-            <div class="card horizontal">
+            <div class="card horizontal z-depth-5">
                 <div class="card-stacked">
                     <div class="card-content">
                         <span class="card-title">{{track.track_name}}</span>
@@ -75,18 +75,19 @@
                         {% if session.user in track.likes %}
                         <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
                                 class="modal-trigger like_track"><i class="fas fa-star"
-                                    id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                                    id="like-track-icon"></i></a></span><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                         {% else %}
                         <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
                                 class="modal-trigger like_track"><i class="far fa-star"
-                                    id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                                    id="like-track-icon"></i></a></span><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                         {% endif %}
                         {% else %}
                         <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i
-                                    class="far fa-star"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                                    class="far
+                                    fa-star"></i></a></span><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                         {% endif %}
                         {% if track.comments|length > 0 %}
-                        {{track.comments|length}}
+                        <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
                         {% endif %}
                         <div class="card-information-wrapper">
                             <div class="track-card-information">
@@ -99,7 +100,7 @@
                             </div>
                             <div class="card-action">
                                 <div class="more-info-btn">
-                                    <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
+                                    <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
                                     {% if username == session["user"] %}
                                     <a href="#" class="btn">Edit</a>
                                     {% endif %}
@@ -285,11 +286,11 @@
             success: function (res) {
                 let resultsWrapper = document.getElementsByClassName('results-wrapper')[0]
                 empty(resultsWrapper)
-              
+
 
                 let results = res.results_list
                 let newResults = res.new_results_list
-                
+
 
                 if (results) {
                     console.log('results: ', results.length)
@@ -325,7 +326,7 @@
                         }
                     })
                 } else if (newResults) {
-                        
+
                 }
 
 
@@ -335,12 +336,12 @@
                 console.log(err)
             }
         });
-        
+
         // https://stackoverflow.com/questions/27108725/ajax-jquery-live-search-is-duplicating-the-output-results
         function empty(element) {
             let children = Array.prototype.slice.call(element.childNodes);
 
-            children.forEach(function(child) {
+            children.forEach(function (child) {
                 element.removeChild(child)
             })
         }
