@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="browse-background">
     <div class="row">
         <div class="col s12 user-option-list top-level-background">
             <ul>
@@ -23,29 +22,30 @@
                 {% endif %}
             </ul>
         </div>
-            <div class="search-bar-wrapper" id="search-bar-wrapper">
-                <div class="row">
-                    <div class="col s12">
-                        <i class="fas fa-times-circle" id="close-search-wrapper"></i>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
-                            <input type="text" placeholder="Search by Genre or Username" name="search_input"
-                                id="search_input" class="search-input-mobile" oninput="searchTracks()" >
-                        </form>
-                    </div>
-                </div>
-                <div class="container results-container">
-                    <div class="row">
-                        <div class="results-wrapper">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+        <div class="browse-background">
+              <div class="search-bar-wrapper" id="search-bar-wrapper">
+                  <div class="row">
+                      <div class="col s12">
+                          <i class="fas fa-times-circle" id="close-search-wrapper"></i>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col s12">
+                          <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
+                              <input type="text" placeholder="Search by Genre or Username" name="search_input"
+                                  id="search_input" class="search-input-mobile" oninput="searchTracks()">
+                          </form>
+                      </div>
+                  </div>
+                  <div class="container results-container">
+                      <div class="row">
+                          <div class="results-wrapper">
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
         <div class="row">
         <div class="col s12 section-header">
             <h1>Latest Tracks</h1>
@@ -296,7 +296,7 @@
                     results.map((item, index) => {
                         if (item) {
                             let resultDisplay = `
-                            <div class="col s12 m6">
+                            <div class="col s12">
                                 <div class="card horizontal">
                                     <div class="card-image">
                                         ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
