@@ -8,6 +8,7 @@ and initialises MongoDB.
 """
 
 from flask import Flask
+from flask.templating import render_template
 from flask_pymongo import PyMongo
 from flask_mail import Mail
 from application.config import Config
@@ -47,8 +48,13 @@ def create_app(default_config=Config):
     app.register_blueprint(tracks_bp)
     app.register_blueprint(comments_bp)
 
+    app.register_error_handler(404, page_not_found)
+
 
     return app
+
+def page_not_found(e):
+    return render_template("404.html"), 404
 
 
 
