@@ -145,7 +145,7 @@ def login():
             if password_check:
                 session["user"] = login_username
                 flash("Welcome back {}".format(login_username))
-                return redirect(url_for("users.user_profile", username=session["user"]))
+                return redirect(request.referrer)
             
             else:
                 flash("Invalid username/password")
@@ -430,6 +430,10 @@ def delete_profile(username):
 
         
     return redirect(url_for("users.user_profile", username=username))
+
+@users.errorhandler(500)
+def internal_server_error(e):
+    return render_template("500.html"), 500
 
 
 
