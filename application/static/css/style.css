@@ -62,27 +62,10 @@ nav li a {
 }
 
 .social-links li a {
-    margin: 0 20px;
+    margin: 0 20px; 
     font-size: 2rem;
     color: #222222;
 }
-
-
-.background-main {
-    background: url("../images/design3.png") no-repeat;
-    background-size: 50%;
-    background-position: 50% 20%;
-    width: 100%;
-
-}
-
-/* .hero-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    justify-content: center;
-    width: 100%;
-} */
 
 /* -------- Home Page --------- */
 
@@ -102,17 +85,18 @@ nav li a {
 }
 
 .hero-header h1 {
-    font-size: 3.5rem;
-    margin-top: 200px;
+    font-size: 1.5rem;
 }
 
 .hero-inner {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     height: 300px;
     align-items: center;
-    flex-direction: column;
+    background: url('../images/design3.png') no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .info-header {
@@ -315,6 +299,7 @@ nav li a {
     border-radius: 50%;
 }
 
+
 .album-cover {
     width: 100%;
 }
@@ -389,6 +374,41 @@ nav li a {
 
 /* Tablet Devices */
 @media screen and (min-width: 600px) {
+
+    /* -------- Home Page --------- */
+
+    .hero-header h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero-section {
+        background: url("../images/design3.png") no-repeat;
+        background-size: 50%;
+        background-position: 50% 20%;
+        width: 100%;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-header {
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .hero-inner {
+        width: 100%;
+        justify-content: flex-start;
+        height: 300px;
+        align-items: center;
+        flex-direction: column;
+
+        background: none;
+    }
 
     /* ------ Browse Tracks Page ------ */
     /* Top-level links displaying user options */
