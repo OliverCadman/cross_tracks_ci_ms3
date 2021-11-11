@@ -62,7 +62,7 @@ nav li a {
 }
 
 .social-links li a {
-    margin: 0 20px; 
+    margin: 0 20px;
     font-size: 2rem;
     color: #222222;
 }
@@ -110,6 +110,14 @@ nav li a {
 .use-crosstracks-list {
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.about-crosstracks-vector {
+    width: 250px;
+    float: right;
+    clip-path: circle(90% at 75% 0);
+    shape-outside: circle(50% at 75%) border-box;
 }
 
 
@@ -411,7 +419,7 @@ nav li a {
 
     .about-lead {
         font-size: 2rem;
-        
+
 
     }
 
@@ -734,3 +742,19 @@ nav li a {
 
 /* Large Desktop devices */
 @media only screen and (min-width: 1200px) {}
+
+/* iPhone 5 Device */
+
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+
+    /* Vector graphic for 'About Us' section in index.html */
+
+    .about-crosstracks-vector {
+        width: 175px;
+        shape-margin: 1rem;
+    }
+
+    .about-lead {
+        font-size: 1rem;
+    }
+}
