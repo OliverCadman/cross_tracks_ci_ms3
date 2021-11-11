@@ -99,6 +99,11 @@ nav li a {
     background-position: center;
 }
 
+.about-crosstracks-background {
+    margin-top: 2rem;
+    background-color: #f1f1f1
+}
+
 .info-header {
     font-family: "Alata", sans-serif;
     text-decoration: underline;
@@ -118,6 +123,16 @@ nav li a {
     float: right;
     clip-path: circle(90% at 75% 0);
     shape-outside: circle(50% at 75%) border-box;
+}
+
+.use-crosstracks-list {
+    line-height: 3rem;
+}
+
+.use-crosstracks-icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: #7b89b4;
 }
 
 
@@ -756,5 +771,14 @@ nav li a {
 
     .about-lead {
         font-size: 1rem;
+    }
+
+    /* .use-crosstracks-icon {
+        margin-right: 1rem;
+    } */
+
+    .use-crosstracks-list {
+        line-height: 2rem;
+        font-size: .9rem;
     }
 }
