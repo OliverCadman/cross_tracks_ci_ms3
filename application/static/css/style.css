@@ -100,21 +100,21 @@ nav li a {
 }
 
 .info-header {
+    font-family: "Alata", sans-serif;
     text-decoration: underline;
     font-size: 2rem;
     text-align: center;
 }
 
+.about-lead,
+.use-crosstracks-list {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+}
 
-/* 
-.opaque-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.301);
-} */
+
+
+
 
 /* -------- User Profile Page --------- */
 
@@ -386,7 +386,7 @@ nav li a {
         background-size: 50%;
         background-position: 50% 20%;
         width: 100%;
-        height: 80vh;
+        height: 90vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -406,8 +406,33 @@ nav li a {
         height: 300px;
         align-items: center;
         flex-direction: column;
-
         background: none;
+    }
+
+    .about-lead {
+        font-size: 2rem;
+        
+
+    }
+
+    .about-crosstracks-vector {
+        width: 450px;
+        float: right;
+        border-radius: 50%;
+        shape-outside: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .use-crosstracks-list {
+        font-size: 1.4rem;
+    }
+
+    .use-crosstracks-list li {
+        margin: 20px 0;
+    }
+
+    .use-crosstracks-icon {
+        margin-right: 10px;
+        text-align: left;
     }
 
     /* ------ Browse Tracks Page ------ */
