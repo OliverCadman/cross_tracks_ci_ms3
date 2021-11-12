@@ -457,17 +457,46 @@ nav li a {
         background: none;
     }
 
+    .about-crosstracks-wrapper {
+        position: relative;
+        margin-bottom: 50px;
+        margin-left: 20px;
+    }
+
+    .about-crosstracks-wrapper::after {
+        content: '';
+        height: 50%;
+        width: 10px;
+        position: absolute;
+        right: 0;
+        top: 25%;
+        display: inline-block;
+        background-color: rgb(180, 180, 180);
+    }
+
     .about-lead {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
 
+    .about-summary {
+        font-size: 1.2rem;
+    }
 
+    .about-crosstracks-background {
+        padding: 2rem;
     }
 
     .about-crosstracks-vector {
         width: 450px;
         float: right;
         border-radius: 50%;
-        shape-outside: polygon(100% 0, 100% 100%, 0 100%);
+        
+    }
+
+    .use-crosstracks-list-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .use-crosstracks-list {
