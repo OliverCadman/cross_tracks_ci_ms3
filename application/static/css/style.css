@@ -112,17 +112,28 @@ nav li a {
 }
 
 .about-lead,
+.about-summary,
 .use-crosstracks-list {
-    font-family: "Quicksand", sans-serif;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+.about-lead,
+.use-crosstracks-list {
     font-weight: 600;
     font-size: 1.1rem;
+}
+
+.about-summary {
+    font-family: 'Quicksand', sans-serif;
+
 }
 
 .about-crosstracks-vector {
     width: 250px;
     float: right;
     clip-path: circle(90% at 75% 0);
-    shape-outside: circle(50% at 75%) border-box;
+    shape-outside: circle(50%) border-box;
 }
 
 .use-crosstracks-list {
@@ -133,6 +144,19 @@ nav li a {
     margin-right: 1rem;
     font-size: 1.5rem;
     color: #7b89b4;
+}
+
+.signup-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3rem;
+}
+
+.signup-btn-wrapper {
+    font-family: "Alata", sans-serif;
+    font-size: 1.2rem;
 }
 
 
@@ -405,11 +429,12 @@ nav li a {
     }
 
     .hero-section {
+        margin-top: 1rem;
         background: url("../images/design3.png") no-repeat;
-        background-size: 50%;
+        background-size: 46%;
         background-position: 50% 20%;
         width: 100%;
-        height: 90vh;
+        height: 80vh;
         display: flex;
         flex-direction: column;
         align-items: center;
