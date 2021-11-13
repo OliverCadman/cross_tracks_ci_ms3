@@ -422,6 +422,17 @@ nav li a {
 /* Tablet Devices */
 @media screen and (min-width: 600px) {
 
+    .block-divider {
+        width: 50%;
+        border-top: 3px solid #ffffff;
+        display: inline-block;
+    }
+
+    .block-divider-home {
+        width: 50%;
+        border-top: 5px solid #DDD;
+    }
+
     /* -------- Home Page --------- */
 
     .hero-header h1 {
@@ -431,10 +442,10 @@ nav li a {
     .hero-section {
         margin-top: 1rem;
         background: url("../images/design3.png") no-repeat;
-        background-size: 46%;
+        background-size: 85%;
         background-position: 50% 20%;
         width: 100%;
-        height: 80vh;
+        height: 68vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -442,7 +453,6 @@ nav li a {
     }
 
     .hero-header {
-        height: 300px;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -451,27 +461,14 @@ nav li a {
     .hero-inner {
         width: 100%;
         justify-content: flex-start;
-        height: 300px;
+        height: 150px;
         align-items: center;
         flex-direction: column;
         background: none;
     }
 
-    .about-crosstracks-wrapper {
-        position: relative;
-        margin-bottom: 50px;
-        margin-left: 20px;
-    }
-
-    .about-crosstracks-wrapper::after {
-        content: '';
-        height: 50%;
-        width: 10px;
-        position: absolute;
-        right: 0;
-        top: 25%;
-        display: inline-block;
-        background-color: rgb(180, 180, 180);
+    .info-header {
+        font-size: 3rem;
     }
 
     .about-lead {
@@ -479,7 +476,7 @@ nav li a {
     }
 
     .about-summary {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     .about-crosstracks-background {
@@ -487,10 +484,10 @@ nav li a {
     }
 
     .about-crosstracks-vector {
-        width: 450px;
+        width: 400px;
         float: right;
         border-radius: 50%;
-        
+        shape-outside: polygon(0 0, 75px, 300px)
     }
 
     .use-crosstracks-list-wrapper {
@@ -596,6 +593,34 @@ nav li a {
         color: #222222;
     }
 
+    /* ----- Home Page ----- */
+
+    .hero-section {
+        margin-top: 1rem;
+        background: url("../images/design3.png") no-repeat;
+        background-size: 85%;
+        background-position: 50% 20%;
+        width: 100%;
+        height: 80vh;
+    }
+
+    .about-crosstracks-wrapper {
+        position: relative;
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+
+    .about-crosstracks-wrapper::after {
+        content: '';
+        height: 50%;
+        width: 10px;
+        position: absolute;
+        right: 0;
+        top: 25%;
+        display: inline-block;
+        background-color: rgb(180, 180, 180);
+    }
+
     /* ------ Browse Tracks Page ------ */
     /* Top-level links displaying user options */
 
@@ -614,20 +639,6 @@ nav li a {
     .user-option-icon {
         margin: 0 10px 0 30px;
     }
-
-    /* 
-    #search-tracks-form {
-        display: flex;
-        justify-content: center;
-    } */
-
-    /* #search_input {
-        width: 50%;
-    }
-
-    #search_tracks {
-        width: 225px;
-    } */
 
     .card-title {
         /* white-space: nowrap; */
@@ -740,12 +751,6 @@ nav li a {
     .profile-location-icon {
         font-size: 1.5rem;
         margin-right: .4rem
-    }
-
-    .block-divider {
-        width: 50%;
-        border-top: 3px solid #ffffff;
-        display: inline-block;
     }
 
     .edit-profile-btn-wrapper {
