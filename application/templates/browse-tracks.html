@@ -66,11 +66,11 @@
         {% if tracks_and_users %}
         {% for track in tracks_and_users %}
         {% set username = track['user'][0]['username'] %}
-        <div class="col m4 hide-on-small-only">
+        <div class="col m6 l4 hide-on-small-only">
             <div class="card horizontal z-depth-5">
                 <div class="card-stacked">
                     <div class="card-content">
-                        <span class="card-title">{{track.track_name}}</span>
+                        <span class="card-title no-wordbreak">{{track.track_name}}</span>
                         {% if session.user %}
                         {% if session.user in track.likes %}
                         <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
@@ -100,7 +100,8 @@
                             </div>
                             <div class="card-action">
                                 <div class="more-info-btn">
-                                    <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
+                                    <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                            class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
                                     {% if username == session["user"] %}
                                     <a href="#" class="btn">Edit</a>
                                     {% endif %}
@@ -264,6 +265,7 @@
 <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
 <script src="{{url_for('static', filename='js/comment-regex-error.js')}}"></script>
+<script src="{{url_for('static', filename='js/fit-card-title.js')}}"></script>
 
 
 {% endblock %}
