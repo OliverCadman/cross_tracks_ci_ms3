@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
+{% if not session.user %}
+<div class="card-panel login-window hide-on-med-and-down">
+    <form action="{{url_for('users.login')}}" method="POST">
+        <div class="input-field">
+            <i class="fas fa-user prefix login-window-icon"></i>
+            <input type="text" name="username" id="username" class="login-window-input">
+            <label for="username">Username</label>
+        </div>
+        <div class="input-field">
+            <i class="fas fa-lock prefix login-window-icon"></i>
+            <input type="password" name="password" id="password" class="login-window-input">
+            <label for="password">Password</label>
+        </div>
+        <div class="login-button-wrapper">
+            <button type="submit" class="btn">Login</button>
+        </div>
+        <small>New to Cross//Tracks? <a href="{{url_for('users.register_user')}}">Join Us</a></small>
+    </form>
+</div>
+{% endif %}
 <section>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
