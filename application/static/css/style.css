@@ -18,6 +18,11 @@ body {
     min-height: 71vh;
 }
 
+/* Overrides margin-bottom property added by materializeCSS */
+.row {
+    margin-bottom: 0;
+}
+
 
 /* Navbar and Footer styling */
 
@@ -334,7 +339,14 @@ nav li a {
 
 .card-title {
     font-family: 'Alata', sans-serif;
+}
+
+.no-wordbreak {
     white-space: nowrap;
+}
+
+.add-wordbreak {
+    white-space: inherit;
 }
 
 .card-content {
@@ -344,7 +356,7 @@ nav li a {
 }
 
 .track-image {
-    border-radius: 0 20px 0 0;
+    border-radius: 0 20px 20px 0;
 }
 
 .card-content a {
@@ -579,6 +591,38 @@ nav li a {
         width: 100%;
     }
 
+    .card-image img {
+        height: 100% !important;
+    }
+
+    .track-name {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    .track-image {
+        width: 100px;
+    }
+
+    .modal-user-details {
+        margin-bottom: 1.3rem;
+    }
+
+    .message-user-modal {
+        margin-left: 2rem;
+    }
+
+    .comments-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .submit-comment-btn {
+        display: inline;
+        float: right;
+    }
+
     /* ------ User Profile ------ */
 
     /* 'My Tracks' cards */
@@ -699,40 +743,9 @@ nav li a {
     }
 
     /* Latest Tracks */
-    .card-image {
-        width: 100%;
-    }
-
-    .card-image img {
-        height: 100% !important;
-    }
-
-    .track-name {
-        font-size: 1.5rem;
-        text-align: left;
-    }
-
+    
     .track-image {
         width: 150px;
-    }
-
-    .modal-user-details {
-        margin-bottom: 1.3rem;
-    }
-
-    .message-user-modal {
-        margin-left: 2rem;
-    }
-
-    .comments-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-    }
-
-    .submit-comment-btn {
-        display: inline;
-        float: right;
     }
 
 
