@@ -145,14 +145,14 @@ def login():
             if password_check:
                 session["user"] = login_username
                 flash("Welcome back {}".format(login_username))
-                return redirect(request.referrer)
+                return redirect(url_for('users.user_profile', username=session["user"]))
             
             else:
                 flash("Invalid username/password")
-                return redirect(url_for("users.login"))
+                return redirect(request.referrer)
         else:
             flash("Invalid username/password")
-            return redirect(url_for("users.login"))
+            return redirect(request.referrer)
 
     return render_template("login.html")   
 
