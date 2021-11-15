@@ -289,33 +289,40 @@
                 let resultsWrapper = document.getElementsByClassName('results-wrapper')[0]
                 empty(resultsWrapper)
 
-
                 let results = res.results_list
                 let newResults = res.new_results_list
+                let user = res.user
 
 
                 if (results) {
-                    console.log('results: ', results.length)
                     results.map((item, index) => {
                         if (item) {
+                            console.log(item.likes.includes(user))
                             let resultDisplay = `
                             <div class="col s12">
                                 <div class="card horizontal">
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <span class="card-title">${item.track_name}</span>
+                                             ${item.likes.includes(String(user)) ? ` <span><a
+                                                     href="{{url_for('tracks.like_track', track_id='${item._id}', username=session['user'])}}"
+                                                     class="modal-trigger like_track"><i class="fas fa-star"
+                                                         id="like-track-icon"></i></a></span><span>&nbsp;${item.likes_count
+                                                 ? `${item.likes_count}` : ''}</span>` : ` <span><a
+                                                         href="{{url_for('tracks.like_track', track_id='${item._id}', username=session['user'])}}"
+                                                         class="modal-trigger like_track"><i class="far fa-star"
+                                                             id="like-track-icon"></i></a></span><span>&nbsp;${item.likes_count
+                                                     ? `${item.likes_count}` : ''}</span>` }
+                                        <p>${item.artist_name}</p>
+                                        <p>${item.album_name}</p>
+                                        <p>${item.genre}</p>
+                                    </div>
+                                </div>
                                     <div class="card-image">
-                                        ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
-                                            class="track-image">` : `<img
+                                        ${item.image_url ? `<img src=${item.image_url}
+                                            alt="Image of Cover Art for Track" class="track-image">` : `<img
                                             src="{{url_for('static', filename='images/design3.png')}}"
                                             alt="Image of Cover Art for Track" class="track-image">`}
-                                    </div>
-                                    <div class="card-title">
-                                        <span>${item.track_name}</span>
-                                    </div>
-                                    <div class="card-stacked">
-                                        <div class="card-content">
-                                            <p>${item.artist_name}</p>
-                                            <p>${item.album_name}</p>
-                                            <p>${item.genre}</p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
