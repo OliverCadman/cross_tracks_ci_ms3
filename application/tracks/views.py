@@ -203,7 +203,7 @@ def search_track():
             
             print(results_list)
         
-            return jsonify(results_list=results_list)
+            return jsonify(results_list=results_list, user=session["user"])
         
         else:
             new_results_list = []
