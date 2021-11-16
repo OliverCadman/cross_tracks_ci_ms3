@@ -16,6 +16,9 @@ $(document).ready(function() {
         let searchBar = document.getElementById('search-bar-wrapper');
         console.log('click')
         searchBar.classList.toggle('show-search-bar');
+
+        let opaqueOverlay = document.getElementById("opaque-overlay")
+        opaqueOverlay.classList.toggle('show-opaque-overlay')
     }
 
     
