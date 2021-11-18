@@ -368,10 +368,24 @@ nav li a {
 
 .track-image {
     border-radius: 0 20px 20px 0;
+    width: 100px;
 }
 
-.card-content a {
+.like-comment-icons {
+    margin: 10px;
+}
+
+.card-content a,
+.card span a {
     color: #E0C0AC;
+}
+
+.card span a {
+    margin: 20px 5px 10px 10px;
+}
+
+.card .card-title {
+    margin-left: 10px;
 }
 
 .user-image-card {
@@ -566,6 +580,8 @@ nav li a {
     .user-option-list ul li {
         display: inline-block;
         margin: 0 30px;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 600;
     }
 
     .user-option-list ul li:hover {
