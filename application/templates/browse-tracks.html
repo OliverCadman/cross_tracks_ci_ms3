@@ -33,10 +33,13 @@
         </div>
         <div class="row">
             <div class="col s12">
-                <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
-                    <input type="text" placeholder="Search by Genre or Username" name="search_input" id="search_input"
-                        class="search-input-mobile" oninput="searchTracks()">
-                </form>
+                    <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
+                        <div class="input-field">
+                        <input type="text" name="search_input" id="search_input" class="search-input-mobile"
+                            oninput="searchTracks()">
+                            <label for="search_input">Search by Genre or Username</label>
+                        </div>
+                    </form>
             </div>
         </div>
         <div class="container results-container">
@@ -149,9 +152,9 @@
                 <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i
                             class="far fa-star"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
                 {% endif %}
-                {% if track.comments|length > 0 %}
-                {{track.comments|length}}
-                {% endif %}
+                    {% if track.comments|length > 0 %}
+                    <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
+                    {% endif %}
                 <div class="card-content">
                     <p>{{track.artist_name}}</p>
                     <p>{{track.album_name}}</p>
