@@ -226,7 +226,7 @@
                          </div>
                 </div>
                     {% for comment_object in track["comments"]%}
-                    <div class="col s12 m6">
+                    <div class="col s12 m6 comments-container">
                         <div class="comments-wrapper">
                             <div class="comment">
                                 <p>{{comment_object["comment"]}}</p>
@@ -243,7 +243,8 @@
                         <hr class="comment-divider">
                     </div>
                     {% endfor %}
-                    <div class="col s12 m6 input-field">
+                    {% if session.user %}
+                    <div class="col s12 m6 input-field add-comment-container">
                         <form action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}"
                             method="POST">
                             <textarea rows="2" cols=10 name="comment_body" class="materialize-textarea"></textarea>
@@ -253,6 +254,7 @@
                             </div>
                         </form>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
