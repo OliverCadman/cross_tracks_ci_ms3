@@ -459,7 +459,7 @@ nav li a {
 .modal-body p {
     font-family: 'Quicksand', sans-serif;
     color: #eee;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 
@@ -491,10 +491,27 @@ nav li a {
     font-size: 1.5rem;
 }
 
+.comments-container {
+    background-color: #e5e8ec;
+    padding-top: 2rem;
+    padding-left: 1rem;
+}
+
+.comments-wrapper {
+    margin-top: 0.25rem;
+}
+
+.comments-container h2 {
+    font-size: 2rem;
+    font-family: 'Alata', sans-serif;
+}
+
 .comment {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
 }
 
 .edit-delete-comment-btns button {
@@ -502,7 +519,8 @@ nav li a {
 }
 
 .comment-divider {
-    border-top: 1px solid rgb(0, 0, 0, 0.05);
+    border-top: 3px solid rgb(160, 160, 160);
+    width: 25%;
 }
 
 /* .comment p,
