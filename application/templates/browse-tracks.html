@@ -126,7 +126,7 @@
 
         </div>
         <div class="col s12 hide-on-med-and-up">
-            <div class="card">
+            <div class="card z-depth-4">
                 <div class="card-image">
                     {% if not track.image_url == '' %}
                     <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
@@ -183,44 +183,48 @@
             </div>
         </div>
 
-        <div class="modal" id="track_modal_{{track._id}}">
+        <div class="modal track-modal" id="track_modal_{{track._id}}">
             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="modal-content">
-                <div class="row">
-                    <div class="col s12 modal-user-details">
-                        <p>
-                            <small>Added by:</small> {{username}}
-                            {% if track['user'][0]['profile_image'] %}
-                            <a href="{{url_for('users.user_profile', username=username)}}">
-                                <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                                    alt="User profile image" class="user-image-card">
-                            </a>
-                            {% else %}
-                            <a href="{{url_for('users.user_profile', username=username)}}">
-                                <img src="{{url_for('static', filename='images/default-user-image.png')}}"
-                                    alt="User profile image" class="user-image-card">
-                            </a>
-                            {% endif %}
-                            <span class="message-user-modal"><a href="#" class="btn">Message {{username}}</a></span>
-                        </p>
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col s12 modal-user-details">
+                            <p>
+                                <small>Added by:</small> {{username}}
+                                {% if track['user'][0]['profile_image'] %}
+                                <a href="{{url_for('users.user_profile', username=username)}}">
+                                    <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                        alt="User profile image" class="user-image-card">
+                                </a>
+                                {% else %}
+                                <a href="{{url_for('users.user_profile', username=username)}}">
+                                    <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                        alt="User profile image" class="user-image-card">
+                                </a>
+                                {% endif %}
+                                <span class="message-user-modal"><a href="#" class="btn">Message {{username}}</a></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col s12 m6 album-cover-modal">
-                        <h4 class="track-modal-header">{{track.track_name}}</h4>
-                        {% if not track.image_url == '' %}
-                        <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
-                        {% else %}
-                        <img src="{{url_for('static', filename='images/design3.png')}}"
-                            alt="Image of Cover Art for Track" class="album-cover">
-                        {% endif %}
-                    </div>
-                    <div class="col s12 m6">
-                        <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
-                        <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
-                        <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
-                        <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
-                    </div>
+                <div class="modal-body">
+                     <div class="row">
+                         <div class="col s12 m6 album-cover-modal">
+                             <h4 class="track-modal-header">{{track.track_name}}</h4>
+                             {% if not track.image_url == '' %}
+                             <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
+                             {% else %}
+                             <img src="{{url_for('static', filename='images/design3.png')}}"
+                                 alt="Image of Cover Art for Track" class="album-cover">
+                             {% endif %}
+                         </div>
+                         <div class="col s12 m6">
+                             <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
+                             <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
+                             <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
+                             <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
+                         </div>
+                </div>
                     {% for comment_object in track["comments"]%}
                     <div class="col s12 m6">
                         <div class="comments-wrapper">
