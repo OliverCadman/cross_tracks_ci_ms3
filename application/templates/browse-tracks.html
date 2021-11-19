@@ -225,24 +225,33 @@
                              <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
                          </div>
                 </div>
-                    {% for comment_object in track["comments"]%}
-                    <div class="col s12 m6 comments-container">
-                        <div class="comments-wrapper">
-                            <div class="comment">
-                                <p>{{comment_object["comment"]}}</p>
-                                <span
-                                    class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                </div>
+                {% if track["comments"] %}
+                <div class="comments-container">
+                    <h2>Comments</h2>
+                    <div class="row">
+                        {% for comment_object in track["comments"]%}
+                        <div class="col s12 m6">
+                            <div class="comments-wrapper">
+                                <div class="comment">
+                                    <p>{{comment_object["comment"]}}</p>
+                                    <span
+                                        class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                                </div>
+                                {% if track["comment_added_by"][0]["username"] == session.user %}
+                                <div class="edit-delete-comment-btns">
+                                    <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
+                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                {% endif %}
                             </div>
-                            {% if track["comment_added_by"][0]["username"] == session.user %}
-                            <div class="edit-delete-comment-btns">
-                                <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                            {% endif %}
+                            <hr class="comment-divider">
                         </div>
-                        <hr class="comment-divider">
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    {% endif %}
+
+                </div>
                     {% if session.user %}
                     <div class="col s12 m6 input-field add-comment-container">
                         <form action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}"
@@ -255,7 +264,6 @@
                         </form>
                     </div>
                     {% endif %}
-                </div>
             </div>
         </div>
         {% endfor %}
