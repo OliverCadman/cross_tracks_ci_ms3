@@ -2,22 +2,28 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col s12 card-panel">
-            <form action="#" method="POST">
+        <div class="col s12 add-track-form-wrapper">
+            <div class="add-track-form-header">
+                <h1>Add Your Track</h1>
+                <figure>
+                    <img src="{{url_for('static', filename='images/add-track-header-icon.png')}}" alt="Cross//Tracks logo">
+                </figure>
+            </div>
+            <form action="#" method="POST" class="add-track-form card-panel">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 m6">
                         <input type="text" id="track_name" name="track_name" required>
                         <label for="track_name">Track Name</label>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 m6">
                         <input type="text" id="artist_name" name="artist_name" required>
                         <label for="artist_name">Artist</label>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 m6">
                         <input type="text" id="album_name" name="album_name" required>
                         <label for="album_name">Album</label>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 m6">
                         <select name="genre" id="genre">
                         <option>Choose a Genre:</option>
                         {% for genre in genres %}
@@ -34,7 +40,7 @@
                          <label for="image_url">Image URL</label>
                      </div>
 
-                     <div class="col s6 submit-btn">
+                     <div class="col s12 submit-btn center-align">
                          <button type="submit" class="btn">Add Track</button>
                      </div>
                 </div>
