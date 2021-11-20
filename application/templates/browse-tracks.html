@@ -253,7 +253,9 @@
                                     {% endif %}
     
                                 </div>
+                                {% if not loop.last %}
                                 <hr class="comment-divider">
+                                {% endif %}
                                 {% endfor %}
                                 
                             </div>
