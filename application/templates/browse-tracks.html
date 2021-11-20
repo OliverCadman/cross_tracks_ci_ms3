@@ -24,7 +24,7 @@
     </div>
 </div>
 <div class="browse-background">
-<div id="opaque-overlay"></div>
+    <div id="opaque-overlay"></div>
     <div class="search-bar-wrapper" id="search-bar-wrapper">
         <div class="row">
             <div class="col s12">
@@ -33,13 +33,13 @@
         </div>
         <div class="row">
             <div class="col s12">
-                    <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
-                        <div class="input-field">
+                <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
+                    <div class="input-field">
                         <input type="text" name="search_input" id="search_input" class="search-input-mobile"
                             oninput="searchTracks()">
-                            <label for="search_input">Search by Genre or Username</label>
-                        </div>
-                    </form>
+                        <label for="search_input">Search by Genre or Username</label>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="container results-container">
@@ -152,9 +152,9 @@
                 <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i
                             class="far fa-star"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
                 {% endif %}
-                    {% if track.comments|length > 0 %}
-                    <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
-                    {% endif %}
+                {% if track.comments|length > 0 %}
+                <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
+                {% endif %}
                 <div class="card-content">
                     <p>{{track.artist_name}}</p>
                     <p>{{track.album_name}}</p>
@@ -208,52 +208,77 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col s12 m6 album-cover-modal">
-                             <h4 class="track-modal-header">{{track.track_name}}</h4>
-                             {% if not track.image_url == '' %}
-                             <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
-                             {% else %}
-                             <img src="{{url_for('static', filename='images/design3.png')}}"
-                                 alt="Image of Cover Art for Track" class="album-cover">
-                             {% endif %}
-                         </div>
-                         <div class="col s12 m6">
-                             <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
-                             <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
-                             <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
-                             <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
-                         </div>
-                </div>
-                </div>
-                {% if track["comments"] %}
-                <div class="comments-container">
-                    <h2>Comments</h2>
                     <div class="row">
-                        {% for comment_object in track["comments"]%}
-                        <div class="col s12 m6">
-                            <div class="comments-wrapper">
-                                <div class="comment">
-                                    <p>{{comment_object["comment"]}}</p>
-                                    <span
-                                        class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
-                                </div>
-                                {% if track["comment_added_by"][0]["username"] == session.user %}
-                                <div class="edit-delete-comment-btns">
-                                    <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
-                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                                {% endif %}
-                            </div>
-                            <hr class="comment-divider">
+                        <div class="col s12 m6 album-cover-modal">
+                            <h4 class="track-modal-header">{{track.track_name}}</h4>
+                            {% if not track.image_url == '' %}
+                            <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
+                            {% else %}
+                            <img src="{{url_for('static', filename='images/design3.png')}}"
+                                alt="Image of Cover Art for Track" class="album-cover">
+                            {% endif %}
                         </div>
-                        {% endfor %}
+                        <div class="col s12 m6">
+                            <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
+                            <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
+                            <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
+                            <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}</p>
+                            
+                            <!--Comment Input Goes Here-->
+                            {% if session.user %}
+                                 <form
+                                     action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}"
+                                     method="POST" class="submit-comment-form">
+                                     <textarea rows="2" cols=10 name="comment_body"
+                                         class="materialize-textarea"></textarea>
+                                     <label for="comment_body">Leave a comment:</label>
+                                     <div class="submit-comment-btn">
+                                         <button type="submit" class="btn right-align">Submit</button>
+                                     </div>
+                                 </form>
+                            {% endif %}
+                            <div class="comments-container">
+                                {% for comment_object in track["comments"] %}
+                                <div class="comments-wrapper hide-on-small-only">
+                                    <div class="comment">
+                                        <p>{{comment_object["comment"]}}</p>
+                                        <span
+                                            class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                                    </div>
+                                    {% if track["comment_added_by"][0]["username"] == session.user %}
+                                    <div class="edit-delete-comment-btns">
+                                        <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
+                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                    {% endif %}
+    
+                                </div>
+                                <hr class="comment-divider">
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
                     </div>
-                    {% endif %}
-
-                </div>
+                    {% for comment_object in track["comments"]%}
+                    <div class="col s12 m6 hide-on-med-and-up">
+                        <div class="comments-wrapper">
+                            <div class="comment">
+                                <p>{{comment_object["comment"]}}</p>
+                                <span
+                                    class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                            </div>
+                            {% if track["comment_added_by"][0]["username"] == session.user %}
+                            <div class="edit-delete-comment-btns">
+                                <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
+                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <hr class="comment-divider">
+                    </div>
+                    {% endfor %}
                     {% if session.user %}
-                    <div class="col s12 m6 input-field add-comment-container">
+                    <div class="col s12 m6 input-field hide-on-med-and-up">
                         <form action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}"
                             method="POST">
                             <textarea rows="2" cols=10 name="comment_body" class="materialize-textarea"></textarea>
@@ -264,6 +289,7 @@
                         </form>
                     </div>
                     {% endif %}
+                </div>
             </div>
         </div>
         {% endfor %}
