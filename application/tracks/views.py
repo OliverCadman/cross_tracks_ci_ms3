@@ -106,9 +106,6 @@ def remove_liked_track(track_id, username):
 @tracks.route("/add-comment/<track_id>/<username>/", methods=["GET", "POST"])
 def add_comment(track_id, username):
 
-    user = User.find_user_by_username(username)
-    user_id = user["_id"]
-
     if request.method == "POST":
 
         user_input = request.form.get("comment_body")
@@ -118,7 +115,7 @@ def add_comment(track_id, username):
             flash(error_message)
             return redirect(url_for("tracks.browse_tracks"))
 
-        new_comment = Comment(user_input, ObjectId(user_id), ObjectId(track_id))
+        new_comment = Comment(user_input, username, ObjectId(track_id))
         
         new_comment.add_comment()
         success_message = "Thanks for leaving your comment!"
@@ -203,7 +200,7 @@ def search_track():
             
             print(results_list)
         
-            return jsonify(results_list=results_list, user=session["user"])
+            return jsonify(results_list=results_list)
         
         else:
             new_results_list = []
