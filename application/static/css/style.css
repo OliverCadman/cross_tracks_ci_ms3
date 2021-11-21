@@ -469,6 +469,7 @@ nav li a {
     color: #333333;
 }
 
+
 .track-modal .modal-content {
     padding: 0;
 
@@ -751,6 +752,10 @@ nav li a {
         width: 100px;
     }
 
+    .modal-body {
+        padding-bottom: 2rem;
+    }
+
     .modal-user-details {
         margin-bottom: 1.3rem;
     }
@@ -760,7 +765,11 @@ nav li a {
     }
 
     .comments-container {
-        background-color: #eee;
+        background-color: #e5e8ec;
+        padding-bottom: 1rem;
+        border-radius: 15px;
+        height: 200px;
+        overflow: auto;
     }
 
     .comment {
@@ -771,6 +780,11 @@ nav li a {
 
     .comment p {
         color: #222222;
+    }
+
+    .comment-author {
+        padding: 0;
+        margin: 0;
     }
 
     .comment span {
