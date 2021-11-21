@@ -237,28 +237,33 @@
                                      </div>
                                  </form>
                             {% endif %}
+                            {% if track["comments"] %}
                             <div class="comments-container">
                                 {% for comment_object in track["comments"] %}
                                 <div class="comments-wrapper hide-on-small-only">
                                     <div class="comment">
                                         <p>{{comment_object["comment"]}}</p>
+                                        <div class="comment-details">
+                                        <p class="comment-author"><small>{{comment_object["author"]}}</small></p>
+                                        
                                         <span
                                             class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+
                                     </div>
-                                    {% if track["comment_added_by"][0]["username"] == session.user %}
+                                    </div>
                                     <div class="edit-delete-comment-btns">
                                         <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
                                         <a href="#"><i class="fas fa-trash-alt"></i></a>
                                     </div>
-                                    {% endif %}
+
     
                                 </div>
                                 {% if not loop.last %}
                                 <hr class="comment-divider">
                                 {% endif %}
                                 {% endfor %}
-                                
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                     {% for comment_object in track["comments"]%}
@@ -269,12 +274,12 @@
                                 <span
                                     class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
                             </div>
-                            {% if track["comment_added_by"][0]["username"] == session.user %}
+
                             <div class="edit-delete-comment-btns">
                                 <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
                                 <a href="#"><i class="fas fa-trash-alt"></i></a>
                             </div>
-                            {% endif %}
+                            {{track}}
                         </div>
                         <hr class="comment-divider">
                     </div>
