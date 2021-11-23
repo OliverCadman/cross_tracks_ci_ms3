@@ -98,7 +98,7 @@
     <main>
         <div class="row top-level-background">
             <div class="col s12">
-
+                
             </div>
         </div>
         <div class="content">
@@ -147,15 +147,6 @@
     <div id="register-modal" class="modal bottom-sheet">
         <div class="modal-content">
             <h4>Register</h4>
-            <div>
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <p>{{ message }}</p>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-            </div>
             <form action="{{url_for('users.register_user')}}" method="POST">
                 <div class="container">
                     <div class="row">
@@ -191,6 +182,16 @@
     <!--MaterializeCSS JavaScript-->
     <script src="{{url_for('static', filename='js/initialization.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{url_for('static', filename='js/toast.js')}}"></script>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            displayToast({{ messages | tojson | safe}});
+        </script>
+
+    {% endif %}
+    {% endwith %}
     {% block scripts %}
     {% endblock %}
 </body>
