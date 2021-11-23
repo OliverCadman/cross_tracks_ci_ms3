@@ -23,7 +23,6 @@ body {
     margin-bottom: 0;
 }
 
-
 /* Navbar and Footer styling */
 
 .top-level-background,
@@ -97,6 +96,16 @@ nav li a {
     color: #eeeeee;
     font-size: 1.1rem;
     font-weight: 500;
+}
+
+/* Flash Messages */
+.flash-message {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    color: #202c39;
+    text-align: center;
+    background-color: #d6e2e9;
+    padding: 20px;
 }
 
 /* -------- Home Page --------- */
@@ -492,7 +501,7 @@ nav li a {
 }
 
 .comments-container {
-    background-color: #e5e8ec;
+    background-color: #eee;
     padding-top: 2rem;
     padding-left: 1rem;
 }
@@ -523,10 +532,16 @@ nav li a {
     width: 25%;
 }
 
-/* .comment p,
-.comment span {
-    display: inline;
-} */
+.submit-comment-form {
+    background-color: #eee;
+    padding: 0 1rem;
+    margin-bottom: .25rem;
+    padding-bottom: 1rem;
+}
+
+.comment p {
+    color: #222222;
+}
 
 /* --------- Add a Track Page --------- */
 
@@ -607,6 +622,14 @@ nav li a {
         border-radius: 0 0 300px 0;
         height: 40%;
     }
+
+    #toast-container {
+        min-width: 10%;
+        top: 15%;
+        right: 50%;
+        transform: translateX(50%) translateY(50%);
+    }
+
 
     /* -------- Home Page --------- */
 
@@ -776,10 +799,6 @@ nav li a {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-    }
-
-    .comment p {
-        color: #222222;
     }
 
     .comment-author {
