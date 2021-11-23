@@ -32,4 +32,27 @@ $(document).ready(function() {
 
         searchBar.classList.remove('show-search-bar')
     }
+
+})
+
+// Click outside search bar window to close search bar 
+// https://stackoverflow.com/questions/1403615/use-jquery-to-hide-a-div-when-the-user-clicks-outside-of-it?page=1&tab=votes#tab-top
+$(document).mouseup(function(e) {
+     let searchWrapper = $("#search-bar-wrapper");
+
+     if(searchWrapper.hasClass('show-search-bar')) {
+
+         if (
+           !searchWrapper.is(e.target) &&
+           searchWrapper.has(e.target).length === 0
+         ) {
+           searchWrapper.removeClass('show-search-bar');
+
+           $('#opaque-overlay').removeClass('show-opaque-overlay');
+           $('#search_input').val('');
+           $('.results-wrapper').html('');
+            
+     }
+
+     }
 })
