@@ -410,10 +410,21 @@ nav li a {
     margin-left: 10px;
 }
 
+.card-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 5px !important; 
+}
+
+.card-action p {
+    font-family: 'Alata';
+}
+
 .user-image-card {
     width: 50px;
     display: inline;
-    border: 2px solid #222222;
+    border: 2px solid #B8B5BF;
     border-radius: 50%;
 }
 
@@ -716,7 +727,7 @@ nav li a {
     }
 
     .user-option {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         color: #eeeeee;
     }
 
@@ -752,10 +763,23 @@ nav li a {
 
 
     .browse-background {
-        background: url('../images/design1.png') no-repeat;
+        background-color: #e5e8ec;
         background-size: cover;
         background-position: top;
 
+    }
+
+    .card-information-container {
+        position: relative;
+        
+
+    }
+
+
+    .card-image-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 
     .card-image {
@@ -772,7 +796,8 @@ nav li a {
     }
 
     .track-image {
-        width: 100px;
+        width: 118px;
+        border-radius: 0 20px 0 0;
     }
 
     .modal-body {
@@ -943,10 +968,14 @@ nav li a {
         font-size: 1.3rem;
     }
 
+    .card-information-wrapper {
+        margin-top: .75rem;
+    }
+
     /* Latest Tracks */
 
     .track-image {
-        width: 150px;
+        width: 132px;
     }
 
 
