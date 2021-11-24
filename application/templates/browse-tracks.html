@@ -4,7 +4,8 @@
     <div class="col s12 user-option-list top-level-background">
         <ul>
             <li>
-                <i class="fas fa-search user-option-icon search-bar-icon"></i>
+                <i class="fas fa-search user-option-icon search-bar-icon" id="search-bar-icon"></i>
+                <p class="user-option hide-on-small-only">Search Tracks</p>
             </li>
             {% if session.user %}
             <li>
@@ -53,17 +54,6 @@
     <div class="row">
         <div class="col s12 section-header">
             <h1>Latest Tracks</h1>
-            <div class="center-align">
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                {{message}}
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-
-            </div>
-
         </div>
     </div>
     <div class="row">
@@ -101,8 +91,31 @@
                                 <p class="album-name">
                                     {{track.album_name}}
                                 </p>
+                                   <div class="card-image-wrapper">
+                                       {% if not track.image_url == '' %}
+                                       <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
+                                           class="track-image">
+                                       {% else %}
+                                       <img src="{{url_for('static', filename='images/design3.png')}}"
+                                           alt="Image of Cover Art for Track" class="track-image">
+                                       {% endif %}
+                                   </div>
                             </div>
                             <div class="card-action">
+                                <p>
+                                    <small>Added by:</small> {{username}}
+                                    {% if track['user'][0]['profile_image'] %}
+                                    <a href="{{url_for('users.user_profile', username=username)}}">
+                                        <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                            alt="User profile image" class="user-image-card">
+                                    </a>
+                                    {% else %}
+                                    <a href="{{url_for('users.user_profile', username=username)}}">
+                                        <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                            alt="User profile image" class="user-image-card">
+                                    </a>
+                                    {% endif %}
+                                </p>
                                 <div class="more-info-btn">
                                     <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
                                             class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
@@ -113,14 +126,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    {% if not track.image_url == '' %}
-                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
-                    {% else %}
-                    <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
-                        class="track-image">
-                    {% endif %}
                 </div>
             </div>
 
@@ -175,10 +180,13 @@
                         </a>
                         {% endif %}
                     </p>
-                    <a href="#track_modal_{{track._id}}" class="btn modal-trigger">More Info</a>
-                    {% if username == session["user"] %}
-                    <a href="#" class="btn">Edit</a>
-                    {% endif %}
+                    <div class="more-info-btn">
+                        <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-info-circle"><i
+                                    class="fas fa-comment"></i></i></a>
+                        {% if username == session["user"] %}
+                        <a href="#" class="btn">Edit</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -202,7 +210,6 @@
                                         alt="User profile image" class="user-image-card">
                                 </a>
                                 {% endif %}
-                                <span class="message-user-modal"><a href="#" class="btn">Message {{username}}</a></span>
                             </p>
                         </div>
                     </div>
@@ -238,9 +245,9 @@
                                  </form>
                             {% endif %}
                             {% if track["comments"] %}
-                            <div class="comments-container">
+                            <div class="comments-container hide-on-small-only">
                                 {% for comment_object in track["comments"] %}
-                                <div class="comments-wrapper hide-on-small-only">
+                                <div class="comments-wrapper">
                                     <div class="comment">
                                         <p>{{comment_object["comment"]}}</p>
                                         <div class="comment-details">
@@ -251,11 +258,13 @@
 
                                     </div>
                                     </div>
+                                    {% if comment_object["author"] == session.user%}
                                     <div class="edit-delete-comment-btns">
                                         <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
-                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
+                                            class="remove_comment_btn"><i class="fas fa-trash-alt"></i></a>
                                     </div>
-
+                                    {% endif %}
     
                                 </div>
                                 {% if not loop.last %}
@@ -274,28 +283,18 @@
                                 <span
                                     class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
                             </div>
-
+                            {% if comment_object["author"] == session.user %}
                             <div class="edit-delete-comment-btns">
                                 <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"><i class="fas fa-trash-alt"></i></a>
                             </div>
-                            {{track}}
+                            {% endif %}
                         </div>
+                        {% if not loop.last %}
                         <hr class="comment-divider">
+                        {% endif %}
                     </div>
                     {% endfor %}
-                    {% if session.user %}
-                    <div class="col s12 m6 input-field hide-on-med-and-up">
-                        <form action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}"
-                            method="POST">
-                            <textarea rows="2" cols=10 name="comment_body" class="materialize-textarea"></textarea>
-                            <label for="comment_body">Leave a comment:</label>
-                            <div class="submit-comment-btn">
-                                <button type="submit" class="btn right-align">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -313,9 +312,8 @@
 {% block scripts %}
 <script src="{{url_for('static', filename='js/search-bar.js')}}"></script>
 <script src="{{url_for('static', filename='js/edit-comment.js')}}"></script>
-<script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
+<script src="{{url_for('static', filename='js/remove_comment.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
-<script src="{{url_for('static', filename='js/comment-regex-error.js')}}"></script>
 <script src="{{url_for('static', filename='js/fit-card-title.js')}}"></script>
 
 
