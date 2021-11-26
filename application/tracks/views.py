@@ -26,10 +26,16 @@ def add_track(username):
         image_url = request.form.get("image_url")
         added_by = user_id
         
-        new_track = Track(track_name, artist_name, album_name,
+        try:
+            new_track = Track(track_name, artist_name, album_name,
                           genre, year_of_release, added_by, image_url)
 
-        new_track.add_track()
+            new_track.add_track()
+            flash('Track added successfully')
+            return redirect(url_for('tracks.add_track', username=username))
+        except:
+            flash('Sorry, something went wrong. Please try again')
+            return redirect(url_for('tracks.add_track', username=username))
 
     return render_template("add-track.html", genres=genres, user_id=user_id)
 
