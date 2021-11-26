@@ -104,23 +104,13 @@
                             <div class="card-action">
                                 <p>
                                     <small>Added by:</small> {{username}}
-                                    {% if track['user'][0]['profile_image'] %}
-                                    <a href="{{url_for('users.user_profile', username=username)}}">
-                                        <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                                            alt="User profile image" class="user-image-card">
-                                    </a>
-                                    {% else %}
-                                    <a href="{{url_for('users.user_profile', username=username)}}">
-                                        <img src="{{url_for('static', filename='images/default-user-image.png')}}"
-                                            alt="User profile image" class="user-image-card">
-                                    </a>
-                                    {% endif %}
                                 </p>
                                 <div class="more-info-btn">
                                     <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
-                                            class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
+                                            class="fas fa-info-circle card-btn"></i></a>
                                     {% if username == session["user"] %}
-                                    <a href="#" class="btn">Edit</a>
+                                    <a href="#" class="btn"><i class="fas fa-edit card-btn"></i></a>
+                                    <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-trash-alt card-btn"></i></a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -190,7 +180,8 @@
                 </div>
             </div>
         </div>
-
+        
+        <!--Track Info Modal-->
         <div class="modal track-modal" id="track_modal_{{track._id}}">
             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="modal-content">
@@ -298,6 +289,34 @@
                 </div>
             </div>
         </div>
+
+         <!-- Track Delete Modal -->
+         <div class="modal" id="delete_track_modal_{{track._id}}">
+             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
+             <div class="modal-content">
+                 <div class="row">
+                     <div class="col s12 m6 confirm-delete-container">
+                         <div class="confirm-delete-message center-align">
+                             <p>Deleting "{{track.track_name}}"</p>
+                         </div>
+                         <div class="confirm-delete-wrapper center-align">
+                             <p>Are you sure you want to continue?</p>
+                             <a href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}"
+                                 class="btn">Delete</a>
+                             <button type="button" class="btn modal-close">Cancel</button>
+                         </div>
+                     </div>
+                     <div class="col m6 hide-on-mobile-only">
+                         {% if not track.image_url == '' %}
+                         <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
+                         {% else %}
+                         <img src="{{url_for('static', filename='images/design3.png')}}"
+                             alt="Image of Cover Art for Track" class="album-cover">
+                         {% endif %}
+                     </div>
+                 </div>
+             </div>
+         </div>
         {% endfor %}
         <!-- Track Modal -->
         {% endif %}
