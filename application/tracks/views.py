@@ -60,7 +60,7 @@ def browse_tracks():
 
     
  
-    return render_template("browse-tracks.html", tracks_and_users=tracks_and_users)
+    return render_template("browse-tracks.html", tracks_and_users=tracks_and_users, genre_list=genre_list)
 
 
 
@@ -144,10 +144,17 @@ def edit_track(track_id, username):
             "image_url": request.form.get("image_url")
         }
 
-        Track.edit_track(track_id, edited_info)
+        try:
+            Track.edit_track(track_id, edited_info)
+            flash('Track edited successfully')
+            return redirect(request.referrer)
+        except:
+            flash('Sorry, there was a problem. Please try again.')
+            return redirect(request.referrer)
 
 
-    return redirect(url_for('users.user_profile', username=username))
+
+    
 
 
 @tracks.route("/delete-track/<track_id>/<username>", methods=["GET", "POST"])
