@@ -152,10 +152,6 @@ def edit_track(track_id, username):
 
 @tracks.route("/delete-track/<track_id>/<username>", methods=["GET", "POST"])
 def delete_track(track_id, username):
-
-    # Get Track
-    current_track = Track.get_track_id(track_id)
-    # Delete track
     
     # Remove track from list of user's liked tracks
     all_users = User.get_all_users()
@@ -167,21 +163,18 @@ def delete_track(track_id, username):
 
     try:
         Track.delete_track(track_id)
-    except Exception as e:
-        print(e)
-
-    try:
         Comment.delete_track_from_collection(track_id)
-    except Exception as e:
-        print(e)
-
-    for every_user in all_users:
+        
+        for every_user in all_users:
         # Confirm that 'liked_tracks' field exists in database
-        if 'liked_tracks' in every_user:
-            User.pull_from_list("liked_tracks", track_id)
-
-
-    return redirect(url_for('users.user_profile', username=username))
+            if 'liked_tracks' in every_user:
+                User.pull_from_list("liked_tracks", track_id)
+        
+        flash('Track deleted successfully')
+        return redirect(request.referrer)
+    except:
+        flash('Sorry, something went wrong. Please try again.')
+        return redirect(request.referrer)
 
 
 @tracks.route("/search-track", methods=["GET", "POST"])
