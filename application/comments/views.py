@@ -1,6 +1,7 @@
 from flask import (Blueprint, render_template, redirect, flash, url_for, session, jsonify, request, flash)
 from application.comments.classes import Comment
 import urllib
+import datetime
 
 comments = Blueprint("comments", __name__)
 
@@ -18,6 +19,7 @@ def delete_comment(comment_id):
         flash('Sorry, something went wrong. Please try again.')
         return redirect(url_for('tracks.browse-tracks'))
 
+
 @comments.route('/edit_comment/<comment_id>', methods=["GET", "POST"])
 def edit_comment(comment_id):
 
@@ -26,8 +28,11 @@ def edit_comment(comment_id):
 
         input_val = request.form.get('edit_comment')
 
+        date_updated = datetime.datetime.now()
+
         edited_comment = {
-            "comment": input_val
+            "comment": input_val,
+            "date_added": date_updated
         }
 
         try:
