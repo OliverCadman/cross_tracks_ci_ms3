@@ -109,7 +109,7 @@
                                     <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
                                             class="fas fa-info-circle card-btn"></i></a>
                                     {% if username == session["user"] %}
-                                    <a href="#" class="btn"><i class="fas fa-edit card-btn"></i></a>
+                                    <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-edit card-btn"></i></a>
                                     <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-trash-alt card-btn"></i></a>
                                     {% endif %}
                                 </div>
@@ -240,18 +240,30 @@
                                 {% for comment_object in track["comments"] %}
                                 <div class="comments-wrapper">
                                     <div class="comment">
-                                        <p>{{comment_object["comment"]}}</p>
-                                        <div class="comment-details">
-                                        <p class="comment-author"><small>{{comment_object["author"]}}</small></p>
-                                        
-                                        <span
-                                            class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                                        <div class="comment-content">
 
-                                    </div>
+                                            <p>{{comment_object["comment"]}}</p>
+                                            <div class="comment-details">
+                                            <p class="comment-author"><small>{{comment_object["author"]}}</small></p>
+                                            
+                                            <span
+                                                class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                                            </div>
+                                        </div>
+                                        {% if comment_object["author"] == session.user %}
+                                        <form action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}" method="POST" class="comment-edit-form">
+                                            <div class="input-field">
+                                                <input type="text" value="{{comment_object['comment']}}" name="edit_comment"
+                                                    class="edit-comment-input">
+                                                <button type="submit" class="btn submit-comment-edit">Submit</button>
+                                                <button type="button" class="btn cancel-comment-edit">Cancel</button>
+                                            </div>
+                                        </form>
+                                        {% endif %}
                                     </div>
                                     {% if comment_object["author"] == session.user%}
                                     <div class="edit-delete-comment-btns">
-                                        <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
+                                        <button class="btn edit-comment-btn"><i class="fas fa-edit"></i></button>
                                         <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
                                             class="remove_comment_btn"><i class="fas fa-trash-alt"></i></a>
                                     </div>
@@ -276,7 +288,7 @@
                             </div>
                             {% if comment_object["author"] == session.user %}
                             <div class="edit-delete-comment-btns">
-                                <a href="#" id="edit-comment-btn"><i class="fas fa-edit"></i></a>
+                                <button class="button edit-comment-btn"><i class="fas fa-edit"></i></button>
                                 <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"><i class="fas fa-trash-alt"></i></a>
                             </div>
                             {% endif %}
@@ -286,6 +298,56 @@
                         {% endif %}
                     </div>
                     {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Track Edit Modal -->
+        <div class="modal" id="edit_track_modal_{{track._id}}">
+            <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
+            <div class="row">
+                <div class="col s12 card-panel">
+                    <form action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
+                        method="POST">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input type="text" value="{{track.track_name}} " id="track_name" name="track_name"
+                                    required>
+                                <label for="track_name">Track Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input type="text" value="{{track.artist_name}}" id="artist_name" name="artist_name"
+                                    required>
+                                <label for="artist_name">Artist</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input type="text" value="{{track.album_name}}" id="album_name" name="album_name"
+                                    required>
+                                <label for="album_name">Album</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select name="genre" id="genre">
+                                    <option>{{track.genre}}</option>
+                                    {% for genre in genre_list %}
+                                    <option value="{{genre}}">{{genre}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-field col s6">
+                                <input type="number" value="{{track.year_of_release}}" name="year_of_release"
+                                    id="year_of_release" required>
+                                <label for="year_of_release">Year of Release</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input type="text" value={{track.image_url}} name="image_url" id="image_url">
+                                <label for="image_url">Image URL</label>
+                            </div>
+
+                            <div class="col s6 submit-btn">
+                                <button type="submit" class="btn">Edit Track</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -323,20 +385,14 @@
     </div>
 </div>
 
-
-
-
-
-
 {% block scripts %}
 <script src="{{url_for('static', filename='js/search-bar.js')}}"></script>
 <script src="{{url_for('static', filename='js/edit-comment.js')}}"></script>
 <script src="{{url_for('static', filename='js/remove_comment.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
 <script src="{{url_for('static', filename='js/fit-card-title.js')}}"></script>
-
-
 {% endblock %}
+
 <script>
     let submitButton = document.getElementById("search-submit-btn")
 
@@ -440,6 +496,7 @@
 
     };
 </script>
+
 
 
 {% endblock %}
