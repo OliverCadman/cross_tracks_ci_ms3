@@ -80,4 +80,17 @@ class Comment:
     def delete_track_from_collection(track_id):
 
         mongo.db.comments.delete_many({"track_id": ObjectId(track_id)})
+        
+
+    @staticmethod
+    def delete_comment(comment_id):
+
+        mongo.db.comments.delete_one({"_id": ObjectId(comment_id)})
+
+    
+    @staticmethod
+    def edit_comment(comment_id, comment_content):
+
+        mongo.db.comments.update_one({"_id": ObjectId(comment_id)},
+                                     {"$set": comment_content})
 
