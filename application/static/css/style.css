@@ -526,7 +526,7 @@ nav li a {
     font-family: 'Alata', sans-serif;
 }
 
-.comment {
+.comment-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -552,6 +552,18 @@ nav li a {
 
 .comment p {
     color: #222222;
+}
+
+.comment-edit-form {
+    display: none;
+}
+
+.show-comment-edit-form {
+    display: block;
+}
+
+.hide-comment {
+    display: none;
 }
 
 /* --------- Add a Track Page --------- */
@@ -800,6 +812,10 @@ nav li a {
         border-radius: 0 20px 0 0;
     }
 
+    a .card-btn {
+        font-size: 1.1rem;
+    }
+
     .modal-body {
         padding-bottom: 2rem;
     }
@@ -818,12 +834,6 @@ nav li a {
         border-radius: 15px;
         height: 200px;
         overflow: auto;
-    }
-
-    .comment {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
     }
 
     .comment-author {
