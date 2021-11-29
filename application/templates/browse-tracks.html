@@ -242,10 +242,19 @@
                                     <div class="comment">
                                         <div class="comment-content">
 
-                                            <p>{{comment_object["comment"]}}</p>
+                                            <p>{{comment_object["comment"]}}
+                                            {% if comment_object["author"] == session.user%}
+                                            <span class="edit-delete-comment-btns">
+                                                <button class="btn edit-delete-comment-btn edit-comment-btn"><i
+                                                        class="fas fa-edit"></i></button>
+                                                <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
+                                                    class="btn edit-delete-comment-btn remove-comment-btn"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                            </span>
+                                            {% endif %}
+                                            </p>
                                             <div class="comment-details">
                                             <p class="comment-author"><small>{{comment_object["author"]}}</small></p>
-                                            
                                             <span
                                                 class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
                                             </div>
@@ -261,13 +270,7 @@
                                         </form>
                                         {% endif %}
                                     </div>
-                                    {% if comment_object["author"] == session.user%}
-                                    <div class="edit-delete-comment-btns">
-                                        <button class="btn edit-comment-btn"><i class="fas fa-edit"></i></button>
-                                        <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
-                                            class="remove_comment_btn"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                    {% endif %}
+                                 
     
                                 </div>
                                 {% if not loop.last %}
@@ -281,18 +284,33 @@
                     {% for comment_object in track["comments"]%}
                     <div class="col s12 m6 hide-on-med-and-up">
                         <div class="comments-wrapper">
-                            <div class="comment">
-                                <p>{{comment_object["comment"]}}</p>
-                                <span
-                                    class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                            <div class="comment-content">
+                                <div class="comment">
+                                    <p>{{comment_object["comment"]}}</p>
+                                    <span
+                                        class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M %Y-%m-%d')}}</small></span>
+                                </div>
+                                {% if comment_object["author"] == session.user %}
+                                <div class="edit-delete-comment-btns">
+                                    <button class="button edit-comment-btn"><i class="fas fa-edit"></i></button>
+                                    <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                {% endif %}
+
                             </div>
                             {% if comment_object["author"] == session.user %}
-                            <div class="edit-delete-comment-btns">
-                                <button class="button edit-comment-btn"><i class="fas fa-edit"></i></button>
-                                <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"><i class="fas fa-trash-alt"></i></a>
-                            </div>
+                            <form action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
+                                method="POST" class="comment-edit-form">
+                                <div class="input-field">
+                                    <input type="text" value="{{comment_object['comment']}}" name="edit_comment"
+                                        class="edit-comment-input">
+                                    <button type="submit" class="btn submit-comment-edit">Submit</button>
+                                    <button type="button" class="btn cancel-comment-edit">Cancel</button>
+                                </div>
+                            </form>
                             {% endif %}
                         </div>
+
                         {% if not loop.last %}
                         <hr class="comment-divider">
                         {% endif %}
