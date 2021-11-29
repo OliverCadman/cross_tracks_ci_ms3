@@ -16,54 +16,82 @@ Functions:
 
 */ 
 
+
+
 $(document).ready(function(){
+  let buttons = document.getElementsByTagName("button");
 
-    let buttons = document.getElementsByTagName("button")
+  /* Media query to check for mobile screen size
+     Used to call seperate function to style input for mobile devices specifically.
+     https://www.w3schools.com/howto/howto_js_media_queries.asp
+     */
 
-    for (buttonOne of buttons) {
-        if (buttonOne.getAttribute('class').includes("edit-comment-btn")) {
-            buttonOne.param = "openCommentEdit"
-            buttonOne.addEventListener("click", toggleForm)
-        } else if (buttonOne.getAttribute('class').includes("cancel-comment-edit")) {
-            buttonOne.param = "cancelCommentEdit"
-            buttonOne.addEventListener("click", toggleForm)
-        }
+  let mobileScreen = window.matchMedia("(max-width: 414px)");
+
+  for (buttonOne of buttons) {
+    if (buttonOne.getAttribute("class").includes("edit-comment-btn")) {
+      if (mobileScreen.matches) {
+        buttonOne.param = "openCommentEdit";
+        buttonOne.addEventListener("click", toggleFormMobile);
+      } else {
+        buttonOne.param = "openCommentEdit";
+        buttonOne.addEventListener("click", toggleForm);
+      }
+    } else if (
+      buttonOne.getAttribute("class").includes("cancel-comment-edit")
+    ) {
+      if (mobileScreen.matches) {
+        buttonOne.param = "cancelCommentEdit";
+        buttonOne.addEventListener("click", toggleFormMobile);
+      } else {
+        buttonOne.param = "cancelCommentEdit";
+        buttonOne.addEventListener("click", toggleForm);
+      }
     }
+  }
 
+  function toggleForm(e, x) {
+    /* Handles display and hide of form and comment content/buttons for iPad device size and up */
 
-    function toggleForm(e) {
-      
-        let commentContent =
-          e.target.parentElement.parentElement.parentElement.children[0]
-            .children[0];
-        
-        let form = e.target.parentElement.parentElement.parentElement.children[0].children[1]
+    console.log("mobile click");
+    let commentContent =
+      e.target.parentElement.parentElement.parentElement.parentElement;
 
-        let editDeleteBtns = e.target.parentElement.parentElement.parentElement.children[1]
-        
-        if (e.currentTarget.param === "openCommentEdit") {
+    let form =
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement.children[1];
 
-                form.style.display = "block"
-                commentContent.style.display = "none"
-                editDeleteBtns.style.display = "none"
+    if (e.currentTarget.param === "openCommentEdit") {
+      form.style.display = "block";
+      commentContent.style.display = "none";
+    } else if (e.currentTarget.param === "cancelCommentEdit") {
+      form = e.target.parentElement.parentElement;
+      form.style.display = "none";
 
-            } else if  (e.currentTarget.param === "cancelCommentEdit" || form.style.display === "block") {
-                form = e.target.parentElement.parentElement
-                form.style.display = "none";
-
-                
-
-                commentContent = e.target.parentElement.parentElement.parentElement.children[0]
-                commentContent.style.display = "flex"
-
-                editDeleteBtns =
-                  e.target.parentElement.parentElement.parentElement
-                    .parentElement.children[1];
-
-                editDeleteBtns.style.display = "block";
-
-                }
-
-        
+      commentContent =
+        e.target.parentElement.parentElement.parentElement.children[0];
+      commentContent.style.display = "flex";
     }
+  }
+
+  function toggleFormMobile(e) {
+    /* Handles the display and hide of text input and comment content/buttons */
+
+    let commentContent = e.target.parentElement.parentElement.parentElement;
+    let form =
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .children[1];
+
+    if (e.currentTarget.param === "openCommentEdit") {
+      form.style.display = "block";
+      commentContent.style.display = "none";
+    } else if (e.currentTarget.param === "cancelCommentEdit") {
+      form = e.target.parentElement.parentElement;
+      form.style.display = "none";
+
+      commentContent =
+        e.target.parentElement.parentElement.parentElement.children[0];
+      commentContent.style.display = "flex";
+    }
+  }
 })
