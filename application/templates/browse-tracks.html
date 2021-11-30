@@ -52,7 +52,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s12 section-header">
+        <div class="col s12 section-header all-tracks-btn-container">
+            <a class="btn" href="#all-tracks-header">See All Tracks</a>
             <h1>Latest Tracks</h1>
         </div>
     <div class="row">
@@ -63,10 +64,10 @@
                     <div class="card z-depth-4">
                         <div class="card-image">
                             {% if not track.image_url == '' %}
-                            <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
+                            <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image-mobile">
                             {% else %}
                             <img src="{{url_for('static', filename='images/design3.png')}}"
-                                alt="Image of Cover Art for Track" class="track-image">
+                                alt="Image of Cover Art for Track" class="track-image-mobile">
                             {% endif %}
                         </div>
                         <div class="card-title">
@@ -187,7 +188,7 @@
     </div>
     </div>
     <div class="row">
-        <div class="col s12 section-header">
+        <div class="col s12 section-header" id="all-tracks-header">
             <h1>All Tracks</h1>
         </div>
     </div>

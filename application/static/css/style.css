@@ -367,9 +367,31 @@ nav li a {
     color: #3d3c3c;
 }
 
-.section-header h1, h2 {
+.section-header h1 {
+    padding-top: 1rem;
+}
+
+.section-header h1,
+h2 {
+   
     font-family: 'Alata', sans-serif;
     font-size: 3.5rem;
+}
+
+.all-tracks-btn-container {
+    position: relative;
+}
+
+.all-tracks-btn-container a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #E0C0AC;
+    color: #3d3c3c;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: .3rem .3rem 0 0;
 }
 
 .browse-background {
@@ -402,9 +424,10 @@ nav li a {
     font-size: 1.1rem;
 }
 
-.track-image {
-    border-radius: 0 20px 20px 0;
+.track-image-mobile {
+    border-radius: 20px;
     width: 100px;
+    padding: 1rem;
 }
 
 .like-comment-icons {
@@ -783,7 +806,8 @@ nav li a {
         transform: scale(1);
     }
 
-    .section-header h1, h2 {
+    .section-header h1,
+    h2 {
         padding-left: 1.5rem;
     }
 
@@ -905,6 +929,11 @@ nav li a {
 
     /* 'My Tracks' cards */
 
+    .track-image {
+        border-radius: 0 20px 20px 0;
+        width: 100px;
+
+    }
 
     .track-image-wrapper img {
         width: 100%
