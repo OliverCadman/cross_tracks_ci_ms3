@@ -4,6 +4,7 @@ from application.tracks.classes import Track
 from application.users.classes import User
 from application.comments.classes import Comment
 from bson.objectid import ObjectId
+from application import mongo
 import pprint
 
 
@@ -46,6 +47,9 @@ def browse_tracks():
     tracks_and_users = Track.bind_users_to_tracks()
     genres = Track.get_genres()
     all_users = User.get_all_users()
+    latest_tracks = Track.get_latest_tracks()
+
+    print(latest_tracks)
 
     user_list = []
     for user in all_users:
@@ -60,7 +64,8 @@ def browse_tracks():
 
     
  
-    return render_template("browse-tracks.html", tracks_and_users=tracks_and_users, genre_list=genre_list)
+    return render_template("browse-tracks.html", tracks_and_users=tracks_and_users,
+                            latest_tracks=latest_tracks, genre_list=genre_list)
 
 
 
@@ -197,7 +202,7 @@ def search_track():
             return redirect(url_for("tracks.browse_tracks"))
 
         results = Track.search_tracks(query)
-        
+
         results_list = []
         if results:
             for result in results:
