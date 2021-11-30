@@ -7,7 +7,7 @@ $(document).ready(function () {
   });
   $(".dropdown-trigger").dropdown();
   $(".sidenav").sidenav({
-    edge: "right",
+    edge: "left",
     inDuration: 500,
     draggable: true,
   });
