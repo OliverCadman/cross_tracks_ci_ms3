@@ -155,7 +155,34 @@ class Track:
     @staticmethod
     def get_latest_tracks():
 
-        return mongo.db.tracks.find().sort("_id", -1).limit(6)
+        return mongo.db.tracks.aggregate([
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "added_by",
+                    "foreignField": "_id",
+                    "as": "user"
+                }
+            }, {
+                "$lookup": {
+                    "from": "comments",
+                    "localField": "_id",
+                    "foreignField": "track_id",
+                    "as": "comments"
+
+                }
+            },
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "comments.author",
+                    "foreignField": "_id",
+                    "as": "comment_added_by"
+                }
+            },
+            { "$sort": {"_id": -1}},
+            { "$limit": 6}
+        ])
 
     @staticmethod 
     def bind_users_to_tracks():
@@ -207,6 +234,25 @@ class Track:
                 }},
             
         ])
+
+    @staticmethod
+    def search_tracks_by_user(username):
+
+        return mongo.db.tracks.aggregate([
+            {
+                "$lookup": {
+                    "from": "users",
+                    "localField": "added_by",
+                    "foreignField": "_id",
+                    "as": "added_by",
+                    "pipeline": [
+                        {"$match": {
+                            "$text": username
+                        }}
+                    ]
+                }
+            }
+        ])
     
     @staticmethod
     def delete_users_tracks(user_id):
@@ -219,12 +265,6 @@ class Track:
     def remove_user_from_likes_list(username):
 
         mongo.db.tracks.update_many({"likes": username}, {"$pull": {"likes": username}})
-
-    @staticmethod
-    def decrement_likes_count(username):
-
-        mongo.db.tracks.update_many({},
-        [{"$set": {}}])
 
 
     @staticmethod
