@@ -362,6 +362,20 @@ nav li a {
     color: #eeeeee;
 }
 
+.section-header {
+    background-color: #abc4ff;
+    color: #3d3c3c;
+}
+
+.section-header h1, h2 {
+    font-family: 'Alata', sans-serif;
+    font-size: 3.5rem;
+}
+
+.browse-background {
+    background-color: rgb(201, 201, 201)
+}
+
 /* Track Cards */
 
 .card {
@@ -461,7 +475,7 @@ nav li a {
         0px 0px 5px 1px #B8B5BF;
 }
 
-.modal-header {
+.modal-content {
     background-color: #dcedf2;
 }
 
@@ -765,8 +779,12 @@ nav li a {
 
     .show-search-bar {
         box-shadow: 60px 60px 50px 75px rgba(90, 90, 90, 0.3);
-        width: 40%;
+        width: 50%;
         transform: scale(1);
+    }
+
+    .section-header h1, h2 {
+        padding-left: 1.5rem;
     }
 
 
@@ -810,6 +828,11 @@ nav li a {
 
     a .card-btn {
         font-size: 1.1rem;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: center;
     }
 
     .modal-body {
