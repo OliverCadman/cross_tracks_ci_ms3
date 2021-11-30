@@ -59,6 +59,66 @@
         {% if latest_tracks %}
             {% for track in latest_tracks %}
                 {% set username = track['user'][0]['username'] %}
+                <div class="col s12 hide-on-med-and-up">
+                    <div class="card z-depth-4">
+                        <div class="card-image">
+                            {% if not track.image_url == '' %}
+                            <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
+                            {% else %}
+                            <img src="{{url_for('static', filename='images/design3.png')}}"
+                                alt="Image of Cover Art for Track" class="track-image">
+                            {% endif %}
+                        </div>
+                        <div class="card-title">
+                            <span>{{track.track_name}}</span>
+                        </div>
+                        {% if session.user %}
+                        {% if session.user in track.likes %}
+                        <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                                class="modal-trigger like_track"><i class="fas fa-star"
+                                    id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                        {% else %}
+                        <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                                class="modal-trigger like_track"><i class="far fa-star"
+                                    id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                        {% endif %}
+                        {% else %}
+                        <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i
+                                    class="far fa-star"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
+                        {% endif %}
+                        {% if track.comments|length > 0 %}
+                        <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
+                        {% endif %}
+                        <div class="card-content">
+                            <p>{{track.artist_name}}</p>
+                            <p>{{track.album_name}}</p>
+                            <p>{{track.genre}}</p>
+                        </div>
+                        <div class="card-action">
+                            <p>
+                                <small>Added by:</small> {{username}}
+                                {% if track['user'][0]['profile_image'] %}
+                                <a href="{{url_for('users.user_profile', username=username)}}">
+                                    <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                        alt="User profile image" class="user-image-card">
+                                </a>
+                                {% else %}
+                                <a href="{{url_for('users.user_profile', username=username)}}">
+                                    <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                        alt="User profile image" class="user-image-card">
+                                </a>
+                                {% endif %}
+                            </p>
+                            <div class="more-info-btn">
+                                <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                        class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
+                                {% if username == session["user"] %}
+                                <a href="#" class="btn">Edit</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col m6 l4 hide-on-small-only">
                     <div class="card horizontal z-depth-5">
                         <div class="card-stacked">
