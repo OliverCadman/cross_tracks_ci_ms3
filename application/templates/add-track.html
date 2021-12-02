@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col s12 add-track-form-wrapper">
-            <div class="add-track-form-header">
-                <h1>Add Your Track</h1>
-                <figure>
-                    <img src="{{url_for('static', filename='images/add-track-header-icon.png')}}" alt="Cross//Tracks logo">
-                </figure>
-            </div>
-            <form action="#" method="POST" class="add-track-form card-panel">
+<div class="section-header add-track-header">
+    <h1>Add Your Track</h1>
+</div>
+<div>
+    <div class="row add-track-body">
+        <div class="col s12 l6 add-track-form-wrapper">
+            <form action="#" method="POST" class="add-track-form">
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <input type="text" id="track_name" name="track_name" required>
@@ -42,10 +39,20 @@
 
                      <div class="col s12 submit-btn center-align">
                          <button type="submit" class="btn">Add Track</button>
+                         <button type="button" class="btn" id="reset-form">Reset</button>
                      </div>
                 </div>
             </form>
         </div>
+        <div class="col l6 hide-on-med-and-down">
+            <figure>
+                <img src="{{url_for('static', filename='images/add-track-hero.png')}}" alt="Hero image for Add-Track page" width="400">
+            </figure>
+        </div>
     </div>
 </div>
+
+{% block scripts %}
+<script src="{{url_for('static', filename='js/reset-form.js')}}"></script>
+{% endblock %}
 {% endblock %}
