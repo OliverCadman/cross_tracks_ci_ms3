@@ -52,11 +52,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s12 section-header all-tracks-btn-container">
-            <a class="btn" href="#all-tracks-header">See All Tracks</a>
+        <div class="col s12 section-header">
             <h1>Latest Tracks</h1>
         </div>
-    <div class="row">
+    <div class="row track-card-container">
         {% if latest_tracks %}
             {% for track in latest_tracks %}
                 {% set username = track['user'][0]['username'] %}
@@ -114,13 +113,14 @@
                                 <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
                                         class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
                                 {% if username == session["user"] %}
-                                <a href="#" class="btn">Edit</a>
+                                <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                        class="fas fa-edit card-btn"></i></a>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col m6 l4 hide-on-small-only">
+                <div class="col m6 l4 hide-on-small-only track-card">
                     <div class="card horizontal z-depth-5">
                         <div class="card-stacked">
                             <div class="card-content">
@@ -196,7 +196,7 @@
         {% if tracks_and_users %}
         {% for track in tracks_and_users %}
         {% set username = track['user'][0]['username'] %}
-        <div class="col m6 l4 hide-on-small-only">
+        <div class="col m6 l4 hide-on-small-only track-card">
             <div class="card horizontal z-depth-5">
                 <div class="card-stacked">
                     <div class="card-content">
@@ -460,26 +460,26 @@
         <div class="modal" id="edit_track_modal_{{track._id}}">
             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="row">
-                <div class="col s12 card-panel">
+                <div class="col s12e">
                     <form action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
-                        method="POST">
+                        method="POST" class="edit-track-form">
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <input type="text" value="{{track.track_name}} " id="track_name" name="track_name"
                                     required>
                                 <label for="track_name">Track Name</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <input type="text" value="{{track.artist_name}}" id="artist_name" name="artist_name"
                                     required>
                                 <label for="artist_name">Artist</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <input type="text" value="{{track.album_name}}" id="album_name" name="album_name"
                                     required>
                                 <label for="album_name">Album</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <select name="genre" id="genre">
                                     <option>{{track.genre}}</option>
                                     {% for genre in genre_list %}
@@ -487,18 +487,19 @@
                                     {% endfor %}
                                 </select>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <input type="number" value="{{track.year_of_release}}" name="year_of_release"
                                     id="year_of_release" required>
                                 <label for="year_of_release">Year of Release</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <input type="text" value={{track.image_url}} name="image_url" id="image_url">
                                 <label for="image_url">Image URL</label>
                             </div>
 
                             <div class="col s6 submit-btn">
                                 <button type="submit" class="btn">Edit Track</button>
+                                <button type="button" class="btn modal-close">Cancel</button>
                             </div>
                         </div>
                     </form>
@@ -556,6 +557,8 @@
         searchTrackURL = "{{url_for('tracks.search_track')}}"
         console.log(JSON.stringify(inputField.value))
 
+        let resultsWrapper = document.getElementsByClassName('results-wrapper')[0]
+
         $.ajax({
             url: searchTrackURL,
             type: 'POST',
@@ -564,8 +567,9 @@
                 'data': inputField.value
             },
             success: function (res) {
-                let resultsWrapper = document.getElementsByClassName('results-wrapper')[0]
                 empty(resultsWrapper)
+
+    
 
                 let results = res.results_list
                 let newResults = res.new_results_list
@@ -610,9 +614,9 @@
                                 </div>
                                  <div>
                                      ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
-                                         class="track-image">` : `<img
+                                         class="track-image-mobile">` : `<img
                                          src="{{url_for('static', filename='images/design3.png')}}"
-                                         alt="Image of Cover Art for Track" class="track-image">`}
+                                         alt="Image of Cover Art for Track" class="track-image-mobile">`}
                                  </div>
                                 </div>
 
@@ -620,26 +624,27 @@
                             `
                             resultsWrapper.innerHTML += resultDisplay
                             let searchActive = false;
+                        
                         }
                     })
                 } else  {
                        resultDisplay = `
                        <div class="col s12">
-                           <p class="center-align">No Results</p>
+                           <p class="center-align" id="no-result-msg">No Results</p>
                        </div>
                        `
 
+                       
                        resultsWrapper.innerHTML = resultDisplay
                 }
-
-
-
-            },
+         
+             },
             error: function (err) {
                 console.log(err)
             }
         });
-
+        
+        
         // https://stackoverflow.com/questions/27108725/ajax-jquery-live-search-is-duplicating-the-output-results
         function empty(element) {
             let children = Array.prototype.slice.call(element.childNodes);
@@ -650,6 +655,8 @@
         }
 
     };
+
+    
 </script>
 
 
