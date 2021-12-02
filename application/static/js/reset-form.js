@@ -2,12 +2,14 @@ $(document).ready(function() {
     let resetBtn = document.getElementById('reset-form')
 
     resetBtn.addEventListener('click', resetForm)
-})
+});
 
 function resetForm() {
-    console.log('click')
+
+    // Clear all input fields
+    
     let inputFields = document.querySelectorAll("input")
-    console.log(inputFields)
+
 
     for (input of inputFields) {
 
@@ -16,10 +18,23 @@ function resetForm() {
             if (input.classList.contains('select-dropdown')) {
                 input.value = 'Choose a Genre:'
             } else {
-                input.value = "";
-            }
-            
+                input.value = ""
+            };
+
+        };
+
+    };
+
+    // Return materializeCSS labels to unfocused state.
+
+
+    let labels = document.querySelectorAll('label')
+
+    for (x of labels) {
+        
+        if (x.classList.contains('active')) {
+            x.classList.remove('active')
         }
     }
     
-}
+};
