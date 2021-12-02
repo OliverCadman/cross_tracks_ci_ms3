@@ -23,6 +23,10 @@ body {
     margin-bottom: 0;
 }
 
+label {
+    font-family: 'Quicksand', sans-serif;
+}
+
 /* Navbar and Footer styling */
 
 .top-level-background,
@@ -349,7 +353,6 @@ nav li a {
     z-index: 300;
     transition: all 0.3s ease-in-out;
     background-color: #eeeeee;
-    min-height: 100%;
     overflow: scroll;
 }
 
@@ -360,6 +363,12 @@ nav li a {
 
 .search-input-mobile {
     text-align: center;
+}
+
+#no-result-msg,
+.search-input-mobile {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
 }
 
 #close-search-wrapper {
@@ -604,6 +613,50 @@ h2 {
     display: none;
 }
 
+/* ----- Edit Track Modal ----- */
+
+.edit-track-modal {
+    background-color: #d8d8d8;
+    border-radius: 14px;
+}
+
+.edit-track-modal button {
+    font-family: 'Alata', sans-serif;
+}
+
+.edit-track-modal input {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+}
+
+.edit-track-modal button {
+    background-color: #82bd87;
+    font-weight: 600;
+    color: #222222;
+    margin: .4rem 0;
+}
+
+.edit-track-modal button:last-of-type {
+    background-color: rgb(252, 252, 107);
+
+}
+
+.edit-track-modal .submit-btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.edit-track-modal
+.submit-btn
+button {
+    margin: .5rem 0;
+}
+
+.edit-track-form {
+    padding: 2rem;
+}
+
 /* --------- Add a Track Page --------- */
 
  /* .add-track-header h1 {
@@ -623,13 +676,14 @@ h2 {
 
 .add-track-body {
     background-color: #e5e5e5;
-    /* padding: .8rem; */
+    padding-left: 1.5rem;
+
 }
 
 
 .add-track-form {
     border-radius: 20px;
-    background-color: #e7e7e7;
+    background-color: #e5e5e5;
     padding: .6rem;
     font-family: 'Quicksand', sans-serif;
     margin-bottom: 2rem;
@@ -651,6 +705,10 @@ h2 {
     font-family: 'Alata', sans-serif;
     color: #222222;
     background-color: #82bd87;
+}
+
+.add-track-form .submit-btn button:last-of-type {
+    background-color: rgb(252, 252, 107);
 }
 
 
@@ -812,6 +870,7 @@ h2 {
         color: #252525;
         transition: all 0.3s ease-in-out;
         overflow: scroll;
+        border-radius: 0 0 0 5px;
     }
 
     .show-search-bar {
@@ -965,6 +1024,19 @@ h2 {
         margin: 0 5px;
     }
 
+    /* Edit Track Modal */
+
+    .edit-track-modal .submit-btn {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .edit-track-modal .submit-btn button {
+        margin: 0 .5rem;
+    }
+
+    
    
 
 
@@ -1083,7 +1155,7 @@ h2 {
 
     .add-track-body {
         display: flex;
-        justify-content: space-between;
+        align-items: center;
     }
 
 
