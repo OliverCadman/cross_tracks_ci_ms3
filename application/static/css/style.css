@@ -322,6 +322,11 @@ nav li a {
     display: inline-block;
 }
 
+.user-option-list li a,
+.user-option-list li {
+    color: #e5e5e5;
+}
+
 .user-option-icon {
     margin: 0 30px;
     font-size: 2rem;
@@ -363,19 +368,15 @@ nav li a {
 }
 
 .section-header {
-    background-color: #abc4ff;
-    color: #3d3c3c;
-}
-
-.section-header h1 {
-    padding-top: 1rem;
+    background-color: #5c677d;
+    color: #e5e5e5;
 }
 
 .section-header h1,
 h2 {
-   
+    margin: 1rem 0;
     font-family: 'Alata', sans-serif;
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 
 .all-tracks-btn-container {
@@ -605,11 +606,24 @@ h2 {
 
 /* --------- Add a Track Page --------- */
 
+ /* .add-track-header h1 {
+     margin-top: 0;
+     padding-bottom: 1.75rem;
 
-.add-track-form-header h1 {
+ } */
+
+.add-track-header h1 {
     font-family: 'Alata', sans-serif;
     font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 1rem 0 1rem 0.5rem;
 
+}
+
+.add-track-body {
+    background-color: #e5e5e5;
+    /* padding: .8rem; */
 }
 
 
@@ -819,10 +833,12 @@ h2 {
 
     }
 
+    .track-card {
+        padding: 1rem 0.75rem !important;
+    }
+
     .card-information-container {
         position: relative;
-
-
     }
 
 
@@ -948,6 +964,8 @@ h2 {
     .info-edit-delete-wrapper a {
         margin: 0 5px;
     }
+
+   
 
 
 
