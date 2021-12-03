@@ -1,36 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="login-page-container">
 <div class="container">
     <div class="row">
         <div class="col s12">
-            <h1>Login</h1>
+            <h1 class="login-page-header">Login</h1>
         </div>
     </div>
-    <div class="row">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p>{{message}}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <div class="col s12">
-            <form action="{{url_for('users.login')}}" method="POST">
-                <div class="row">
-                    <div class="card-panel col s12">
-                        <div class="input-field">
-                            <input type="text" id="username" name="username">
-                            <label for="username">Username</label>
+        <div class="row">
+            <div class="col s12 login-form-wrapper">
+                <form action="{{url_for('users.login')}}" method="POST" class="login-form">
+                    <div class="row">
+                        <div class="card-panel col s12">
+                            <div class="input-field">
+                                <i class="fas fa-user prefix login-window-icon"></i>
+                                <input type="text" id="username" name="username">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-lock prefix login-window-icon"></i>
+                                <input type="password" id="password" name="password">
+                                <label for="password">Password</label>
+                            </div>
+                            <button type="submit" class="btn">Login</button>
+                            <p><small>Forgotten your password? You can <a href="#reset-password-modal" class="modal-trigger">reset it here</a></small></p>
                         </div>
-                        <div class="input-field">
-                            <input type="password" id="password" name="password">
-                            <label for="password">Password</label>
-                        </div>
-                        <button type="submit" class="btn">Login</button>
-                        <p><small>Forgotten your password? You can <a href="#reset-password-modal" class="modal-trigger">Reset it here</a></small></p>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
