@@ -65,7 +65,7 @@
                             {% if not track.image_url == '' %}
                             <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image-mobile">
                             {% else %}
-                            <img src="{{url_for('static', filename='images/design3.png')}}"
+                            <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
                                 alt="Image of Cover Art for Track" class="track-image-mobile">
                             {% endif %}
                         </div>
@@ -104,7 +104,7 @@
                                 </a>
                                 {% else %}
                                 <a href="{{url_for('users.user_profile', username=username)}}">
-                                    <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                    <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
                                         alt="User profile image" class="user-image-card">
                                 </a>
                                 {% endif %}
@@ -157,7 +157,7 @@
                                             <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
                                                 class="track-image">
                                             {% else %}
-                                            <img src="{{url_for('static', filename='images/design3.png')}}"
+                                            <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
                                                 alt="Image of Cover Art for Track" class="track-image">
                                             {% endif %}
                                         </div>
@@ -232,7 +232,7 @@
                                        <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
                                            class="track-image">
                                        {% else %}
-                                       <img src="{{url_for('static', filename='images/design3.png')}}"
+                                       <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
                                            alt="Image of Cover Art for Track" class="track-image">
                                        {% endif %}
                                    </div>
@@ -262,7 +262,7 @@
                     {% if not track.image_url == '' %}
                     <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image">
                     {% else %}
-                    <img src="{{url_for('static', filename='images/design3.png')}}" alt="Image of Cover Art for Track"
+                    <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}" alt="Image of Cover Art for Track"
                         class="track-image">
                     {% endif %}
                 </div>
@@ -301,7 +301,7 @@
                         </a>
                         {% else %}
                         <a href="{{url_for('users.user_profile', username=username)}}">
-                            <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                            <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
                                 alt="User profile image" class="user-image-card">
                         </a>
                         {% endif %}
@@ -348,7 +348,7 @@
                             {% if not track.image_url == '' %}
                             <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
                             {% else %}
-                            <img src="{{url_for('static', filename='images/design3.png')}}"
+                            <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
                                 alt="Image of Cover Art for Track" class="album-cover">
                             {% endif %}
                         </div>
@@ -457,10 +457,10 @@
         </div>
 
         <!-- Track Edit Modal -->
-        <div class="modal" id="edit_track_modal_{{track._id}}">
+        <div class="modal edit-track-modal" id="edit_track_modal_{{track._id}}">
             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="row">
-                <div class="col s12e">
+                <div class="col s12">
                     <form action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
                         method="POST" class="edit-track-form">
                         <div class="row">
@@ -497,7 +497,7 @@
                                 <label for="image_url">Image URL</label>
                             </div>
 
-                            <div class="col s6 submit-btn">
+                            <div class="col s12 submit-btn">
                                 <button type="submit" class="btn">Edit Track</button>
                                 <button type="button" class="btn modal-close">Cancel</button>
                             </div>
@@ -527,7 +527,7 @@
                          {% if not track.image_url == '' %}
                          <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
                          {% else %}
-                         <img src="{{url_for('static', filename='images/design3.png')}}"
+                         <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
                              alt="Image of Cover Art for Track" class="album-cover">
                          {% endif %}
                      </div>
@@ -614,9 +614,9 @@
                                 </div>
                                  <div>
                                      ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
-                                         class="track-image-mobile">` : `<img
-                                         src="{{url_for('static', filename='images/design3.png')}}"
-                                         alt="Image of Cover Art for Track" class="track-image-mobile">`}
+                                         class="track-image search-result">` : `<img
+                                         src="{{url_for('static', filename='images/default-track-image.png')}}"
+                                         alt="Image of Cover Art for Track" class="track-image">`}
                                  </div>
                                 </div>
 
