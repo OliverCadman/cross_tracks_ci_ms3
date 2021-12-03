@@ -782,7 +782,7 @@ button {
     }
 
     .hero-section {
-        background-image: url(../images/crosstracks-logo.png), url(../images/home-login-bg.jpg);
+        background-image: url(../images/crosstracks-logo.png), url(../images/home-login-bg.webp);
         background-size: 85%, cover;
         background-position: 50% 20%, top;
         background-repeat: no-repeat, no-repeat;
@@ -1099,7 +1099,6 @@ button {
     /* ----- Home Page ----- */
 
     .hero-section {
-        background-image: url(../images/crosstracks-logo.png), url(../images/home-login-bg.jpg);
         background-repeat: no-repeat, no-repeat;
         background-size: 45%, cover;
         background-position: 50% 20%;
