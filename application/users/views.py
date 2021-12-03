@@ -88,17 +88,14 @@ def build_profile(username):
 
         if 'profile_image' in request.files:
 
-            allowed_filesize = User.check_image_filesize(request.cookies.get('filesize'))
-            if not allowed_filesize:
-                flash('Your file is too large!')
-                return redirect(url_for("users.build_profile", username=session["user"]))
-
             profile_image = request.files['profile_image']
-            if profile_image:
 
-                if profile_image.filename == '':
-                    flash("Your image must have a filename!")
-                    return redirect(url_for('users.build_profile', username=session["user"]))
+            if profile_image.filename != '':
+
+                allowed_filesize = User.check_image_filesize(request.cookies.get('filesize'))
+                if not allowed_filesize:
+                    flash('Your file is too large!')
+                    return redirect(url_for("users.build_profile", username=session["user"]))
 
                 allowed_image = User.allowed_file(profile_image.filename)
 
@@ -145,7 +142,7 @@ def login():
             if password_check:
                 session["user"] = login_username
                 flash("Welcome back {}".format(login_username))
-                return redirect(url_for('users.user_profile', username=session["user"]))
+                return redirect(request.referrer)
             
             else:
                 flash("Invalid username/password")
