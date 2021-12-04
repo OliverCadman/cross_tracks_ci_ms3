@@ -21,78 +21,70 @@
 </div>
 {% endif %}
 <section>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-    <div class="container">
-        <div class="row flashes center-align">
-            <p>{{message}}</p>
-        </div>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    <div class="hero-section background-main hero-container">
-        <div class="row">
-            <div class="col s12 hero-header">
-                <h1 class="center-align">Cross//Tracks</h1>
-                <p class="center-align">Make new connections through new music.</p>
-                <div class="hero-inner">
-                    <button class="btn">Find Me A Track</button>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="row about-crosstracks-background">
-                <div class="col s12 l6 about-crosstracks-wrapper">
-                    <h2 class="info-header">About Us</h2>
-                    <p class="about-lead">Cross//Tracks is an online community.</p>
-                     <figure>
-                         <img src="{{url_for('static', filename='images/about-crosstracks-vector.png')}}"
-                             alt="Vector graphic of two people listening to music from iPhone"
-                             class="about-crosstracks-vector">
-                     </figure>
-                    <p class="about-lead">A hub where music can be shared, discovered and enjoyed.</p>
-                    <p class="about-summary">
-                        Discover your new favourite artists from around the world, and meet like-minded music lovers
-                        to share your passion, expand your library, and quench your thirst for new music.
-                    </p>
-                </div>
-                <div class="col s12 l6 using-crosstracks-wrapper">
-                    <hr class="block-divider-home">
-                    <h2 class="info-header">Using Cross//Tracks</h2>
-                    <div class="use-crosstracks-list-wrapper">
-                        <ul class="use-crosstracks-list">
-                            <li>
-                                <i class="fas fa-check-square use-crosstracks-icon"></i>Browse All Tracks (no need to
-                                register!)
-                            </li>
-                            <li>
-                                <i class="fas fa-check-square use-crosstracks-icon"></i>Filter Tracks by Genre, or Year
-                                of
-                                Release
-                            </li>
-                            <li>
-                                <i class="fas fa-check-square use-crosstracks-icon"></i>Share your tracks with the
-                                community
-                            </li>
-                            <li>
-                                <i class="fas fa-check-square use-crosstracks-icon"></i>Save tracks and collect them in
-                                your
-                                profile
-                            </li>
-                            <li>
-                                <i class="fas fa-check-square use-crosstracks-icon"></i>Message other users and make new
-                                friends
-                            </li>
-                        </ul>
+    <div class="full-height-background">
+
+        <div class="hero-section background-main hero-container">
+            <div class="row">
+                <div class="col s12 hero-header">
+                    <h1 class="center-align">Cross//Tracks</h1>
+                    <p class="center-align">Make new connections through new music.</p>
+                    <div class="hero-inner">
+                        <button class="btn">Find Me A Track</button>
                     </div>
                 </div>
-                <div class="col s12 hide-on-med-and-up signup-btn-wrapper">
-                    <p>Ready to Discover?</p>
-                    <a class="btn">Sign Up Here</a>
-                </div>
             </div>
+        </div>
+                <div class="row about-crosstracks-background">
+                    <div class="col s12 l6 about-crosstracks-wrapper">
+                        <h2 class="info-header">About Us</h2>
+                        <p class="about-lead">Cross//Tracks is an online community.</p>
+                         <figure>
+                             <img src="{{url_for('static', filename='images/about-crosstracks-vector.png')}}"
+                                 alt="Vector graphic of two people listening to music from iPhone"
+                                 class="about-crosstracks-vector">
+                         </figure>
+                        <p class="about-lead">A hub where music can be shared, discovered and enjoyed.</p>
+                        <p class="about-summary">
+                            Discover your new favourite artists from around the world, and meet like-minded music lovers
+                            to share your passion, expand your library, and quench your thirst for new music.
+                        </p>
+                    </div>
+                    <div class="col s12 l6 using-crosstracks-wrapper">
+                        <hr class="block-divider-home">
+                        <h2 class="info-header">Using Cross//Tracks</h2>
+                        <div class="use-crosstracks-list-wrapper">
+                            <ul class="use-crosstracks-list">
+                                <li>
+                                    <i class="fas fa-check-square use-crosstracks-icon"></i>Browse All Tracks (no need to
+                                    register!)
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-square use-crosstracks-icon"></i>Filter Tracks by Genre, or Year
+                                    of
+                                    Release
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-square use-crosstracks-icon"></i>Share your tracks with the
+                                    community
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-square use-crosstracks-icon"></i>Save tracks and collect them in
+                                    your
+                                    profile
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-square use-crosstracks-icon"></i>Message other users and make new
+                                    friends
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col s12 hide-on-med-and-up signup-btn-wrapper">
+                        <p>Ready to Discover?</p>
+                        <a class="btn">Sign Up Here</a>
+                    </div>
+                </div>
+    </div>
         </div>
 
 
