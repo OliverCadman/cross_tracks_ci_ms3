@@ -465,22 +465,22 @@
                         method="POST" class="edit-track-form">
                         <div class="row">
                             <div class="input-field col s12 m6">
-                                <input type="text" value="{{track.track_name}} " id="track_name" name="track_name"
+                                <input type="text" value="{{track.track_name}}" name="track_name"
                                     required>
                                 <label for="track_name">Track Name</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input type="text" value="{{track.artist_name}}" id="artist_name" name="artist_name"
+                                <input type="text" value="{{track.artist_name}}" name="artist_name"
                                     required>
                                 <label for="artist_name">Artist</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input type="text" value="{{track.album_name}}" id="album_name" name="album_name"
+                                <input type="text" value="{{track.album_name}}" name="album_name"
                                     required>
                                 <label for="album_name">Album</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <select name="genre" id="genre">
+                                <select name="genre">
                                     <option>{{track.genre}}</option>
                                     {% for genre in genre_list %}
                                     <option value="{{genre}}">{{genre}}</option>
@@ -489,11 +489,11 @@
                             </div>
                             <div class="input-field col s12 m6">
                                 <input type="number" value="{{track.year_of_release}}" name="year_of_release"
-                                    id="year_of_release" required>
+                                    required>
                                 <label for="year_of_release">Year of Release</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <input type="text" value={{track.image_url}} name="image_url" id="image_url">
+                                <input type="text" value={{track.image_url}} name="image_url">
                                 <label for="image_url">Image URL</label>
                             </div>
 

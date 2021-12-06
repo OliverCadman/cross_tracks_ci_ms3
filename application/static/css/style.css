@@ -318,21 +318,49 @@ nav li a {
 
 /* "My Tracks" */
 
-.my-tracks-section {
-    background-color: rgba(190, 192, 96, 0.9)
+.my-tracks-header-wrapper,
+.liked-tracks-header-wrapper {
+    padding: 0;
+    background: url("../images/home-login-bg.jpg") no-repeat;
+    background-size: cover;
+    background-position: top;
 }
+
+
+
+.track-container,
+.my-tracks-container,
+.liked-tracks-container {
+    padding: 0 !important;
+}
+
+.row.no-margin {
+    margin: 0 !important;
+}
+
+.no-tracks-found {
+    font-family: "Quicksand", sans-serif;
+}
+
+.no-tracks-vector {
+    width: 200px;
+}
+
 
 .my-tracks-header,
 .liked-tracks-header {
     font-family: "Alata", sans-serif;
+    padding: 30px 0;
+    text-align: center;
 }
 
 .track-container {
+    background: #F1EDE6;
     height: 500px;
-    border: 2px solid black;
-    overflow: auto;
-    padding: 1rem;
+
+
 }
+
 
 /* Liked Tracks */
 
@@ -422,6 +450,7 @@ nav li a {
     background-size: cover;
     background-position: top;
     color: #3d3c3c;
+    padding: 0;
 }
 
 .section-header h1,
@@ -599,7 +628,7 @@ h2 {
 
 .close-modal-icon {
     font-size: 1.5rem;
-    color:rgb(61, 61, 61)
+    color: rgb(61, 61, 61)
 }
 
 .comments-container {
@@ -691,9 +720,7 @@ h2 {
     flex-direction: column;
 }
 
-.edit-track-modal
-.submit-btn
-button {
+.edit-track-modal .submit-btn button {
     margin: .5rem 0;
 }
 
@@ -703,7 +730,7 @@ button {
 
 /* --------- Add a Track Page --------- */
 
- /* .add-track-header h1 {
+/* .add-track-header h1 {
      margin-top: 0;
      padding-bottom: 1.75rem;
 
@@ -784,16 +811,8 @@ button {
     font-weight: bold;
 }
 
-/* ----- User Profile ----- */
 
-.my-tracks-header-wrapper,
-.liked-tracks-header-wrapper {
-    padding: 0;
-    background: url("../images/home-login-bg.jpg") no-repeat;
-    background-size: cover;
-    background-position: top;
-    
-}
+
 
 
 
@@ -836,7 +855,7 @@ button {
     .hero-header h1 {
         font-size: 3.5rem;
     }
-    
+
 
     .hero-section {
         background-image: url(../images/crosstracks-logo.png), url(../images/home-login-bg.jpg);
@@ -1076,22 +1095,18 @@ button {
     /* ------ User Profile ------ */
 
     .profile-image-email {
-        border-right: 8px solid #eeeeee;
+        border-right: 8px solid #B8B5BF;
     }
 
     /* 'My Tracks' cards */
-
-    .track-container {
-        background-color: #7b89b4;
-    }
-
+    /* 
      .user-tracks-section-bg {
          background: url("../images/home-login-bg.jpg") no-repeat;
          background-size: cover;
          background-position: center;
-     }
+     } */
 
-     /* User's Liked Tracks Section */
+    /* User's Liked Tracks Section */
 
     .my-tracks-track-image {
         border-radius: 0 20px 20px 0;
@@ -1104,13 +1119,13 @@ button {
     }
 
     .my-tracks-track-name {
-    font-family: 'Alata', sans-serif;
-    font-size: 2rem;
-    font-weight: bold;
+        font-family: 'Alata', sans-serif;
+        font-size: 2rem;
+        font-weight: bold;
     }
 
     .my-tracks-artist-name {
-    font-size: 1.7rem;
+        font-size: 1.7rem;
     }
 
     .my-tracks-album-name {
@@ -1148,7 +1163,7 @@ button {
     }
 
     /* ----- Login Page ----- */
-   
+
     .login-page-container {
         background: url("../images/home-login-bg.jpg");
         background-size: cover;
@@ -1370,6 +1385,24 @@ button {
     }
 
     /* User's Tracks Section */
+
+    .my-tracks-header-wrapper {
+        background-position: 100%;
+    }
+
+    .liked-tracks-header-wrapper {
+        background-position: top;
+    }
+
+    .track-container {
+        height: 500px;
+        overflow: auto;
+    }
+
+    .my-tracks-container .section-header,
+    .track-container {
+        border-right: 8px solid #B8B5BF;
+    }
 
     .my-tracks-track-name {
         font-family: 'Alata', sans-serif;
