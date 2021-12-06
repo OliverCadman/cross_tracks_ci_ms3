@@ -340,6 +340,10 @@ nav li a {
 
 .no-tracks-found {
     font-family: "Quicksand", sans-serif;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .no-tracks-vector {
