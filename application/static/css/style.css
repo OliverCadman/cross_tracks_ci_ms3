@@ -114,8 +114,15 @@ nav li a {
 
 /* -------- Home Page --------- */
 
+.hero-section {
+    background: url('../images/home-login-bg.jpg') no-repeat;
+    background-size: cover;
+    background-position: 80%;
+}
+
 .hero-header {
     font-family: "Alata", sans-serif;
+    padding: 2.3rem 1rem !important;
 }
 
 .hero-header.card-panel {
@@ -235,13 +242,10 @@ nav li a {
     position: relative;
 }
 
-
-
 .profile-image {
     width: 80px;
     border: 2px solid #222222;
     border-radius: 50%;
-    
 }
 
 .is-artist-wrapper {
@@ -318,9 +322,21 @@ nav li a {
     background-color: rgba(190, 192, 96, 0.9)
 }
 
-.my-tracks-header {
-    font-family: "Quicksand", sans-serif;
+.my-tracks-header,
+.liked-tracks-header {
+    font-family: "Alata", sans-serif;
 }
+
+.track-container {
+    height: 500px;
+    border: 2px solid black;
+    overflow: auto;
+    padding: 1rem;
+}
+
+/* Liked Tracks */
+
+
 
 /* ------ Browse Tracks Page ------- */
 
@@ -402,8 +418,10 @@ nav li a {
 }
 
 .section-header {
-    background-color: #5c677d;
-    color: #e5e5e5;
+    background: url('../images/home-login-bg.jpg') no-repeat;
+    background-size: cover;
+    background-position: top;
+    color: #3d3c3c;
 }
 
 .section-header h1,
@@ -766,6 +784,16 @@ button {
     font-weight: bold;
 }
 
+/* ----- User Profile ----- */
+
+.my-tracks-header-wrapper,
+.liked-tracks-header-wrapper {
+    padding: 0;
+    background: url("../images/home-login-bg.jpg") no-repeat;
+    background-size: cover;
+    background-position: top;
+    
+}
 
 
 
@@ -1047,9 +1075,25 @@ button {
 
     /* ------ User Profile ------ */
 
+    .profile-image-email {
+        border-right: 8px solid #eeeeee;
+    }
+
     /* 'My Tracks' cards */
 
-    .track-image {
+    .track-container {
+        background-color: #7b89b4;
+    }
+
+     .user-tracks-section-bg {
+         background: url("../images/home-login-bg.jpg") no-repeat;
+         background-size: cover;
+         background-position: center;
+     }
+
+     /* User's Liked Tracks Section */
+
+    .my-tracks-track-image {
         border-radius: 0 20px 20px 0;
         width: 100px;
 
@@ -1057,6 +1101,24 @@ button {
 
     .track-image-wrapper img {
         width: 100%
+    }
+
+    .my-tracks-track-name {
+    font-family: 'Alata', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    }
+
+    .my-tracks-artist-name {
+    font-size: 1.7rem;
+    }
+
+    .my-tracks-album-name {
+        font-size: 1.5rem;
+    }
+
+    .my-tracks-yor {
+        font-size: 1.4rem;
     }
 
     .info-edit-delete-wrapper {
@@ -1067,6 +1129,10 @@ button {
 
     .info-edit-delete-wrapper a {
         margin: 0 5px;
+    }
+
+    .info-edit-delete-wrapper a i {
+        font-size: 2rem;
     }
 
     /* Edit Track Modal */
@@ -1228,16 +1294,6 @@ button {
 
     /* ------ Profile Page ------- */
 
-    .user-tracks-section-bg {
-        background: url("../images/home-login-bg.jpg") no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .profile-image-email {
-        border-right: 8px solid #eeeeee;
-    }
-
     .profile-tabs {
         border: 1px solid white;
         height: 40px;
@@ -1315,18 +1371,15 @@ button {
 
     /* User's Tracks Section */
 
-    /* User's Liked Tracks Section */
-
-    .track-container {
-        height: 500px;
-        border: 2px solid black;
-        overflow: auto;
-        padding: 20px;
+    .my-tracks-track-name {
+        font-family: 'Alata', sans-serif;
+        font-size: 2rem;
+        font-weight: bold;
     }
 
-    /* .card.horizontal.profile {
-    max-height: 150px;
-} */
+    .my-tracks-artist-name {
+        font-size: 1.4rem;
+    }
 
     .card-action.action-buttons {
         display: flex;
