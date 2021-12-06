@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col s12">
                     <div class="row profile-banner">
-                        <div class="col s6">
+                        <div class="col s6 profile-image-container">
                              <div class="profile-image-wrapper">
                                  {% if username.is_artist == "on" %}
                                  <div class="is-artist-wrapper">
@@ -74,58 +74,76 @@
     </section>
     <section>
     <!-- User's Tracks -->
+    <div class="user-tracks-section-bg">
+
+    
     <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 l6">
           <h5>My Tracks</h5>
           <div class="track-container">
           <div class="row">
               {% if users_tracks %}
                 {% for track in users_tracks %}
-                    <div class="col s12 m6">
-                       <div class="card horizontal">
-                <div class="card-stacked">
-                    <div class="card-content track-info-container">
-                        <div class="row">
-                            <div class="col s12 m6">
-                                <span class="card-title">{{track.track_name}}</span>
-                            </div>
-                            <div class="col s12 m6">
-                                <div class="track-image-wrapper">
-                                    {% if not track.image_url == '' %}
-                                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
-                                        class="track-image">
-                                    {% else %}
-                                    <img src="{{url_for('static', filename='images/design3.png')}}"
-                                        alt="Image of Cover Art for Track" class="track-image">
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-information-wrapper">
-                            <div class="track-card-information">
-                                <p class="artist-name">
-                                    {{track.artist_name}}
-                                </p>
-                                <p class="album-name">
-                                    {{track.album_name}}
-                                </p>
-                            </div>
-                            <div class="card-action info-edit-delete-wrapper">
-                                <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger">
-                                    <i class="fas fa-info-circle"></i>
-                                </a>
-                                    {% if username["username"] == session.user %}
-                                    <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-edit"></i></a>
-                                    <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-trash-alt"></i></a>
-                                    {% endif %}
-                            </div>
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    </div>
-                    </div>
+                     <div class="col s12 hide-on-small-only">
+                         <div class="card horizontal profile">
+                             <div class="card-image profile">
+                                 {% if not track.image_url == '' %}
+                                 <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="my-tracks-track-image">
+                                 {% else %}
+                                 <img src="{{url_for('static', filename='images/design3.png')}}"
+                                     alt="Image of Cover Art for Track" class="track-image">
+                                 {% endif %}
+                             </div>
+                             <div class="card-stacked">
+                                 <div class="card-content">
+                                     <h6 class="my-tracks-track-name">{{track.track_name}}</h6>
+                                     <p class="my-tracks-artist-name">{{track.artist_name}}</p>
+                                     <p class="my-tracks-album-name">{{track.album_name}}</p>
+                                     <p class="my-tracks-yor">{{track.year_of_release}}</p>
+                                 </div>
+                                 <div class="card-action action-buttons">
+                                     <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger">
+                                         <i class="fas fa-info-circle"></i>
+                                     </a>
+                                     {% if username["username"] == session.user %}
+                                     <a href="{{url_for('tracks.remove_liked_track', track_id=track._id, username=session.user)}}"
+                                         class="btn remove-like"><i class="fas fa-trash-alt"></i></a>
+                                     {% endif %}
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col s12 hide-on-med-and-up">
+                         <div class="card z-depth-4">
+                             <div class="card-image">
+                                 {% if not track.image_url == '' %}
+                                 <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
+                                     class="track-image-mobile">
+                                 {% else %}
+                                 <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                                     alt="Image of Cover Art for Track" class="track-image-mobile">
+                                 {% endif %}
+                             </div>
+                             <div class="card-title">
+                                 <span>{{track.track_name}}</span>
+                             </div>
+                             <div class="card-content">
+                                 <p class="my-tracks-artist-name">{{track.artist_name}}</p>
+                                 <p class="my-tracks-album-name">{{track.album_name}}</p>
+                                 <p class="my-tracks-genre">{{track.genre}}</p>
+                             </div>
+                             <div class="card-action">
+                                 <div class="more-info-btn">
+                                     <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger"><i
+                                             class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
+                                     {% if username == session["user"] %}
+                                     <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                             class="fas fa-edit card-btn"></i></a>
+                                     {% endif %}
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
                 <!-- Track Info Modal -->
                 <div class="modal" id="more_info_modal_{{track._id}}">
                     <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
@@ -159,21 +177,21 @@
                             <form action="{{url_for('tracks.edit_track', track_id=track._id, username=username['username'])}}" method="POST">
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input type="text" value="{{track.track_name}} "id="track_name" name="track_name"
+                                        <input type="text" value="{{track.track_name}}" name="track_name"
                                             required>
                                         <label for="track_name">Track Name</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input type="text" value="{{track.artist_name}}" id="artist_name"
+                                        <input type="text" value="{{track.artist_name}}"
                                             name="artist_name" required>
                                         <label for="artist_name">Artist</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input type="text" value="{{track.album_name}}" id="album_name" name="album_name" required>
+                                        <input type="text" value="{{track.album_name}}" name="album_name" required>
                                         <label for="album_name">Album</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <select name="genre" id="genre">
+                                        <select name="genre">
                                             <option>Choose a Genre:</option>
                                             {% for genre in genres %}
                                             <option value="{{genre.genre_name}}">{{genre.genre_name}}</option>
@@ -241,7 +259,7 @@
           <div class="row">
               {% if liked_tracks %}
                 {% for track in liked_tracks %}
-                     <div class="col s12 m6">
+                     <div class="col s12 l6">
                         <div class="card horizontal profile">
                             <div class="card-image profile">
                                 {% if not track.image_url == '' %}
@@ -318,6 +336,7 @@
           </div>
         </div>
     </div>
+</div>
 </div>
 </section>
 <aside>
@@ -409,5 +428,6 @@
 {% block scripts %}
 <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script>
 <script src="{{url_for('static', filename='js/remove-like-ajax.js')}}"></script>
+<script src="{{url_for('static', filename='js/fit-card-title.js')}}"></script>
 {% endblock %}
 {% endblock %}
