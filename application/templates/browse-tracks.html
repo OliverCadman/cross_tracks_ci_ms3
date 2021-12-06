@@ -75,11 +75,11 @@
                         {% if session.user %}
                         {% if session.user in track.likes %}
                         <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                                class="modal-trigger like_track"><i class="fas fa-star"
+                                class="like_track_mob"><i class="fas fa-star"
                                     id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
                         {% else %}
                         <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                                class="modal-trigger like_track"><i class="far fa-star"
+                                class="like_track_mob"><i class="far fa-star"
                                     id="like-track-icon"></i></a></span><span>{{track.likes_count if track.likes_count}}</span>
                         {% endif %}
                         {% else %}
@@ -128,11 +128,11 @@
                                 {% if session.user %}
                                     {% if session.user in track.likes %}
                                         <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                                                class="modal-trigger like_track"><i class="fas fa-star"
+                                                class="modal-trigger like_track_med"><i class="fas fa-star"
                                                     id="like-track-icon"></i></a></span><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                                     {% else %}
                                         <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                                                class="modal-trigger like_track"><i class="far fa-star"
+                                                class="modal-trigger like_track_med"><i class="far fa-star"
                                                     id="like-track-icon"></i></a></span><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                                     {% endif %}
                                     {% else %}
