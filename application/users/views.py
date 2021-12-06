@@ -142,7 +142,7 @@ def login():
             if password_check:
                 session["user"] = login_username
                 flash("Welcome back {}".format(login_username))
-                return redirect(request.referrer)
+                return redirect(url_for('main.index'))
             
             else:
                 flash("Invalid username/password")
@@ -152,6 +152,7 @@ def login():
             return redirect(request.referrer)
 
     return render_template("login.html")   
+
 
 
 @users.route("/edit-profile/<username>", methods = ["GET", "POST"])
@@ -179,11 +180,17 @@ def edit_profile(username):
             "display_spotify_playlists": display_spotify_playlists,
             "is_artist": is_artist
         }
+        
+        try:
+            User.edit_profile(username, edited_info)
+            flash("Your profile has been updated")
+            return redirect(url_for("users.user_profile", username=session["user"]))
+        except:
+            flash("Sorry, something went wrong. Please try again.")
+            return redirect(url_for("users.user_profile", username=session["user"]))
 
-        user.edit_profile(username, edited_info)
-        session["user"] = user.username
-        flash("Your profile has been updated")
-        return redirect(url_for("users.user_profile", username=session["user"]))
+
+        
 
 
 
