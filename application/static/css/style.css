@@ -228,19 +228,45 @@ nav li a {
 }
 
 .profile-image-wrapper {
-    margin: 30px 0 30px 15px;
+    margin: 30px 0 40px 15px;
 }
+
+.profile-image-container {
+    position: relative;
+}
+
+
 
 .profile-image {
     width: 80px;
     border: 2px solid #222222;
     border-radius: 50%;
+    
 }
+
+.is-artist-wrapper {
+    font-family: 'Quicksand';
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #D4AF37;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+}
+
+.is-artist-wrapper p {
+    margin-top: 16px;
+    display: inline-block;
+}
+
+
 
 .username-wrapper,
 .messaging-wrapper {
     font-family: 'Alata', sans-serif;
     color: #ffffff;
+    text-align: right;
 }
 
 .edit-profile-btn-wrapper {
@@ -1215,6 +1241,10 @@ button {
     .profile-tabs {
         border: 1px solid white;
         height: 40px;
+    }
+
+    .profile-image-container {
+        position: static;
     }
 
     .profile-image-wrapper {
