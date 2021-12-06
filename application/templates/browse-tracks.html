@@ -104,7 +104,7 @@
                                 </a>
                                 {% else %}
                                 <a href="{{url_for('users.user_profile', username=username)}}">
-                                    <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                                    <img src="{{url_for('static', filename='images/default-user-image.png')}}"
                                         alt="User profile image" class="user-image-card">
                                 </a>
                                 {% endif %}
@@ -301,7 +301,7 @@
                         </a>
                         {% else %}
                         <a href="{{url_for('users.user_profile', username=username)}}">
-                            <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                            <img src="{{url_for('static', filename='images/default-user-image.png')}}"
                                 alt="User profile image" class="user-image-card">
                         </a>
                         {% endif %}
