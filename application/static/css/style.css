@@ -675,8 +675,10 @@ button {
 }
 
 .add-track-body {
-    background-color: #e5e5e5;
-    padding-left: 1.5rem;
+    background: url('../images/home-login-bg.jpg') no-repeat;
+    background-size: cover;
+    background-position: 100 25%;
+    padding-top: 1.5rem;
 
 }
 
@@ -780,6 +782,7 @@ button {
     .hero-header h1 {
         font-size: 3.5rem;
     }
+    
 
     .hero-section {
         background-image: url(../images/crosstracks-logo.png), url(../images/home-login-bg.jpg);
