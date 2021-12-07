@@ -98,7 +98,7 @@
                              </div>
                              <div class="card-stacked">
                                  <div class="card-content">
-                                     <h6 class="my-tracks-track-name">{{track.track_name}}</h6>
+                                     <p class="my-tracks-track-name">{{track.track_name}}</p>
                                      <p class="my-tracks-artist-name">{{track.artist_name}}</p>
                                      <p class="my-tracks-album-name">{{track.album_name}}</p>
                                      <p class="my-tracks-yor">{{track.year_of_release}}</p>
@@ -147,25 +147,28 @@
                          </div>
                      </div>
                 <!-- Track Info Modal -->
-                <div class="modal" id="more_info_modal_{{track._id}}">
+                <div class="modal track-info-modal user-profile" id="more_info_modal_{{track._id}}">
                     <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
-                    <div class="modal-content">
+                    <div class="modal-content modal-body">
                         <div class="row">
-                            <div class="col s12 m6 album-cover-modal">
-                                {% if not track.image_url == '' %}
-                                <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
-                                {% else %}
-                                <img src="{{url_for('static', filename='images/design3.png')}}"
-                                    alt="Image of Cover Art for Track" class="album-cover">
-                                {% endif %}
-                            </div>
-                            <div class="col s12 m6">
-                                <h4>{{track.track_name}}</h4>
-                                <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
-                                <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
-                                <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
-                                <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}
-                                </p>
+                            <p id="track-name">{{track.track_name}}</p>
+                            <div class="row">
+                                <div class="col s12 m6 album-cover-modal">
+                                    {% if not track.image_url == '' %}
+                                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
+                                    {% else %}
+                                    <img src="{{url_for('static', filename='images/design3.png')}}"
+                                        alt="Image of Cover Art for Track" class="album-cover">
+                                    {% endif %}
+                                </div>
+                                <div class="col s12 m6">
+                                    <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
+                                    <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
+                                    <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
+                                    <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -278,7 +281,7 @@
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">
-                                    <h6>{{track.track_name}}</h6>
+                                    <p class="liked-tracks-track-name">{{track.track_name}}</p>
                                     <p>{{track.artist_name}}</p>
                                 </div>
                                 <div class="card-action action-buttons">
@@ -292,47 +295,29 @@
                             </div>
                         </div>
                      </div>
-                     <div class="modal" id="more_info_modal_{{track._id}}">
+                     <div class="modal track-info-modal user-profile" id="more_info_modal_{{track._id}}">
                          <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
-                         <div class="modal-content">
+                         <div class="modal-content modal-body">
                              <div class="row">
-                                 <div class="col 12 modal-user-details">
-                                     <p>
-                                         <small>Added by:</small> {{track['user'][0]['username']}}
-                                         {% if track['user'][0]['profile_image'] %}
-                                         <a href="{{url_for('users.user_profile', username=username)}}">
-                                             <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                                                 alt="User profile image" class="user-image-card">
-                                         </a>
+                                    <p id="track-name">{{track.track_name}}</p>
+                                 <div class="row">
+                                     <div class="col s12 m6 album-cover-modal">
+                                         {% if not track.image_url == '' %}
+                                         <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
+                                             class="album-cover">
                                          {% else %}
-                                         <a href="{{url_for('users.user_profile', username=username)}}">
-                                             <img src="{{url_for('static', filename='images/default-user-image.png')}}"
-                                                 alt="User profile image" class="user-image-card">
-                                         </a>
+                                         <img src="{{url_for('static', filename='images/design3.png')}}"
+                                             alt="Image of Cover Art for Track" class="album-cover">
                                          {% endif %}
-                                         <span class="message-user-modal"><a href="#" class="btn">Message
-                                                 {{track['user'][0]['username']}}</a></span>
-                                     </p>
-                                 </div>
-                             </div>
-                             <div class="row">
-                                 <div class="col s12 m6 album-cover-modal">
-                                     {% if not track.image_url == '' %}
-                                     <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
-                                         class="album-cover">
-                                     {% else %}
-                                     <img src="{{url_for('static', filename='images/design3.png')}}"
-                                         alt="Image of Cover Art for Track" class="album-cover">
-                                     {% endif %}
-                                 </div>
-                                 <div class="col s12 m6">
-                                     <h4>{{track.track_name}}</h4>
-                                     <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
-                                     <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
-                                     <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
-                                     <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}
-                                     </p>
-                                 </div>
+                                     </div>
+                                     <div class="col s12 m6">
+                                         <p><span class="track-modal-info">Artist:</span> {{track.artist_name}}</p>
+                                         <p><span class="track-modal-info">Album:</span> {{track.album_name}}</p>
+                                         <p><span class="track-modal-info">Genre:</span> {{track.genre}}</p>
+                                         <p><span class="track-modal-info">Year of Release:</span> {{track.year_of_release}}
+                                         </p>
+                                     </div>
+                                </div>
                              </div>
                          </div>
                      </div>
@@ -351,58 +336,43 @@
 <aside>
 <!-- Edit Profile Modal -->
 <div class="modal" id="edit-profile">
+    <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
      <div class="row">
-         <div class="col s12">
+            <h2>Edit Your Profile</h2>
+         <div class="col s12 edit-profile-body">
              <form action="{{url_for('users.edit_profile', username=session['user'])}}" method="POST"
-                 enctype="multipart/form-data">
+                 enctype="multipart/form-data" class="edit-profile-form">
                  <div class="row">
                      <div class="input-field col s12">
                          <input type="text" value="{{session.user}} " id="username" name="username" disabled>
                          <label for="username">Username<i class="fas fa-question-circle tooltipped" data-position="top"
                                  data-tooltip="Username cannot be changed"></i></label>
                      </div>
-                     <div class="input-field col s6">
+                     <div class="input-field col s12 m6">
                          <input type="text" value="{{username.first_name}}" id="first_name" name="first_name">
                          <label for="first_name">First Name</label>
                      </div>
-                     <div class="input-field col s6">
+                     <div class="input-field col s12 m6">
                          <input type="text" value="{{username.last_name}}" id="last_name" name="last_name">
                          <label for="last_name">Last Name</label>
                      </div>
-                     <div class="input-field col s4">
+                     <div class="input-field col s12">
                          <input type="date" value="{{username.date_of_birth}}" id="date_of_birth" name="date_of_birth">
                          <label for="date_of_birth">Date of Birth</label>
                      </div>
-                     <div class="input-field col s4">
+                     <div class="input-field col s6">
                          <input type="text" value="{{username.city}}"id="city" name="city">
                          <label for="city">City</label>
                      </div>
-                     <div class="input-field col s4">
+                     <div class="input-field col s6">
                          <input type="text" value="{{username.country}}" id="country" name="country">
                          <label for="country">Country</label>
                      </div>
-                     <div class="input-field col s6">
-                         <textarea type="text" id="about_user" name="about_user">{{username.about_user}}</textarea>
-                         <label for="about_user">Tell us who you are and what you like!</label>
+                     <div class="input-field col s12">
+                         <textarea type="text" id="about_user" name="about_user" class="materialize-textarea">{{username.about_user}}</textarea>
+                         <label for="about_user">Let the community know who you are!</label>
                      </div>
-                     <div class="input-field col s4">
-                         <input type="text" value="{{username.spotify_userID}}" id="spotify_userID" name="spotify_userID">
-                         <label for="spotify_userID">Spotify ID</label>
-                     </div>
-                     <div class="switch col s4">
-                         <p>Display your Spotify Playlists?</p>
-                         <label for="display_spotify_playlist">
-                             No
-                             {% if username.display_spotify_playlists == "on" %}
-                             <input type="checkbox" id="display_spotify_playlist" name="display_spotify_playlists" checked>
-                             {% else %}
-                             <input type="checkbox" id="display_spotify_playlist" name="display_spotify_playlists">
-                             {% endif %}
-                             <span class="lever"></span>
-                             Yes
-                         </label>
-                     </div>
-                     <div class="switch col s4">
+                     <div class="switch col s12">
                          <p>Are you an Artist?</p>
                          <label for="is_artist">
                              No
@@ -415,7 +385,10 @@
                              Yes
                          </label>
                      </div>
-                     <button type="submit" class="btn">Submit</button>
+                     <div class="col s12 submit-btn">
+                        <button type="submit" class="btn">Submit</button>
+                        <button type="button" class="btn modal-close">Cancel</button>
+                     </div>
                  </div>
              </form>
          </div>
