@@ -316,6 +316,62 @@ nav li a {
     display: none;
 }
 
+ /* Edit Profile Modal */
+
+ #edit-profile {
+     background-color: #F1EDE6;
+ }
+
+#edit-profile h2 {
+    font-size: 2rem;
+    margin-left: .5rem;
+    margin-top: .5rem;
+}
+
+ .edit-profile-form {
+     padding: 1rem;
+ }
+
+ .edit-profile-form input,
+ .edit-profile-form p,
+ .edit-profile-form button,
+ .edit-profile-form textarea {
+     font-family: "Quicksand", sans-serif;
+ }
+
+ .edit-profile-form textarea {
+     margin-top: 20px;
+     width: 200px;
+     height: 200px;
+ }
+
+ .switch label input[type=checkbox]:checked+.lever {
+     background-color: #7b89b4
+
+ }
+
+ .switch label input[type=checkbox]:checked+.lever:after {
+     background-color: #2e3549;
+
+ }
+
+ .submit-btn button {
+     background-color: #E0C0AC;
+     font-weight: bold;
+     color: #333333;
+     margin-left: .5rem;
+ }
+
+ .edit-profile-form
+ .submit-btn {
+     margin-top: 1.5rem;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+
+
 /* "My Tracks" */
 
 .my-tracks-header-wrapper,
