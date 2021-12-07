@@ -970,6 +970,10 @@ h2 {
     font-family: "Alata", sans-serif;
 }
 
+.contact-vector {
+    width: 100%;
+}
+
 .contact-lead {
     font-family: "Quicksand", sans-serif;
     font-weight: 500;
@@ -978,8 +982,8 @@ h2 {
 .contact-body {
     background: url("../images/home-login-bg.jpg") no-repeat;
     background-size: cover;
-    background-position: top;
-    min-height: 76vh;
+    background-position: 70%;
+    min-height: 80vh;
 }
 
 .contact-header h1 {
@@ -1399,7 +1403,7 @@ h2 {
     /* .contact-vector-wrapper {
         display: inline;
     } */
-/* 
+    /* 
     .contact-lead-container {
         display: flex;
         justify-content: center;
@@ -1414,14 +1418,14 @@ h2 {
 
     .contact-lead {
         font-size: 1.25rem;
-     
+        width: 85%;
     }
 
     .contact-form-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 300px;
+        min-height: 300px;
     }
 
     .contact-form {
