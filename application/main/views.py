@@ -30,8 +30,11 @@ def send_email():
         msg.recipients = ['o.cadman@live.co.uk']
         msg.html = render_template('contact-message.html', user='Oliver', sender_name=sender, sender_email=sender_email, message=message)
 
-        mailing.send(msg)
-
-        flash("Thanks for contacting us! We will reply shortly")
-        return redirect(url_for('main.contact'))
+        try:
+            mailing.send(msg)
+            flash("Thanks for contacting us! We will reply shortly")
+            return redirect(url_for('main.contact'))
+        except: 
+            flash('Sorry, something went wrong. Please try again')
+            return redirect(url_for('main.contact'))
 
