@@ -6,3 +6,7 @@ main = Blueprint("main",__name__)
 @main.route("/index")
 def index():
     return render_template("index.html")
+
+@main.route("/contact")
+def contact():
+    return render_template("contact.html")
