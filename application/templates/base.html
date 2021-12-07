@@ -110,24 +110,38 @@
     <footer class="page-footer">
         <div class="container">
             <div class="row center-align">
+                {% if not session.user %}
                 <div class="col s4">
                     <ul class="domestic-links">
-                        <li><a href="#">Accessibility</a></li>
                         <li><a href="#">Register</a></li>
                     </ul>
                 </div>
                 <div class="col s4">
                     <ul class="domestic-links">
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Login</a></li>
+                        {% if not session.user %}
+                        <li><a href="{{url_for('users.login')}}">Login</a></li>
+                        {% else %}
+                        <li><a href="{{url_for('users.logout')}}">Logout</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="col s4">
                     <ul class="domestic-links">
-                        <li><a href="#">F.A.Q</a></li>
                         <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
+                {% else %}
+                 <div class="col s6">
+                     <ul class="domestic-links">
+                         <li><a href="{{url_for('users.logout')}}">Logout</a></li>
+                     </ul>
+                 </div>
+                 <div class="col s6">
+                     <ul class="domestic-links">
+                         <li><a href="#">Contact Us</a></li>
+                     </ul>
+                 </div>
+                {% endif %}
             </div>
             <div class="row social-links-row center-align">
                 <div class="col s12">
@@ -161,11 +175,13 @@
                         <div class=" col s6 password-input">
                             <label for="password">Choose a password:</label>
                             <input type="password" id="password" name="password" pattern="^[a-zA-Z0-9]{8,18}$"
-                                class="validate" required>
+                                class="validate" required
+                                autocomplete="on">
                         </div>
                         <div class="col s6 confirm-password-input">
                             <label for="confirm-password">Confirm your password:</label>
-                            <input type="password" id="password" name="confirm_password" class="validate" required>
+                            <input type="password" id="confirm_password" name="confirm_password" class="validate" required
+                            autocomplete="on">
                         </div>
                         <div class="col s12 submit-button">
                             <button type="submit" class="btn-large">Sign Up</button>
