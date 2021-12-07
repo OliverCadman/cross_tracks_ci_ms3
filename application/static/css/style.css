@@ -27,6 +27,17 @@ label {
     font-family: 'Quicksand', sans-serif;
 }
 
+.card-action.action-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.card-action.action-buttons a {
+    background-color: #E0C0AC;
+    color: #5d6ca7;
+}
+
 /* Navbar and Footer styling */
 
 .top-level-background,
@@ -644,7 +655,7 @@ h2 {
 .card-action {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 16px 5px !important;
 }
 
@@ -957,6 +968,10 @@ h2 {
         transform: translateX(50%) translateY(50%);
     }
 
+    .modal i {
+        font-size: 2rem;
+    }
+
 
     /* -------- Home Page --------- */
 
@@ -1252,6 +1267,20 @@ h2 {
         font-size: 2rem;
     }
 
+    /* Track Info Modal */
+
+    #track-name {
+        font-size: 2rem;
+    }
+
+    .track-info-modal-details p span {
+        font-size: 1.2rem;
+    }
+
+    .track-info-modal-details p {
+        font-size: 1.5rem;
+    }
+
     /* Edit Track Modal */
 
     .edit-track-modal .submit-btn {
@@ -1521,18 +1550,6 @@ h2 {
 
     .my-tracks-artist-name {
         font-size: 1.4rem;
-    }
-
-    .card-action.action-buttons {
-        display: flex;
-        justify-content: space-around;
-        padding: 10px;
-    }
-
-    .card-action.action-buttons 
-    a {
-        background-color: #E0C0AC;
-        color: #5d6ca7;
     }
 
     /* Delete User Modal */
