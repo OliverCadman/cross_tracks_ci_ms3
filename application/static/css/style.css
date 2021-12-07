@@ -293,7 +293,11 @@ nav li a {
 
 .edit-profile-btn-wrapper a {
     margin: 10px 5px;
-    font-size: 10px;
+    font-size: .8rem;
+    background-color: #dddddd;
+    color: #222222;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
 
 }
 
@@ -464,7 +468,7 @@ nav li a {
 
 .track-container {
     background: #F1EDE6;
-    height: 500px;
+    min-height: 300px;
 }
 
 /* Track Info Modal */
@@ -1516,10 +1520,16 @@ h2 {
     }
 
     .edit-profile-btn-wrapper a {
-        background-color: #D8D6D7;
-        color: #222222;
-        font-family: 'Quicksand', sans-serif;
-        font-weight: 600;
+        font-size: .8rem;
+    }
+
+    .edit-profile-btn-wrapper a:first-of-type:hover {
+        background-color: #FFF9A5;
+    }
+
+    .edit-profile-btn-wrapper a:last-of-type:hover {
+        background-color: #BC4749;
+        color: #dddddd;
     }
 
     /* User's Tracks Section */
@@ -1558,6 +1568,10 @@ h2 {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .delete-action-btn:first-of-type:hover {
+        background-color: #E0C0AC;
     }
 
 
