@@ -2,13 +2,25 @@
 {% block content %}
 <section>
     <div class="contact-body">
-        <div class="contact-header">
-            <h1>Contact</h1>
+        <div class="row">
+            <div class="col s12">
+            <div class="contact-header">
+                    <h1>Contact</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6">
+
+                <div class="contact-lead">
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur pariatur ullam, similique porro impedit autem! Repellendus assumenda culpa tempora quam voluptatem! Vero, corrupti sapiente nam mollitia nostrum, eveniet unde voluptatibus labore atque neque, eius cum. Dolore delectus unde consequatur voluptatibus!</p>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col s12">
                 <div class="contact-form-wrapper">
-                    <form action="#" class="contact-form">
+                <form action="#" class="contact-form card-panel">
                         <div class="input-field">
                             <input type="text" name="full_name" id="full_name">
                             <label for="full_name">Please enter your name</label>
@@ -20,6 +32,9 @@
                         <div class="input-field">
                             <textarea name="questions_comments" id="questions_comments" cols="30" rows="10" class="materialize-textarea"></textarea>
                             <label for="questions_comments">Let us know what you think!</label>
+                        </div>
+                        <div class="submit-btn">
+                            <button type="submit" class="btn">Send Email</button>
                         </div>
                     </form>
                 </div>
