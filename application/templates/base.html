@@ -118,16 +118,12 @@
                 </div>
                 <div class="col s4">
                     <ul class="domestic-links">
-                        {% if not session.user %}
                         <li><a href="{{url_for('users.login')}}">Login</a></li>
-                        {% else %}
-                        <li><a href="{{url_for('users.logout')}}">Logout</a></li>
-                        {% endif %}
                     </ul>
                 </div>
                 <div class="col s4">
                     <ul class="domestic-links">
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="{{url_for('main.contact')}}">Contact Us</a></li>
                     </ul>
                 </div>
                 {% else %}
