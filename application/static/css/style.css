@@ -417,13 +417,26 @@ nav li a {
 .track-container {
     background: #F1EDE6;
     height: 500px;
-
-
 }
+
+/* Track Info Modal */
+
+.album-cover-modal {
+    margin-top: 1rem;
+}
+
+ #track-name {
+     font-size: 1.5rem;
+     font-family: "Alata", sans-serif;
+ }
 
 
 /* Liked Tracks */
 
+.liked-tracks-track-name {
+    font-family: "Alata", sans-serif;
+    
+}
 
 
 /* ------ Browse Tracks Page ------- */
@@ -1176,12 +1189,6 @@ h2 {
 
     .track-image-wrapper img {
         width: 100%
-    }
-
-    .my-tracks-track-name {
-        font-family: 'Alata', sans-serif;
-        font-size: 2rem;
-        font-weight: bold;
     }
 
     .my-tracks-artist-name {
