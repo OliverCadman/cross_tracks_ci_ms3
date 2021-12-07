@@ -237,8 +237,10 @@ nav li a {
 }
 
 .username-container {
-    margin-top: 3rem;
-    border-left: 3px solid #eeeeee;
+    height: 155px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .profile-image-container {
@@ -306,7 +308,7 @@ nav li a {
 }
 
 .messaging-wrapper {
-    font-size: .8rem;
+    font-size: 1rem;
 }
 
 .user-fullname,
@@ -480,6 +482,36 @@ nav li a {
  #track-name {
      font-size: 1.5rem;
      font-family: "Alata", sans-serif;
+ }
+
+
+ /* Delete Track Modal */
+
+ .delete-track-modal {
+     background-color: #F1EDE6;
+ }
+
+ .confirm-delete-message {
+     font-family: "Alata", sans-serif;
+     font-size: 1.25rem;
+ }
+
+ .confirm-delete-wrapper p {
+     font-family: "Quicksand", sans-serif;
+     font-size: 1.1rem;
+ }
+
+ .delete-track-modal-image {
+     margin-top: 2rem;
+ }
+
+ .delete-track-btn {
+    background-color: #BC4749;
+ }
+
+ .cancel-delete-btn {
+    background-color:#FFF9A5;
+    color: #333333;
  }
 
 
@@ -1462,6 +1494,10 @@ h2 {
 
     .profile-image-wrapper {
         position: relative;
+    }
+
+    .messaging-wrapper {
+        font-size: 1.2rem;
     }
 
     .is-artist-wrapper {
