@@ -338,7 +338,13 @@
 
                         {% endfor %}
                         {% else %}
-                        <p>No Liked Tracks</p>
+                        <div class="col s12 m6 no-tracks-found">
+                            <h1>No Tracks</h1>
+                            <figure>
+                                <img src="{{url_for('static', filename='images/no-tracks-vector.png')}}"
+                                    alt="No tracks found, vector art" class="no-tracks-vector">
+                            </figure>
+                        </div>
                         {% endif %}
                     </div>
                 </div>
