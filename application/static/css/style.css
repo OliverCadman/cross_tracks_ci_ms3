@@ -370,6 +370,43 @@ nav li a {
      justify-content: center;
  }
 
+ /* Delete Profile Modal */
+
+
+ .delete-account-modal {
+     background-color: #F1EDE6;
+     padding-bottom: 3rem;
+ }
+
+ .delete-account-modal
+ .modal-footer {
+     background-color: #F1EDE6;
+ }
+
+
+ .delete-action-btn-wrapper {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     margin-top: 3rem;
+ }
+
+ .delete-action-btn {
+     letter-spacing: 0;
+     background-color: #E0C0AC;
+     color: #333333;
+     font-family: "Quicksand", sans-serif;
+     font-weight: bold;
+     text-transform: capitalize;
+ }
+
+ .delete-modal-alert-wrapper h5 {
+     font-family: "Alata", sans-serif;
+ }
+
+ .delete-modal-alert-wrapper p {
+     font-family: "Quicksand", sans-serif;
+ }
 
 
 /* "My Tracks" */
@@ -435,8 +472,10 @@ nav li a {
 
 .liked-tracks-track-name {
     font-family: "Alata", sans-serif;
-    
+
 }
+
+
 
 
 /* ------ Browse Tracks Page ------- */
@@ -651,10 +690,6 @@ h2 {
     border: 5px solid #33333360;
     box-shadow: 0px 0px 5px -5px rgba(204, 204, 204, 0.15),
         0px 0px 5px 1px #B8B5BF;
-}
-
-.modal-content {
-    background-color: #dcedf2;
 }
 
 .modal-body {
@@ -1229,6 +1264,13 @@ h2 {
         margin: 0 .5rem;
     }
 
+    /* Delete Profile Modal */
+
+     .delete-action-btn {
+         /* Overrides Materialize class property */
+         margin: .5rem 0.3rem !important;
+     }
+
     /* ----- Login Page ----- */
 
     .login-page-container {
@@ -1483,8 +1525,14 @@ h2 {
 
     .card-action.action-buttons {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         padding: 10px;
+    }
+
+    .card-action.action-buttons 
+    a {
+        background-color: #E0C0AC;
+        color: #5d6ca7;
     }
 
     /* Delete User Modal */
@@ -1493,11 +1541,6 @@ h2 {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .delete-action-btn {
-        /* Overrides Materialize class property */
-        margin: 0 5px !important;
     }
 
 
