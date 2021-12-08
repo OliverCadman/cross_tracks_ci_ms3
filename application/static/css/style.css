@@ -940,7 +940,16 @@ h2 {
 
 /* --------- Login Page ----------- */
 
-.login-page-header {
+ .login-page-container,
+ .register-page-container {
+     background: url("../images/home-login-bg.jpg");
+     background-size: cover;
+     background-position: top;
+     height: 78vh;
+ }
+
+.login-page-header,
+.register-page-header {
     font-family: "Alata", sans-serif;
 }
 
@@ -1374,9 +1383,6 @@ h2 {
     /* ----- Login Page ----- */
 
     .login-page-container {
-        background: url("../images/home-login-bg.jpg");
-        background-size: cover;
-        background-position: 15%;
         height: 80vh;
     }
 
