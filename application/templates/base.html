@@ -45,7 +45,7 @@
                 {% endif %}
                 {% if not session.user %}
                 <li>
-                    <a href="#register-modal" class="modal-trigger">Register</a>
+                    <a href="{{url_for('users.register_user')}}" class="modal-trigger">Register</a>
                 </li>
                 <li>
                     <a href="{{url_for('users.login')}}">Login</a>
@@ -113,7 +113,7 @@
                 {% if not session.user %}
                 <div class="col s4">
                     <ul class="domestic-links">
-                        <li><a href="#">Register</a></li>
+                        <li><a href="{{url_for('users.register_user')}}">Register</a></li>
                     </ul>
                 </div>
                 <div class="col s4">
