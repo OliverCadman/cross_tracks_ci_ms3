@@ -1910,7 +1910,7 @@ span.date-text,
 
 @media only screen and (min-width: 320px) and (max-width: 320px) {
 
-    /* Vector graphic for 'About Us' section in index.html */
+    /* ------ Home Page ------ */
 
     .about-crosstracks-vector {
         width: 175px;
@@ -1921,12 +1921,31 @@ span.date-text,
         font-size: 1rem;
     }
 
-    /* .use-crosstracks-icon {
-        margin-right: 1rem;
-    } */
-
     .use-crosstracks-list {
         line-height: 2rem;
         font-size: .9rem;
     }
+
+    /* ------ Profile Page ------ */
+
+    .username-container {
+        display: block;
+    }
+
+    .profile-image-wrapper {
+        margin: 10px 0;
+    }
+
+    .profile-image {
+        width: 100px;
+    }
+
+    .username-wrapper {
+        font-size: 1.75rem;
+    }
+
+    .messaging-wrapper {
+        font-size: .9rem;
+    }
+
 }
