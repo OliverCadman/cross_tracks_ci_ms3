@@ -1,7 +1,6 @@
 /* File contains all code required to initialize
 MaterializeCSS features */
 $(document).ready(function () {
-  console.log("ready")
   $(".modal").modal({
     opacity: 0.7,
   });
@@ -13,4 +12,7 @@ $(document).ready(function () {
   });
   $(".tooltipped").tooltip();
   $("select").formSelect();
+  $(".datepicker").datepicker({
+    yearRange: 75
+  });
 });
