@@ -1,5 +1,5 @@
 from os import error
-from flask import (Blueprint, render_template, url_for, flash, request, redirect, session, jsonify)
+from flask import (Blueprint, render_template, url_for, flash, request, redirect, session, jsonify, abort)
 from application.tracks.classes import Track
 from application.users.classes import User
 from application.comments.classes import Comment
@@ -14,6 +14,9 @@ tracks = Blueprint("tracks", __name__)
 @tracks.route("/add-track/<username>", methods=["GET","POST"])
 def add_track(username):
 
+    if User.find_user_by_username(username) is None:
+        abort(404)
+    
     user_id = User.get_id(username)
     genres = Track.get_genres()
 

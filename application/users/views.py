@@ -10,7 +10,7 @@ import os
 
 from flask import (Blueprint, render_template,
                    url_for, flash, redirect, request,
-                   session)
+                   session, abort)
 from application.users.classes import User
 from application.tracks.classes import Track
 from application.comments.classes import Comment
@@ -24,6 +24,7 @@ from bson.objectid import ObjectId
 from time import time
 from flask_mail import Message
 from application import mailing
+from urllib.parse import urlparse
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 if os.path.exists("env.py"):
@@ -130,6 +131,14 @@ def build_profile(username):
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
+
+    parsed_url = urlparse(request.referrer)
+
+    print('Request URL:', request.url)
+    print('Request Referrer:', request.referrer)
+    url_endpoint = parsed_url.path
+    print(url_endpoint == "/browse-tracks")
+
     if request.method == "POST":
         login_username = request.form.get("username").lower()
         login_password = request.form.get("password")
@@ -141,8 +150,14 @@ def login():
                              login_password)
             if password_check:
                 session["user"] = login_username
-                flash("Welcome back {}".format(login_username))
-                return redirect(url_for('main.index'))
+
+                if url_endpoint.strip("/") == "login":
+                    flash("Welcome back, {}".format(login_username))
+                    return redirect('tracks.browse_tracks')
+                else:
+                    print(url_endpoint)
+                    flash("Welcome back, {}".format(login_username))
+                    return redirect(url_for('main.index'))
             
             else:
                 flash("Invalid username/password")
@@ -222,6 +237,10 @@ def user_profile(username):
     collected in build_profile function, as well as 
     user's tracks.
     """
+
+    # Customize error handling in case of invalid URL path
+    if User.find_user_by_username(username) is None:
+        abort(404)
 
     current_user = User.find_user_by_username(username)
 
