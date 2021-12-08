@@ -937,14 +937,43 @@ h2 {
     background-color: rgb(252, 252, 107);
 }
 
+/* --------- Register Page -------- */
+
+.register-page-container {
+    height: 77vh;
+}
+
+.register-form {
+    padding-bottom: 1.5rem !important;
+}
+
+.register-form button {
+    background-color: #E0C0AC;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    color: #333333;
+}
+
+.register-form
+.submit-button {
+    display: flex;
+    justify-content: center;
+}
+
+
+
 
 /* --------- Login Page ----------- */
 
  .login-page-container,
- .register-page-container {
+ .register-page-container,
+ .build-profile-container {
      background: url("../images/home-login-bg.jpg");
      background-size: cover;
-     background-position: top;
+     background-position: 60%;
+ }
+
+ .login-page-container {
      height: 78vh;
  }
 
@@ -971,6 +1000,59 @@ h2 {
     background-color: #7b89b4;
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
+}
+
+/* ------ Build Profile Page ------- */
+
+.build-profile-header {
+    padding-top: 3rem;
+}
+
+.build-profile-header h1 {
+    font-family: "Alata", sans-serif;
+    font-size: 2rem;
+    margin: 0 0 0 0.5rem;
+    text-align: center;
+}
+
+.build-profile-form-wrapper {
+    background-color: #eeeeee;
+    border-radius: 20px;
+}
+
+.build-profile-form {
+    padding-bottom: 1rem;
+}
+
+.build-profile-form .submit-btn {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.build-profile-form button,
+.btn span {
+    font-family: "Quicksand", sans-serif;
+}
+
+.btn,
+.btn span {
+    color: #333333;
+    background-color: #E0C0AC;
+    font-weight: 500;
+}
+
+.welcome-message {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+}
+
+
+.switch p {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
 }
 
 /* Contact Page */
@@ -1129,6 +1211,9 @@ h2 {
         margin-right: 10px;
         text-align: left;
     }
+
+    /* ------ Build Profile Page ------- */
+
 
     /* ------ Browse Tracks Page ------ */
     /* Top-level links displaying user options */
@@ -1380,13 +1465,20 @@ h2 {
         margin: .5rem 0.3rem !important;
     }
 
+    /* ----- Register Page ----- */
+
+    .register-page-container {
+        height: 73vh;
+    }
+
     /* ----- Login Page ----- */
 
     .login-page-container {
         height: 80vh;
     }
 
-    .login-form-wrapper {
+    .login-form-wrapper,
+    .register-form-wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
