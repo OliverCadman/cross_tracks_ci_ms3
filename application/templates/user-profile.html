@@ -24,14 +24,14 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="col s6">
-                            <div class="username-wrapper">
-                                {{username.username}}
+                        <div class="col s6 username-container">
+                                <div class="username-wrapper">
+                                    {{username.username}}
+                                </div>
+                                <div class="messaging-wrapper">
+                                    <i class="fas fa-envelope profile-mail-icon"></i> {{username.email_address}}
+                                </div>
                             </div>
-                            <div class="messaging-wrapper">
-                                <i class="fas fa-envelope profile-mail-icon"></i> {{username.email_address}}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -138,11 +138,11 @@
                                 <div class="card-action">
                                     <div class="more-info-btn">
                                         <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger"><i
-                                                class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
-                                        {% if username == session["user"] %}
-                                        <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
-                                                class="fas fa-edit card-btn"></i></a>
-                                        {% endif %}
+                                                class="fas fa-info-circle"></i></a>
+                                         {% if username["username"] == session.user %}
+                                         <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                                 class="fas fa-trash-alt"></i></a>
+                                         {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                         </div>
 
                         <!-- Track Delete Modal -->
-                        <div class="modal" id="delete_track_modal_{{track._id}}">
+                        <div class="modal delete-track-modal" id="delete_track_modal_{{track._id}}">
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="modal-content">
                                 <div class="row">
@@ -241,11 +241,11 @@
                                         <div class="confirm-delete-wrapper center-align">
                                             <p>Are you sure you want to continue?</p>
                                             <a href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}"
-                                                class="btn">Delete</a>
-                                            <button type="button" class="btn modal-close">Cancel</button>
+                                                class="btn delete-track-btn">Delete</a>
+                                            <button type="button" class="btn modal-close cancel-delete-btn">Cancel</button>
                                         </div>
                                     </div>
-                                    <div class="col m6 hide-on-mobile-only">
+                                    <div class="col m6 delete-track-modal-image">
                                         {% if not track.image_url == '' %}
                                         <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
                                             class="album-cover">
