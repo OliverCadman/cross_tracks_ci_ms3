@@ -74,8 +74,7 @@ nav li a {
     height: 50%;
 }
 
-.sidenav,
-.dropdown-content {
+.sidenav {
     background: #7b89b4;
 }
 
@@ -1033,10 +1032,49 @@ h2 {
 .build-profile-form button,
 .btn span {
     font-family: "Quicksand", sans-serif;
+    font-weight: 600;
 }
 
-.btn,
-.btn span {
+.datepicker-table td.is-selected {
+    background-color: #a58a79;
+    color: #fff;
+}
+
+.dropdown-content li>span,
+.datepicker-controls .select-month input,
+.datepicker-controls .select-year input {
+    color: #333333;
+    font-family: "Quicksand", sans-serif;
+}
+
+.datepicker-table td.is-today {
+    color: #9aa2bd
+}
+
+
+.datepicker-date-display {
+    background-color: #7b89b4;
+    
+}
+
+.datepicker-date-display
+span.date-text,
+.datepicker-calendar {
+    font-family: "Quicksand", sans-serif;
+}
+
+.datepicker-cancel,
+.datepicker-done {
+    color: #7b89b4;
+    padding: 0 1rem;
+}
+
+.datepicker-cancel:hover,
+.datepicker-done:hover {
+    color: #eee;
+}
+
+.btn {
     color: #333333;
     background-color: #E0C0AC;
     font-weight: 500;
@@ -1571,8 +1609,18 @@ h2 {
         height: 82vh;
     }
 
+    /* ----- Build Profile Page ----- */
+
     .build-profile-container {
         height: unset;
+    }
+
+    .build-profile-form button:hover,
+    .build-profile-form
+    .btn:hover,
+    .build-profile-form
+    .btn span:hover {
+        background-color: #d3b29c;
     }
 
     /* Login Form */
