@@ -228,8 +228,16 @@ nav li a {
 
 .profile-banner {
     background-color: #3c4c8b;
+    display: flex;
+    justify-content: space-between;
 
 }
+
+.username-container {
+    width: 100% !important;
+}
+
+
 
 .user-info {
     background-color: #7b89b4;
@@ -255,7 +263,7 @@ nav li a {
 }
 
 .profile-image {
-    width: 80px;
+    width: 150px;
     border: 2px solid #222222;
     border-radius: 50%;
 }
@@ -303,7 +311,7 @@ nav li a {
 }
 
 .username-wrapper {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
 }
 
 .messaging-wrapper {
@@ -1427,6 +1435,10 @@ span.date-text,
         border-right: 8px solid #B8B5BF;
     }
 
+    .profile-image {
+        width: 125px;
+    }
+
     /* 'My Tracks' cards */
     /* 
      .user-tracks-section-bg {
@@ -1723,6 +1735,10 @@ span.date-text,
     .profile-image-container {
         position: static;
     }
+
+     .profile-image {
+         width: 175px;
+     }
 
     .profile-image-wrapper {
         position: relative;
