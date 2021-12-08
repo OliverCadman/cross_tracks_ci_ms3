@@ -1214,6 +1214,9 @@ h2 {
 
     /* ------ Build Profile Page ------- */
 
+    .build-profile-container {
+        height: 80vh;
+    }
 
     /* ------ Browse Tracks Page ------ */
     /* Top-level links displaying user options */
@@ -1566,6 +1569,10 @@ h2 {
         width: 100%;
         padding-top: 2rem;
         height: 82vh;
+    }
+
+    .build-profile-container {
+        height: unset;
     }
 
     /* Login Form */
