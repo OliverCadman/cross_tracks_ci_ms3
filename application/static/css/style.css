@@ -263,7 +263,7 @@ nav li a {
 }
 
 .profile-image {
-    width: 150px;
+    width: 110px;
     border: 2px solid #222222;
     border-radius: 50%;
 }
@@ -274,8 +274,8 @@ nav li a {
     font-size: 1.2rem;
     color: #D4AF37;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 10%;
+    right: -25%;
     overflow: auto;
 }
 
@@ -474,7 +474,7 @@ nav li a {
 
 .track-container {
     background: #F1EDE6;
-    min-height: 300px;
+    min-height: 500px;
 }
 
 /* Track Info Modal */
@@ -1439,6 +1439,11 @@ span.date-text,
         width: 125px;
     }
 
+    .is-artist-wrapper {
+        bottom: 0;
+        right: -50px;
+    }
+
     /* 'My Tracks' cards */
     /* 
      .user-tracks-section-bg {
@@ -1755,7 +1760,7 @@ span.date-text,
         color: #D4AF37;
         position: absolute;
         top: 0;
-        right: 10%;
+        right: -50%;
         margin-right: 40px;
 
     }
