@@ -322,14 +322,20 @@ nav li a {
 .user-location-age {
     font-family: 'Alata', sans-serif;
     color: #e2d3ca;
+    font-size: 1.5rem;
 }
 
 .user-fullname {
-    font-size: 1.5rem;
+    font-size: 2rem;
+}
+
+.profile-location-icon {
+    margin-right: 10px;
 }
 
 .about-user {
     font-family: 'Quicksand', sans-serif;
+    font-size: 1.25rem;
     color: #fafafa;
     font-weight: 500;
     padding: 1rem .5rem;
