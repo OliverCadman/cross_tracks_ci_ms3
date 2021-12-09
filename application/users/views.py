@@ -153,7 +153,7 @@ def login():
 
                 if url_endpoint.strip("/") == "login":
                     flash("Welcome back, {}".format(login_username))
-                    return redirect('main.index')
+                    return redirect(url_for('main.index'))
                 else:
                     print(url_endpoint)
                     flash("Welcome back, {}".format(login_username))
@@ -304,24 +304,31 @@ def edit_profile_img(username):
                     
                     filename_id = existing_file["_id"]
 
-                    updated_info = {
-                        "profile_image": profile_image.filename
-                    }
-
                     try:
                         User.delete_profileimage_file(filename_id)
-                        User.add_profile_image(username, updated_info)
 
-                        flash("Profile image successully updated")
-                        return redirect(url_for('users.user_profile', username=username))
                     except Exception as e:
-                        print("Error: ", e)
 
                         flash("Sorry, something went wrong. Please try again")
                         return redirect(url_for('users.user_profile', username=username))
+
+                print(profile_image.filename)
+                
+                updated_info = {
+                    "profile_image": profile_image.filename
+                }
+
+                print(updated_info)
+
+                try:
+                    User.add_profile_image(username, profile_image.filename, profile_image, updated_info)
+                    flash('Profile image successfully updated')
+                    return redirect(url_for('users.user_profile', username=username))
+                except Exception as e:
+                    print('Error: ', e)
+                    flash('Sorry, something went wrong. Please try again.')
+                    return redirect(url_for('users.user_profile', username=username))
     
-    flash('Success')
-    return redirect(url_for('users.user_profile', username=username))
                 
 
       
