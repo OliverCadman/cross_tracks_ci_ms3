@@ -285,11 +285,12 @@ class User():
             return False
 
     @staticmethod
-    def add_profile_image(username, profile_image):
+    def update_profile_image(username, filename,
+                         profile_image, updated_info):
 
-        mongo.save_file(profile_image.filename, profile_image)
+        mongo.save_file(filename, profile_image)
         mongo.db.users.update_one({"username": username},
-                                  {"$set": profile_image})
+                                  {"$set": updated_info})
 
     
     @staticmethod
@@ -325,10 +326,3 @@ class User():
 
         mongo.db.fs.files.delete_one({"_id": ObjectId(_id)})
         mongo.db.fs.chunks.delete_one({"files_id": ObjectId(_id)})
-
-
-
-
-
-
-    
