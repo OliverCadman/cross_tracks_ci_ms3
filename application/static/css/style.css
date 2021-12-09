@@ -258,7 +258,7 @@ nav li a {
     margin: 30px 0 40px 0;
 }
 
-.profile-image-container {
+.profile-image-wrapper {
     position: relative;
 }
 
@@ -274,8 +274,8 @@ nav li a {
     font-size: 1.2rem;
     color: #D4AF37;
     position: absolute;
-    bottom: 10%;
-    right: -25%;
+    bottom: -25px;
+    right: -50px;
     overflow: auto;
 }
 
@@ -284,7 +284,25 @@ nav li a {
     display: inline-block;
 }
 
+.profile-pic-edit-wrapper {
+    position: absolute;
+    right: -15px;
+    top: 5%;
+}
 
+.profile-pic-edit-wrapper i {
+    color: #ddd;
+    font-size: 1.25rem;
+}
+
+.image-upload>input {
+    display: none;
+}
+
+.image-upload form {
+    position: absolute;
+    right: 0;
+}
 
 .username-wrapper,
 .messaging-wrapper {
@@ -1877,7 +1895,7 @@ h2 {
     }
 
     .profile-banner {
-        height: 150px;
+        min-height: 150px;
     }
 
     .username-wrapper {
@@ -2074,5 +2092,25 @@ h2 {
     .page-not-found-container,
     .internal-error-container {
         height: 76vh;
+    }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 414px) {
+    .profile-pic-edit-wrapper {
+        right: -10px;
+    }
+
+}
+
+@media only screen and (min-width: 375px) and (max-width: 375px) {
+    .profile-pic-edit-wrapper {
+        right: -10px;
+    }
+
+}
+
+@media only screen and (min-width: 360px) and (max-width: 360px) {
+    .profile-pic-edit-wrapper {
+        right: -10px;
     }
 }
