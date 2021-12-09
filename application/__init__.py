@@ -49,12 +49,17 @@ def create_app(default_config=Config):
     app.register_blueprint(comments_bp)
 
     app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, internal_error)
+
 
 
     return app
 
 def page_not_found(e):
     return render_template("404.html"), 404
+
+def internal_error(e):
+    return render_template("500.html"), 500
 
 
 
