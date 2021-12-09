@@ -50,17 +50,17 @@ def register_user():
         if not User.validate_password_match(password,
                                             confirm_password):
             flash("Passwords do not match")
-            return render_template("index.html")
+            return redirect(request.referrer)
 
         if not User.validate_password_format(password):
             flash("Password format invalid")
-            return render_template("index.html")
+            return redirect(request.referrer)
 
         
         
         if User.find_user_by_username(username):
             flash("Username already exists")
-            return redirect(url_for("main.index"))
+            return redirect(request.referrer)
 
         
 
@@ -153,7 +153,7 @@ def login():
 
                 if url_endpoint.strip("/") == "login":
                     flash("Welcome back, {}".format(login_username))
-                    return redirect('tracks.browse_tracks')
+                    return redirect('main.index')
                 else:
                     print(url_endpoint)
                     flash("Welcome back, {}".format(login_username))
@@ -279,15 +279,55 @@ def user_profile(username):
     if user_id is not None:
 
         users_tracks = Track.get_users_tracks(user_id)
-        print(users_tracks)
 
     return render_template("user-profile.html", username=current_user,
                              user_age=user_age, users_tracks=users_tracks,
                              liked_tracks=liked_tracks, genres=genres)
 
 
-# https://medium.com/@stevenrmonaghan/password-reset-with-flask-mail-protocol-ddcdfc190968
+@users.route('/edit_profile_img/<username>', methods=["GET", "POST"])
+def edit_profile_img(username):
+    
+    if request.method == "POST":
 
+        user = User.find_user_by_username(username)
+
+        if user is not None:
+
+            profile_image = request.files["profile_image"]
+            print(profile_image)
+            if profile_image.filename != '':
+                
+                existing_file = User.find_file_by_filename(user['profile_image'])
+                print(user["profile_image"])
+                if existing_file is not None:
+                    
+                    filename_id = existing_file["_id"]
+
+                    updated_info = {
+                        "profile_image": profile_image.filename
+                    }
+
+                    try:
+                        User.delete_profileimage_file(filename_id)
+                        User.add_profile_image(username, updated_info)
+
+                        flash("Profile image successully updated")
+                        return redirect(url_for('users.user_profile', username=username))
+                    except Exception as e:
+                        print("Error: ", e)
+
+                        flash("Sorry, something went wrong. Please try again")
+                        return redirect(url_for('users.user_profile', username=username))
+    
+    flash('Success')
+    return redirect(url_for('users.user_profile', username=username))
+                
+
+      
+
+
+# https://medium.com/@stevenrmonaghan/password-reset-with-flask-mail-protocol-ddcdfc190968
 def get_reset_token(email, expires_sec=500):
     """
     Generates and returns JSON Web Token to be used for authorization
@@ -453,20 +493,3 @@ def delete_profile(username):
 
         
     return redirect(url_for("users.user_profile", username=username))
-
-@users.errorhandler(500)
-def internal_server_error(e):
-    return render_template("500.html"), 500
-
-
-
-
-
-
-
-
-
-
-
-        
-   
