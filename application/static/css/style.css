@@ -450,12 +450,18 @@ nav li a {
 }
 
 
-
 .track-container,
 .my-tracks-container,
 .liked-tracks-container {
-    padding: 0 !important;
+    padding: 1rem !important;
 }
+
+.my-tracks-container,
+.liked-tracks-container {
+    background-color: #3c4c8b;
+}
+
+
 
 .row.no-margin {
     margin: 0 !important;
@@ -482,7 +488,7 @@ nav li a {
 }
 
 .track-container {
-    background: #F1EDE6;
+    background: #ddd;
     min-height: 500px;
 }
 
@@ -537,7 +543,8 @@ nav li a {
 
 /* ----- 404 Page ----- */
 
-.page-not-found-container {
+.page-not-found-container,
+.internal-error-container {
     background: url("../images/home-login-bg-dimmed.jpg") no-repeat;
     background-size: cover;
     background-position: 80%;
@@ -547,18 +554,20 @@ nav li a {
 }
 
 .page-not-found-wrapper {
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
 
 }
 
-.page-not-found-vector {
+.page-not-found-vector,
+.internal-error-vector {
     width: 100%;
 }
 
-.page-not-found-header {
+.page-not-found-header,
+.internal-error-header {
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
     font-size: 2.5rem;
@@ -571,7 +580,7 @@ nav li a {
     margin-top: 1.5rem;
     font-size: 1.5rem;
     font-weight: bold;
-    background-color:#3c4c8b;
+    background-color: #3c4c8b;
     color: #eee;
 }
 
@@ -1010,8 +1019,7 @@ h2 {
     color: #333333;
 }
 
-.register-form
-.submit-button {
+.register-form .submit-button {
     display: flex;
     justify-content: center;
 }
@@ -1021,17 +1029,17 @@ h2 {
 
 /* --------- Login Page ----------- */
 
- .login-page-container,
- .register-page-container,
- .build-profile-container {
-     background: url("../images/home-login-bg.jpg");
-     background-size: cover;
-     background-position: 60%;
- }
+.login-page-container,
+.register-page-container,
+.build-profile-container {
+    background: url("../images/home-login-bg.jpg");
+    background-size: cover;
+    background-position: 60%;
+}
 
- .login-page-container {
-     height: 78vh;
- }
+.login-page-container {
+    height: 78vh;
+}
 
 .login-page-header,
 .register-page-header {
@@ -1111,11 +1119,10 @@ h2 {
 
 .datepicker-date-display {
     background-color: #7b89b4;
-    
+
 }
 
-.datepicker-date-display
-span.date-text,
+.datepicker-date-display span.date-text,
 .datepicker-calendar {
     font-family: "Quicksand", sans-serif;
 }
@@ -1188,7 +1195,20 @@ span.date-text,
 }
 
 
+/* ----- 404/500 Pages ----- */
 
+.internal-error-header {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.internal-error-msg-wrapper {
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #fafafa;
+    text-align: center;
+}
 
 
 
@@ -1480,6 +1500,12 @@ span.date-text,
 
     /* ------ User Profile ------ */
 
+    .my-tracks-header-wrapper h5,
+    .liked-tracks-header-wrapper h5 {
+        font-size: 3rem;
+    }
+
+
     .profile-image-email {
         border-right: 8px solid #B8B5BF;
     }
@@ -1640,9 +1666,10 @@ span.date-text,
         background-color: #F1EDE6;
     }
 
-    /* ----- 404 Page ----- */
+    /* ----- 404/500 Page ----- */
 
-    .page-not-found-container {
+    .page-not-found-container,
+    .internal-error-container {
         height: 80vh;
         flex-direction: row;
         justify-content: center;
@@ -1656,6 +1683,17 @@ span.date-text,
 
     .page-not-found-vector {
         width: 50%;
+    }
+
+    .internal-error-container
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .internal-error-vector {
+        width: 325px;
     }
 
 
@@ -1700,10 +1738,8 @@ span.date-text,
     }
 
     .build-profile-form button:hover,
-    .build-profile-form
-    .btn:hover,
-    .build-profile-form
-    .btn span:hover {
+    .build-profile-form .btn:hover,
+    .build-profile-form .btn span:hover {
         background-color: #d3b29c;
     }
 
@@ -1808,9 +1844,9 @@ span.date-text,
         position: static;
     }
 
-     .profile-image {
-         width: 175px;
-     }
+    .profile-image {
+        width: 175px;
+    }
 
     .profile-image-wrapper {
         position: relative;
@@ -1968,7 +2004,7 @@ span.date-text,
         margin-right: 10rem;
     }
 
-    /* ----- 404 Page ----- */
+    /* ----- 404 Page/500 Page ----- */
 
     .page-not-found-container {
         height: 73vh;
@@ -2028,4 +2064,15 @@ span.date-text,
         font-size: .9rem;
     }
 
+}
+
+/* iPhone X Device */
+
+@media only screen and (min-width: 375px) and (max-width: 411px) {
+    /* ------ 404/500 Pages ------ */
+
+    .page-not-found-container,
+    .internal-error-container {
+        height: 76vh;
+    }
 }
