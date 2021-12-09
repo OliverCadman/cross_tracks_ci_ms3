@@ -132,13 +132,6 @@ def build_profile(username):
 @users.route("/login", methods=["GET", "POST"])
 def login():
 
-    parsed_url = urlparse(request.referrer)
-
-    print('Request URL:', request.url)
-    print('Request Referrer:', request.referrer)
-    url_endpoint = parsed_url.path
-    print(url_endpoint == "/browse-tracks")
-
     if request.method == "POST":
         login_username = request.form.get("username").lower()
         login_password = request.form.get("password")
@@ -151,13 +144,8 @@ def login():
             if password_check:
                 session["user"] = login_username
 
-                if url_endpoint.strip("/") == "login":
-                    flash("Welcome back, {}".format(login_username))
-                    return redirect(url_for('main.index'))
-                else:
-                    print(url_endpoint)
-                    flash("Welcome back, {}".format(login_username))
-                    return redirect(url_for('main.index'))
+                flash("Welcome back, {}".format(login_username))
+                return redirect(url_for('main.index'))
             
             else:
                 flash("Invalid username/password")
@@ -166,6 +154,12 @@ def login():
             flash("Invalid username/password")
             return redirect(request.referrer)
 
+    # Flash message to give feedback to user if they
+    # attempt to like a track without logging in.
+    parsed_url = urlparse(request.referrer)
+
+    if parsed_url.path == '/browse-tracks':
+        flash('Please Login to like your tracks!')
     return render_template("login.html")   
 
 
@@ -299,7 +293,7 @@ def edit_profile_img(username):
             if profile_image.filename != '':
                 
                 existing_file = User.find_file_by_filename(user['profile_image'])
-                print(user["profile_image"])
+    
                 if existing_file is not None:
                     
                     filename_id = existing_file["_id"]
@@ -311,21 +305,17 @@ def edit_profile_img(username):
 
                         flash("Sorry, something went wrong. Please try again")
                         return redirect(url_for('users.user_profile', username=username))
-
-                print(profile_image.filename)
                 
                 updated_info = {
                     "profile_image": profile_image.filename
                 }
 
-                print(updated_info)
-
                 try:
-                    User.add_profile_image(username, profile_image.filename, profile_image, updated_info)
+                    User.update_profile_image(username, profile_image.filename, profile_image, updated_info)
+
                     flash('Profile image successfully updated')
                     return redirect(url_for('users.user_profile', username=username))
                 except Exception as e:
-                    print('Error: ', e)
                     flash('Sorry, something went wrong. Please try again.')
                     return redirect(url_for('users.user_profile', username=username))
     
