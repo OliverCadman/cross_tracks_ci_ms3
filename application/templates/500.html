@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="internal-error-container">
+        <div class="row">
+            <div class="col s12">
+                <figure>
+                    <img src="{{url_for('static', filename='images/500-error-vector.png')}}" alt="Vector graphic, internal server error" class="internal-error-vector">
+                </figure>
+            </div>
+            <div class="col s12">
+                <h1 class="internal-error-header">Internal Error</h1>
+                <div class="internal-error-msg-wrapper">
+                    <p>
+                        We're sorry, something went wrong!
+                    </p>
+                    <p>
+                        We're working to to fix this issue. Please return later.
+                    </p>
+                    <div class="back-home-btn-wrapper">
+                        <a href="{{url_for('main.index')}}" class="btn back-home-btn">Take Me Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
