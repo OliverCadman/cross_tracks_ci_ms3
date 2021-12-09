@@ -1533,8 +1533,16 @@ h2 {
     }
 
     .is-artist-wrapper {
-        bottom: 0;
+        bottom: -25px;
         right: -50px;
+    }
+
+    .profile-pic-edit-wrapper {
+        right: -25px;
+    }
+
+    .profile-pic-edit-wrapper i {
+        font-size: 1.5rem;
     }
 
     /* 'My Tracks' cards */
@@ -1880,10 +1888,21 @@ h2 {
         font-size: 1.2rem;
         color: #D4AF37;
         position: absolute;
-        top: 0;
-        right: -50%;
-        margin-right: 40px;
+        bottom: 0;
+        right: -50px;
 
+    }
+
+    .profile-pic-edit-wrapper i {
+        font-size: 1.5rem;
+        cursor: pointer;
+
+    }
+
+    .profile-pic-edit-wrapper i:hover {
+        transform: scale(1.2);
+        transition: 0.3s ease-in-out;
+        
     }
 
     .is-artist-wrapper p {
@@ -2087,6 +2106,12 @@ h2 {
 /* iPhone X Device */
 
 @media only screen and (min-width: 375px) and (max-width: 411px) {
+    /* ------ User Profile Page ------ */
+
+    .is-artist-wrapper {
+        right: -35px;
+    }
+
     /* ------ 404/500 Pages ------ */
 
     .page-not-found-container,
@@ -2096,6 +2121,13 @@ h2 {
 }
 
 @media only screen and (min-width: 414px) and (max-width: 414px) {
+
+    /* ------ User Profile Page ------ */
+
+    .is-artist-wrapper {
+        right: -35px;
+    }
+
     .profile-pic-edit-wrapper {
         right: -10px;
     }
@@ -2110,6 +2142,12 @@ h2 {
 }
 
 @media only screen and (min-width: 360px) and (max-width: 360px) {
+
+    /* ------ User Profile Page ------ */
+
+    .is-artist-wrapper {
+        right: -35px;
+    }
     .profile-pic-edit-wrapper {
         right: -10px;
     }
