@@ -12,6 +12,7 @@
     <!--MaterializeCSS CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon/favicon.ico')}}">
     <title>Cross//Tracks</title>
 </head>
 
@@ -75,7 +76,7 @@
             {% endif %}
             {% if not session.user %}
             <li>
-                <a href="#register-modal" class="modal-trigger">Register</a>
+                <a href="{{url_for('users.register_user')}}" class="modal-trigger">Register</a>
             </li>
             <li>
                 <a href="{{url_for('users.login')}}">Login</a>
@@ -101,11 +102,8 @@
                 
             </div>
         </div>
-        <div class="content">
             {% block content %}
             {% endblock %}
-        </div>
-
     </main>
     <footer class="page-footer">
         <div class="container">
