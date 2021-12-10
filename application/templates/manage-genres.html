@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Manage Genres</h1>
     <div class="manage-genre-container">
+        <h1>Manage Genres</h1>
         <div class="container">
             <div class="row">
-                <div class="col s12 m6">
-                    <h2>Delete a Genre</h2>
+                <div class="col s12 z-depth-5 delete-genre-wrapper">
+                    <h2 class="center-align">Delete a Genre</h2>
                     {% if all_genres %}
                     {% for genre in all_genres %}
                     <div class="chip genre-chip">
@@ -35,22 +35,25 @@
                     {% endfor %}
                     {% endif %}
                 </div>
-                <div class="col s12 m6">
-                    <h3>
-                        Add a Genre
-                    </h3>
-                    <div class="add-genre-form-wrapper">
-                        <form action="{{url_for('admin.add_genre')}}" method="POST">
-                            <div class="input-field">
-                                <input type="text" name="genre_name" id="genre_name">
-                                <label for="genre_name">Genre Name</label>
-                            </div>
-                            <div class="submit-btn">
-                                <button type="submit" class="btn add-genre-btn">Add Genre</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            </div>
+            <div class="row add-genre-container">
+                     <div class="col s12 m6 add-genre-wrapper z-depth-5">
+                         <h3 class="center-align">
+                             Add a Genre
+                         </h3>
+                         <div class="add-genre-form-wrapper">
+                             <form action="{{url_for('admin.add_genre')}}" method="POST"
+                             class="add-genre-form">
+                                 <div class="input-field">
+                                     <input type="text" name="genre_name" id="genre_name">
+                                     <label for="genre_name">Genre Name</label>
+                                 </div>
+                                 <div class="submit-btn">
+                                     <button type="submit" class="btn add-genre-btn">Add Genre</button>
+                                 </div>
+                             </form>
+                         </div>
+                     </div>
             </div>
         </div>
     </div>
