@@ -994,7 +994,7 @@ h2 {
 
  } */
 
-.add-track-header h1 {
+#add-track-header h1 {
     font-family: 'Alata', sans-serif;
     font-size: 2.5rem;
     margin-top: 0;
@@ -1033,13 +1033,13 @@ h2 {
 }
 
 .add-track-form .submit-btn button {
-    font-family: 'Alata', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     color: #222222;
-    background-color: #82bd87;
+    background-color: #E0C0AC;
 }
 
 .add-track-form .submit-btn button:last-of-type {
-    background-color: rgb(252, 252, 107);
+    background-color: rgb(255, 232, 158);
 }
 
 /* --------- Register Page -------- */
@@ -1371,6 +1371,16 @@ h2 {
 
     .build-profile-container {
         height: 80vh;
+    }
+
+    /* ------ Add Track Page ------ */
+ 
+    #add-track-header {
+        background: none;
+    }
+
+    #add-track-header h1 {
+        font-size: 3.5rem;
     }
 
     /* ------ Browse Tracks Page ------ */
@@ -1884,7 +1894,7 @@ h2 {
 
     /* ------ Add A Track Page ------ */
 
-    .add-track-body {
+    .add-track-container {
         display: flex;
         align-items: center;
     }
