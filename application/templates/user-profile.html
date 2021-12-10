@@ -22,7 +22,7 @@
                                 <img src="{{url_for('static', filename='images/default-user-image.png')}}"
                                     alt="Default Profile Image" class="profile-image">
                                 {% endif %}
-                                {% if session.user %}
+                                {% if username == session.user %}
                                 <form action="{{url_for('users.edit_profile_img', username=session['user'])}}" 
                                  method="POST" id="edit-profile-img-form" enctype="multipart/form-data">
                                 <div class="profile-pic-edit-wrapper image-upload">
