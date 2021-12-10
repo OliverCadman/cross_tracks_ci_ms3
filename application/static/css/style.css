@@ -67,6 +67,14 @@ nav li a {
     color: #222222;
 }
 
+.dropdown-content {
+    background-color: #E0C0AC;
+}
+
+.dropdown-content li a  {
+    color: #333333;
+}
+
 .sidenav {
     top: 57px;
     box-shadow: none;
@@ -1557,6 +1565,12 @@ h2 {
 
     /* User's Liked Tracks Section */
 
+    .liked-tracks-container
+    .track-container
+    .card {
+        height: 151px;
+    }
+
     .my-tracks-track-image {
         border-radius: 0 20px 20px 0;
         width: 100px;
@@ -1730,7 +1744,8 @@ h2 {
 @media screen and (min-width: 992px) {
 
     #account-dropdown-desktop li a {
-        color: #eeeeee;
+        color: #333333;
+        font-weight: 600;
     }
 
     #account-dropdown-desktop li a:hover {
