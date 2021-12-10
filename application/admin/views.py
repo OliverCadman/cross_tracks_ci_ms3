@@ -6,4 +6,8 @@ admin = Blueprint('admin', __name__)
 
 @admin.route("/manage-genres")
 def manage_genres():
-    return render_template('manage-genres.html')
+
+    all_genres = Track.get_genres()
+  
+
+    return render_template('manage-genres.html', all_genres=all_genres )
