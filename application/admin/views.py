@@ -74,7 +74,13 @@ def delete_genre(genre_id):
 
 @admin.route("/manage-tracks")
 def manage_tracks():
-    return render_template("manage-tracks.html")
+
+    all_tracks = Track.get_all_tracks()
+    all_genres = Track.get_genres()
+    
+
+    return render_template("manage-tracks.html", all_tracks=all_tracks,
+                           all_genres=all_genres)
 
 
 
