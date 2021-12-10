@@ -791,7 +791,9 @@ h2 {
 }
 
 .user-image-card {
-    width: 50px;
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
     display: inline;
     border: 2px solid #B8B5BF;
     border-radius: 50%;
@@ -847,6 +849,10 @@ h2 {
     font-weight: 600;
 }
 
+.modal-user-details {
+    display: flex;
+    justify-content: space-around;
+}
 
 
 .modal-user-details p {
@@ -857,7 +863,13 @@ h2 {
 
 .track-modal .modal-content {
     padding: 0;
+    background-color: #F1EDE6;
+}
 
+.track-modal
+.modal-content {
+    background-color: #F1EDE6;
+    padding-top: 1rem;
 }
 
 .track-modal-header {
@@ -1460,12 +1472,21 @@ h2 {
         justify-content: center;
     }
 
+    .user-image-card {
+        width: 125px;
+        height: 125px;
+    }
+
     .modal-body {
         padding-bottom: 2rem;
     }
 
     .modal-user-details {
         margin-bottom: 1.3rem;
+    }
+
+    .modal-user-details p {
+        font-size: 1.4rem;
     }
 
     .message-user-modal {
@@ -1998,6 +2019,7 @@ h2 {
     .track-container {
         border-right: 8px solid #B8B5BF;
     }
+
 
     .my-tracks-track-name {
         font-family: 'Alata', sans-serif;
