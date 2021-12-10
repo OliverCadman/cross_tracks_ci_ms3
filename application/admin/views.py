@@ -1,5 +1,5 @@
 from flask import (Blueprint, render_template, redirect,
-                   url_for, session, flash)
+                   url_for, session, flash, request)
 from application.tracks.classes import Track
 
 admin = Blueprint('admin', __name__)
@@ -25,6 +25,32 @@ def manage_genres():
         flash("You're not meant to be there!")
         return redirect(url_for("main.index"))
 
+@admin.route("/add-genre", methods=["GET", "POST"])
+def add_genre():
+
+    if request.method == "POST":
+
+        genre_name = request.form.get("genre_name")
+
+        if genre_name != '':
+
+            genre_data = {
+                "genre_name": genre_name
+            }
+
+            try:
+                Track.add_genre(genre_data)
+                flash("Genre added successfully")
+                return redirect(url_for("admin.manage_genres"))
+
+            except:
+                flash("Something went wrong. Please try again")
+                return redirect(url_for("admin.manage_genres"))
+            
+        else:
+            flash("No genre name given")
+            return redirect(url_for("admin.manage_genres"))
+
 
 
 @admin.route("/delete-genre/<genre_id>")
@@ -45,4 +71,7 @@ def delete_genre(genre_id):
         except:
             flash("Something went wrong. Please try again")
             return redirect(url_for("admin.manage_genres"))
+
+
+
     
