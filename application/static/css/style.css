@@ -1072,7 +1072,8 @@ h2,h3 {
 
 .login-page-container,
 .register-page-container,
-.build-profile-container {
+.build-profile-container,
+.manage-genre-container {
     background: url("../images/home-login-bg.jpg");
     background-size: cover;
     background-position: 60%;
@@ -1253,10 +1254,66 @@ h2,h3 {
 
 /* ----- Manage Genres Page ----- */
 
-.add-genre-form-wrapper input {
-    font-family: "Quicksand", sans-serif;
+/* Header */
+
+.manage-genre-container h1 {
+    font-family: "Alata", sans-serif;
+    margin-top: 0;
+    font-size: 2.5rem;
+    padding-top: 2rem;
+    padding-left: 1rem;
 }
 
+.delete-genre-wrapper a {
+    color: #555555;
+}
+
+
+.delete-genre-wrapper,
+.add-genre-wrapper {
+    background-color: #3c4c8b;
+    border-radius: 20px;
+}
+
+.delete-genre-wrapper {
+    height: 300px;
+    overflow: auto;
+    text-align: center;
+}
+
+
+.delete-genre-wrapper h2, 
+.add-genre-wrapper h3 {
+    font-family: "Quicksand", sans-serif;
+    color: #eee;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 2.4rem;
+}
+
+.add-genre-container {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 3rem;
+}
+
+.add-genre-wrapper {
+    margin-left: 0 !important;
+}
+
+.add-genre-form {
+    padding: 2rem;
+}
+
+.add-genre-wrapper {
+    margin-top: 2rem;
+}
+
+.add-genre-form-wrapper input {
+    font-family: "Quicksand", sans-serif;
+    color: #fafafa;
+    font-weight: 500;
+}
 
 
 
@@ -2146,6 +2203,15 @@ h2,h3 {
 
     .genre-chip {
         margin: 5px;
+    }
+
+    .add-genre-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .manage-genre-container h1 {
+        margin-left: 40px;
     }
 
 }
