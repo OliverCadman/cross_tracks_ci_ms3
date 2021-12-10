@@ -1,4 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Manage Genres</h1>
+    <div class="manage-genre-container">
+        <div class="container">
+            <div class="col s12">
+                {% if all_genres %}
+                    {% for genre in all_genres %}
+                        <div class="chip genre-chip">
+                            {{ genre.genre_name }}
+                            <a href="#remove_genre_modal_{{genre._id}}" class="modal-trigger">
+                                <i class="fas fa-times-circle remove-genre"></i>
+                            </a>
+                        </div>
+                        <div class="modal" id="remove_genre_modal_{{genre._id}}">
+                            Hello
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}
