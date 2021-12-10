@@ -1,4 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Manage Tracks</h1>
+<div class="manage-track-container">
+    <h1>Manage Tracks</h1>
+    <div class="row">
+        {% if all_tracks %}
+            {% for track in all_tracks %}
+                <div class="col m6 l4 hide-on-small-only track-card">
+                    <div class="card horizontal z-depth-5">
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title no-wordbreak">{{track.track_name}}</span>
+                                <div class="card-information-wrapper">
+                                    <div class="track-card-information">
+                                        <p class="artist-name">
+                                            {{track.artist_name}}
+                                        </p>
+                                        <p class="album-name">
+                                            {{track.album_name}}
+                                        </p>
+                                        <div class="card-image-wrapper">
+                                            {% if not track.image_url == '' %}
+                                            <img src="{{track.image_url}}" alt="Image of Cover Art for Track"
+                                                class="track-image">
+                                            {% else %}
+                                            <img src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                                                alt="Image of Cover Art for Track" class="track-image">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="card-action">
+                                        <div class="more-info-btn">
+                                            <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                                    class="fas fa-info-circle card-btn"></i></a>
+                                            {% if session["user"] == "admin" %}
+                                            <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                                    class="fas fa-edit card-btn"></i></a>
+                                            <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                                    class="fas fa-trash-alt card-btn"></i></a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
