@@ -137,6 +137,16 @@ class Track:
         return genres
 
     @staticmethod
+    def add_genre(genre_data):
+
+        mongo.db.genres.insert_one(genre_data)
+
+    @staticmethod
+    def delete_genre(genre_id):
+
+        mongo.db.genres.delete_one({"_id": ObjectId(genre_id)})
+
+    @staticmethod
     def get_users_tracks(id):
 
         if ObjectId.is_valid(id):
