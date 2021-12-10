@@ -72,6 +72,10 @@ def delete_genre(genre_id):
             flash("Something went wrong. Please try again")
             return redirect(url_for("admin.manage_genres"))
 
+@admin.route("/manage-tracks")
+def manage_tracks():
+    return render_template("manage-tracks.html")
+
 
 
     
