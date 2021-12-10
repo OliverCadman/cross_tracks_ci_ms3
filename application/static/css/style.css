@@ -1321,6 +1321,19 @@ h2,h3 {
     font-weight: 500;
 }
 
+/* ----- Manage Tracks Page ----- */
+
+.manage-track-container {
+    background-color: #F1EDE6;
+}
+
+.manage-track-container h1 {
+    font-size: 3rem;
+    font-family: "Alata", sans-serif;
+    margin-top: 0;
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+}
 
 
 
@@ -1864,6 +1877,12 @@ h2,h3 {
 
     .manage-genre-container {
         min-height: 80vh;
+    }
+
+    /* ----- Manage Tracks Page ----- */
+
+    .manage-track-container h1 {
+        font-size: 4rem;
     }
 
 
