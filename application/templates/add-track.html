@@ -1,53 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="section-header add-track-header">
-    <h1>Add Your Track</h1>
-</div>
-<div>
-    <div class="row add-track-body">
-        <div class="col s12 l6 add-track-form-wrapper">
-            <form action="#" method="POST" class="add-track-form">
-                <div class="row">
-                    <div class="input-field col s12 m6">
-                        <input type="text" id="track_name" name="track_name" required>
-                        <label for="track_name">Track Name</label>
+<div class="add-track-body">
+    <div class="section-header" id="add-track-header">
+        <h1>Add Your Track</h1>
+    </div>
+    <div>
+        <div class="row add-track-container">
+            <div class="col s12 l6 add-track-form-wrapper">
+                <form action="#" method="POST" class="add-track-form">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="track_name" name="track_name" required>
+                            <label for="track_name">Track Name</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="artist_name" name="artist_name" required>
+                            <label for="artist_name">Artist</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="album_name" name="album_name" required>
+                            <label for="album_name">Album</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <select name="genre" id="genre">
+                            <option>Choose a Genre:</option>
+                            {% for genre in genres %}
+                                <option value="{{genre.genre_name}}">{{genre.genre_name}}</option>
+                            {% endfor %}
+                        </select>
+                        </div>
+                        <div class="input-field col s6">
+                            <input type="number" name="year_of_release" id="year_of_release" required>
+                            <label for="year_of_release">Year of Release</label>
+                        </div>
+                         <div class="input-field col s6">
+                             <input type="text" name="image_url" id="image_url">
+                             <label for="image_url">Image URL</label>
+                         </div>
+    
+                         <div class="col s12 submit-btn center-align">
+                             <button type="submit" class="btn">Add Track</button>
+                             <button type="button" class="btn" id="reset-form">Reset</button>
+                         </div>
                     </div>
-                    <div class="input-field col s12 m6">
-                        <input type="text" id="artist_name" name="artist_name" required>
-                        <label for="artist_name">Artist</label>
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <input type="text" id="album_name" name="album_name" required>
-                        <label for="album_name">Album</label>
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <select name="genre" id="genre">
-                        <option>Choose a Genre:</option>
-                        {% for genre in genres %}
-                            <option value="{{genre.genre_name}}">{{genre.genre_name}}</option>
-                        {% endfor %}
-                    </select>
-                    </div>
-                    <div class="input-field col s6">
-                        <input type="number" name="year_of_release" id="year_of_release" required>
-                        <label for="year_of_release">Year of Release</label>
-                    </div>
-                     <div class="input-field col s6">
-                         <input type="text" name="image_url" id="image_url">
-                         <label for="image_url">Image URL</label>
-                     </div>
-
-                     <div class="col s12 submit-btn center-align">
-                         <button type="submit" class="btn">Add Track</button>
-                         <button type="button" class="btn" id="reset-form">Reset</button>
-                     </div>
-                </div>
-            </form>
-        </div>
-        <div class="col l6 hide-on-med-and-down">
-            <figure>
-                <img src="{{url_for('static', filename='images/add-track-hero.png')}}" alt="Hero image for Add-Track page" width="400">
-            </figure>
+                </form>
+            </div>
+            <div class="col m12 l6 hide-on-small-only">
+                <figure>
+                    <img src="{{url_for('static', filename='images/add-track-hero.png')}}" alt="Hero image for Add-Track page" width="400">
+                </figure>
+            </div>
         </div>
     </div>
 </div>
