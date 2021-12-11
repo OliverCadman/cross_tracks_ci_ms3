@@ -326,18 +326,18 @@
                         <div class="col s12 modal-user-details">
                             <p>
                                 <small>Added by:</small> {{username}}
-                                {% if track['user'][0]['profile_image'] %}
-                                <a href="{{url_for('users.user_profile', username=username)}}">
-                                    <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                                        alt="User profile image" class="user-image-card">
-                                </a>
-                                {% else %}
-                                <a href="{{url_for('users.user_profile', username=username)}}">
-                                    <img src="{{url_for('static', filename='images/default-user-image.png')}}"
-                                        alt="User profile image" class="user-image-card">
-                                </a>
-                                {% endif %}
                             </p>
+                            {% if track['user'][0]['profile_image'] %}
+                            <a href="{{url_for('users.user_profile', username=username)}}">
+                                <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                    alt="User profile image" class="user-image-card">
+                            </a>
+                            {% else %}
+                            <a href="{{url_for('users.user_profile', username=username)}}">
+                                <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                    alt="User profile image" class="user-image-card">
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -361,7 +361,7 @@
                             <!--Comment Input Goes Here-->
                             {% if session.user %}
                                  <form
-                                     action="{{url_for('tracks.add_comment', track_id=track._id, username=session['user'])}}"
+                                     action="{{url_for('comments.add_comment', track_id=track._id, username=session['user'])}}"
                                      method="POST" class="submit-comment-form">
                                      <textarea rows="2" cols=10 name="comment_body"
                                          class="materialize-textarea"></textarea>
@@ -543,7 +543,6 @@
 {% block scripts %}
 <script src="{{url_for('static', filename='js/search-bar.js')}}"></script>
 <script src="{{url_for('static', filename='js/edit-comment.js')}}"></script>
-<script src="{{url_for('static', filename='js/remove_comment.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
 <script src="{{url_for('static', filename='js/fit-card-title.js')}}"></script>
 {% endblock %}
