@@ -472,6 +472,11 @@ class Track:
 
     @staticmethod
     def decrement_likes_count(username):
+        """
+        Decrements likes_count of all tracks
+        where username is found in the same
+        document's 'likes_list'.
+        """
     
         mongo.db.tracks.update_many({
             "likes": username },
