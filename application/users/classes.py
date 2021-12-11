@@ -45,55 +45,151 @@ class User():
         is_artist (bool): optional field for user to display their artist status
 
     
-    Methods:
-    =============
-        get_info():
-            Prepares user information ready for MongoDB handling.
+    Instance Methods:
 
-        register():
-            Inputs user information into MongoDB
+        get_user_info(self):
+            Collects and prepares User object attributes
+            and returns dictionary, to be used by register
+            method to insert data into mongoDB "users" collection.
 
-        login():
-            Logs user into session (subject to validation)
+        register(self):
+            Invokes get_user_info() and inserts returned
+            dictionary into mongoDB "users" collection
 
-        logout():
-            Logs user out of session
 
-        find_user_by_id(): 
-            Finds an individual user by their ObjectId
+        prepare_liked_track(self):
+            Used in conjunction with class method
+            "get_user()", when user likes a track.
+            Prepares ID of liked track into a dictionary
+            format, and returning the value ready to be
+            inserted into mongoDB "users" collection.
 
-        find_all_users():
-            Queries MongoDB for a list of all users
 
-        validate_password_match():
-            Verifies that 'Confirm Password' matches first password
-            upon registering.
+        add_liked_track(self, track_id):
+            Utilises User object created
+            from class method "get_user()". Appends
+            ID of liked track to user object's 
+            "liked_tracks" array, then updates 
+            mongoDB "user" collection with value returned
+            from "prepare_liked_track()" instance method.
 
-        validate_password_format():
-            Verifies that the password meets specified format criteria
+        remove_liked_track(self, track_id):
+            Utilises User object created from class method
+            "get_user()". Removes ID of un-liked track from
+            user object's "liked_tracks" array, then updates 
+            mongoDB "user" collection with value returned
+            from "prepare_liked_track()" instance method.
+
+    
+    Class Methods:
+
+        get_user(cls, username):
+            Queries mongoDB "users" collection,
+            and returns a User object ready to be
+            accessed by the object's instance methods,
+            particularly:
+
+            add_liked_track()
+
+            remove_liked_track()
+
+    
+    Static Methods:
 
         edit_profile():
-            Updates MongoDB with updates fields provided by user
+            Queries mongoDB "users" collection, finding
+            a document by username, and updating it with
+            edited profile information.
 
-        change_password():
-            Updates MongoDB with new password, in the case user forgets
-            original password.
+        complete_user_profile():
+            Queries mongoDB "users" collection by 
+            matching username, and updates document with
+            data gathered in "build-profile.html"
 
-        change_email():
-            Updates MongoDB with user's new email address.
+        pull_from_list():
+            Method used to remove the IDs of liked tracks that
+            are attributed to a particular user, who has deleted
+            their account, along with all associated tracks that
+            they added.
 
-        delete_user():
-            Deletes user from database
+        get_all_users():
+            Queries mongoDB "users" collection and returns
+            all users.
+
+        get_id():
+            Queries mongoDB "users" collection by
+            matching username, and returns ID of user.
+
+        find_user_by_id():
+            Queries mongoDB "users" collection by
+            matching ID, and returns user document.
+            Used to find user when JWT token is 
+            submitted upon resetting password.
+
+
+        find_user_by_username(username):
+            Queries MongoDB for username
+            Utilised in users/views.py in register 
+            function, to determine if username
+            already exists.
+
+
+        validate_password_match(password, confirm_password):
+            Returns equality between both passwords, to confirm
+            that passwords match when a user logs in.
+
+        validate_password_format(password):
+            Returns a regex search on the password passed as argument,
+            to confirm that a user's password contains at least
+            8 characters, one number, one uppercase character,
+            and a special character. 
+
+
+        check_password(password_hash, password):
+            Returns werkzeug.security check_password_hash,
+            to ensure that the password submitted matches 
+            the encrypted password in mongoDB.
+
+
+        delete_user(user_id):
+            Queries mongoDB "users" collection by matching ID,
+            and removes user document from the collection.
+
+
+        allowed_file(filename):
+            Used when user selects a profile image.
+            Ensures that the user isn't able to upload any
+            file format other than an image.
+
+        check_image_filesize(filesize):
+            Ensures than an image's filesize can
+            be no greater than 500KB.
+
+        update_profile_image(username, filename, 
+                             profile_image, updated_info):
+            Queries mongoDB "users" collection by matching
+            username. And updates profile_image field with
+            new profile image filename.
+
+            Saves binary data to mongoDB fs.files and
+            fs.chunks collections.
+
+        find_file_by_filename(filename):
+            Queries mongoDB "fs.files" collection by matching filename,
+            and returns the filename found.
+
+        delete_profileimage_file(_id):
+            Queries mongoDB "fs.files" and "fs.chunks" collections,
+            and deletes the found filename and binary data.
      """
 
     def __init__(self, username, password=None, email_address=None,
                 first_name=None, last_name=None, date_of_birth=None,
-                city=None, country=None, about_user=None, 
-                profile_image=None, is_artist=None, spotify_userID=None,
-                display_spotify_playlists=None, _id=None, liked_tracks=None):
+                city=None, country=None, about_user=None, profile_image=None,
+                 is_artist=None, _id=None, liked_tracks=None):
 
         """
-        Initialise user instance
+        Constructor to create attributes, attributable to User object.
         """
 
         self.username = username
@@ -107,19 +203,15 @@ class User():
         self.about_user = about_user if isinstance (about_user, str) else str("")
         self.profile_image = profile_image if isinstance(profile_image, str) else str('')
         self.is_artist = is_artist if isinstance(is_artist, bool) else False
-        self.spotify_userID = spotify_userID if isinstance(spotify_userID, str) else str("")
-        self.display_spotify_playlists = display_spotify_playlists if isinstance(
-            display_spotify_playlists, bool) else False
         self.id = _id
         self.liked_tracks = liked_tracks if isinstance(liked_tracks, list) else []
         
 
-    
-    
     def get_user_info(self):
         """
-        Collects and prepares user input in
-        register and profile build functions.
+        Collects and prepares User object attributes
+        and returns dictionary, to be used by register
+        method to insert data into mongoDB "users" collection.
         """
 
         user_info = {
@@ -142,7 +234,26 @@ class User():
 
         return user_info
 
+
+    def register(self):
+        """
+        Invokes get_user_info() and inserts returned
+        dictionary into mongoDB "users" collection
+        """
+
+        user_data = self.get_user_info()
+
+        mongo.db.users.insert_one(user_data)    
+
+
     def prepare_liked_track(self):
+        """
+        Used in conjunction with class method
+        "get_user()", when user likes a track.
+        Prepares ID of liked track into a dictionary
+        format, and returning the value ready to be
+        inserted into mongoDB "users" collection.
+        """
 
         liked_track_info = {
             "liked_tracks": self.liked_tracks
@@ -152,9 +263,16 @@ class User():
 
 
     def add_liked_track(self, track_id):
+        """
+        Utilises User object created
+        from class method "get_user()". Appends
+        ID of liked track to user object's 
+        "liked_tracks" array, then updates 
+        mongoDB "user" collection with value returned
+        from "prepare_liked_track()" instance method.
+        """
 
         self.liked_tracks.append(ObjectId(track_id))
-        # print("liked tracks:", self.liked_tracks)
 
         mongo.db.users.update_one({
             "_id": ObjectId(self.id),
@@ -164,6 +282,13 @@ class User():
 
     
     def remove_liked_track(self, track_id):
+        """
+        Utilises User object created from class method
+        "get_user()". Removes ID of un-liked track from
+        user object's "liked_tracks" array, then updates 
+        mongoDB "user" collection with value returned
+        from "prepare_liked_track()" instance method.
+        """
 
         if ObjectId(track_id) in self.liked_tracks:
             self.liked_tracks.remove(ObjectId(track_id))
@@ -173,27 +298,42 @@ class User():
                 "$set": self.prepare_liked_track()
             })
 
+
     @staticmethod
     def pull_from_list(array, id):
-
+        """
+        Method used to remove the IDs of liked tracks that
+        are attributed to a particular user, who has deleted
+        their account, along with all associated tracks that
+        they added.
+        """
         
         mongo.db.users.update_many({array: ObjectId(id)},{"$pull": {array: ObjectId(id)}})
 
 
     @staticmethod
     def edit_profile(username, edited_info):
+        """
+        Queries mongoDB "users" collection, finding
+        a document by username, and updating it with
+        edited profile information.
+        """
         
-       mongo.db.users.update_one({"username": username},{"$set": edited_info })
+        mongo.db.users.update_one({"username": username},{"$set": edited_info })
 
     
 
     @classmethod
     def get_user(cls, username):
         """
-        Queries MongoDB to locate a user by their ID
-        Utilised in users/views.py in functions:
+        Queries mongoDB "users" collection,
+        and returns a User object ready to be
+        accessed by the object's instance methods,
+        particularly:
 
-        edit_profile
+        add_liked_track()
+
+        remove_liked_track()
         """
 
         user_data = mongo.db.users.find_one({"username": username.lower()})
@@ -207,12 +347,20 @@ class User():
 
     @staticmethod
     def get_all_users():
+        """
+        Queries mongoDB "users" collection and returns
+        all users.
+        """
 
         return mongo.db.users.find()
 
     
     @staticmethod
     def get_id(username):
+        """
+        Queries mongoDB "users" collection by
+        matching username, and returns ID of user.
+        """
         
         user_id = mongo.db.users.find_one({"username":username})["_id"]
 
@@ -221,17 +369,35 @@ class User():
 
     @staticmethod
     def complete_user_profile(username, profile_info):
+        """
+        Queries mongoDB "users" collection by 
+        matching username, and updates document with
+        data gathered in "build-profile.html"
+        """
 
         
         mongo.db.users.update_one({"username": username}, {"$set": profile_info})
 
     @staticmethod
     def find_user_by_email(email_address):
+        """
+        Queries mongoDB "users" collection by
+        matching email address, and returns
+        user document. Used when user requests
+        to reset password, and have an email sent 
+        to them to reset psasword. 
+        """
 
         return mongo.db.users.find_one({"email_address": email_address})
 
     @staticmethod
     def find_user_by_id(id):
+        """
+        Queries mongoDB "users" collection by
+        matching ID, and returns user document.
+        Used to find user when JWT token is 
+        submitted upon resetting password.
+        """
 
         return mongo.db.users.find_one({"_id": ObjectId(id)})
 
@@ -246,37 +412,47 @@ class User():
         """
         return mongo.db.users.find_one({"username": username})
 
-    def register(self):
-        """
-        Invokes get_user_info() and inserts data
-        into MongoDB
-        """
-
-        user_data = self.get_user_info()
-
-        mongo.db.users.insert_one(user_data)
-
 
     @staticmethod
     def validate_password_match(password, confirm_password):
+        """
+        Returns equality between both passwords, to confirm
+        that passwords match when a user logs in.
+        """
 
         return password == confirm_password
         
         
     @staticmethod
     def validate_password_format(password):
+        """
+        Returns a regex search on the password passed as argument,
+        to confirm that a user's password contains at least
+        8 characters, one number, one uppercase character,
+        and a special character. 
+        """
 
-        pattern = "^[a-zA-Z0-9]{8,18}$"
+        pattern = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
         return re.search(pattern, password)
 
     @staticmethod
     def allowed_file(filename):
-        ALLOWED_EXTENSIONS = set(["txt", "pdf", "png", "jpg", "jpeg", "gif"])
+        """
+        Used when user selects a profile image.
+        Ensures that the user isn't able to upload any
+        file format other than an image.
+        """
+        ALLOWED_EXTENSIONS = set(["pdf", "png", "jpg", "jpeg", "gif"])
         if filename != '':
             return "." in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
     @staticmethod
     def check_image_filesize(filesize):
+        """
+        Ensures than an image's filesize can
+        be no greater than 500KB.
+        """
         max_img_filesize = 0.5 * 1024 * 1024
 
         if int(filesize) <= max_img_filesize:
@@ -284,9 +460,18 @@ class User():
         else:
             return False
 
+
     @staticmethod
     def update_profile_image(username, filename,
                          profile_image, updated_info):
+        """
+        Queries mongoDB "users" collection by matching
+        username. And updates profile_image field with
+        new profile image filename.
+
+        Saves binary data to mongoDB fs.files and
+        fs.chunks collections.
+        """
 
         mongo.save_file(filename, profile_image)
         mongo.db.users.update_one({"username": username},
@@ -295,7 +480,13 @@ class User():
     
     @staticmethod
     def return_profile_image(filename):
-
+        """
+        Queries mongoDB files collection to
+        send binary data of image. Returns
+        the image to be displayed on User's
+        profile page, and on Track modals and
+        cards in Browse Tracks page.
+        """
         try:
             profile_image = mongo.send_file(filename)
         except Exception as e:
@@ -306,23 +497,40 @@ class User():
 
     @staticmethod
     def check_password(password_hash, password):
+        """
+        Returns werkzeug.security check_password_hash,
+        to ensure that the password submitted matches 
+        the encrypted password in mongoDB.
+        """
         return check_password_hash(password_hash, password)
 
     
     @staticmethod
     def delete_user(user_id):
+        """
+        Queries mongoDB "users" collection by matching ID,
+        and removes user document from the collection.
+        """
 
         mongo.db.users.delete_one({"_id": ObjectId(user_id)})
 
     
     @staticmethod
     def find_file_by_filename(filename):
+        """
+        Queries mongoDB "fs.files" collection by matching filename,
+        and returns the filename found.
+        """
 
         return mongo.db.fs.files.find_one({"filename": filename})
 
 
     @staticmethod
     def delete_profileimage_file(_id):
+        """
+        Queries mongoDB "fs.files" and "fs.chunks" collections,
+        and deletes the found filename and binary data.
+        """
 
         mongo.db.fs.files.delete_one({"_id": ObjectId(_id)})
         mongo.db.fs.chunks.delete_one({"files_id": ObjectId(_id)})

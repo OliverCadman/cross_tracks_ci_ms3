@@ -39,7 +39,7 @@ class Comment:
         _id: str
             The id of the comment itself   
 
-    Class Methods:
+        Instance Methods:
 
         get_comment_info()
             Collects and prepares data when comment object created,
@@ -81,7 +81,7 @@ class Comment:
 
         self.comment_body = comment_body
         self.comment_author = comment_author
-        self.track_id = track_id
+        self.track_id = ObjectId(track_id)
         self._id = _id if isinstance(_id, str) else ""
 
     
