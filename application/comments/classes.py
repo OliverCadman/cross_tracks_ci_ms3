@@ -39,7 +39,8 @@ class Comment:
         _id: str
             The id of the comment itself   
 
-        Instance Methods:
+
+    Instance Methods:
 
         get_comment_info()
             Collects and prepares data when comment object created,
@@ -48,6 +49,7 @@ class Comment:
         add_comment()
             Invokes get_comment_info() method and inserts
             data into mongoDB 'comments' collection.
+            
 
     Static Methods:
 
