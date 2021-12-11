@@ -2,7 +2,7 @@
 Comments: Sub-Module
 
 Handles data management and routing when a user 
-created, edits or deletes a comment.
+creates, edits or deletes a comment.
 
 Functions:
 
