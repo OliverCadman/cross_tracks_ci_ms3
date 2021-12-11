@@ -21,6 +21,7 @@ from application import mailing
 from flask_mail import Message
 import os
 
+# Initialize 'main' blueprint
 main = Blueprint("main",__name__)
 
 
