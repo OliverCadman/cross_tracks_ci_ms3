@@ -1,15 +1,28 @@
 """
-Admin View - Sub-module
+Admin: Sub-module
 ========================
 
-Manages the view
+Manages the admin views, handling data preparation
+and presentation of Track and Genre data.
+
+Views:
+
+    manage_genres()
+
+    manage_tracks()
+
+
+Functions:
+
+    add_genre()
+
+    delete_genre()
 """
 
 
 from flask import (Blueprint, render_template, redirect,
                    url_for, session, flash, request)
 from application.tracks.classes import Track
-
 
 
 # Initialize admin blueprint
@@ -24,6 +37,8 @@ def manage_genres():
     Queries mongoDB Genre collection for all genres,
     which are passed in to the render_template return
     function, to be rendered onto the 'manage-genres.html'
+
+    View only displayed if user 'admin' is logged in.
     """
 
     if not session.get("user") is None:
@@ -46,6 +61,13 @@ def manage_genres():
 
 @admin.route("/add-genre", methods=["GET", "POST"])
 def add_genre():
+    """
+    Add Genre Function
+
+    Handles form input in 'manage_genres' view, and 
+    inserts new genre data into mongoDB 'Genre' 
+    collection.
+    """
 
     if request.method == "POST":
 
@@ -90,6 +112,7 @@ def delete_genre(genre_id):
         except:
             flash("Something went wrong. Please try again")
             return redirect(url_for("admin.manage_genres"))
+
 
 @admin.route("/manage-tracks")
 def manage_tracks():
