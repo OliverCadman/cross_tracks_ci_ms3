@@ -1,3 +1,27 @@
+"""
+Tracks: Sub-module
+
+Handles all routing and data preparation 
+relative to tracks.
+
+Views:
+    add_track(username)
+
+    browse_tracks()
+
+Functions:
+    like_track()
+
+    remove_liked_track()
+
+    edit_track()
+
+    delete_track()
+
+    search_track()
+"""
+
+
 from os import error
 from flask import (Blueprint, render_template, url_for, flash, request, redirect, session, jsonify, abort)
 from application.tracks.classes import Track
@@ -13,7 +37,22 @@ tracks = Blueprint("tracks", __name__)
 
 @tracks.route("/add-track/<username>", methods=["GET","POST"])
 def add_track(username):
+    """
+    Renders 'add-track.html' template.
 
+    Invokes Track classes' "get_genres()" method,
+    to be accessed in select dropdown in form.
+
+    Invokes User classes' "get_id" method, to 
+    insert user's id to be used as a foreign key
+    when joining 'tracks' and 'users' collections.
+
+    Handles data submitted through form
+    in 'add-track.html', and creates Track object,
+    which is inserted into mongoDB 'tracks' collection.
+    """
+
+    # Customised error handling in case of invalid URL path
     if User.find_user_by_username(username) is None:
         abort(404)
     
@@ -36,7 +75,7 @@ def add_track(username):
 
             new_track.add_track()
             flash('Track added successfully')
-            return redirect(url_for('tracks.add_track', username=username))
+            return redirect(url_for('tracks.browse_tracks', username=username))
         except:
             flash('Sorry, something went wrong. Please try again')
             return redirect(url_for('tracks.add_track', username=username))
@@ -46,13 +85,17 @@ def add_track(username):
 
 @tracks.route("/browse-tracks")
 def browse_tracks():
+    """
+    Renders 'browse-tracks.html' template.
+
+
+    """
 
     tracks_and_users = Track.bind_users_to_tracks()
+    latest_tracks = Track.get_latest_tracks()
     genres = Track.get_genres()
     all_users = User.get_all_users()
-    latest_tracks = Track.get_latest_tracks()
 
-    print(latest_tracks)
 
     user_list = []
     for user in all_users:
@@ -74,6 +117,23 @@ def browse_tracks():
 
 @tracks.route('/like-track/<track_id>/<username>')
 def like_track(track_id, username):
+    """
+    Handles user input when user clicks the star
+    displayed on each track card in browse tracks page.
+
+    Invokes Track class' 'get_track_object' method, 
+    to access the relative instance methods.
+    
+   
+    In the case where the particular track isn't found in 
+    the user's 'liked_tracks' list, the method 'add_like'
+    is invoked. If the track is found in the user's 
+    'liked_tracks' list, then the 'remove_like' instance 
+    method is invoked.
+
+    Returns jsonify, used in conjunction with AJAX call in
+    'like-button-ajax.js' found in static/js directory.
+    """
 
     selected_track_object = Track.get_track_object(track_id)
     selected_track = selected_track_object._id
@@ -102,6 +162,21 @@ def like_track(track_id, username):
 
 @tracks.route("/remove-like/<track_id>/<username>")
 def remove_liked_track(track_id, username):
+    """
+    Function utilised in 'User Profile' page, when
+    user removes track from their 'Liked Tracks' 
+    collection. 
+
+    Invokes Track class' 'get_track_object' method, 
+    to access the relative instance methods.
+
+    Invokes User class static method 'get_user',
+    to be used to check if track is in user's 
+    "liked_tracks" list.
+
+    Returns jsonify, in conjunction with AJAX call in
+    'remove-like-ajax.js' found in static/js directory.
+    """
 
     selected_track_object = Track.get_track_object(track_id)
     selected_track = selected_track_object._id
@@ -114,32 +189,23 @@ def remove_liked_track(track_id, username):
             current_user.remove_liked_track(track_id)
             selected_track_object.remove_like(username)
 
-    return jsonify(selected_track_object.track_name, current_user.username)
+    parsed_track_id = Track.parse_json(current_user.liked_tracks)
+
+    return jsonify(track_name=selected_track_object.track_name, username=current_user.username,
+                    liked_tracks=parsed_track_id)
 
 
-@tracks.route("/add-comment/<track_id>/<username>/", methods=["GET", "POST"])
-def add_comment(track_id, username):
+@tracks.route("/edit-track/<track_id>", methods=["GET", "POST"])
+def edit_track(track_id):
+    """
+    Handles data submitted through form
+    in modal window in "browse-tracks.html"
+    and "user-profile.html".
 
-    if request.method == "POST":
-
-        user_input = request.form.get("comment_body")
-
-        if not Comment.check_for_whitespace(user_input):
-            error_message = "Your comment is empty!"
-            flash(error_message)
-            return redirect(url_for("tracks.browse_tracks"))
-
-        new_comment = Comment(user_input, username, ObjectId(track_id))
-        
-        new_comment.add_comment()
-        success_message = "Thanks for leaving your comment!"
-        flash(success_message)
-        return redirect(url_for('tracks.browse_tracks'))
-
-
-@tracks.route("/edit-track/<track_id>/<username>", methods=["GET", "POST"])
-def edit_track(track_id, username):
- 
+    Once data is prepared into dictionary,
+    the Track class static method "edit_track()"
+    is invoked.
+    """
 
     if request.method == "POST":
 
@@ -162,11 +228,12 @@ def edit_track(track_id, username):
 
 
 
-    
-
-
 @tracks.route("/delete-track/<track_id>/<username>", methods=["GET", "POST"])
 def delete_track(track_id, username):
+    """
+    Handles deletion of track, and removal of track data
+    in "tracks" and "users" collections.
+    """
     
     # Remove track from list of user's liked tracks
     all_users = User.get_all_users()
@@ -194,15 +261,22 @@ def delete_track(track_id, username):
 
 @tracks.route("/search-track", methods=["GET", "POST"])
 def search_track():
+    """
+    Handles user input in search window
+    in "browse-tracks.html".
+
+    Used in conjunction with AJAX call.
+
+    Returned data is 'jsonified', so it
+    can be utilised in the 'success' response
+    in AJAX call, and rendered asynchronously.
+    """
 
     query = None
     if request.method == "POST":
 
+        # Utilising data passed from AJAX call
         query = str(request.get_data())
-        print("query: ", query)
-        if query == '':
-            flash("Please search by genre or username")
-            return redirect(url_for("tracks.browse_tracks"))
 
         results = Track.search_tracks(query)
 
@@ -211,28 +285,9 @@ def search_track():
             for result in results:
                 json_encoded_result = Track.parse_json(result)
                 results_list.append(json_encoded_result)
-            
-            print(results_list)
         
             return jsonify(results_list=results_list)
         
         else:
             new_results_list = []
             return jsonify(new_results_list = new_results_list)
-
-   
-
-
-
-
-
-
-
-     
-
-    
-
-
-
-    
-    
