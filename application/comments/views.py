@@ -106,13 +106,3 @@ def edit_comment(comment_id):
         except:
             flash("Sorry, something went wrong. Please try again")
             return redirect(url_for('tracks.browse_tracks'))
-
-
-
-
-    
-
-
-
-    
-
