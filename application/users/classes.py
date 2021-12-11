@@ -89,11 +89,22 @@ class User():
             accessed by the object's instance methods,
             particularly:
 
-            add_liked_track()
+        add_liked_track():
+            Utilises User object created
+            from class method "get_user()". Appends
+            ID of liked track to user object's 
+            "liked_tracks" array, then updates 
+            mongoDB "user" collection with value returned
+            from "prepare_liked_track()" instance method.
+            
+        remove_liked_track():
+            Utilises User object created from class method
+            "get_user()". Removes ID of un-liked track from
+            user object's "liked_tracks" array, then updates 
+            mongoDB "user" collection with value returned
+            from "prepare_liked_track()" instance method.
 
-            remove_liked_track()
 
-    
     Static Methods:
 
         edit_profile():
