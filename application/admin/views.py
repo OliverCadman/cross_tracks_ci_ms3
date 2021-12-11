@@ -1,8 +1,20 @@
+"""
+Admin View - Sub-module
+========================
+
+Manages the view
+"""
+
+
 from flask import (Blueprint, render_template, redirect,
                    url_for, session, flash, request)
 from application.tracks.classes import Track
 
+
+
+# Initialize admin blueprint
 admin = Blueprint('admin', __name__)
+
 
 @admin.route("/manage-genres")
 def manage_genres():
@@ -14,16 +26,23 @@ def manage_genres():
     function, to be rendered onto the 'manage-genres.html'
     """
 
-    # Avoids display of page if any user other than
-    # admin attempts to manually enter URL path
-    if session["user"] == "admin":
+    if not session.get("user") is None:
 
-        all_genres = Track.get_genres()
-        return render_template('manage-genres.html', all_genres=all_genres)
+        # Avoids display of page if any user other than
+        # admin attempts to manually enter URL path
+        if session["user"] == "admin":
 
+            all_genres = Track.get_genres()
+            return render_template('manage-genres.html', all_genres=all_genres)
+
+        else:
+            flash("You're not meant to be there!")
+            return redirect(url_for('main.index'))
+    
     else:
         flash("You're not meant to be there!")
         return redirect(url_for("main.index"))
+
 
 @admin.route("/add-genre", methods=["GET", "POST"])
 def add_genre():
@@ -75,12 +94,24 @@ def delete_genre(genre_id):
 @admin.route("/manage-tracks")
 def manage_tracks():
 
-    all_tracks = Track.get_all_tracks()
-    all_genres = Track.get_genres()
+    if not session.get("user") is None:
+
+        if session["user"] == "admin":
+
+            all_tracks = Track.get_all_tracks()
+            all_genres = Track.get_genres()
     
 
-    return render_template("manage-tracks.html", all_tracks=all_tracks,
+            return render_template("manage-tracks.html", all_tracks=all_tracks,
                            all_genres=all_genres)
+    
+        else:
+            flash("You're not meant to be there!")
+            return redirect(url_for('main.index'))
+    
+    else:
+        flash("You're not meant to be there!")
+        return redirect(url_for('main.index'))
 
 
 
