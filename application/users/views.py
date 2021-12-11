@@ -1,9 +1,39 @@
 """
-User Views
+User: Sub-module
 ==========
 
-Sub-module to handle routes and data input relative
-to user details.
+Sub-module to handle routes and data relating
+to users.
+
+Views:
+    build_profile()
+
+    login()
+
+    user_profile()
+
+
+Functions:
+
+    register_user()
+
+    edit_profile()
+
+    logout()
+
+    display_profile_image()
+
+    edit_profile_img()
+
+    get_reset_token()
+
+    request_password_reset()
+
+    verify_reset_token()
+
+    reset_password()
+
+    delete_profile()
 """
 
 import os
@@ -32,13 +62,32 @@ if os.path.exists("env.py"):
 
 
 
-
+# Initialize users blueprint
 users = Blueprint('users', __name__)
-
 
 
 @users.route("/register", methods=["GET", "POST"])
 def register_user():
+    """
+    Renders "register.html" template
+
+    Handles data submitted through form in
+    Register page
+    
+    Checks if the submitted username already
+    exists in the database.
+
+    Uses password validation to ensure the
+    password is in the correct format, and
+    that the first password matches the 
+    confirmed password.
+
+    If all checks are passed, a new User
+    object is instantiated and registered,
+    and a session cookie is created, assigned
+    to the username provided in registration 
+    form.
+    """
 
     if request.method == "POST":
 
@@ -63,7 +112,6 @@ def register_user():
             return redirect(request.referrer)
 
         
-
         new_user = User(username, password, email_address)
 
         new_user.register()
@@ -75,14 +123,22 @@ def register_user():
     return render_template('register.html')
 
 
-
-
-
 @users.route("/profile-edit/<username>", methods=["GET", "POST"])
 def build_profile(username):
     """
-    build_profile() runs after initial registration, to gather information
-    to be displayed on user's profile page.
+    Renders "build-profile.html"
+
+    Runs after initial registration, and handles form
+    data submitted in Build Profile page.
+
+    If the user selects a profile image, methods in
+    User class are used to validate file format and 
+    size. If all checks are passed, the file is saved
+    to mongodb fs.files and fs.chunks collections.
+
+    Dictionary is made containing data submitted through
+    form, and passed into User class' static method
+    "complete_user_profile()"
     """
 
     if request.method == "POST":
@@ -123,14 +179,29 @@ def build_profile(username):
 
             User.complete_user_profile(username, profile_info)
 
-            return redirect(url_for("users.user_profile", username = username))
+            return redirect(url_for("users.user_profile", username=username))
         
     return render_template('build-profile.html')
 
 
-
 @users.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Renders "login.html"
+
+    Handles data submitted from login form.
+
+    Finds username in "users" collection.
+
+    Checks that the password matches the 
+    password hash held in the user document
+    in "users" collection.
+
+    If all checks are passed, session cookie
+    is created and assigned to username, and 
+    user is redirected to the home page, with
+    welcome message.
+    """
 
     if request.method == "POST":
         login_username = request.form.get("username").lower()
@@ -159,15 +230,21 @@ def login():
     parsed_url = urlparse(request.referrer)
 
     if parsed_url.path == '/browse-tracks':
-        flash('Please Login to like your tracks!')
+        flash('Please login to like tracks!')
     return render_template("login.html")   
-
 
 
 @users.route("/edit-profile/<username>", methods = ["GET", "POST"])
 def edit_profile(username):
+    """
+    Handles data submitted from form in modal,
+    in User Profile page.
 
-    user = User.find_user_by_username(username)
+    Organises submitted data into dictionary, 
+    and passed into User class' "edit_profile()"
+    method, to updated relative user document in
+    mongoDB "users" collection.
+    """
 
     if request.method == "POST":
         
@@ -199,12 +276,13 @@ def edit_profile(username):
             return redirect(url_for("users.user_profile", username=session["user"]))
 
 
-        
-
-
-
 @users.route("/logout")
 def logout():
+    """
+    Removes "user" session cookie, and 
+    logs user out, redirecting to website's
+    home page.
+    """
     session.pop("user")
     flash("You have been logged out")
     return redirect(url_for('main.index'))
@@ -213,6 +291,13 @@ def logout():
 
 @users.route("/file/<path:filename>")
 def display_profile_image(filename):
+    """
+    Queries mongoDB fs.files collection using
+    filename to match file, and sends profile image
+    to client, which is returned to be displayed
+    in User Profile page, and on Track cards/modals
+    in Browse Tracks page.
+    """
 
     try:
         profile_image = mongo.send_file(filename)
@@ -265,8 +350,6 @@ def user_profile(username):
         user_dob = tuple(map(int, user_dob.split('-')))
         user_age = calculate_user_age(user_dob)
 
-    user_profile_image = current_user["profile_image"]
-
     # Display user's tracks
     user_id = User.get_id(username)
 
@@ -281,7 +364,17 @@ def user_profile(username):
 
 @users.route('/edit_profile_img/<username>', methods=["GET", "POST"])
 def edit_profile_img(username):
-    
+    """
+    Handles image file uploaded from User Profile
+    page. 
+
+    Finds existing profile image data in fs.files
+    and fs.chunks collections, and removes them, ready
+    to be replaced with new image data.
+
+    If successful, the new image data is saved to 
+    mongoDB, and filename is updated to user collection.
+    """
     if request.method == "POST":
 
         user = User.find_user_by_username(username)
@@ -412,7 +505,20 @@ def verify_reset_token(token):
 
 @users.route("/reset-password/<token>", methods=["GET", "POST"])
 def reset_password(token):
+    """
+    Renders "reset-password.html"
 
+    Handles data submitted in form in Reset Password
+    page. 
+
+    Checks that the password matches the correct format,
+    and the first password matches the confirmed password.
+
+    If all checks are passed, the new password is updated in
+    user collection, and user is redirected to home page.
+    """
+
+    # Grabs user ID returned from verify_reset_token()
     user = verify_reset_token(token)
     print(user)
 
@@ -443,6 +549,25 @@ def reset_password(token):
 
 @users.route('/delete_profile/<username>')
 def delete_profile(username):
+    """
+    Deletes user's account from "users" collection
+
+    Removes all tracks attributed to user from 
+    "tracks" collection, as well as all attributed
+    tracks listed in user's "liked_tracks" arrays.
+
+    Username is removed from "track" collection's
+    "likes" list, wherever the username matches.
+
+    All comments that the user submitted are also
+    removed.
+
+    User profile image data is removed from fs.files
+    and fs.chunks collections.
+
+    User is then popped out of the session cookie, 
+    and returned to the home page with flash message.
+    """
 
     if not session["user"]:
         return redirect(url_for("users.login"))
@@ -463,23 +588,29 @@ def delete_profile(username):
 
             if filename_id:
                 try:
+                    # Remove image data from fs.files and fs.chunks
                     User.delete_profileimage_file(filename_id)
                 except Exception as e:
                     print(e)
 
 
         try:
+            # Remove user document from "users" collection
             User.delete_user(user_id)
         except Exception as e:
             print(e)
 
         try:
+            # Remove user data from track's "likes" list
+            # and decrement the 'likes' count of all
+            # relative tracks.
             Track.decrement_likes_count(username)
             Track.remove_user_from_likes_list(username)
         except Exception as e:
             print(e)
 
         try:
+            # Remove all comments linked to user_id
             Comment.delete_comments_by_user_id(user_id)
         except Exception as e:
             print(e)
