@@ -165,6 +165,17 @@
                                     <div class="card-action">
                                         <p>
                                             <small>Added by:</small> {{username}}
+                                            {% if track['user'][0]['profile_image'] %}
+                                            <a href="{{url_for('users.user_profile', username=username)}}">
+                                                <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                                    alt="User profile image" class="user-image-card">
+                                            </a>
+                                            {% else %}
+                                            <a href="{{url_for('users.user_profile', username=username)}}">
+                                                <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                                    alt="User profile image" class="user-image-card">
+                                            </a>
+                                            {% endif %}
                                         </p>
                                         <div class="more-info-btn">
                                             <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
@@ -240,6 +251,17 @@
                             <div class="card-action">
                                 <p>
                                     <small>Added by:</small> {{username}}
+                                    {% if track['user'][0]['profile_image'] %}
+                                    <a href="{{url_for('users.user_profile', username=username)}}">
+                                        <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                                            alt="User profile image" class="user-image-card">
+                                    </a>
+                                    {% else %}
+                                    <a href="{{url_for('users.user_profile', username=username)}}">
+                                        <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                                            alt="User profile image" class="user-image-card">
+                                    </a>
+                                    {% endif %}
                                 </p>
                                 <div class="more-info-btn">
                                     <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
@@ -306,13 +328,16 @@
                         </a>
                         {% endif %}
                     </p>
-                    <div class="more-info-btn">
-                        <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-info-circle"><i
-                                    class="fas fa-comment"></i></i></a>
-                        {% if username == session["user"] %}
-                        <a href="#" class="btn">Edit</a>
-                        {% endif %}
-                    </div>
+                   <div class="more-info-btn">
+                       <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
+                               class="fas fa-info-circle card-btn"></i></a>
+                       {% if username == session["user"] %}
+                       <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                               class="fas fa-edit card-btn"></i></a>
+                       <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                               class="fas fa-trash-alt card-btn"></i></a>
+                       {% endif %}
+                   </div>
                 </div>
             </div>
         </div>
