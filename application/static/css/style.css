@@ -678,6 +678,11 @@ nav li a {
     display: inline;
 }
 
+.search-bar-icon,
+.user-option  {
+    cursor: pointer;
+}
+
 .search-bar-mobile {
     position: relative;
 
@@ -871,7 +876,6 @@ h2,h3 {
 
 .modal-body p span {
     font-family: 'Alata', sans-serif;
-    color: #eee;
 }
 
 .modal-body p {
@@ -943,8 +947,48 @@ h2,h3 {
     font-weight: 500;
 }
 
+.date-comment-added {
+    color: grey;
+}
+
+.edit-delete-comment-btn {
+     background-color: transparent;
+     box-shadow: none;
+     padding: 0;
+ }
+
 .edit-delete-comment-btns button {
     display: inline;
+}
+
+.edit-delete-comment-btn i {
+    color: grey;
+}
+
+.submit-comment-edit,
+.cancel-comment-edit {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+
+.submit-comment-edit {
+    background-color: #3c4c8b;
+    color: #eee;  
+}
+
+.submit-comment-edit:hover {
+    background-color: #3c4c8b;
+}
+
+.cancel-comment-edit:hover {
+    background-color: rgb(255, 232, 158);
+}
+
+.cancel-comment-edit {
+    background-color: rgb(255, 232, 158);
+    color: #333;
 }
 
 .comment-divider {
@@ -1185,6 +1229,16 @@ h2,h3 {
     display: flex;
     justify-content: center;
     margin: 1.5rem 0;
+}
+
+.build-profile-form .submit-btn button,
+.build-profile-form .btn {
+    background-color: #3c4c8b;
+    color: #eee;
+}
+
+.build-profile-form button:hover {
+    background-color: #3c4c8b;
 }
 
 .build-profile-form button,
@@ -1709,12 +1763,6 @@ h2,h3 {
         margin-left: .75rem;
     }
 
-    .edit-delete-comment-btn {
-        background-color: transparent;
-        box-shadow: none;
-        padding: 0;
-
-    }
 
     .edit-delete-comment-btn:hover {
         background: none;
@@ -2015,7 +2063,7 @@ h2,h3 {
     .build-profile-form button:hover,
     .build-profile-form .btn:hover,
     .build-profile-form .btn span:hover {
-        background-color: #d3b29c;
+        background-color: #3c4c8b;
     }
 
     /* Login Form */
