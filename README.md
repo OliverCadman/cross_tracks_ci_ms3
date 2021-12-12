@@ -304,6 +304,12 @@ Should the user choose to delete their profile by clicking the 'Delete My Profil
 
 ![Website User Profile Tracks](documentation/readme-images/crosstracks-user-tracks.png)
 
+
+
+https://user-images.githubusercontent.com/79907183/145728312-0bebd56e-c9c1-4ad7-903b-7924ffbfdd0c.mp4
+
+
+
 The lower level section of the User Profile page is where the user can collect their added and liked tracks. Should a user add their own track, it's displayed on their profile page for other users to see. Displayed on a materializeCSS card, users have the option to open a modal window displaying further information, by clicking the info button at the bottom of the card.
 
 ![Website User Profile, Delete Track](documentation/readme-images/crosstracks-delete-track.png)
