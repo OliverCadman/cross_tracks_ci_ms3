@@ -375,9 +375,52 @@ When the user submits the form and it is inserted to the database, the user is t
 
 ![Website Add a Track Page](documentation/readme-images/crosstracks-contact.png)
 
-The top level of the contact page features a header, accompanied by a vector. Beneath, a form is featured, for the user to provide their email address, name, and any questions/feedback they would like to give. Upon submission of the form, a flash message is displayed to the user, either to confirm that the email was sent, or that something went wrong (in the case that there are some server issues).
+The top level of the contact page features a header, accompanied by a vector. Beneath, a form is featured, for the user to provide their email address, name, and any questions/feedback they would like to give. 
 
-## Features left to Implement
+Upon submission of the form, an email is sent to the website owner (via the HTML file 'contact-message.html', and a flash message is displayed to the user, either to confirm that the email was sent, or that something went wrong (in the case that there are some server issues).
+
+### 404 Page
+
+![Website Add a Track Page](documentation/readme-images/crosstracks-404.png)
+
+The website features a 404 page, in the case that the user enters an invalid URL path. The page features a vector conveying the 404 message, along with a header saying 'Page Not Found', and a button inviting the user to return to the website's home page.
+
+### 500 Page
+
+![Website Add a Track Page](documentation/readme-images/crosstracks-500.png)
+
+The website also features a 500 page, in the case that there are server issues. The page features a header conveying the 500 error message, along with a brief apology about the interruption, and a button to return the user back to the home page. The message is also accompanied by a vector of a person singing to another person, who are covering their ears.
+
+### Manage Genres (as admin)
+
+
+![Website Manage Genres Page](documentation/readme-images/crosstracks-manage-genres.png)
+
+If the admin is logged into the website, there are two extra pages available. One of them is the 'Manage Genres' page, where the administrator can delete or add genres, which will be available to the user when they add or edit their tracks. The current list of genres is presented using clickable materializeCSS "chips", each with a cross icon. If the icon is clicked, a modal window is displayed to confirm deletion of the genre. Here the administrator can confirm deletion, or cancel (which closes the modal window)
+
+Below the list of genres is a small form with one text input with a submit button, allowing the administrator to add a new genre to the list. 
+
+### Manage Tracks (as admin)
+
+![Website Manage Tracks Page](documentation/readme-images/crosstracks-manage-tracks.png)
+
+The admin also has the privilege to edit or delete all tracks in the Cross//Tracks database. The 'Manage Tracks' page features a collection of all tracks, displayed on materializeCSS cards, and styled as per the styling in the website's 'Browse Tracks' page. Each card features an edit and delete button, the former of which opens a modal window allowing the administrator to edit the track (typically in the case where an image URL is broken, and another can be sourced), or delete the track (in the case of duplication/explicit language).
+
+## Features for future implementation
+
+1. Messaging 
+
+2. Notifications
+
+3. Playback (Spotify API)
+
+4. Search by username
+
+5. Add Friends
+
+6. 
+
+
 
 
 
