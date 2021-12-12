@@ -173,6 +173,10 @@ nav li a {
     background-color: #F1EDE6;
 }
 
+.about-crosstracks-wrapper {
+    font-weight: 500;
+}
+
 .info-header {
     font-family: "Alata", sans-serif;
     text-decoration: underline;
@@ -229,7 +233,13 @@ nav li a {
 }
 
 
-
+.signup-btn-wrapper a,
+.hero-inner a {
+    font-family: "Quicksand", sans-serif;
+    background: #3c4c8b;
+    color: #eee;
+    font-weight: 600;
+}
 
 
 /* -------- User Profile Page --------- */
@@ -330,7 +340,7 @@ nav li a {
 .edit-profile-btn-wrapper a {
     margin: 10px 5px;
     font-size: .8rem;
-    background-color: #dddddd;
+    background-color: #E0C0AC;
     color: #222222;
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
@@ -414,19 +424,24 @@ nav li a {
 
 }
 
-.submit-btn button {
-    background-color: #E0C0AC;
-    font-weight: bold;
-    color: #333333;
-    margin-left: .5rem;
-    font-family: "Quicksand", sans-serif;
-}
-
 .edit-profile-form .submit-btn {
     margin-top: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.edit-profile-form .submit-btn button {
+    background-color: #3c4c8b;
+    font-weight: bold;
+    color: #eee;
+    margin-left: .5rem;
+    font-family: "Quicksand", sans-serif;
+}
+
+.edit-profile-form .submit-btn button:last-of-type {
+    background-color: rgb(255, 232, 158);
+    color: #333;
 }
 
 /* Delete Profile Modal */
@@ -449,12 +464,23 @@ nav li a {
     margin-top: 3rem;
 }
 
-.delete-action-btn {
+.delete-action-btn,
+.delete-track-btn
+ {
     letter-spacing: 0;
-    background-color: #E0C0AC;
-    color: #333333;
+    background-color: #3c4c8b;
+    color: #eee;
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
+    text-transform: capitalize;
+}
+
+.delete-action-btn.modal-close,
+.cancel-delete-btn {
+    background-color: rgb(255, 232, 158);
+    color: #333;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
     text-transform: capitalize;
 }
 
@@ -551,15 +577,6 @@ nav li a {
 
 .delete-track-modal-image {
     margin-top: 2rem;
-}
-
-.delete-track-btn {
-    background-color: #BC4749;
-}
-
-.cancel-delete-btn {
-    background-color: #FFF9A5;
-    color: #333333;
 }
 
 
@@ -929,6 +946,14 @@ h2,h3 {
     padding-bottom: 1rem;
 }
 
+.submit-comment-btn button {
+    background-color: #3c4c8b;
+    color: #eee;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
 .comment p {
     color: #222222;
 }
@@ -953,7 +978,7 @@ h2,h3 {
 }
 
 .edit-track-modal button {
-    font-family: 'Alata', sans-serif;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .edit-track-modal input {
@@ -962,14 +987,15 @@ h2,h3 {
 }
 
 .edit-track-modal button {
-    background-color: #82bd87;
+    background-color: #3c4c8b;
     font-weight: 600;
-    color: #222222;
+    color: #eee;
     margin: .4rem 0;
 }
 
 .edit-track-modal button:last-of-type {
-    background-color: rgb(252, 252, 107);
+    background-color: rgb(255, 232, 158);
+    color: #333;
 
 }
 
@@ -1035,12 +1061,13 @@ h2,h3 {
 
 .add-track-form .submit-btn button {
     font-family: 'Quicksand', sans-serif;
-    color: #222222;
-    background-color: #E0C0AC;
+    color: #eee;
+    background-color: #3c4c8b;
 }
 
 .add-track-form .submit-btn button:last-of-type {
     background-color: rgb(255, 232, 158);
+    color: #333;
 }
 
 /* --------- Register Page -------- */
@@ -1450,6 +1477,15 @@ h2,h3 {
         text-align: left;
     }
 
+    .signup-btn-wrapper a:hover,
+    .hero-inner a:hover {
+        font-family: "Quicksand", sans-serif;
+        background: #d4daf0;
+        color: #333;
+        font-weight: 600;
+    }
+
+
     /* ------ Build Profile Page ------- */
 
     .build-profile-container {
@@ -1553,6 +1589,11 @@ h2,h3 {
         position: relative;
     }
 
+    .card
+    .card-title {
+        font-size: 18px;
+    }
+
 
     .card-image-wrapper {
         position: absolute;
@@ -1634,7 +1675,11 @@ h2,h3 {
 
     .submit-comment-btn {
         display: inline;
+    }
 
+    .submit-comment-btn button:hover {
+        background-color: #d4daf0;
+        color: #333;
     }
 
     .edit-delete-comment-btns {
@@ -1767,6 +1812,14 @@ h2,h3 {
 
     .edit-track-modal .submit-btn button {
         margin: 0 .5rem;
+    }
+
+    .edit-track-form .submit-btn button:hover {
+         background: #3c4c8b;
+    }
+
+    .edit-track-form .submit-btn button:last-of-type:hover {
+        background: rgb(255, 232, 158);
     }
 
     /* Delete Profile Modal */
@@ -1996,7 +2049,7 @@ h2,h3 {
 
     .card-title {
         /* white-space: nowrap; */
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
 
     .card-information-wrapper {
@@ -2127,13 +2180,8 @@ h2,h3 {
         font-size: .8rem;
     }
 
-    .edit-profile-btn-wrapper a:first-of-type:hover {
-        background-color: #FFF9A5;
-    }
-
-    .edit-profile-btn-wrapper a:last-of-type:hover {
-        background-color: #BC4749;
-        color: #dddddd;
+    .edit-profile-btn-wrapper a:hover {
+        background-color: #e4d4ca;
     }
 
     /* User's Tracks Section */
@@ -2175,8 +2223,8 @@ h2,h3 {
         align-items: center;
     }
 
-    .delete-action-btn:first-of-type:hover {
-        background-color: #E0C0AC;
+    .delete-action-btn:hover {
+        background-color: none;
     }
 
 
