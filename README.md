@@ -312,6 +312,42 @@ If the track belongs to the user who's profile it's being featured on, then edit
 
 Similarly, if a user likes a track, these likes are collected in the next section of the User Profile page, again on materializeCSS cards. A button to open a modal window with more information about the track is present, along with a delete button if the user is on their own profile page. AJAX is used to remove the liked track from their list, so as not to refresh the page and provide a better UX.
 
+### Browse Tracks Page
+
+#### Latest Tracks/All Tracks 
+
+![Website Browse Tracks Page, Latest Tracks](documentation/readme-images/crosstracks-latest-tracks.png)
+
+The top level of the 'Browse Tracks' page features links to give the user the option to search for tracks, add their own track, or visit their profile. If the user is not logged in, the user only has the option to search for tracks.
+
+Track presentation is divided into two sections; 'Latest Tracks' and 'All Tracks'. The 'Latest Tracks' section is limited to the last 6 tracks which were added to the database. The 'All Tracks' section, of course, features all tracks on the database. These sections are headed by a full-width banner, featuring the background design found in most other pages of the website.
+
+Below, tracks are presented on materializeCSS cards, featuring an image of the track's album art. If an image URL is not provided, the image defaults to the Cross//Tracks logo. The card features the track name, the artist name and the genre of the track. A button is present to allow the user to find out more information about the track, or to leave a comment on the track. 
+
+A FontAwesome star is present on all track cards. If clicked, the data is sent to the mongoDB database, and the track is added to the user's list of "liked_tracks", and the amount of likes the track has increases by one. This functionality is achieved through AJAX, as without it, the page would refresh and would scroll to the top, which isn't great UX.
+
+At the bottom of the cards, information on the user who added the track is present, along with their profile picture. Users can click on the profile picture to visit their profile. 
+
+If the user chooses to inspect further information about a track, they may open a modal window by clicking on the button featuring the FontAwesome 'info' icon. The modal features the image of the album art for the track, along with slightly more details about the track. Furthermore, a form is present to allow the user to leave a comment on the track. If a user leaves a comment, a comment icon appears on the track card, along with a number representing the amount of comments the track has. The user who left the comment can choose to edit, or delete the comment.
+
+Edit and Delete buttons are also presented to the user, but only if they are the same user who added the track.
+
+#### Search Tracks
+
+Users can also search for tracks by genre. The user can click the link 'Search Tracks' (accompanied by the maginifying glass).
+This link opens up a sidebar from the right hand side of the viewport (this spans full-width on mobile devices). Here, the user can type a genre name and search for tracks. The use of AJAX provides the user with instant results, without having to click a button to refresh the page. It was determined that the inclusion of AJAX for this functionality would result in a better UX.
+
+#### Edit and Delete Modals 
+
+As with the User Profile section, users have the option to edit or delete their added tracks. The design of the modals to allow for this are the same as those in the User Profile section.
+
+
+
+
+
+
+
+
 ## Features left to Implement
 
 
