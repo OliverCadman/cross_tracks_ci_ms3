@@ -173,8 +173,60 @@ Links to the wireframes are below:
 * [Login Page](documentation/wireframes/cross-tracks-login.pdf)
 * [Add Track Page](documentation/wireframes/cross-tracks-add-track.pdf)
 * [Browse Tracks Page](documentation/wireframes/cross-tracks-search-tracks.pdf)
-* [My Tracks Page](documentation/wireframes/cross-tracks-my-tracks.pdf)
 * [User Profile](documentation/wireframes/cross-tracks-user-profile.pdf)
 * [User Profile (editable)](documentation/wireframes/cross-tracks-editable-profile.pdf)
 * [Edit Profile](documentation/wireframes/cross-tracks-profile-edit.pdf)
+
 ### Surface
+
+#### Design
+
+##### General Considerations
+
+The website's background features a design which serves to frame the content of each page. This background design is prevalent on all pages of the website. Since this background design features a fair amount of variation in it's colour scheme, a more monochromatic approach to the colour scheme was considered, particularly for the more high-level elements of the page, such as the track cards, and card modals. A monochromatic approach was determined to compliment the relatively busier colour scheme of the website's background image.
+
+##### Colour Palette
+
+![Color Palette Used For Website](documentation/readme-images/crosstracks-colourpalette.png)
+
+* #7b89b4 (Shadow Blue) - The colour 'Shadow Blue' is used for the website's navigation bar on laptop and desktop devices, as well as the sidenav bar for iPad and mobile devices, and the website's footer. This colour is also featured in the website's user profile page, at the top level, where the user details and profile image are displayed.
+
+* #5d6ca7 (Blue Yonder) - This colour is used for the MaterializeCSS Cards and Modals to display track information, comments and images in the website's 'Browse Tracks' and 'User Profile' pages. These colours were chosen in consistency with the monochromatic consideration (between the cards and the navigation bar. 
+
+* 3c4c8b (Y in Mn Blue) - This colour is featured on all buttons throughout the website, as well as being used as a secondary colour in the website's 'User Profile' page, serving as a banner to provide a background to the text content (username and email). The decision for this colour to be used as a banner was to provide a distinction between the user's primary details and the user's other details (name, location, age, description); the latter of which sits atop the ligther 'Shadow Blue' colour. 
+
+* #f1ede6 (Alabaster) - This colour is used as the background colour for the website's Home, Login, Build Profile, Add Track and Registration pages, as well as for all sections displaying track cards and modals to delete and edit tracks and user's accounts. The contrast between this colour and the prevalent blue colour should provide contrast between background and foreground elements.
+
+* #eac0ac (Desert Sand) - This colour is used for the buttons displayed on the track cards (More info, Edit and Delete). Although this colour goes against the monochromatic approach, it was deemed that this colour against the blue background was rather aesthetically pleasing. 
+
+* #333333 (Jet) - This colour is used for all text content which sits on top of a light background, such as the text content in the website's Home Page and Build Profile page, the headers in Registration, Login,  and the section header banners in Browse Tracks and User Profile pages. This colour was chosen simply to contrast against the light background, whilst also not being too dark. The colour is also used on all buttons which feature a lighter colour.
+
+* #eeeeee (Cultured) - This colour is used for the text content in the website's navigation, sidenav and footer elements, as well as track cards and modals, and all buttons which feature a darker 'Y in Mn Blue' colour.
+
+##### Typography
+
+The website uses the Google Fonts library to provide the typefaces:
+
+* Alata - Used for the website's logo, headers, track names and usernames.
+
+* Quicksand - Used for track details, additional user details (in User Profile page), form text inputs and all buttons throughout website. This font was chosen as it nicely complimented the 'Alata' font used for the headers of the website.
+
+##### Icons
+
+Icons for the website were provided by the FontAwesome library, and were used in the buttons on track cards, to represent the actions a user could take with regards to displaying more information, editing, or deleting a track. Icons are also used in the list of options in the top level of the Browse Tracks page. A hamburger icon is also used for the website's collapsible navbar. 
+
+Clickable FontAwesome star icons are also used to represent a clickable button for the user to 'like' a track, and save it to their profile. A speech bubble icon is used alongside the number of comments that is left on a particular track, to concisely represent that the numbers are related to the amount of comments a track has.
+
+##### Images
+
+The website features a main background image which is featured on all pages of the website except the User Profile page, as well as serving as the background for the header banners in the 'Browse Tracks' and 'User Profile' pages.
+
+The website's logo is used in the hero section of the Home Page, as well as being used as a default track image (should the user not provide an image URL). This logo is also used for the website's favicon.
+
+Vector images are used at the top level in the 'Add a Track' and 'Contact' pages, as well as being used in lower level elements in some pages, such as the 'About Us' section in the 'Home' page, and accompanying the 'No Tracks' message in the User Profile 'My Tracks' and 'Liked Tracks' sections.
+
+
+
+
+
+
