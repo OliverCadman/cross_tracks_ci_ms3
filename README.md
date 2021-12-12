@@ -302,12 +302,9 @@ Should the user choose to edit their profile by clicking the 'Edit My Profile' b
 
 Should the user choose to delete their profile by clicking the 'Delete My Profile' button, a materializeCSS modal is presented, with a confirmation message to provide the user an option to cancel deleting their profile, if they then decide against it. Defensive programming is important in this case, so a confirmation modal window is necessary (as opposed to clicking one button, and there's no going back).
 
-![Website User Profile Tracks](documentation/readme-images/crosstracks-user-tracks.png)
-
-
-
 https://user-images.githubusercontent.com/79907183/145728312-0bebd56e-c9c1-4ad7-903b-7924ffbfdd0c.mp4
 
+![Website User Profile Tracks](documentation/readme-images/crosstracks-user-tracks.png)
 
 
 The lower level section of the User Profile page is where the user can collect their added and liked tracks. Should a user add their own track, it's displayed on their profile page for other users to see. Displayed on a materializeCSS card, users have the option to open a modal window displaying further information, by clicking the info button at the bottom of the card.
