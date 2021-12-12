@@ -508,7 +508,7 @@
         </div>
 
          <!-- Track Delete Modal -->
-         <div class="modal" id="delete_track_modal_{{track._id}}">
+         <div class="modal delete-track-modal" id="delete_track_modal_{{track._id}}">
              <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
              <div class="modal-content">
                  <div class="row">
@@ -519,11 +519,11 @@
                          <div class="confirm-delete-wrapper center-align">
                              <p>Are you sure you want to continue?</p>
                              <a href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}"
-                                 class="btn">Delete</a>
-                             <button type="button" class="btn modal-close">Cancel</button>
+                                 class="btn delete-track-btn">Delete</a>
+                             <button type="button" class="btn modal-close cancel-delete-btn">Cancel</button>
                          </div>
                      </div>
-                     <div class="col m6 hide-on-mobile-only">
+                     <div class="col m6 delete-track-modal-image">
                          {% if not track.image_url == '' %}
                          <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover">
                          {% else %}
@@ -544,7 +544,6 @@
 <script src="{{url_for('static', filename='js/search-bar.js')}}"></script>
 <script src="{{url_for('static', filename='js/edit-comment.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
-<script src="{{url_for('static', filename='js/fit-card-title.js')}}"></script>
 {% endblock %}
 
 <script>
