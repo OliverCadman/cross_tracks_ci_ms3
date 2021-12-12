@@ -225,6 +225,29 @@ The website's logo is used in the hero section of the Home Page, as well as bein
 
 Vector images are used at the top level in the 'Add a Track' and 'Contact' pages, as well as being used in lower level elements in some pages, such as the 'About Us' section in the 'Home' page, and accompanying the 'No Tracks' message in the User Profile 'My Tracks' and 'Liked Tracks' sections.
 
+## Features
+
+### Global Features
+
+#### Navbar
+
+![Website Navigation bAR](documentation/readme-images/crosstracks-navbar.png)
+
+Each page features a fully responsive navigation bar, with a logo displayed on the left hand side on laptop/desktop devices, and centred on tablet and mobile devices. 
+
+When viewing on a tablet or mobile device, the navbar collapses to a FontAwesome hamburger icon, which opens a side navigation bar when clicked. The side navigation bar can also be accessed by dragging from the left hand side.
+
+![Website Navigation Bar (collapsed)](documentation/readme-images/crosstracks-navbar-collapsed.png)
+
+#### Footer
+
+![Website Footer](documentation/readme-images/crosstracks-footer.png)
+
+A footer is also present on all pages of the website, featuring 'quick links' for the user to visit Register, Login or Contact pages. Once logged in, both 'Login' and 'Register' links are replaced with one 'Logout' link (the Contact link remains present in both logged-out and logged-in states).
+
+
+### Features left to Implement
+
 
 
 
