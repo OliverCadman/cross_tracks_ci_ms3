@@ -400,7 +400,7 @@ If the admin is logged into the website, there are two extra pages available. On
 
 Below the list of genres is a small form with one text input with a submit button, allowing the administrator to add a new genre to the list. 
 
-### Manage Tracks (as admin)
+### Manage Tracks (as admin)
 
 ![Website Manage Tracks Page](documentation/readme-images/crosstracks-manage-tracks.png)
 
@@ -408,17 +408,17 @@ The admin also has the privilege to edit or delete all tracks in the Cross//Trac
 
 ## Features for future implementation
 
-1. Messaging 
+1. Messaging - Currently, the only methods of communication between users of Cross//Tracks is through either leaving comments, or copying the user's email address from their user profile. Of course this is not ideal; it is important to the developer to integrate a messaging service (research into Socket I/O was made, which seems viable to integrate). It is the developers intention to implement this functionality as soon as possible.
 
-2. Notifications
+2. Notifications - Along with messaging, it is important that users should be notified whenever they receive a message from another user, as well as when someone has liked their track. Again, it is the developer's intention to implement this functionality.
 
-3. Playback (Spotify API)
+3. Playback (Spotify API) - Since this service is centered around music, it is of course vital that users are able to listen to the tracks that are featured on Cross//Tracks. The developers intention is to provide a Spotify SDK in the track modal windows, to allow the user to play the tracks on offer. Once the developer has fully understood web authentication (both for the API to search for tracks, and the Spotify SDK API), playback integration will be pursued.
 
-4. Search by username
+4. Search by username - Efforts were made to provide the ability for users to search by username, as well as genre. The developer deemed this an important issue; since Cross//Tracks is community oriented, and if a user finds many tracks they enjoy that are added by another user, it would be ideal for the user to search for all tracks added by that same user. However, the developer was unable to navigate how to join two collections (tracks and users, using the user_id as the foreign key), and search at the same time. Once this issue has been understood, this feature will be implemented.
 
-5. Add Friends
+5. Add Friends - It would of course be useful if users can add eachother as friends, so that online relationships can be created and nurtured, and users can be enabled to share tracks with more ease. Furthermore, in the case where a certain user likes another user's tracks, they are easily able to discover other users who are friends of that user who added those tracks, therefore further bolstering the community ethos of the Cross//Tracks brand.
 
-6. 
+
 
 
 
