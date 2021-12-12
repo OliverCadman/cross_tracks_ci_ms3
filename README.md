@@ -267,7 +267,52 @@ The second section is a list detailing what Cross//Tracks have to offer; an indi
 
 These two sections collapse to full-width columns on iPad and mobile devices, with a button at the bottom of the page, inviting the user to register to the service. This button takes the user to the website's Registration page.
 
-### Features left to Implement
+### Register Page
+
+![Website Register Page](documentation/readme-images/crosstracks-register.png)
+
+The register page features a header, and a simple form for the user to choose a username, email, and password. Password confirmation is required. The form sits on a materializeCSS card panel, with some box-shadow to provide a little depth between the form and the background. Should the user submit an incorrect piece of data, feedback is provided through Flask 'flash' messages, presented as materializeCSS 'toasts'.
+
+### Login Page
+
+![Website Register Page](documentation/readme-images/crosstracks-login.png)
+
+Similarly to the Register page, the login page features a header, and a simple form for the user to enter their username and password. Again, the user is presented with a flash message if they submit an incorrect piece of data.
+
+### Build Profile Page
+
+![Website Build Profile Page](documentation/readme-images/crosstracks-build-profile.png)
+
+Here, the user can choose to add more personal details, which will be displayed on their profile page. Through the form, the user can provide their First and Last name, their location (by city and country), their date of birth (which gets converted into their age), and a brief description of who they are, what they like, their tastes (or just about anything!). The user can also upload a profile image from their machine, and can use the switch to display their status as an 'Artist'.
+
+The materialize datepicker was utilized to provide better UX/UI, should the user wish to enter their date of birth.
+
+![Website User Profile Page](documentation/readme-images/crosstracks-user-profile.png)
+
+Once the user has proceeded through the 'Build Profile' page, the user is taken to their profile page. 
+
+At the top level, this page features the username and email address, along with their profile image. If no profile image was provided, the image defaults to a generic, simply vector image to represent the user. If their artist status is checked, this is represented with a FontAwesome 'check' icon, along with the word 'artist'. If the user has provided further details about themselves, this is presented to the right hand side. The two sections are seperated by a vertical rule.
+If the user is logged in and on their own page, they can choose to change their profile image by clicking the FontAwesome 'edit' icon next to their profile image. They can also choose to edit or delete their profile, by clicking the relative buttons.
+
+![Website Edit Profile Modal](documentation/readme-images/crosstracks-edit-profile.png)
+
+Should the user choose to edit their profile by clicking the 'Edit My Profile' button, the user is presented with a simple form by way of a materializeCSS modal window. Input values are already present if they have been filled in when the user 'built' their profile. The user can choose to submit new information, or click the 'Cancel' button, which closes the modal window.
+
+![Website Delete Profile Modal](documentation/readme-images/crosstracks-delete-profile.png)
+
+Should the user choose to delete their profile by clicking the 'Delete My Profile' button, a materializeCSS modal is presented, with a confirmation message to provide the user an option to cancel deleting their profile, if they then decide against it. Defensive programming is important in this case, so a confirmation modal window is necessary (as opposed to clicking one button, and there's no going back).
+
+![Website User Profile Tracks](documentation/readme-images/crosstracks-user-tracks.png)
+
+The lower level section of the User Profile page is where the user can collect their added and liked tracks. Should a user add their own track, it's displayed on their profile page for other users to see. Displayed on a materializeCSS card, users have the option to open a modal window displaying further information, by clicking the info button at the bottom of the card.
+
+![Website User Profile, Delete Track](documentation/readme-images/crosstracks-delete-track.png)
+
+If the track belongs to the user who's profile it's being featured on, then edit and delete buttons are present, opening modal windows; the edit button opens a simple form to edit the track, and the delete button opens a modal window to confirm deletion of the track.
+
+Similarly, if a user likes a track, these likes are collected in the next section of the User Profile page, again on materializeCSS cards. A button to open a modal window with more information about the track is present, along with a delete button if the user is on their own profile page. AJAX is used to remove the liked track from their list, so as not to refresh the page and provide a better UX.
+
+## Features left to Implement
 
 
 
