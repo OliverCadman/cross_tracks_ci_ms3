@@ -323,6 +323,8 @@ Similarly, if a user likes a track, these likes are collected in the next sectio
 
 The top level of the 'Browse Tracks' page features links to give the user the option to search for tracks, add their own track, or visit their profile. If the user is not logged in, the user only has the option to search for tracks.
 
+![Website Browse Tracks Page, Latest Tracks](documentation/readme-images/crosstracks-all-tracks.png)
+
 Track presentation is divided into two sections; 'Latest Tracks' and 'All Tracks'. The 'Latest Tracks' section is limited to the last 6 tracks which were added to the database. The 'All Tracks' section, of course, features all tracks on the database. These sections are headed by a full-width banner, featuring the background design found in most other pages of the website.
 
 Below, tracks are presented on materializeCSS cards, featuring an image of the track's album art. If an image URL is not provided, the image defaults to the Cross//Tracks logo. The card features the track name, the artist name and the genre of the track. A button is present to allow the user to find out more information about the track, or to leave a comment on the track. 
