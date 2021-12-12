@@ -296,11 +296,11 @@ If the user is logged in and on their own page, they can choose to change their 
 
 ![Website Edit Profile Modal](documentation/readme-images/crosstracks-edit-profile.png)
 
-Should the user choose to edit their profile by clicking the 'Edit My Profile' button, the user is presented with a simple form by way of a materializeCSS modal window. Input values are already present if they have been filled in when the user 'built' their profile. The user can choose to submit new information, or click the 'Cancel' button, which closes the modal window.
+Should the user choose to edit their profile by clicking the 'Edit My Profile' button, the user is presented with a simple form by way of a materializeCSS modal window. Input values are already present if they have been filled in when the user 'built' their profile. The user can choose to submit new information, or click the 'Cancel' button, which closes the modal window. If the user submits the form to edit their profile, a flash message is displayed to confirm that their profile was edited successfully. In the case of server issues, a flash message is displayed to inform the user that something went wrong.
 
 ![Website Delete Profile Modal](documentation/readme-images/crosstracks-delete-profile.png)
 
-Should the user choose to delete their profile by clicking the 'Delete My Profile' button, a materializeCSS modal is presented, with a confirmation message to provide the user an option to cancel deleting their profile, if they then decide against it. Defensive programming is important in this case, so a confirmation modal window is necessary (as opposed to clicking one button, and there's no going back).
+Should the user choose to delete their profile by clicking the 'Delete My Profile' button, a materializeCSS modal is presented, with a confirmation message to provide the user an option to cancel deleting their profile, if they then decide against it. Defensive programming is important in this case, so a confirmation modal window is necessary (as opposed to clicking one button, and there's no going back). Once the user deletes their profile, a flash message is displayed, and the user is taken to the website's home page.
 
 https://user-images.githubusercontent.com/79907183/145728312-0bebd56e-c9c1-4ad7-903b-7924ffbfdd0c.mp4
 
@@ -311,9 +311,9 @@ The lower level section of the User Profile page is where the user can collect t
 
 ![Website User Profile, Delete Track](documentation/readme-images/crosstracks-delete-track.png)
 
-If the track belongs to the user who's profile it's being featured on, then edit and delete buttons are present, opening modal windows; the edit button opens a simple form to edit the track, and the delete button opens a modal window to confirm deletion of the track.
+If the track belongs to the user who's profile it's being featured on, then edit and delete buttons are present, opening modal windows; the edit button opens a simple form to edit the track, and the delete button opens a modal window to confirm deletion of the track. If the user submits the form to edit their track, or to delete a track, a flash message is displayed, confirming that their track was edited/deleted successfully.
 
-Similarly, if a user likes a track, these likes are collected in the next section of the User Profile page, again on materializeCSS cards. A button to open a modal window with more information about the track is present, along with a delete button if the user is on their own profile page. AJAX is used to remove the liked track from their list, so as not to refresh the page and provide a better UX.
+Similarly, if a user likes a track, these likes are collected in the next section of the User Profile page, again on materializeCSS cards. A button to open a modal window with more information about the track is present, along with a delete button if the user is on their own profile page. AJAX is used to remove the liked track from their list, so as not to refresh the page and provide a better UX. 
 
 ### Browse Tracks Page
 
@@ -337,7 +337,7 @@ At the bottom of the cards, information on the user who added the track is prese
 
 https://user-images.githubusercontent.com/79907183/145729292-ec68c4e7-3346-423c-97b6-16c691e17faa.mp4
 
-If the user chooses to inspect further information about a track, they may open a modal window by clicking on the button featuring the FontAwesome 'info' icon. The modal features the image of the album art for the track, along with slightly more details about the track. Furthermore, a form is present to allow the user to leave a comment on the track. If a user leaves a comment, a comment icon appears on the track card, along with a number representing the amount of comments the track has. The user who left the comment can choose to edit, or delete the comment.
+If the user chooses to inspect further information about a track, they may open a modal window by clicking on the button featuring the FontAwesome 'info' icon. The modal features the image of the album art for the track, along with slightly more details about the track. Furthermore, a form is present to allow the user to leave a comment on the track. If a user leaves a comment, a comment icon appears on the track card, along with a number representing the amount of comments the track has. The user who left the comment can choose to edit, or delete the comment. A flash message is also displayed once the comment has been added to the database, to provide feedback to the user.
 
 Edit and Delete buttons are also presented to the user, but only if they are the same user who added the track.
 
@@ -350,8 +350,32 @@ This link opens up a sidebar from the right hand side of the viewport (this span
 
 #### Edit and Delete Modals 
 
-As with the User Profile section, users have the option to edit or delete their added tracks. The design of the modals to allow for this are the same as those in the User Profile section.
+As with the User Profile section, users have the option to edit or delete their added tracks. The design of the modals to allow for this are the same as those in the User Profile section. Once a user edits or deletes a track, a flash message is dislayed to inform them that the track was edited/deleted succesfully.
 
+### Add A Track Page
+
+![Website Add a Track Page](documentation/readme-images/crosstracks-add-track.png)
+
+Cross//Track's Add a Track Page features a header, and a simple form displayed on a materializeCSS card-panel, to provide some depth against the page's background. Here the user can add:
+
+* Track Name
+* Artist Name
+* Album Name
+* Genre - The user can choose from a list of available genres, provided by an option/select element.
+* Year of Release
+* Image URL 
+
+The user is required to fill in all fields of the form, except for the image URL for the track's album cover. Two buttons are featured at the bottom of the form; one to submit the data, and another to reset the form.
+
+An accompanying vector is also featured on iPad/Laptop/Desktop device sizes. 
+
+When the user submits the form and it is inserted to the database, the user is taken to the 'Browse Tracks' page, along with a flash message either to confirm that the track was added successfully, or that there was a problem (in the case that there are server issues).
+
+### Contact Page
+
+![Website Add a Track Page](documentation/readme-images/crosstracks-contact.png)
+
+The top level of the contact page features a header, accompanied by a vector. Beneath, a form is featured, for the user to provide their email address, name, and any questions/feedback they would like to give. Upon submission of the form, a flash message is displayed to the user, either to confirm that the email was sent, or that something went wrong (in the case that there are some server issues).
 
 ## Features left to Implement
 
