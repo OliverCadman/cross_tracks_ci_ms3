@@ -1088,10 +1088,10 @@ h2,h3 {
 }
 
 .register-form button {
-    background-color: #E0C0AC;
+    background-color: #3c4c8b;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
-    color: #333333;
+    color: eee;
 }
 
 .register-form .submit-button {
@@ -1137,7 +1137,18 @@ h2,h3 {
 }
 
 .login-form button {
-    background-color: #7b89b4;
+    background-color: #3c4c8b;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+}
+
+#reset-password-modal p {
+    font-family: "Quicksand", sans-serif;
+}
+
+.reset-password-form button {
+    background-color: #3c4c8b;
+    color: #eee;
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
 }
@@ -1263,11 +1274,12 @@ h2,h3 {
 .contact-form button {
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
+    background-color: #3c4c8b;
+    color: #eee;
 }
 
 .contact-form button:hover {
-    background-color: #333333;
-    color: #dddddd;
+    background-color: #3c4c8b;
 }
 
 
@@ -1486,10 +1498,7 @@ h2,h3 {
 
     .signup-btn-wrapper a:hover,
     .hero-inner a:hover {
-        font-family: "Quicksand", sans-serif;
-        background: #d4daf0;
-        color: #333;
-        font-weight: 600;
+        background: #3c4c8b;
     }
 
 
@@ -1859,6 +1868,11 @@ h2,h3 {
         justify-content: center;
     }
 
+    .register-form button:hover,
+    .login-form button:hover {
+        background-color: #3c4c8b;
+    }
+
     .login-form {
         width: 75%;
     }
@@ -2010,8 +2024,19 @@ h2,h3 {
     .login-window-input,
     .login-window label,
     .login-window button {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Quicksand', sans-serif;
         font-weight: 300;
+    }
+
+    .login-window button {
+        background-color: #3c4c8b;
+        color: #eee;
+        font-weight: bold;
+    }
+
+    .login-window button:hover {
+        background-color: #3c4c8b;
+
     }
 
     .login-button-wrapper {
