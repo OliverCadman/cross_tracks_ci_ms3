@@ -340,7 +340,7 @@ If the user chooses to inspect further information about a track, they may open 
 Edit and Delete buttons are also presented to the user, but only if they are the same user who added the track.
 
 #### Search Tracks
-S
+
 https://user-images.githubusercontent.com/79907183/145729308-2a1b41bd-94d7-4f0a-85a7-e67659c512f0.mp4
 
 Users can also search for tracks by genre. The user can click the link 'Search Tracks' (accompanied by the maginifying glass).
@@ -349,7 +349,7 @@ This link opens up a sidebar from the right hand side of the viewport (this span
 #### Edit and Delete Modals 
 
 As with the User Profile section, users have the option to edit or delete their added tracks. The design of the modals to allow for this are the same as those in the User Profile section.
-S
+
 
 ## Features left to Implement
 
