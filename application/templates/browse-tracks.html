@@ -605,7 +605,7 @@
                         if (item) {
                             console.log(item.likes.includes(user))
                             resultDisplay = `
-                            <div class="col s12">
+                            <div class="col s12 hide-on-small-only">
                                 <div class="card horizontal z-depth-5">
                                     <div class="card-stacked">
                                         <div class="card-content">
@@ -639,11 +639,35 @@
                                      ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
                                          class="track-image search-result">` : `<img
                                          src="{{url_for('static', filename='images/default-track-image.png')}}"
-                                         alt="Image of Cover Art for Track" class="track-image">`}
+                                         alt="Image of Cover Art for Track" class="track-image search-result">`}
                                  </div>
                                 </div>
 
                                 </div>
+                            <div class="col s12 hide-on-med-and-up">
+                    <div class="card z-depth-4">
+                        <div class="card-image">
+                             ${item.image_url ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
+                                 class="track-image search-result">` : `<img
+                                 src="{{url_for('static', filename='images/default-track-image.png')}}"
+                                 alt="Image of Cover Art for Track" class="track-image search-result">`}
+                        </div>
+                        <div class="card-title">
+                            <span>${item.track_name}</span>
+                        </div>
+                        <div class="card-content">
+                            <p>${item.artist_name}</p>
+                            <p>${item.album_name}</p>
+                            <p>${item.genre}</p>
+                        </div>
+                        <div class="card-action">
+                        </div>
+                        <div class="more-info-btn">
+                            <a href="#track_modal_${item._id.$oid}" class="btn modal-trigger"><i
+                                    class="fas fa-info-circle"><i class="fas fa-comment"></i></i></a>
+                        </div>
+                    </div>
+                </div>
                             `
                             resultsWrapper.innerHTML += resultDisplay
                             let searchActive = false;
