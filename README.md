@@ -245,6 +245,27 @@ When viewing on a tablet or mobile device, the navbar collapses to a FontAwesome
 
 A footer is also present on all pages of the website, featuring 'quick links' for the user to visit Register, Login or Contact pages. Once logged in, both 'Login' and 'Register' links are replaced with one 'Logout' link (the Contact link remains present in both logged-out and logged-in states).
 
+### Home Page
+
+![Website Home Page](documentation/readme-images/crosstracks-homepage.png)
+
+At the top level, the website's homepage features the Cross//Tracks logo as it's hero/background image, and within it is the Cross//Tracks header, with a lead paragraph. Below this is a button 'Find Me A Track', which takes the user to the 'Browse Tracks' page.
+
+On laptop and desktop devices, a small login window is present in the top left corner of the section, to allow for ease of use for users who are already registered to the website. The login window also features a message in small tags, inviting the user to click the link to visit the website's Registration page, if they haven't signed up already.
+
+![Website Home Page](documentation/readme-images/crosstracks-homepage-mobile.png)
+
+On mobile devices, the website header and lead paragraph are contained within the website's logo, to allow for lack of screen real-estate in comparison with laptop and desktop devices.
+
+![Website Home Page - Lower Level](documentation/readme-images/crosstracks-homepage-lower.png)
+
+On the lower level of the homepage, there are two sections. One section features a brief overview of the purpose of Cross//Tracks, accompanied with a light-hearted vector of two people listening to music through the same headphones.
+
+The second section is a list detailing what Cross//Tracks have to offer; an indication as to how to use Cross//Tracks. The list is bulleted with FontAwesome check icons, to accentuate and give some visual feedback to the bulleted points.
+
+![Website Home Page - Lower Level](documentation/readme-images/crosstracks-homepage-lower-mobile.png)
+
+These two sections collapse to full-width columns on iPad and mobile devices, with a button at the bottom of the page, inviting the user to register to the service. This button takes the user to the website's Registration page.
 
 ### Features left to Implement
 
