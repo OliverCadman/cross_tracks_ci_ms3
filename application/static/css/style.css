@@ -710,6 +710,10 @@ nav li a {
     font-weight: 500;
 }
 
+.track-image.search-result {
+    width: 100;
+}
+
 #close-search-wrapper {
     font-size: 2rem;
     color: #eeeeee;
@@ -1632,7 +1636,8 @@ h2,h3 {
         text-align: left;
     }
 
-    .track-image {
+    .track-image,
+    .track-image.search-result {
         width: 118px;
         border-radius: 0 20px 0 0;
     }
