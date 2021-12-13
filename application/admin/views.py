@@ -53,7 +53,7 @@ def manage_genres():
         else:
             flash("You're not meant to be there!")
             return redirect(url_for('main.index'))
-    
+
     else:
         flash("You're not meant to be there!")
         return redirect(url_for("main.index"))
@@ -64,8 +64,8 @@ def add_genre():
     """
     Add Genre Function
 
-    Handles form input in 'manage_genres' view, and 
-    inserts new genre data into mongoDB 'Genre' 
+    Handles form input in 'manage_genres' view, and
+    inserts new genre data into mongoDB 'Genre'
     collection.
     """
 
@@ -87,11 +87,10 @@ def add_genre():
             except:
                 flash("Something went wrong. Please try again")
                 return redirect(url_for("admin.manage_genres"))
-            
+
         else:
             flash("No genre name given")
             return redirect(url_for("admin.manage_genres"))
-
 
 
 @admin.route("/delete-genre/<genre_id>")
@@ -123,19 +122,14 @@ def manage_tracks():
 
             all_tracks = Track.get_all_tracks()
             all_genres = Track.get_genres()
-    
 
             return render_template("manage-tracks.html", all_tracks=all_tracks,
-                           all_genres=all_genres)
-    
+                                   all_genres=all_genres)
+
         else:
             flash("You're not meant to be there!")
             return redirect(url_for('main.index'))
-    
+
     else:
         flash("You're not meant to be there!")
         return redirect(url_for('main.index'))
-
-
-
-    

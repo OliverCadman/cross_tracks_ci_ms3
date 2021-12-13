@@ -12,7 +12,7 @@ Views:
     contact()
 
 Functions:
-    send_email()  
+    send_email()
 """
 
 
@@ -22,7 +22,7 @@ from flask_mail import Message
 import os
 
 # Initialize 'main' blueprint
-main = Blueprint("main",__name__)
+main = Blueprint("main", __name__)
 
 
 @main.route("/")
@@ -38,7 +38,7 @@ def index():
 def contact():
     """
     Renders the website's contact page.
-    """  
+    """
     return render_template("contact.html")
 
 
@@ -46,7 +46,7 @@ def contact():
 def send_email():
     """
     Handles data submitted from form in
-    Contact page. Flask Mail utilised 
+    Contact page. Flask Mail utilised
     to send email to website owner, in
     html format ("contact-message.html")
     """
@@ -60,12 +60,14 @@ def send_email():
         msg.subject = "Cross//Tracks Feedback/Query"
         msg.sender = sender_email
         msg.recipients = ['o.cadman@live.co.uk']
-        msg.html = render_template('contact-message.html', user='Oliver', sender_name=sender, sender_email=sender_email, message=message)
+        msg.html = render_template('contact-message.html',
+                                   user='Oliver', sender_name=sender,
+                                   sender_email=sender_email, message=message)
 
         try:
             mailing.send(msg)
             flash("Thanks for contacting us! We will reply shortly")
             return redirect(url_for('main.contact'))
-        except: 
+        except:
             flash('Sorry, something went wrong. Please try again')
             return redirect(url_for('main.contact'))

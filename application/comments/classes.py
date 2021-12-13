@@ -13,15 +13,16 @@ from bson.objectid import ObjectId
 import datetime
 import re
 
+
 class Comment:
     """
-    Class to represent a comment. 
+    Class to represent a comment.
     A comment object is created through user
     submission in track modals in Browse Tracks
     page, and inserted into mongoDB 'comments' collection
     using class methods 'get_comment_info' and 'add_comment'.
 
-    Additional static methods handle comment validation, 
+    Additional static methods handle comment validation,
     editing, deleting, and joining to 'user' collection.
 
 
@@ -29,7 +30,7 @@ class Comment:
 
         comment_body: str
             The comment itself
-        
+
         comment_author: str
             The username of the user who left the comment
 
@@ -37,7 +38,7 @@ class Comment:
             The id of the track the comment is concerning
 
         _id: str
-            The id of the comment itself   
+            The id of the comment itself
 
 
     Instance Methods:
@@ -45,11 +46,11 @@ class Comment:
         get_comment_info()
             Collects and prepares data when comment object created,
             to insert into mongoDB 'comments' collection.
-        
+
         add_comment()
             Invokes get_comment_info() method and inserts
             data into mongoDB 'comments' collection.
-            
+
 
     Static Methods:
 
@@ -58,7 +59,7 @@ class Comment:
             check if the submitted comment is empty.
 
         bind_users_to_comments()
-            Uses mongoDB aggregate 'lookup' method 
+            Uses mongoDB aggregate 'lookup' method
             to join users to comments, using local field
             "author" as reference to foreign field
             "_id" in user collection.
@@ -76,7 +77,8 @@ class Comment:
             comment.
     """
 
-    def __init__(self, comment_body, comment_author, track_id, _id=None):
+    def __init__(self, comment_body, comment_author,
+                 track_id, _id=None):
         """
         Constructor to create attributes attributable to comment object.
         """
@@ -86,7 +88,6 @@ class Comment:
         self.track_id = ObjectId(track_id)
         self._id = _id if isinstance(_id, str) else ""
 
-    
     def get_comment_info(self):
         """
         Gathers and prepares data, ready to be inserted
@@ -104,7 +105,6 @@ class Comment:
 
         return comment_info
 
-    
     def add_comment(self):
         """
         Invokes class method get_comment_info,
@@ -124,7 +124,7 @@ class Comment:
         """
         Uses regex compile and match methods to
         check if the submitted comment is empty,
-        returning the value, accessed in 
+        returning the value, accessed in
         comment view.
         """
 
@@ -133,11 +133,10 @@ class Comment:
 
         return whitespace_check
 
-
-    @staticmethod 
+    @staticmethod
     def bind_users_to_comments():
         """
-        Aggregate "lookup" to join comments 
+        Aggregate "lookup" to join comments
         and users collection, using local field
         "author" as reference to foreign field
         "_id" in user collection.
@@ -154,7 +153,6 @@ class Comment:
             }
         ])
 
-
     @staticmethod
     def delete_track_from_collection(track_id):
         """
@@ -163,8 +161,8 @@ class Comment:
         deletes their account.
         """
 
-        mongo.db.comments.delete_many({"track_id": ObjectId(track_id)})
-        
+        mongo.db.comments.delete_many(
+            {"track_id": ObjectId(track_id)})
 
     @staticmethod
     def delete_comment(comment_id):
@@ -174,7 +172,6 @@ class Comment:
 
         mongo.db.comments.delete_one({"_id": ObjectId(comment_id)})
 
-    
     @staticmethod
     def edit_comment(comment_id, comment_content):
         """
@@ -184,4 +181,3 @@ class Comment:
 
         mongo.db.comments.update_one({"_id": ObjectId(comment_id)},
                                      {"$set": comment_content})
-

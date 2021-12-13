@@ -2,10 +2,12 @@
 User Class
 ==============
 
-Handles all user data that will be created, read, 
-updated and deleted to MongoDB, as well as password
-validation.
+Handles all user data that will be created, read,
+updated and deleted to MongoDB, as well as user
+authentication.
 
+Manages file input in the case when a user uploads
+a profile image.
 """
 
 from application import mongo
@@ -32,19 +34,24 @@ class User():
 
         last_name (str): the user's last name
 
-        date_of_birth (date): the user's date of birth, used to determine age
+        date_of_birth (date): the user's date of birth,
+                              used to determine age
 
-        city (str): an optional field for user to provide their city of residence
+        city (str): an optional field for user to provide
+                    their city of residence
 
-        country (str): an optional field for user to provide their country of residence
+        country (str): an optional field for user to
+                       provide their country of residence
 
-        about_user (str): an optional field for user to provide brief description
+        about_user (str): an optional field for user to
+                          provide brief description
 
         profile_image (binData): an optional field for user's profile image
 
-        is_artist (bool): optional field for user to display their artist status
+        is_artist (bool): optional field for user to
+                          display their artist status
 
-    
+
     Instance Methods:
 
         get_user_info(self):
@@ -68,19 +75,19 @@ class User():
         add_liked_track(self, track_id):
             Utilises User object created
             from class method "get_user()". Appends
-            ID of liked track to user object's 
-            "liked_tracks" array, then updates 
+            ID of liked track to user object's
+            "liked_tracks" array, then updates
             mongoDB "user" collection with value returned
             from "prepare_liked_track()" instance method.
 
         remove_liked_track(self, track_id):
             Utilises User object created from class method
             "get_user()". Removes ID of un-liked track from
-            user object's "liked_tracks" array, then updates 
+            user object's "liked_tracks" array, then updates
             mongoDB "user" collection with value returned
             from "prepare_liked_track()" instance method.
 
-    
+
     Class Methods:
 
         get_user(cls, username):
@@ -92,15 +99,15 @@ class User():
         add_liked_track():
             Utilises User object created
             from class method "get_user()". Appends
-            ID of liked track to user object's 
-            "liked_tracks" array, then updates 
+            ID of liked track to user object's
+            "liked_tracks" array, then updates
             mongoDB "user" collection with value returned
             from "prepare_liked_track()" instance method.
-            
+
         remove_liked_track():
             Utilises User object created from class method
             "get_user()". Removes ID of un-liked track from
-            user object's "liked_tracks" array, then updates 
+            user object's "liked_tracks" array, then updates
             mongoDB "user" collection with value returned
             from "prepare_liked_track()" instance method.
 
@@ -113,7 +120,7 @@ class User():
             edited profile information.
 
         complete_user_profile():
-            Queries mongoDB "users" collection by 
+            Queries mongoDB "users" collection by
             matching username, and updates document with
             data gathered in "build-profile.html"
 
@@ -134,16 +141,14 @@ class User():
         find_user_by_id():
             Queries mongoDB "users" collection by
             matching ID, and returns user document.
-            Used to find user when JWT token is 
+            Used to find user when JWT token is
             submitted upon resetting password.
-
 
         find_user_by_username(username):
             Queries MongoDB for username
-            Utilised in users/views.py in register 
+            Utilised in users/views.py in register
             function, to determine if username
             already exists.
-
 
         validate_password_match(password, confirm_password):
             Returns equality between both passwords, to confirm
@@ -153,19 +158,16 @@ class User():
             Returns a regex search on the password passed as argument,
             to confirm that a user's password contains at least
             8 characters, one number, one uppercase character,
-            and a special character. 
-
+            and a special character.
 
         check_password(password_hash, password):
             Returns werkzeug.security check_password_hash,
-            to ensure that the password submitted matches 
+            to ensure that the password submitted matches
             the encrypted password in mongoDB.
-
 
         delete_user(user_id):
             Queries mongoDB "users" collection by matching ID,
             and removes user document from the collection.
-
 
         allowed_file(filename):
             Used when user selects a profile image.
@@ -176,7 +178,7 @@ class User():
             Ensures than an image's filesize can
             be no greater than 500KB.
 
-        update_profile_image(username, filename, 
+        update_profile_image(username, filename,
                              profile_image, updated_info):
             Queries mongoDB "users" collection by matching
             username. And updates profile_image field with
@@ -195,28 +197,34 @@ class User():
      """
 
     def __init__(self, username, password=None, email_address=None,
-                first_name=None, last_name=None, date_of_birth=None,
-                city=None, country=None, about_user=None, profile_image=None,
+                 first_name=None, last_name=None, date_of_birth=None,
+                 city=None, country=None, about_user=None, profile_image=None,
                  is_artist=None, _id=None, liked_tracks=None):
-
         """
         Constructor to create attributes, attributable to User object.
         """
 
         self.username = username
-        self.password = generate_password_hash(password) if isinstance(password, str) else str("")
-        self.email_address = email_address if isinstance(email_address, str) else str("")
-        self.first_name = first_name if isinstance(first_name, str) else str("")
-        self.last_name = last_name if isinstance(last_name, str) else str("")
-        self.date_of_birth = date_of_birth if isinstance(date_of_birth, str) else str("")
+        self.password = generate_password_hash
+        (password) if isinstance(password, str) else str("")
+        self.email_address = email_address if isinstance(email_address,
+                                                         str) else str("")
+        self.first_name = first_name if isinstance(first_name,
+                                                   str) else str("")
+        self.last_name = last_name if isinstance(last_name,
+                                                 str) else str("")
+        self.date_of_birth = date_of_birth if isinstance(date_of_birth,
+                                                         str) else str("")
         self.city = city if isinstance(city, str) else str("")
         self.country = country if isinstance(country, str) else str("")
-        self.about_user = about_user if isinstance (about_user, str) else str("")
-        self.profile_image = profile_image if isinstance(profile_image, str) else str('')
+        self.about_user = about_user if isinstance(about_user,
+                                                   str) else str("")
+        self.profile_image = profile_image if isinstance(profile_image,
+                                                         str) else str('')
         self.is_artist = is_artist if isinstance(is_artist, bool) else False
         self.id = _id
-        self.liked_tracks = liked_tracks if isinstance(liked_tracks, list) else []
-        
+        self.liked_tracks = liked_tracks if isinstance(liked_tracks,
+                                                       list) else []
 
     def get_user_info(self):
         """
@@ -237,14 +245,10 @@ class User():
             "about_user": self.about_user,
             "profile_image": self.profile_image,
             "is_artist": self.is_artist,
-            "spotify_userID": self.spotify_userID,
-            "display_spotify_playlists": self.display_spotify_playlists,
             "liked_tracks": self.liked_tracks
-            
         }
 
         return user_info
-
 
     def register(self):
         """
@@ -254,8 +258,7 @@ class User():
 
         user_data = self.get_user_info()
 
-        mongo.db.users.insert_one(user_data)    
-
+        mongo.db.users.insert_one(user_data)
 
     def prepare_liked_track(self):
         """
@@ -269,16 +272,15 @@ class User():
         liked_track_info = {
             "liked_tracks": self.liked_tracks
         }
-        
-        return liked_track_info
 
+        return liked_track_info
 
     def add_liked_track(self, track_id):
         """
         Utilises User object created
         from class method "get_user()". Appends
-        ID of liked track to user object's 
-        "liked_tracks" array, then updates 
+        ID of liked track to user object's
+        "liked_tracks" array, then updates
         mongoDB "user" collection with value returned
         from "prepare_liked_track()" instance method.
         """
@@ -288,15 +290,13 @@ class User():
         mongo.db.users.update_one({
             "_id": ObjectId(self.id),
         }, {
-            "$set": self.prepare_liked_track()
-        })
+            "$set": self.prepare_liked_track()})
 
-    
     def remove_liked_track(self, track_id):
         """
         Utilises User object created from class method
         "get_user()". Removes ID of un-liked track from
-        user object's "liked_tracks" array, then updates 
+        user object's "liked_tracks" array, then updates
         mongoDB "user" collection with value returned
         from "prepare_liked_track()" instance method.
         """
@@ -309,7 +309,6 @@ class User():
                 "$set": self.prepare_liked_track()
             })
 
-
     @staticmethod
     def pull_from_list(array, id):
         """
@@ -318,9 +317,9 @@ class User():
         their account, along with all associated tracks that
         they added.
         """
-        
-        mongo.db.users.update_many({array: ObjectId(id)},{"$pull": {array: ObjectId(id)}})
 
+        mongo.db.users.update_many({array: ObjectId(id)},
+                                   {"$pull": {array: ObjectId(id)}})
 
     @staticmethod
     def edit_profile(username, edited_info):
@@ -329,10 +328,9 @@ class User():
         a document by username, and updating it with
         edited profile information.
         """
-        
-        mongo.db.users.update_one({"username": username},{"$set": edited_info })
 
-    
+        mongo.db.users.update_one({"username": username},
+                                  {"$set": edited_info})
 
     @classmethod
     def get_user(cls, username):
@@ -355,7 +353,6 @@ class User():
             user_data = None
             return False
 
-
     @staticmethod
     def get_all_users():
         """
@@ -365,29 +362,27 @@ class User():
 
         return mongo.db.users.find()
 
-    
     @staticmethod
     def get_id(username):
         """
         Queries mongoDB "users" collection by
         matching username, and returns ID of user.
         """
-        
-        user_id = mongo.db.users.find_one({"username":username})["_id"]
+
+        user_id = mongo.db.users.find_one({"username": username})["_id"]
 
         return user_id
-
 
     @staticmethod
     def complete_user_profile(username, profile_info):
         """
-        Queries mongoDB "users" collection by 
+        Queries mongoDB "users" collection by
         matching username, and updates document with
         data gathered in "build-profile.html"
         """
 
-        
-        mongo.db.users.update_one({"username": username}, {"$set": profile_info})
+        mongo.db.users.update_one({"username": username},
+                                  {"$set": profile_info})
 
     @staticmethod
     def find_user_by_email(email_address):
@@ -395,8 +390,8 @@ class User():
         Queries mongoDB "users" collection by
         matching email address, and returns
         user document. Used when user requests
-        to reset password, and have an email sent 
-        to them to reset psasword. 
+        to reset password, and have an email sent
+        to them to reset psasword.
         """
 
         return mongo.db.users.find_one({"email_address": email_address})
@@ -406,23 +401,21 @@ class User():
         """
         Queries mongoDB "users" collection by
         matching ID, and returns user document.
-        Used to find user when JWT token is 
+        Used to find user when JWT token is
         submitted upon resetting password.
         """
 
         return mongo.db.users.find_one({"_id": ObjectId(id)})
 
-
     @staticmethod
     def find_user_by_username(username):
         """
         Queries MongoDB for username
-        Utilised in users/views.py in register 
+        Utilised in users/views.py in register
         function, to determine if username
         already exists.
         """
         return mongo.db.users.find_one({"username": username})
-
 
     @staticmethod
     def validate_password_match(password, confirm_password):
@@ -432,18 +425,19 @@ class User():
         """
 
         return password == confirm_password
-        
-        
+
     @staticmethod
     def validate_password_format(password):
         """
         Returns a regex search on the password passed as argument,
         to confirm that a user's password contains at least
         8 characters, one number, one uppercase character,
-        and a special character. 
+        and a special character.
         """
 
-        pattern = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+        pattern = ("^(?=.*[A-Za-z])(?=.*\d)(?=.*",
+                   "[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
+
         return re.search(pattern, password)
 
     @staticmethod
@@ -455,8 +449,8 @@ class User():
         """
         ALLOWED_EXTENSIONS = set(["pdf", "png", "jpg", "jpeg", "gif"])
         if filename != '':
-            return "." in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+            return "." in filename and filename.rsplit(
+                '.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
     @staticmethod
     def check_image_filesize(filesize):
@@ -471,10 +465,9 @@ class User():
         else:
             return False
 
-
     @staticmethod
     def update_profile_image(username, filename,
-                         profile_image, updated_info):
+                             profile_image, updated_info):
         """
         Queries mongoDB "users" collection by matching
         username. And updates profile_image field with
@@ -488,7 +481,6 @@ class User():
         mongo.db.users.update_one({"username": username},
                                   {"$set": updated_info})
 
-    
     @staticmethod
     def return_profile_image(filename):
         """
@@ -505,17 +497,15 @@ class User():
 
         return profile_image
 
-
     @staticmethod
     def check_password(password_hash, password):
         """
         Returns werkzeug.security check_password_hash,
-        to ensure that the password submitted matches 
+        to ensure that the password submitted matches
         the encrypted password in mongoDB.
         """
         return check_password_hash(password_hash, password)
 
-    
     @staticmethod
     def delete_user(user_id):
         """
@@ -525,7 +515,6 @@ class User():
 
         mongo.db.users.delete_one({"_id": ObjectId(user_id)})
 
-    
     @staticmethod
     def find_file_by_filename(filename):
         """
@@ -534,7 +523,6 @@ class User():
         """
 
         return mongo.db.fs.files.find_one({"filename": filename})
-
 
     @staticmethod
     def delete_profileimage_file(_id):

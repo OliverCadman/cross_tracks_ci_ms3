@@ -2,8 +2,8 @@
 Track Class
 ===========
 
-Handles all track data that will be created, read, 
-updated and deleted using MongoDB. 
+Handles all track data that will be created, read,
+updated and deleted using MongoDB.
 
 Classes: Track
 """
@@ -21,7 +21,7 @@ class Track:
     Handles all methods to store, edit, join,
     read and delete data in mongoDB track collection.
 
-    The initial track object is created upon submission 
+    The initial track object is created upon submission
     of form in "Add a Track" page.
 
     Attributes:
@@ -31,7 +31,7 @@ class Track:
 
         track_name: str
             The name of the track being added.
-        
+
         artist_name: str
             The name of the artist who composed the track.
 
@@ -61,25 +61,25 @@ class Track:
             The number of likes attributed to
             the track.
 
-    
+
     Instance methods:
-        
+
         get_track_info(self):
             Prepares data created from Track object
-            into dictionary, ready to be inserted 
+            into dictionary, ready to be inserted
             into mongoDB 'tracks' collection.
-        
+
         add_track(self):
-            Invokes 'get_track_info()' method, 
-            and inserts returned value into 
+            Invokes 'get_track_info()' method,
+            and inserts returned value into
             mongoDB 'tracks' collection.
 
         add_like(self, username)
-            Adds username who liked the track into 
-            the track document's 'likes' list, and 
+            Adds username who liked the track into
+            the track document's 'likes' list, and
             increments the same document's 'likes'
             count.
-        
+
         remove_like(self, username)
             Removes username who liked the track from
             the track document's 'likes' list, and
@@ -99,12 +99,12 @@ class Track:
     Static methods:
 
             edit_track(track_id, track_data)
-                Handles form input, and queries mongoDB 
-                'tracks' collection by track_id, and updates 
+                Handles form input, and queries mongoDB
+                'tracks' collection by track_id, and updates
                 the returned track  document with updated track data.
 
             delete_track(track_id)
-                Queries mongoDB 'tracks' collection 
+                Queries mongoDB 'tracks' collection
                 by track_id, and deletes track.
 
             add_genre(genre_data)
@@ -160,7 +160,7 @@ class Track:
 
             parse_json()
                 Parses json data so it can be handled by
-                flask's 'jsonify' method, when making 
+                flask's 'jsonify' method, when making
                 AJAX calls.
     """
 
@@ -171,7 +171,6 @@ class Track:
         """
         Constructor to create attributes, attributable to Track object.
         """
-
 
         self._id = _id
         self.track_name = track_name
@@ -184,7 +183,6 @@ class Track:
         self.likes = likes if isinstance(likes, list) else []
         self.likes_count = likes_count if isinstance(likes_count, int) else 0
 
-    
     def get_track_info(self):
 
         """
@@ -208,11 +206,10 @@ class Track:
 
         return track_info
 
-    
     def add_track(self):
 
         """
-        Invokes Track Class instance method 
+        Invokes Track Class instance method
         "get_track_info()", and inserts
         returned value into mongoDB "tracks"
         collection.
@@ -222,16 +219,15 @@ class Track:
 
         mongo.db.tracks.insert(track_data)
 
-
     @staticmethod
     def edit_track(track_id, track_data):
 
         """
-        Handles form input, and queries mongoDB 
-        'tracks' collection by track_id, and updates 
+        Handles form input, and queries mongoDB
+        'tracks' collection by track_id, and updates
         the returned track  document with updated track data.
         """
-        
+
         try:
             mongo.db.tracks.update_one(
                 {"_id": ObjectId(track_id)},
@@ -240,21 +236,19 @@ class Track:
         except Exception as e:
             print(e)
 
-
     @staticmethod
     def delete_track(track_id):
         """
-        Queries mongoDB 'tracks' collection 
+        Queries mongoDB 'tracks' collection
         by track_id, and deletes track.
         """
 
         mongo.db.tracks.delete_one({"_id": ObjectId(track_id)})
 
-
     def add_like(self, username):
         """
-        Adds username who liked the track into 
-        the track document's 'likes' list, and 
+        Adds username who liked the track into
+        the track document's 'likes' list, and
         increments the same document's 'likes'
         count.
         """
@@ -268,7 +262,6 @@ class Track:
             {"$set": self.get_track_info()}
         )
 
-
     def remove_like(self, username):
         """
         Used in conjunction with "get_track_object()"
@@ -281,7 +274,7 @@ class Track:
         count.
 
         Updates mongoDB tracks collection with
-        updated data using "get_track_info()" 
+        updated data using "get_track_info()"
         instance method.
         """
 
@@ -291,14 +284,12 @@ class Track:
             self.likes_count -= 1
 
             mongo.db.tracks.update_one({
-            "_id": self._id},
-            {"$set": self.get_track_info()})
+                            "_id": self._id},
+                            {"$set": self.get_track_info()})
 
             return True
         else:
             return False
-
-
 
     @classmethod
     def get_track_object(cls, _id):
@@ -318,7 +309,6 @@ class Track:
             data = None
             return False
 
-    
     @staticmethod
     def get_genres():
         """
@@ -377,7 +367,7 @@ class Track:
         Queries mongoDB 'tracks' collection,
         joined to 'users' and 'comments' collection.
         Returns tracks, sorted in reverse by ObjectId,
-        and limited to the last 6 documents that 
+        and limited to the last 6 documents that
         have been added.
         """
 
@@ -406,12 +396,11 @@ class Track:
                     "as": "comment_added_by"
                 }
             },
-            { "$sort": {"_id": -1}},
-            { "$limit": 6}
+            {"$sort": {"_id": -1}},
+            {"$limit": 6}
         ])
 
-
-    @staticmethod 
+    @staticmethod
     def bind_users_to_tracks():
         """
         Queries mongoDB 'tracks' collection,
@@ -434,7 +423,7 @@ class Track:
                     "foreignField": "track_id",
                     "as": "comments"
                 },
-            }, 
+            },
             {
                 "$lookup": {
                     "from": "users",
@@ -445,7 +434,6 @@ class Track:
             }
         ])
 
-    
     @staticmethod
     def delete_users_tracks(user_id):
         """
@@ -454,8 +442,6 @@ class Track:
         """
 
         mongo.db.tracks.delete_many({"added_by": ObjectId(user_id)})
-
-
 
     @staticmethod
     def remove_user_from_likes_list(username):
@@ -467,8 +453,8 @@ class Track:
         'likes' lists.
         """
 
-        mongo.db.tracks.update_many({"likes": username}, {"$pull": {"likes": username}})
-
+        mongo.db.tracks.update_many({"likes": username},
+                                    {"$pull": {"likes": username}})
 
     @staticmethod
     def decrement_likes_count(username):
@@ -477,12 +463,10 @@ class Track:
         where username is found in the same
         document's 'likes_list'.
         """
-    
-        mongo.db.tracks.update_many({
-            "likes": username },
-            { "$inc": { "likes_count": -1 }
-        })
 
+        mongo.db.tracks.update_many({
+            "likes": username},
+            {"$inc": {"likes_count": -1}})
 
     @staticmethod
     def search_tracks(query):
@@ -494,13 +478,12 @@ class Track:
 
         return list(mongo.db.tracks.find({"$text": {"$search": query}}))
 
-
     @staticmethod
     def parse_json(data):
         """
         Parses json data so it can be handled by
-        flask's 'jsonify' method, when making 
+        flask's 'jsonify' method, when making
         AJAX calls.
         """
-        
+
         return json.loads(dumps(data))

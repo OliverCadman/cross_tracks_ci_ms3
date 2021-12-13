@@ -1,7 +1,7 @@
 """
 Comments: Sub-Module
 
-Handles data management and routing when a user 
+Handles data management and routing when a user
 creates, edits or deletes a comment.
 
 Functions:
@@ -18,16 +18,18 @@ from flask import (Blueprint, redirect, flash,
 from application.comments.classes import Comment
 import datetime
 
+
 comments = Blueprint("comments", __name__)
+
 
 @comments.route("/add-comment/<track_id>/<username>/", methods=["GET", "POST"])
 def add_comment(track_id, username):
     """
     Handles form data submitted from comment form
-    in track modals on 'Browse Track' page. 
+    in track modals on 'Browse Track' page.
 
     Checks that the comment is not empty, and
-    if so, creates a Comment object, and calls 
+    if so, creates a Comment object, and calls
     on class method 'add_comment()' to insert
     comment into database.
 
@@ -46,11 +48,12 @@ def add_comment(track_id, username):
             return redirect(url_for("tracks.browse_tracks"))
 
         new_comment = Comment(user_input, username, track_id)
-        
+
         new_comment.add_comment()
         success_message = "Thanks for leaving your comment!"
         flash(success_message)
         return redirect(url_for('tracks.browse_tracks'))
+
 
 @comments.route('/delete_comment/<comment_id>')
 def delete_comment(comment_id):
@@ -65,7 +68,7 @@ def delete_comment(comment_id):
 
     try:
         Comment.delete_comment(comment_id)
-        
+
         flash('Comment deleted successfully')
         return redirect(url_for('tracks.browse_tracks'))
     except:

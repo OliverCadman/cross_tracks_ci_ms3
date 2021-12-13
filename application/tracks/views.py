@@ -1,7 +1,7 @@
 """
 Tracks: Sub-module
 
-Handles all routing and data preparation 
+Handles all routing and data preparation
 relative to tracks.
 
 Views:
@@ -23,7 +23,8 @@ Functions:
 
 
 from os import error
-from flask import (Blueprint, render_template, url_for, flash, request, redirect, session, jsonify, abort)
+from flask import (Blueprint, render_template, url_for,
+                   flash, request, redirect, session, jsonify, abort)
 from application.tracks.classes import Track
 from application.users.classes import User
 from application.comments.classes import Comment
@@ -32,10 +33,10 @@ from application import mongo
 import pprint
 
 
-
 tracks = Blueprint("tracks", __name__)
 
-@tracks.route("/add-track/<username>", methods=["GET","POST"])
+
+@tracks.route("/add-track/<username>", methods=["GET", "POST"])
 def add_track(username):
     """
     Renders 'add-track.html' template.
@@ -43,7 +44,7 @@ def add_track(username):
     Invokes Track classes' "get_genres()" method,
     to be accessed in select dropdown in form.
 
-    Invokes User classes' "get_id" method, to 
+    Invokes User classes' "get_id" method, to
     insert user's id to be used as a foreign key
     when joining 'tracks' and 'users' collections.
 
@@ -55,7 +56,7 @@ def add_track(username):
     # Customised error handling in case of invalid URL path
     if User.find_user_by_username(username) is None:
         abort(404)
-    
+
     user_id = User.get_id(username)
     genres = Track.get_genres()
 
@@ -68,10 +69,10 @@ def add_track(username):
         year_of_release = request.form.get("year_of_release")
         image_url = request.form.get("image_url")
         added_by = user_id
-        
+
         try:
             new_track = Track(track_name, artist_name, album_name,
-                          genre, year_of_release, added_by, image_url)
+                              genre, year_of_release, added_by, image_url)
 
             new_track.add_track()
             flash('Track added successfully')
@@ -87,8 +88,6 @@ def add_track(username):
 def browse_tracks():
     """
     Renders 'browse-tracks.html' template.
-
-
     """
 
     tracks_and_users = Track.bind_users_to_tracks()
@@ -96,23 +95,21 @@ def browse_tracks():
     genres = Track.get_genres()
     all_users = User.get_all_users()
 
-
     user_list = []
     for user in all_users:
         user_list.append(user["username"])
 
     genre_list = []
-    for genre in genres: 
+    for genre in genres:
         genre_list.append(genre["genre_name"])
-    
+
     if request.headers.get("Content-Type") == "application/json":
         return jsonify(genre_list=genre_list, user_list=user_list)
 
-    
- 
-    return render_template("browse-tracks.html", tracks_and_users=tracks_and_users,
-                            latest_tracks=latest_tracks, genre_list=genre_list)
-
+    return render_template("browse-tracks.html",
+                           tracks_and_users=tracks_and_users,
+                           latest_tracks=latest_tracks,
+                           genre_list=genre_list)
 
 
 @tracks.route('/like-track/<track_id>/<username>')
@@ -121,14 +118,14 @@ def like_track(track_id, username):
     Handles user input when user clicks the star
     displayed on each track card in browse tracks page.
 
-    Invokes Track class' 'get_track_object' method, 
+    Invokes Track class' 'get_track_object' method,
     to access the relative instance methods.
-    
-   
-    In the case where the particular track isn't found in 
+
+
+    In the case where the particular track isn't found in
     the user's 'liked_tracks' list, the method 'add_like'
-    is invoked. If the track is found in the user's 
-    'liked_tracks' list, then the 'remove_like' instance 
+    is invoked. If the track is found in the user's
+    'liked_tracks' list, then the 'remove_like' instance
     method is invoked.
 
     Returns jsonify, used in conjunction with AJAX call in
@@ -138,40 +135,43 @@ def like_track(track_id, username):
     selected_track_object = Track.get_track_object(track_id)
     selected_track = selected_track_object._id
 
-
     current_user = User.get_user(username)
 
     if current_user.liked_tracks or current_user.liked_tracks == []:
         users_liked_tracks = current_user.liked_tracks
 
-
         if selected_track in users_liked_tracks:
+
             current_user.remove_liked_track(track_id)
             selected_track_object.remove_like(username)
 
-            return jsonify(num_of_likes=selected_track_object.likes_count, 
-                  likes_list=selected_track_object.likes, username=current_user.username)
+            return jsonify(num_of_likes=selected_track_object.likes_count,
+                           likes_list=selected_track_object.likes,
+                           username=current_user.username)
         else:
-            current_user.add_liked_track(track_id)
-            selected_track_object.add_like(username)
+            try:
+                current_user.add_liked_track(track_id)
+                selected_track_object.add_like(username)
+            except Exception as e:
+                print(e)
 
-    
-        return jsonify(num_of_likes=selected_track_object.likes_count, 
-                  likes_list=selected_track_object.likes, username=username)
+        return jsonify(num_of_likes=selected_track_object.likes_count,
+                       likes_list=selected_track_object.likes,
+                       username=username)
 
 
 @tracks.route("/remove-like/<track_id>/<username>")
 def remove_liked_track(track_id, username):
     """
     Function utilised in 'User Profile' page, when
-    user removes track from their 'Liked Tracks' 
-    collection. 
+    user removes track from their 'Liked Tracks'
+    collection.
 
-    Invokes Track class' 'get_track_object' method, 
+    Invokes Track class' 'get_track_object' method,
     to access the relative instance methods.
 
     Invokes User class static method 'get_user',
-    to be used to check if track is in user's 
+    to be used to check if track is in user's
     "liked_tracks" list.
 
     Returns jsonify, in conjunction with AJAX call in
@@ -191,8 +191,9 @@ def remove_liked_track(track_id, username):
 
     parsed_track_id = Track.parse_json(current_user.liked_tracks)
 
-    return jsonify(track_name=selected_track_object.track_name, username=current_user.username,
-                    liked_tracks=parsed_track_id)
+    return jsonify(track_name=selected_track_object.track_name,
+                   username=current_user.username,
+                   liked_tracks=parsed_track_id)
 
 
 @tracks.route("/edit-track/<track_id>", methods=["GET", "POST"])
@@ -227,14 +228,13 @@ def edit_track(track_id):
             return redirect(request.referrer)
 
 
-
 @tracks.route("/delete-track/<track_id>/<username>", methods=["GET", "POST"])
 def delete_track(track_id, username):
     """
     Handles deletion of track, and removal of track data
     in "tracks" and "users" collections.
     """
-    
+
     # Remove track from list of user's liked tracks
     all_users = User.get_all_users()
 
@@ -246,12 +246,12 @@ def delete_track(track_id, username):
     try:
         Track.delete_track(track_id)
         Comment.delete_track_from_collection(track_id)
-        
+
         for every_user in all_users:
-        # Confirm that 'liked_tracks' field exists in database
+            # Confirm that 'liked_tracks' field exists in database
             if 'liked_tracks' in every_user:
                 User.pull_from_list("liked_tracks", track_id)
-        
+
         flash('Track deleted successfully')
         return redirect(request.referrer)
     except:
@@ -285,9 +285,9 @@ def search_track():
             for result in results:
                 json_encoded_result = Track.parse_json(result)
                 results_list.append(json_encoded_result)
-        
+
             return jsonify(results_list=results_list)
-        
+
         else:
             new_results_list = []
-            return jsonify(new_results_list = new_results_list)
+            return jsonify(new_results_list=new_results_list)
