@@ -205,8 +205,8 @@ class User():
         """
 
         self.username = username
-        self.password = generate_password_hash
-        (password) if isinstance(password, str) else str("")
+        self.password = (generate_password_hash(password) 
+                        if isinstance(password, str) else str(""))
         self.email_address = email_address if isinstance(email_address,
                                                          str) else str("")
         self.first_name = first_name if isinstance(first_name,
@@ -435,8 +435,8 @@ class User():
         and a special character.
         """
 
-        pattern = ("^(?=.*[A-Za-z])(?=.*\d)(?=.*",
-                   "[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
+        pattern = "^(?=.*[A-Za-z])(?=.*\d)(?=.*"\
+                  "[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
 
         return re.search(pattern, password)
 
