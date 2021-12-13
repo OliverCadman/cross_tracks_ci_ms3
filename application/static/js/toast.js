@@ -5,7 +5,7 @@ $(document).ready(function(){
 function displayToast(flashMessages){
     for (let alert in flashMessages){
 
-        alertHTML = `${flashMessages[alert]}`
+        let alertHTML = `${flashMessages[alert]}`
 
         M.toast({
             html: alertHTML,
@@ -13,4 +13,14 @@ function displayToast(flashMessages){
             displayLength: 3000
         });
     }
+}
+
+function imgTooLargeToast(message) {
+    let alertHTML  = `${message}`
+
+    M.toast({
+        html: alertHTML,
+        classes: 'flash-message center-align',
+        displayLength: 3000
+    })
 }

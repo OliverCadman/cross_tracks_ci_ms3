@@ -15,10 +15,10 @@ function collectLikeButtons() {
     buttonsMed[i].addEventListener("click", addRemoveLikeMed);
   }
 
-  let buttonsMob = $(".like_track_mob")
+  let buttonsMob = $(".like_track_mob");
 
   for (let i = 0; i < buttonsMob.length; i++) {
-    buttonsMob[i].addEventListener("click", addRemoveLikeMob)
+    buttonsMob[i].addEventListener("click", addRemoveLikeMob);
   }
 }
 
@@ -29,29 +29,29 @@ function addRemoveLikeMed(e) {
   e.preventDefault();
   $.ajax(this.href, {
     success: function (res) {
-        console.log(res)
-        // Update the DOM element displaying number of likes
-        let numLikesContainer = e.target.parentElement.parentElement.parentElement.childNodes[4]
-        
-        if (res === 0) {
-            numLikesContainer.innerHTML = ''
-        } else {
-            numLikesContainer.innerHTML = `${res.num_of_likes}`
-        }
+      // Update the DOM element displaying number of likes
+      let numLikesContainer =
+        e.target.parentElement.parentElement.parentElement.childNodes[4];
 
-        let currentUser = res.username
-        let listOfLikes = res.likes_list
-        let likeIcon = e.target.parentElement.children[0];
-        
-        /* Replace FontAwesome star icon outline with 
+      if (res.num_of_likes === 0) {
+        numLikesContainer.innerHTML = "";
+      } else {
+        numLikesContainer.innerHTML = `${res.num_of_likes}`;
+      }
+
+      let currentUser = res.username;
+      let listOfLikes = res.likes_list;
+      let likeIcon = e.target.parentElement.children[0];
+
+      /* Replace FontAwesome star icon outline with 
         filled star if track is liked, and vice versa */
-        if (listOfLikes.includes(currentUser)) {
-          likeIcon.classList.remove('far', 'fa-star')
-          likeIcon.classList.add('fas', 'fa-star')
-        } else {
-          likeIcon.classList.remove('fas', 'fa-star')
-          likeIcon.classList.add('far', 'fa-star')
-        }
+      if (listOfLikes.includes(currentUser)) {
+        likeIcon.classList.remove("far", "fa-star");
+        likeIcon.classList.add("fas", "fa-star");
+      } else {
+        likeIcon.classList.remove("fas", "fa-star");
+        likeIcon.classList.add("far", "fa-star");
+      }
     },
   });
 }
@@ -60,30 +60,29 @@ function addRemoveLikeMob(e) {
   e.preventDefault();
 
   $.ajax(this.href, {
-    success: function(res) {
-      let numLikesContainer = e.target.parentElement.parentElement.parentElement.children[3]
+    success: function (res) {
+      let numLikesContainer =
+        e.target.parentElement.parentElement.parentElement.children[3];
 
-      if (res === 0) {
-        numLikesContainer.innerHTML = ""
+      if (res.num_of_likes === 0) {
+        numLikesContainer.innerHTML = "";
       } else {
-        numLikesContainer.innerHTML = `${res.num_of_likes}`
+        numLikesContainer.innerHTML = `${res.num_of_likes}`;
       }
 
-      let currentUser = res.username
-      let listOfLikes = res.likes_list
+      let currentUser = res.username;
+      let listOfLikes = res.likes_list;
       let likeIcon =
         e.target.parentElement.parentElement.parentElement.children[2]
           .children[0].children[0];
 
-          if (listOfLikes.includes(currentUser)) {
-            likeIcon.classList.remove('far', 'fa-star')
-            likeIcon.classList.add('fas', 'fa-star')
-          } else {
-            likeIcon.classList.remove('fas', 'fa-star')
-            likeIcon.classList.add('far', 'fa-star')
-          }
-    }
-  })
+      if (listOfLikes.includes(currentUser)) {
+        likeIcon.classList.remove("far", "fa-star");
+        likeIcon.classList.add("fas", "fa-star");
+      } else {
+        likeIcon.classList.remove("fas", "fa-star");
+        likeIcon.classList.add("far", "fa-star");
+      }
+    },
+  });
 }
-
-

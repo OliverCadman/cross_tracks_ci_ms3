@@ -13,6 +13,7 @@ $(document).ready(function () {
   $(".tooltipped").tooltip();
   $("select").formSelect();
   $(".datepicker").datepicker({
-    yearRange: 75
+    yearRange: 75,
+    format: 'yyyy-mm-dd'
   });
 });
