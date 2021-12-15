@@ -13,7 +13,7 @@ from bson.objectid import ObjectId
 import datetime
 import json
 from bson.json_util import loads, dumps
-
+from flask_paginate import Pagination, get_page_args
 
 class Track:
     """
@@ -433,6 +433,32 @@ class Track:
                 }
             }
         ])
+
+    @staticmethod
+    def get_all_tracks():
+
+        all_tracks = Track.bind_users_to_tracks()
+        all_tracks_list = []
+
+        for track in all_tracks:
+            all_tracks_list.append(track)
+
+
+        return all_tracks_list
+
+
+    # https://github.com/Edb83/self-isolution/blob/master/app.py
+    # Line 55
+    @staticmethod
+    def paginate(tracks):
+
+        PER_PAGE = 6
+        page, per_page, offset = get_page_args(
+            page_parameter="page", per_page_parameter="per_page")
+        offset = page * PER_PAGE - PER_PAGE
+
+        return tracks[offset: offset + PER_PAGE]
+
 
     @staticmethod
     def delete_users_tracks(user_id):
