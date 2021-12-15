@@ -69,9 +69,10 @@ nav li a {
 
 .dropdown-content {
     background-color: #E0C0AC;
+    color: #333;
 }
 
-.dropdown-content li a  {
+#account-dropdown-mobile li a {
     color: #333333;
 }
 
@@ -257,8 +258,6 @@ nav li a {
     width: 100% !important;
 }
 
-
-
 .user-info {
     background-color: #7b89b4;
 }
@@ -349,7 +348,7 @@ nav li a {
 
 }
 
-.username-wrapper {
+.username-wrapper h1 {
     font-size: 2.2rem;
 }
 
@@ -413,8 +412,6 @@ nav li a {
 
 .edit-profile-form textarea {
     margin-top: 20px;
-    width: 200px;
-    height: 200px;
 }
 
 .switch label input[type=checkbox]:checked+.lever {
@@ -467,8 +464,7 @@ nav li a {
 }
 
 .delete-action-btn,
-.delete-track-btn
- {
+.delete-track-btn {
     letter-spacing: 0;
     background-color: #3c4c8b;
     color: #eee;
@@ -517,6 +513,15 @@ nav li a {
     background-color: #3c4c8b;
 }
 
+.my-tracks-track-name {
+    font-family: "Alata", sans-serif;
+}
+
+.my-tracks-artist-name,
+.my-tracks-album-name,
+.my-tracks-genre {
+    font-family: "Quicksand", sans-serif;
+}
 
 
 .row.no-margin {
@@ -679,7 +684,7 @@ nav li a {
 }
 
 .search-bar-icon,
-.user-option  {
+.user-option {
     cursor: pointer;
 }
 
@@ -716,7 +721,7 @@ nav li a {
 }
 
 .track-image.search-result {
-    width: 100;
+    width: 100%;
 }
 
 #close-search-wrapper {
@@ -733,10 +738,40 @@ nav li a {
 }
 
 .section-header h1,
-h2,h3 {
+h2,
+h3 {
     margin: 1rem 0;
     font-family: 'Alata', sans-serif;
     font-size: 3rem;
+}
+
+/* All Tracks Pagination Link (NavBar) */
+
+nav,
+li.page-item.active {
+    background-color: #3c4c8b;
+}
+
+li.page-item.active .page-link {
+    color: #7CFC00;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination li a {
+    color: #eee;
+    font-weight: bold;
+}
+
+.pagination-page-info {
+    padding: 1rem 0;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    text-transform: capitalize;
 }
 
 .all-tracks-btn-container {
@@ -771,6 +806,12 @@ h2,h3 {
     font-family: 'Alata', sans-serif;
 }
 
+.artist-name,
+.album-name,
+.genre-name {
+    font-family: "Quicksand", sans-serif;
+}
+
 .no-wordbreak {
     white-space: nowrap;
 }
@@ -781,7 +822,6 @@ h2,h3 {
 
 .card-content {
     padding: 10px !important;
-    font-family: "Quicksand", sans-serif;
     font-size: 1.1rem;
 }
 
@@ -901,8 +941,7 @@ h2,h3 {
     background-color: #F1EDE6;
 }
 
-.track-modal
-.modal-content {
+.track-modal .modal-content {
     background-color: #F1EDE6;
     padding-top: 1rem;
 }
@@ -910,8 +949,12 @@ h2,h3 {
 .track-modal-header {
     font-size: 1.4rem;
     color: #eee;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Alata', sans-serif;
     font-weight: bold;
+}
+
+.materialize-textarea {
+    font-family: "Quicksand", sans-serif;
 }
 
 .message-user-modal a {
@@ -952,10 +995,10 @@ h2,h3 {
 }
 
 .edit-delete-comment-btn {
-     background-color: transparent;
-     box-shadow: none;
-     padding: 0;
- }
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+}
 
 .edit-delete-comment-btns button {
     display: inline;
@@ -975,7 +1018,7 @@ h2,h3 {
 
 .submit-comment-edit {
     background-color: #3c4c8b;
-    color: #eee;  
+    color: #eee;
 }
 
 .submit-comment-edit:hover {
@@ -1090,7 +1133,7 @@ h2,h3 {
 .add-track-body {
     background: url('../images/home-login-bg.jpg') no-repeat;
     background-size: cover;
-    background-position: 100 25%;
+    background-position: 100% 25%;
     padding-top: 1.5rem;
 
 }
@@ -1135,13 +1178,14 @@ h2,h3 {
 
 .register-form {
     padding-bottom: 1.5rem !important;
+    border-radius: 20px;
 }
 
 .register-form button {
     background-color: #3c4c8b;
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
-    color: eee;
+    color: #eee;
 }
 
 .register-form .submit-button {
@@ -1180,6 +1224,10 @@ h2,h3 {
 .required-input::after {
     content: '*';
     color: red;
+}
+
+.login-form .card-panel {
+    border-radius: 20px;
 }
 
 .login-form small {
@@ -1223,6 +1271,14 @@ h2,h3 {
 
 .build-profile-form {
     padding-bottom: 1rem;
+}
+
+.fas.fa-question-circle {
+    margin-left: .5rem;
+}
+
+.build-profile-form input {
+    font-family: "Quicksand", sans-serif;
 }
 
 .build-profile-form .submit-btn {
@@ -1392,7 +1448,7 @@ h2,h3 {
 }
 
 
-.delete-genre-wrapper h2, 
+.delete-genre-wrapper h2,
 .add-genre-wrapper h3 {
     font-family: "Quicksand", sans-serif;
     color: #eee;
@@ -1404,7 +1460,7 @@ h2,h3 {
 
 .add-genre-container {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     padding-bottom: 3rem;
 
 }
@@ -1577,7 +1633,7 @@ h2,h3 {
     .add-track-container {
         height: 70vh;
     }
- 
+
     #add-track-header {
         background: none;
     }
@@ -1593,7 +1649,7 @@ h2,h3 {
     .add-track-container figure {
         position: absolute;
         right: -10px;
-    
+
     }
 
     .add-track-container figure img {
@@ -1665,8 +1721,7 @@ h2,h3 {
         position: relative;
     }
 
-    .card
-    .card-title {
+    .card .card-title {
         font-size: 18px;
     }
 
@@ -1817,9 +1872,7 @@ h2,h3 {
 
     /* User's Liked Tracks Section */
 
-    .liked-tracks-container
-    .track-container
-    .card {
+    .liked-tracks-container .track-container .card {
         height: 151px;
     }
 
@@ -1831,6 +1884,10 @@ h2,h3 {
 
     .track-image-wrapper img {
         width: 100%
+    }
+
+    .my-tracks-track-name {
+        font-size: 3rem;
     }
 
     .my-tracks-artist-name {
@@ -1890,7 +1947,7 @@ h2,h3 {
     }
 
     .edit-track-form .submit-btn button:hover {
-         background: #3c4c8b;
+        background: #3c4c8b;
     }
 
     .edit-track-form .submit-btn button:last-of-type:hover {
@@ -1912,7 +1969,8 @@ h2,h3 {
 
     /* ----- Login Page ----- */
 
-    .login-page-container {
+    .login-page-container,
+    .register-page-container {
         height: 80vh;
     }
 
@@ -2063,7 +2121,7 @@ h2,h3 {
     .build-profile-form button:hover,
     .build-profile-form .btn:hover,
     .build-profile-form .btn span:hover {
-        background-color: #3c4c8b;
+        background-color: #3c4c8b
     }
 
     /* Login Form */
@@ -2236,7 +2294,7 @@ h2,h3 {
         min-height: 150px;
     }
 
-    .username-wrapper {
+    .username-wrapper h1 {
         font-size: 2.5rem;
         text-decoration: underline;
     }
@@ -2297,7 +2355,6 @@ h2,h3 {
 
 
     .my-tracks-track-name {
-        font-family: 'Alata', sans-serif;
         font-size: 2rem;
         font-weight: bold;
     }
@@ -2312,10 +2369,6 @@ h2,h3 {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .delete-action-btn:hover {
-        background-color: none;
     }
 
 
@@ -2427,7 +2480,7 @@ h2,h3 {
         width: 100px;
     }
 
-    .username-wrapper {
+    .username-wrapper h1 {
         font-size: 1.75rem;
     }
 
