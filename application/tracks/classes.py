@@ -460,6 +460,18 @@ class Track:
         return tracks[offset: offset + PER_PAGE]
 
 
+    # https://github.com/Edb83/self-isolution/blob/master/app.py
+    # Line 63
+    @staticmethod
+    def pagination_args(tracks):
+        page, per_page, offset = get_page_args(
+            page_parameter="page", per_page_parameter="per_page"
+        )
+
+        total = len(tracks)
+
+        return Pagination(page=page, per_page=6, total=total, record_name="tracks")
+
     @staticmethod
     def delete_users_tracks(user_id):
         """
