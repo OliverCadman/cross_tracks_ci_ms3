@@ -30,6 +30,7 @@ from application.users.classes import User
 from application.comments.classes import Comment
 from bson.objectid import ObjectId
 from application import mongo
+from flask_paginate import Pagination, get_page_args
 import pprint
 
 
@@ -84,13 +85,12 @@ def add_track(username):
     return render_template("add-track.html", genres=genres, user_id=user_id)
 
 
-@tracks.route("/browse-tracks")
+@tracks.route("/browse-tracks", methods=["GET", "POST"])
 def browse_tracks():
     """
     Renders 'browse-tracks.html' template.
     """
-
-    tracks_and_users = Track.bind_users_to_tracks()
+    
     latest_tracks = Track.get_latest_tracks()
     genres = Track.get_genres()
     all_users = User.get_all_users()
@@ -106,10 +106,18 @@ def browse_tracks():
     if request.headers.get("Content-Type") == "application/json":
         return jsonify(genre_list=genre_list, user_list=user_list)
 
+
+    tracks_to_paginate = Track.get_all_tracks()
+    paginated_tracks = Track.paginate(tracks_to_paginate)
+    pagination = Track.pagination_args(tracks_to_paginate)
+    
+    
+
     return render_template("browse-tracks.html",
-                           tracks_and_users=tracks_and_users,
+                           all_tracks_list=paginated_tracks,
                            latest_tracks=latest_tracks,
-                           genre_list=genre_list)
+                           genre_list=genre_list,
+                           pagination=pagination)
 
 
 @tracks.route('/like-track/<track_id>/<username>')
