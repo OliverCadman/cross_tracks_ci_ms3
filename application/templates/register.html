@@ -2,31 +2,38 @@
 {% block content %}
 <section>
     <div class="register-page-container">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <h1 class="register-page-header">Register</h1>
-                </div>
+        <div class="row">
+            <div class="col s12 register-page-header">
+                <h1>Register</h1>
             </div>
+        </div>
+        <hr class="block-divider">
+        <div class="container">
             <div class="row">
                 <div class="col s12 register-form-wrapper">
                     <form action="{{url_for('users.register_user')}}" method="POST">
                                 <div class="col s12 card-panel z-depth-5 register-form">
                                     <div class="col s12 input-field username-input">
+                                        <i class="fas fa-user prefix login-window-icon"></i>
                                         <input type="text" id="username" name="username" class="validate" required>
                                         <label for="username">Choose a Username:</label>
                                     </div>
                                     <div class="col s12 input-field email-input">
+                                        <i class="fas fa-envelope prefix login-window-icon"></i>
                                         <input type="email" id="email_address" name="email_address" class="validate"
                                         required>
                                         <label for="email_address">Choose an email address:</label>
                                     </div>
                                     <div class=" col s12 m6 input-field password-input">
-                                        <input type="password" id="password" name="password" pattern="^[a-zA-Z0-9]{8,18}$"
+                                        <i class="fas fa-lock prefix login-window-icon"></i>
+                                        <input type="password" id="password" name="password"
+                                            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                         class="validate" required autocomplete="on">
                                         <label for="password">Choose a password:</label>
+                                        <small>Eight or more characters, with one uppercase letter, a number, and a special character.</small>
                                     </div>
                                     <div class="col s12 m6 input-field confirm-password-input">
+                                        <i class="fas fa-lock prefix login-window-icon"></i>
                                         <input type="password" id="confirm_password" name="confirm_password"
                                         class="validate" required autocomplete="on">
                                         <label for="confirm_password">Confirm your password:</label>
@@ -35,10 +42,11 @@
                                         <button type="submit" class="btn-large">Sign Up</button>
                                     </div>
                                 </div>
-                    </form>
-
-            </div>
-        </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <p>Already have an account? <a href="{{url_for('users.login')}}">Login Here</a></p>
     </div>
 </section>
 {% endblock %}
