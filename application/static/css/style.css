@@ -38,6 +38,18 @@ label {
     color: #5d6ca7;
 }
 
+/* Login/Register Icons */
+
+.login-window-icon {
+    color: grey;
+}
+
+.block-divider {
+    border: 5px solid #5d6ca7;
+    width: 25%;
+    text-align: center;
+}
+
 /* Navbar and Footer styling */
 
 .top-level-background,
@@ -737,9 +749,12 @@ nav li a {
 .section-header h1,
 h2,
 h3 {
-    margin: 1rem 0;
     font-family: 'Alata', sans-serif;
     font-size: 3rem;
+}
+
+.section-header h1 {
+    text-align: center;
 }
 
 
@@ -856,6 +871,7 @@ li.page-item.active .page-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem 0;
 }
 
 .more-info-btn a {
@@ -1171,7 +1187,12 @@ li.page-item.active .page-link {
 /* --------- Register Page -------- */
 
 .register-page-container {
-    height: 77vh;
+    background-color:#5d6ca7;
+}
+
+.register-form-wrapper, 
+.login-form-wrapper {
+    margin-top: 1.5rem;
 }
 
 .register-form {
@@ -1191,7 +1212,16 @@ li.page-item.active .page-link {
     justify-content: center;
 }
 
+.register-form small,
+.register-page-container p {
+    font-family: "Quicksand", sans-serif;
+    text-align: center;
+}
 
+.register-page-container p {
+    margin: 2rem 0;
+    font-weight: bold;
+}
 
 
 /* --------- Login Page ----------- */
@@ -1201,15 +1231,20 @@ li.page-item.active .page-link {
 .build-profile-container,
 .manage-genre-container {
     background-color: #F1EDE6;
+    min-height: 75vh;
 }
 
+.register-page-container,
 .login-page-container {
-    height: 78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-page-header,
 .register-page-header {
     font-family: "Alata", sans-serif;
+    padding-bottom: 2rem;
 }
 
 .close-modal-icon {
@@ -1261,7 +1296,7 @@ li.page-item.active .page-link {
 }
 
 .build-profile-form-wrapper {
-    background-color: #eeeeee;
+    background-color: #fff;
     border-radius: 20px;
 }
 
@@ -1501,8 +1536,8 @@ li.page-item.active .page-link {
 @media screen and (min-width: 600px) {
 
     .block-divider {
-        width: 50%;
-        border-top: 3px solid #ffffff;
+        width: 100px;
+        border: 3px solid #5d6ca7;
         display: inline-block;
     }
 
@@ -1534,7 +1569,12 @@ li.page-item.active .page-link {
     .manage-genre-container {
         background: url("../images/home-login-bg.jpg");
         background-size: cover;
-        background-position: 60%;
+        background-position: 70%;
+        min-height: 80vh;
+    }
+
+    .regiser-page-container p {
+        margin: 5rem 0;
     }
 
 
@@ -1708,6 +1748,7 @@ li.page-item.active .page-link {
 
     .section-header h1,
     h2 {
+        text-align: left;
         padding-left: 1.5rem;
     }
 
@@ -1923,6 +1964,7 @@ li.page-item.active .page-link {
     }
 
     .more-info-btn {
+        padding: 0;
         margin-top: 1rem;
     }
 
@@ -1967,22 +2009,12 @@ li.page-item.active .page-link {
         margin: .5rem 0.3rem !important;
     }
 
-    /* ----- Register Page ----- */
-
-    .register-page-container {
-        height: 73vh;
-    }
-
     /* ----- Login Page ----- */
-
-    .login-page-container,
-    .register-page-container {
-        height: 80vh;
-    }
 
     .login-form-wrapper,
     .register-form-wrapper {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
@@ -2236,6 +2268,12 @@ li.page-item.active .page-link {
         width: 400px;
     }
 
+    /* ----- Register Page ----- */
+
+    .register-page-container,
+    .login-page-container {
+        min-height: 74vh;
+    }
 
     /* ------ Login Page ------ */
 
@@ -2499,9 +2537,21 @@ li.page-item.active .page-link {
 
 }
 
+@media only screen and (min-width: 375px) and (max-width: 375px) and (min-height: 667px) and (max-height: 667px) {
+    .login-page-container {
+        min-height: 71vh;
+    }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 375px) and (min-height: 812px) and (max-height: 812px) {
+    .login-page-container {
+        min-height: 76vh;
+    }
+}
+
 /* iPhone X Device */
 
-@media only screen and (min-width: 375px) and (max-width: 411px) {
+@media only screen and (min-width: 411px) and (max-width: 411px) {
     /* ------ User Profile Page ------ */
 
     .is-artist-wrapper {
@@ -2513,6 +2563,12 @@ li.page-item.active .page-link {
     .page-not-found-container,
     .internal-error-container {
         height: 76vh;
+    }
+
+    /* ----- Login/Register Pages */
+
+    .login-page-container {
+        min-height: 76vh;
     }
 }
 
@@ -2535,6 +2591,12 @@ li.page-item.active .page-link {
         right: -10px;
     }
 
+    /* -----  Login/Register Page ----- */
+
+    .login-page-container {
+        height: 70vh;
+    }
+
 }
 
 /* Huaweu Mate20 Pro Device*/
@@ -2548,6 +2610,12 @@ li.page-item.active .page-link {
 
     .use-crosstracks-list {
         font-size: 1rem;
+    }
+
+    /* -----  Login/Register Page ----- */
+
+    .login-page-container {
+        height: 66vh;
     }
 
     /* ------ User Profile Page ------ */
