@@ -304,8 +304,8 @@ nav li a {
     font-size: 1.2rem;
     color: #D4AF37;
     position: absolute;
-    bottom: -25px;
-    right: -50px;
+    bottom: -35px;
+    left: 0;
     overflow: auto;
 }
 
@@ -314,9 +314,13 @@ nav li a {
     display: inline-block;
 }
 
+.is-artist-wrapper p i {
+    margin-right: 5px;
+}
+
 .profile-pic-edit-wrapper {
     position: absolute;
-    right: -15px;
+    right: -25px;
     top: 5%;
 }
 
@@ -339,6 +343,10 @@ nav li a {
     font-family: 'Alata', sans-serif;
     color: #ffffff;
     text-align: right;
+}
+
+.username-wrapper h1 {
+    text-decoration: underline;
 }
 
 .edit-profile-btn-wrapper {
@@ -1139,6 +1147,8 @@ li.page-item.active .page-link {
     margin-top: 0;
     margin-bottom: 0;
     padding: 1.5rem 0 1rem 1.5rem;
+    text-align: center;
+    
 
 }
 
@@ -1159,7 +1169,6 @@ li.page-item.active .page-link {
 
 .add-track-form-wrapper {
     padding-top: 1.5rem !important;
-    background-color: #5d6ca7;
 }
 
 .add-track-form input {
@@ -1686,10 +1695,15 @@ li.page-item.active .page-link {
 
     #add-track-header h1 {
         font-size: 3.5rem;
+        text-align: left;
+        padding-top: 3rem;
     }
 
     .add-track-container {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .add-track-container figure {
@@ -1899,6 +1913,7 @@ li.page-item.active .page-link {
     .is-artist-wrapper {
         bottom: -25px;
         right: -50px;
+        left: initial;
     }
 
     .profile-pic-edit-wrapper {
@@ -2256,7 +2271,7 @@ li.page-item.active .page-link {
 
     .add-track-container {
         position: static;
-        display: flex;
+        flex-direction: row;
         align-items: center;
     }
 
@@ -2541,6 +2556,10 @@ li.page-item.active .page-link {
     .login-page-container {
         min-height: 71vh;
     }
+
+    .profile-pic-edit-wrapper {
+        right: -50px;
+    }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 375px) and (min-height: 812px) and (max-height: 812px) {
@@ -2555,7 +2574,11 @@ li.page-item.active .page-link {
     /* ------ User Profile Page ------ */
 
     .is-artist-wrapper {
-        right: -35px;
+        right: -40px;
+    }
+
+    .profile-pic-edit-wrapper {
+        right: -20px;
     }
 
     /* ------ 404/500 Pages ------ */
@@ -2577,18 +2600,18 @@ li.page-item.active .page-link {
     /* ------ User Profile Page ------ */
 
     .is-artist-wrapper {
-        right: -35px;
+        right: -40px;
     }
 
     .profile-pic-edit-wrapper {
-        right: -10px;
+        right: -20px;
     }
 
 }
 
 @media only screen and (min-width: 375px) and (max-width: 375px) {
     .profile-pic-edit-wrapper {
-        right: -10px;
+        right: -20px;
     }
 
     /* -----  Login/Register Page ----- */
@@ -2621,10 +2644,10 @@ li.page-item.active .page-link {
     /* ------ User Profile Page ------ */
 
     .is-artist-wrapper {
-        right: -35px;
+        right: -45px;
     }
 
     .profile-pic-edit-wrapper {
-        right: -10px;
+        right: -25px;
     }
 }
