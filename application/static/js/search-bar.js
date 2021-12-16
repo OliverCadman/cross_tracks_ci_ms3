@@ -3,7 +3,6 @@ $(document).ready(function () {
     document
       .getElementById("search-bar-wrapper")
       .classList.toggle("show-search-bar");
-    console.log(document.getElementById("search-bar-wrapper").classList);
 
     let opaqueOverlay = document.getElementById("opaque-overlay");
     opaqueOverlay.classList.toggle("show-opaque-overlay");
@@ -17,34 +16,18 @@ $(document).ready(function () {
     let resultsWrapper = document.getElementsByClassName("results-wrapper")[0];
     let inputField = document.getElementById("search_input");
     let noResultsMsg = document.getElementById("no-result-msg");
+    let opaqueOverlay = document.getElementById("opaque-overlay");
 
     resultsWrapper.innerHTML = "";
     inputField.value = "";
-    noResultsMsg.innerHTML = "";
 
-    searchBar.classList.remove("show-search-bar");
-  }
-});
-
-// Click outside search bar window to close search bar
-// https://stackoverflow.com/questions/1403615/use-jquery-to-hide-a-div-when-the-user-clicks-outside-of-it?page=1&tab=votes#tab-top
-$(document).mouseup(function (e) {
-  let x = window.matchMedia("(min-width: 414px)");
-
-  if (x.matches) {
-    let searchWrapper = $("#search-bar-wrapper");
-
-    if (searchWrapper.hasClass("show-search-bar")) {
-      if (
-        !searchWrapper.is(e.target) &&
-        searchWrapper.has(e.target).length === 0
-      ) {
-        searchWrapper.removeClass("show-search-bar");
-
-        $("#opaque-overlay").removeClass("show-opaque-overlay");
-        $("#search_input").val("");
-        $(".results-wrapper").html("");
-      }
+    if (noResultsMsg) {
+       noResultsMsg.innerHTML = "";
     }
+   
+    if (searchBar.classList.contains("show-search-bar")) {
+      searchBar.classList.remove("show-search-bar");
+      opaqueOverlay.classList.remove("show-opaque-overlay")
+    }   
   }
 });
