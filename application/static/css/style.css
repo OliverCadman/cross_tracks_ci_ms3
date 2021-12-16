@@ -726,7 +726,6 @@ nav li a {
 
 #close-search-wrapper {
     font-size: 2rem;
-    color: #eeeeee;
 }
 
 .section-header {
@@ -745,7 +744,6 @@ h3 {
     font-size: 3rem;
 }
 
-/* All Tracks Pagination Link (NavBar) */
 
 nav,
 li.page-item.active {
