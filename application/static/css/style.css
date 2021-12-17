@@ -2667,7 +2667,10 @@ li.page-item.active .page-link {
         height: 84vh;
         justify-content: center;
     }
-    
+
+    .register-page-header h1 {
+        font-size: 5rem;
+    }
 }
 
 /* iPhone 5 Device */
