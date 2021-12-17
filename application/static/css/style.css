@@ -1586,11 +1586,6 @@ li.page-item.active .page-link {
         min-height: 80vh;
     }
 
-    .regiser-page-container p {
-        margin: 5rem 0;
-    }
-
-
     /* -------- Home Page --------- */
 
     .hero-header h1 {
@@ -1671,6 +1666,31 @@ li.page-item.active .page-link {
     .signup-btn-wrapper a:hover,
     .hero-inner a:hover {
         background: #3c4c8b;
+    }
+
+    /* ------ Register Page ------ */
+
+    .register-page-container {
+        display: block;
+        position: relative;
+    }
+
+    .register-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .register-page-header h1 {
+        text-align: center;
+        clear: both;
+    }
+
+    .register-vector {
+        width: 200px;
+        position: absolute;
+        left: 40px;
+        top: 50px;
     }
 
 
@@ -2288,9 +2308,10 @@ li.page-item.active .page-link {
 
     /* ----- Register Page ----- */
 
-    .register-page-container,
-    .login-page-container {
-        min-height: 74vh;
+    .register-vector {
+        left: 200px;
+        width: 250px;
+        top: 20px;
     }
     
 
@@ -2530,8 +2551,13 @@ li.page-item.active .page-link {
         font-size: 1.5rem;
     }
 
-    /* ----- Register Page/Login Page ------ */
+    /* ----- Register Page ----- */
 
+    .register-page-container {
+        display: flex;
+    }
+
+    /* Applies to both Register and Login Pages */
     .register-page-container,
     .login-page-container {
         min-height: 85vh;
@@ -2545,6 +2571,11 @@ li.page-item.active .page-link {
 
     .signin-message {
         font-size: 1.3rem;
+    }
+
+    .register-vector {
+        left: 20px;
+        top: 150px;
     }
 
     /* ----- Build Profile Page ----- */
@@ -2620,6 +2651,16 @@ li.page-item.active .page-link {
 
 /* Large Desktop devices */
 @media only screen and (min-width: 1600px) {
+
+    .register-page-container {
+        display: flex;
+    }
+
+    .register-vector {
+        top: 100px;
+        left: 300px;
+        width: 400px;
+    }
     
     .register-page-container,
     .login-page-container {
