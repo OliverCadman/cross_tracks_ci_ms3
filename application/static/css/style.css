@@ -1148,13 +1148,13 @@ li.page-item.active .page-link {
     margin-bottom: 0;
     padding: 1.5rem 0 1rem 1.5rem;
     text-align: center;
-    
+
 
 }
 
 .add-track-body {
     background-color: #F1EDE6;
-    
+
 }
 
 
@@ -1196,10 +1196,10 @@ li.page-item.active .page-link {
 /* --------- Register Page -------- */
 
 .register-page-container {
-    background-color:#5d6ca7;
+    background-color: #5d6ca7;
 }
 
-.register-form-wrapper, 
+.register-form-wrapper,
 .login-form-wrapper {
     margin-top: 1.5rem;
 }
@@ -2289,6 +2289,7 @@ li.page-item.active .page-link {
     .login-page-container {
         min-height: 74vh;
     }
+    
 
     /* ------ Login Page ------ */
 
@@ -2505,8 +2506,118 @@ li.page-item.active .page-link {
 
 }
 
+/* iPad Pro Devices */
+@media only screen and (min-width: 1024px) and (max-width: 1024px) {
+    /* ----- Home Page ----- */
+
+    .login-window {
+        width: 30%;
+    }
+
+    .hero-section {
+        background-size: 75%, cover;
+        background-position: 50%, 50% 20%;
+    }
+
+    .hero-header h1 {
+        font-size: 4.5rem;
+    }
+
+    .hero-header p {
+        font-size: 1.5rem;
+    }
+
+    /* ----- Register Page/Login Page ------ */
+
+    .register-page-container,
+    .login-page-container {
+        min-height: 85vh;
+        justify-content: center;
+    }
+
+    .register-page-header h1,
+    .login-page-header h1 {
+        font-size: 6rem;
+    }
+
+    .signin-message {
+        font-size: 1.3rem;
+    }
+
+    /* ----- Build Profile Page ----- */
+
+    .build-profile-container {
+        min-height: 85vh;
+    }
+
+    .build-profile-header {
+        padding-top: 10rem;
+    }
+
+    .build-profile-header h1 {
+
+        font-size: 3rem;
+    }
+
+    .build-profile-container>.container {
+        width: 100%;
+    }
+
+    /* ----- User Profile Page ------ */
+
+
+    .my-tracks-container,
+    .liked-tracks-container{
+        width: 100% !important;
+    }
+
+    .my-tracks-track-name {
+        font-size: 2.5rem;
+    }
+
+    .my-tracks-artist-name {
+        font-size: 2.3rem;
+    }
+
+    .my-tracks-album-name {
+        font-size: 2rem;
+    }
+
+    .my-tracks-genre {
+        font-size: 1.75rem;
+    }
+
+    /* ----- Browse Tracks Page ----- */
+
+    .track-image {
+        width: 90px;
+    }
+
+    /* ----- Contact Page ----- */
+
+    .contact-body {
+        min-height: 85vh;
+    }
+
+    .contact-vector {
+        width: 35%;
+        shape-outside: circle(72.2% at 175px 150px);
+        -webkit-shape-outside: circle(40.2% at 175px 150px);
+        margin-right: 10rem;
+        margin-left: 0;
+    }
+}
+
 /* Large Desktop devices */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1600px) {
+    
+    .register-page-container,
+    .login-page-container {
+        height: 84vh;
+        justify-content: center;
+    }
+    
+}
 
 /* iPhone 5 Device */
 
