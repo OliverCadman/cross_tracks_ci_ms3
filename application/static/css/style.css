@@ -988,7 +988,7 @@ li.page-item.active .page-link {
 }
 
 .comments-container {
-    background-color: #eee;
+    background-color: #F1EDE6;
     padding-top: 2rem;
     padding-left: 1rem;
 }
@@ -1008,6 +1008,10 @@ li.page-item.active .page-link {
     justify-content: space-between;
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
+}
+
+.comment-author a {
+    color: #3c4c8b;
 }
 
 .date-comment-added {
@@ -1843,7 +1847,6 @@ li.page-item.active .page-link {
     }
 
     .comments-container {
-        background-color: #e5e8ec;
         padding-bottom: 1rem;
         border-radius: 15px;
         height: 200px;
@@ -2585,6 +2588,13 @@ li.page-item.active .page-link {
 
     .my-tracks-genre {
         font-size: 1.75rem;
+    }
+
+    .liked-tracks-container
+    .track-container
+    .card.horizontal
+    .card-image {
+        max-width: 30%;
     }
 
     /* ----- Browse Tracks Page ----- */
