@@ -229,8 +229,149 @@ As a musician using the website, I want...
        to concisely inform the user of the meaning of the number on the card.
     3. If no likes are present, the message 'No Likes' is conveyed to the user, as opposed to no information at all.
 
+## Manual Testing of Features on All Pages
 
+Manual testing was undertaken on the following browser platforms:
+
+* Google Chrome
+* Apple Safari
+* Mozilla Firefox
+
+### Home Page
+
+1. Navigation Bar
+    1. Click on brand logo to visit home page, from all other pages of website.
+    2. Navigate to all pages of website using the navigation links.
+    3. Change screen size from laptop to tablet to confirm that the navigation bar collapses to a burger icon.
+    4. Click the burger icon to confirm the side-nav opens.
+    5. Log out to confirm the navbar features links only to Home, Browse Tracks, Register and Login pages.
+    6. Log in to confirm the navbar features links to Home, Browse Tracks, Add a Track pages, and the 'My Account' dropdown.
+    7. Click on the link to 'My Account' to confirm that a dropdown appears, featuring links to 'My Profile' and a link to Logout.
+    8. Click on 'My Profile' and 'Logout' links, to confirm that they are linked correctly, and logout functionality works as intended.
+
+2. Hero Section
+    1. On laptop/desktop and iPad screen sizes, confirm that the Cross//Tracks header, lead paragraph and 'Find Me A Track' buttons are all contained
+       within the hero image/logo, with sufficient margin from the edges of the hero image.
+    2. Collapse to mobile screen size, to confirm that the header and lead paragraph sit above the Cross//Tracks logo, and only the 'Find Me A Track' button sits within.
+    3. Collapse to mobile screen size to confirm that the background image featured on tablet/laptop devices disappears.
     
+    3. Login Window
+        1. Confirm that the login window is present on laptop/desktop device sizes.
+        2. Click Login button without entering any information to confirm the 'required' attribute functions correctly.
+        3. Click on inputs to confirm the MaterializeCSS inputs focus as intended.
+        4. Enter an incorrect username/password to confirm that the flash message displays as intended.
+        5. Log in with correct information to confirm that the user is logged in, and is taken to the Home Page (without the login window).
+
+3. 'About Us'/'Using Cross//Tracks' section
+    1. Confirm that the text content has sufficient contrast and font size to be legible on all device sizes.
+    2. Confirm that the text wraps around the vector graphic without any unattractive word-breaks, on all device sizes.
+    3. Collapse to mobile device size to confirm that the two sections span full-width columns.
+    4. Confirm that the bulleted list doesn't contain any word-breaks, on all device sizes.
+    5. Confirm that the 'Sign Up' button is present and correctly linked to Register page, on mobile device sizes.
+
+### Register Page
+
+1. Navbar 
+    1. Repeat verification steps taken in home page testing.
+
+2. Page Layout
+    1. Confirm that the vector is present and correctly placed, on tablet, laptop and desktop device sizes.
+    2. Collapse to mobile device sizes to confirm that the vector and background are not displayed.
+
+3.  Register Form
+    1. Click on the link to 'Login Here' to confirm that the user is took to the Login page.
+    2. Click submit button without entering any information, to confirm that the required attribute functions correctly.
+    3. Enter information correctly, but with an existing username. Click submit to confirm that the relevant error is thrown.
+    4. Enter an incorrect password format and click submit, to confirm that the relevant error is thrown.
+    5. Enter a mismatching password and click submit, to confirm that the relevant error is thrown.
+    6. Enter all information correctly and click submit, to confirm that the submission is successful, with the relevant flash message.
+    7. Confirm that the user is taken to the page to build their profile.
+
+4. Footer 
+    1. Repeat verification steps taken in home page testing.
+    
+### Build Profile Page
+
+1. Design
+    1. Collapse to mobile screen size to confirm that background isn't displayed.
+
+2. Heading
+    1. Confirm that the welcome message containing `{{username}}` variable renders the correct username as intended.
+
+3. Form
+    1. Confirm that the form is centered on iPad, laptop and desktop devices, and spans full-width on mobile screen sizes.
+    2. Confirm that the username input is disabled and tooltipped correctly.
+    3. Confirm that the username input features the user's username.
+    4. Collapse to mobile screen size to confirm that the Profile Image file selector spans full-width.
+    5. Select an invalid file format and click submit, to confirm that the relevant error is thrown.
+    6. Select an image with filesize larger than 500KB, to confirm that the relevant error is thrown.
+    7. Click on the 'Date of Birth' input, to confirm the MaterializeCSS datepicker is displayed.
+    8. Select a birthdate, to confirm it is displayed in the correct format.
+    9. Enter no details into form and click submit, to confirm that the user is taken to their profile page, with no additional information displayed.
+    10. Fill all inputs of the form and click submit, to confirm that the user is taken to their profile page, with additional information displayed.
+
+### Profile Page
+
+1. Header/User Details
+    
+    1. Confirm that the default user profile image is displayed, if no profile image was supplied in 'Build Profile' form.
+    2. Confirm that the user's username and email address are clearly displayed, with sufficient colour contrast and font size.
+    3. Confirm that text content 'Artist' with check icon are displayed (if checked in 'Build Profile' form).
+    4. If logged in and on own profile:
+        1. Confirm that the edit icon is present and correctly placed next to profile image, on all device sizes.
+        2. Confirm that 'Edit My Profile' and 'Delete My Profile' buttons are present at bottom of header.
+        3. Hover over 'Edit My Profile' and 'Delete My Profile' buttons on laptop/desktop devices, to see if they respond accordingly.
+    5. Collapse to mobile device size, to confirm that columns collapse to full-width.
+    6. Edit Profile-Image icon:
+        1. Log in and navigate to own profile, and click on button to edit profile image.
+        2. Confirm that a file selector window opens.
+        3. Select an image with incorrect file format, to confirm relevant error message is thrown.
+        4. Select an image with a filesize larger than 500KB, to confirm that the relevant error message is thrown.
+        5. Select a valid image, to confirm that the profile image is edited successfully, with the relevant flash message.
+
+2. Edit Profile Modal
+    1. Click both the icon to close the modal and page outside the modal, to confirm it closes correctly.
+    2. If user information is in database, confirm that it is displayed as values in relevant inputs.
+    3. Confirm that the username input is disabled and tooltipped correctly.
+    4. Edit information in each field and click submit, to confirm that the form functions correctly, and the relevant flash message is displayed.
+
+3. Delete Profile Modal
+    1. Click both the icon to close the modal and page outside the modal, to confirm it closes correctly.
+    2. Click the button which reads 'No, I Change My Mind!' to confirm it closes the modal.
+    3. Click the 'Yes I'm Sure' button, to confirm that the account is deleted successfully, and the user is logged out and taken to the home page, with relevant flash message.
+    
+4. 'My Tracks'
+    
+    1. If no tracks present, confirm that the message 'No Tracks' is displayed, both with accompanying vector.
+    2. Log in and add a track, to confirm that the tracks are displayed on track cards in the section, with image, track name, artist name, album name and genre.
+    3. If there are tracks present, click on the button with FontAwesome 'info' icon, to confirm that it opens the relevant modal window.
+    4. If track has no image URL, confirm that the image defaults to the Cross//Tracks logo.
+    5. Select 'Yes' when prompted with 'Are you an Artist?' in Edit Profile/Build Profile forms. Add a track, and navigate to user profile, to confirm that the Artist status is displayed on track card.
+    6. Log in, add a track and navigate to own profile, confirm that edit and delete icons are displayed correctly.
+    7. Log out and visit own profile page, to confirm that the edit and delete icons are hidden.
+    8. Click on both edit and delete icons, to confirm that the relevant modal windows are opened.
+    9. Collapse to mobile device size, to confirm that columns collapse to full-width.
+    
+
+5. 'Liked Tracks'
+    1. If no tracks present, confirm that the message 'No Tracks' is displayed, both with accompanying vector.
+    2. Log in and like a track, to confirm that it is displayed in the section.
+    3. If tracks are present, confirm that the relevant images and track names are displayed.
+    4. If there are tracks present, click on the button with FontAwesome 'info' icon, to confirm that it opens the relevant modal.
+    5. Log in, like a track and navigate to own profile, to confirm that a button to remove liked track is present.
+    6. Click on button to remove liked track, to confirm that the track is removed.
+    7. If deleting the last liked track from the section, confirm that the page reloads, and the 'No Tracks' message is displayed, with accompanying vector.
+    8. Collapse to tablet/mobile screen size, to confirm that the columns span full-width.
+
+6. Track Info Modal 
+    1. Supply an image URL for the track, to confirm that the image is displayed in the modal.
+    2. Confirm that the relevant track name, artist name, album name, genre and year-of-release are displayed correctly.
+    3. Click both the icon to close the modal and page outside the modal, to confirm it closes correctly.
+
+
+
+
+
 
         
 
