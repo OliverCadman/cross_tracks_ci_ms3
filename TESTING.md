@@ -123,6 +123,110 @@ As a visitor using the website for the first time, I want...
 
     3. A button is also presented immediately to the user, inviting them to find tracks, using the website's 'Browse Tracks' page.
 
+    4. Details of the website's purpose, and how the website can be used, are featured on the website's home page.
+
+2. To be able to navigate the website intuitively and with ease, so that my time isn't wasted.
+
+    1. A navbar and footer is present on all pages of the website, with navigation links clearly presented with sufficient colour contrast.
+    2. The website's navbar is collapsible, to allow for responsivity on mobile and tablet devices.
+    3. As well as having clear navigation, the website's home page features links for the user to visit the 'Browse Tracks' or 'Register' pages.
+    4. Should a user be using a laptop or desktop device, a small login window is present to allow for ease on login.
+    5. The website's 'Browse Tracks' page features it's own navbar, with options for users to search for tracks, add tracks, or go to their profile.
+    6. Users are able to visit other user's profiles by clicking on any of the profile images featured on the track cards, in the 'Browse Tracks' page.
+    7. The 'All Tracks' section of the 'Browse Tracks' page is paginated, to minimise cognitive overload and scrolling.
+
+3. To view tracks without having to register, so I can determine whether the website suits my needs.
+
+    1. The navigation link to the 'Browse Tracks' page is present regardless of whether a user is logged in/registered or not.
+    2. The option to search for tracks is available to users (in the 'Browse Tracks' page), whether they are logged in or not.
+
+4. To be able to search for tracks based on different criteria (Genre, Artist Name, Year of Release), so I can search for tracks more granularly.
+    
+    1. A search window is available on the website's 'Browse Tracks' page, enabling the user to search for tracks using the above search terms.
+    2. The search window uses AJAX to query MongoDB through the backend, allowing for instant results when a search is made, and minimizing click count.
+    3. When the search window is opened on laptop or tablet devices, the background dims through use of an opaque overlay, to allow maximum engagement with the search window.
+
+5. To view comments on a particular track, so I find out what other users have to say about the music and engage with the community.
+
+    1. In the 'Browse Tracks' page, each modal window contains a section displaying comments other users have left on tracks.
+    2. Should there be a comment left on a particular track, this is highlighted by use of a FontAwesome speech-bubble icon on the track card,
+       along with the amount of comments a track has.
+
+6. To view how many likes a particular track has, so I can determine which tracks are popular.
+    
+    1. Each track card in the 'Browse Tracks' page features a FontAwesome star icon, accompanied by the amount of likes a track has (if any).
+
+### Returning Visitors
+
+1. To be able to write and edit comments on tracks which have been shared by others, so I can communicate and build relationships with other users of the website.
+
+    1. If a user is logged in, a form is featured on each track modal in the 'Browse Tracks' page, allowing them to leave a comment.
+    2. A user's comment is accompanied with FontAwesome edit and trash icons, allowing the user to edit their comment (from within the comment window) 
+       or delete their comment.
+    3. Timestamps accompany every comment, to inform the user of when the comment was submitted.
+
+2. The details of users who share a particular track to be clearly visible, so I can browse their profile and find out more about their musical tastes.
+
+    1. Every track card featured in the 'Browse Tracks' page features the name of the user who submitted the track at the bottom of the card,
+       along with the user's profile image. This image is clickable, and will take the user to the relevant profile upon clicking.
+    2. User details are also featured at the top level in all track modals, in the 'Browse Tracks' page.
+
+3. To be able to Add, Edit and Delete my own profile, so I can manage my personal information with ease.
+
+    1. Full CRUD functionality is present, allowing the user to register themselves to the website.
+    2. After registering, a form is presented to the user, inviting them to submit further details such as name, age, description
+       and 'artist' status.
+    
+
+4. To be able to Add, Edit and Delete my own track information, so I can share tracks with other users of the website.
+
+    1. Full CRUD functionality is present, enabling the user to Add, Edit or Delete their tracks.
+    2. The user can edit/delete their track either from the 'Browse Tracks' page, or from their own profile page, maximising intuition and ease of use.
+
+5. To be able to save/like tracks which I come across when browsing, so they are saved to my profile.
+
+    1. Each track card featured in the 'Browse Tracks' page features a FontAwesome saw, which the user can click to like and save a track.
+    2. The FontAwesome icon changes from an outlined star to a star with colour fill, to give feedback to the user that the track is liked.
+    3. Further feedback is given through the increment of the likes count, which accompanies the colour fill of the FontAwesome star.
+    4. The like button uses AJAX, to allow for feedback without refreshing the page, allowing for better UX.
+    5. All liked tracks are displayed on their own profile, so the user can browse their liked tracks at will.
+
+6. To be able to contact the site owner, so I can leave feedback. 
+
+    1. A contact page is present, and linked in the footer section of each page of the website.
+
+7. To be able to reset my password so I can access the website if I forget my password.
+
+    Unfortunately, the functionality to fulfill this user story hasn't been successfully implemented. This issue is in regards
+    to the JSON web token (JWT), which is needed to provide authentication when resetting the password, by determining if the user who is 
+    resetting the password is the same user who requested the password reset.
+
+    Though functionality was successfully in place to send the user an email containing the JWT in the URL, as well as a link taking the user
+    back to the website's 'Reset Password' page, the developer ran into issues when testing the reset-password form. Upon submission of the
+    form, the user would taken to a 404 page, and the form is not submitted. The developer examined the view which handles the form input, and 
+    couldn't find the particular bug which was causing this issue. Unfortunately, a solution to the bug has not yet been discovered.
+    It is the developer's intention to rectify this error as soon as possible.
+
+### Musicians
+
+As a musician using the website, I want...
+
+1. To be able to display that I am an artist to other users of the platform, so I can market myself and grow my fanbase.
+
+    1. When filling the form in the website's 'Build Profile' page, a checkbox is present along with the text content 'Are you an Artist?'.
+       The user can check this checkbox to display their artist status.
+    2. A user's 'artist' status is displayed on their profile, next to their profile image.
+
+2. To display my artist status on track cards, so users can easily find tracks added by me.
+
+    1. If a track that is featured on the 'Browse Tracks' page is added by a user with 'artist' status, this is displayed
+       in the footer section of the track cards.
+
+3. View how many 'likes' my tracks have, so I can determine how well my fanbase is growing.
+
+    Unfortunately, due to the time taken to develop the other features of the website, the developer was unable to navigate
+    the database effectively, in order to aggregate and lookup the 'likes' field in all relevant documents 
+    in the MongoDB 'tracks' collection, to display the information on the front-end. It is the developers intention to implement this functionality as soon as possible.
     
 
         
