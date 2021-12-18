@@ -393,7 +393,6 @@ The website also features a 500 page, in the case that there are server issues. 
 
 ### Manage Genres (as admin)
 
-
 ![Website Manage Genres Page](documentation/readme-images/crosstracks-manage-genres.png)
 
 If the admin is logged into the website, there are two extra pages available. One of them is the 'Manage Genres' page, where the administrator can delete or add genres, which will be available to the user when they add or edit their tracks. The current list of genres is presented using clickable materializeCSS "chips", each with a cross icon. If the icon is clicked, a modal window is displayed to confirm deletion of the genre. Here the administrator can confirm deletion, or cancel (which closes the modal window)
@@ -406,9 +405,9 @@ Below the list of genres is a small form with one text input with a submit butto
 
 The admin also has the privilege to edit or delete all tracks in the Cross//Tracks database. The 'Manage Tracks' page features a collection of all tracks, displayed on materializeCSS cards, and styled as per the styling in the website's 'Browse Tracks' page. Each card features an edit and delete button, the former of which opens a modal window allowing the administrator to edit the track (typically in the case where an image URL is broken, and another can be sourced), or delete the track (in the case of duplication/explicit language).
 
-## Features for future implementation
+### Features for future implementation
 
-1. Messaging - Currently, the only methods of communication between users of Cross//Tracks is through either leaving comments, or copying the user's email address from their user profile. Of course this is not ideal; it is important to the developer to integrate a messaging service (research into Socket I/O was made, which seems viable to integrate). It is the developers intention to implement this functionality as soon as possible.
+1. Messaging - Currently, the only methods of communication between users of Cross//Tracks are through either leaving comments, or copying the user's email address from their user profile. Of course this is not ideal; it is important to the developer to integrate a messaging service (research into Socket I/O was made, which seems viable to integrate). It is the developers intention to implement this functionality as soon as possible.
 
 2. Notifications - Along with messaging, it is important that users should be notified whenever they receive a message from another user, as well as when someone has liked their track. Again, it is the developer's intention to implement this functionality.
 
@@ -417,6 +416,79 @@ The admin also has the privilege to edit or delete all tracks in the Cross//Trac
 4. Search by username - Efforts were made to provide the ability for users to search by username, as well as genre. The developer deemed this an important issue; since Cross//Tracks is community oriented, and if a user finds many tracks they enjoy that are added by another user, it would be ideal for the user to search for all tracks added by that same user. However, the developer was unable to navigate how to join two collections (tracks and users, using the user_id as the foreign key), and search at the same time. Once this issue has been understood, this feature will be implemented.
 
 5. Add Friends - It would of course be useful if users can add eachother as friends, so that online relationships can be created and nurtured, and users can be enabled to share tracks with more ease. Furthermore, in the case where a certain user likes another user's tracks, they are easily able to discover other users who are friends of that user who added those tracks, therefore further bolstering the community ethos of the Cross//Tracks brand.
+
+## Technologies Used
+
+### Languages
+
+The primary languages used throughout the development of this project are:
+
+* [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
+* [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* [Python3](https://www.python.org/downloads/)
+* [JavaScript](https://www.javascript.com/)
+
+### Integrated Development Environment
+
+* [Visual Studio Code 2](https://code.visualstudio.com/) - Microsoft's IDE 'Visual Studio Code 2' was utilised through the development of this project.
+
+### Database
+
+* [MongoDB](https://www.mongodb.com/) - The non-relational, 'noSQL' database MongoDB is used to store and serve data inputted through the front-end of the website. 
+                                        Unlike relational databases such as SQL, MongoDB stores the data in 'documents', following JSON-like structure, allowing data to be handled more flexibly.
+
+### Back-End Libraries/Frameworks
+
+* [Flask](https://flask.palletsprojects.com/en/2.0.x/) - The microservice Flask framework is used to handle routing and serving of HTML pages displaying front-end content.
+
+* [Flask-PyMongo](https://docs.mongodb.com/drivers/pymongo/) - Flask's extension 'Flask-PyMongo' is the language used to interact between Flask and the MongoDB database. It handles the data inputted through the website's forms and sends it to the database, as well as retrieving it from the database to be served onto the client's screen.
+
+* [Flask Mail](https://pythonhosted.org/Flask-Mail/) - The Flask Mail module is used to provide functionality to the website's Contact form, as well as sending emails to users who may need to reset their password.
+
+* [Flask Paginate](https://pythonhosted.org/Flask-paginate/) - Flask Paginate is used to provide pagination to the website's 'All Tracks' section, featured in the 'Browse Tracks' page.
+
+* [jQuery](https://jquery.com/) - The developer used fairly heavy use of jQuery's AJAX for certain features of the website, including the 'like' buttons and search side-bar in the 'Browse Tracks' page, as well as the functionality to remove liked tracks in the 'User Profile' page.
+
+* [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/) - The WSGI web-application library Werkzeug was used to generate hashed passwords, therefore providing password security for the client.
+
+* [itsdangerous](https://itsdangerous.palletsprojects.com/en/2.0.x/) - itsdangerous is used to generate JSON web tokens; to encode a certain user's username and be sent to their email address (in the form of a link to click), 
+                                                                       so as to prove authenticity in the case where a user should need to reset their password.
+
+### Front-End Libraries/Frameworks
+
+* [MaterializeCSS](https://materializecss.com/) - The MaterializeCSS framework was used to provide the grid layout and structure of the website. The framework was also used to provide the following front-end features:
+
+    * Cards/Card Panels
+    * Modals
+    * Tooltips
+    * Buttons
+    * Toasts
+    * Sidenav
+    * Datepicker
+
+* [FontAwesome](https://fontawesome.com/) - The FontAwesome library was used to provide iconography to the website.
+
+* [Google Fonts](https://fonts.google.com/) - Typography was provided by Google Fonts; namely their 'Alata' and 'Quicksand' typefaces.
+
+### Other Technologies
+
+* [Google Chrome Devtools](https://developer.chrome.com/docs/devtools/) - The developer made heavy use of Google Chrome's devtools, to debug (using their console), and to ensure responsivity across all main device sizes.
+
+* [remove.bg](https://www.remove.bg/) - RemoveBG was used to remove backgrounds from the website's vector graphic images, to allow for them to integrate into the website's design.
+
+* [TinyPNG](https://tinypng.com/) - TinyPNG was used to compress vector graphic images, to optimise performance and reduce page load times.
+
+* [Real Favicon Generator](https://realfavicongenerator.net/) - The website's favicon was generated using the Real Favicon Generator.
+
+* [Balsamiq](https://balsamiq.com/) - Wireframes were made using Balsamiq software.
+
+* [SendInBlue](https://www.sendinblue.com/) - The STMP service SendInBlue is in conjunction with Flask-Mail, to handle emails sent through the website's Contact form, and Reset Password modal.
+
+
+
+
+
+
 
 
 
