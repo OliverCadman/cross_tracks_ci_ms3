@@ -36,18 +36,18 @@ The W3C Jigsaw validator was used to validate the website's CSS source code.
 
 Some errors were thrown when using certain CSS properties on some elements of the page.
 
-[Screenshot of W3C Jigsaw Errors](documentation/readme-images/css-jigsaw-errors.png)
+![Screenshot of W3C Jigsaw Errors](documentation/readme-images/css-jigsaw-errors.png)
 
 The 'shape-outside' and 'shape-margin' CSS properties were used on two classes with float properties, namely the vector graphic on the website's Home Page, and on the Contact page. The shape-outside property intends 
 to provide a smooth text-wrap around the images. However, the Jigsaw validator states that these properties don't exist.
 
-[Screenshot of Can I Use results when checking 'shape-outside' property](documentation/readme-images/caniuse-shapeoutside.png)
+![Screenshot of Can I Use results when checking 'shape-outside' property](documentation/readme-images/caniuse-shapeoutside.png)
 
 Upon consultancy of the Slack community, along with cross-referencing against [Can I Use](https://caniuse.com/), it was found that
 this property, along with the 'shape-margin' property, has more than 95% coverage across all browsers. Therefore it was deemed that
 it was not considered bad practice to use these properties when designing the website.
 
-[Screenshot of W3C Jigsaw Warnings](documentation/readme-images/css-jigsaw-warnings.png)
+![Screenshot of W3C Jigsaw Warnings](documentation/readme-images/css-jigsaw-warnings.png)
 
 Some warnings were thrown in relation to the import of Google Fonts, and the use of the 'webkit-shape-outside' property.
 It was surmised that these warnings were thrown due to the fact that the jigsaw validator is unable to directly interpret the source
@@ -69,9 +69,9 @@ The JSHint service was used to lint and validate the JavaScript source code used
 
 Upon validating the website's JavaScript files, there were some issues regarding unused and undefined variables.
 
-[JS Hint toast.js validation](documentation/readme-images/jshint-toasts.png)
+![JS Hint toast.js validation](documentation/readme-images/jshint-toasts.png)
 
-[JS Hint update-profile-image.js validation](documentation/readme-images/jshint-update-profile-image.png)
+![JS Hint update-profile-image.js validation](documentation/readme-images/jshint-update-profile-image.png)
 
 The issues in these images pertain to the instantiation of Materialize Toasts (`M.Toast`) and the `imgTooLargeToast`.
 Though these functions/variables may not be invoked in the same file as they are instantiated (and therefore interpreted as being undefined/unused),
