@@ -224,9 +224,12 @@ As a musician using the website, I want...
 
 3. View how many 'likes' my tracks have, so I can determine how well my fanbase is growing.
 
-    Unfortunately, due to the time taken to develop the other features of the website, the developer was unable to navigate
-    the database effectively, in order to aggregate and lookup the 'likes' field in all relevant documents 
-    in the MongoDB 'tracks' collection, to display the information on the front-end. It is the developers intention to implement this functionality as soon as possible.
+    1. 'Likes' information is displayed on the track cards in the 'My Tracks' section of the User Profile.
+    2. The amount of likes is accompanied with the same FontAwesome star featured in the 'Browse Tracks' page, 
+       to concisely inform the user of the meaning of the number on the card.
+    3. If no likes are present, the message 'No Likes' is conveyed to the user, as opposed to no information at all.
+
+
     
 
         
