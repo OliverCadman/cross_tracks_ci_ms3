@@ -110,18 +110,18 @@ Home Page > Register > Build Profile > Profile Page
 
 As a visitor using the website for the first time, I want...
 
-    1. The purpose of the website to be clearly evident upon first visit, so I can be sure that my needs will be met.
+1. The purpose of the website to be clearly evident upon first visit, so I can be sure that my needs will be met.
 
-        1. A significant amount of consideration was made regarding the naming/branding of the website, in such a way that was
+    1. A significant amount of consideration was made regarding the naming/branding of the website, in such a way that was
            concise and effective. Eventually, the name 'Cross//Tracks' was chosen, as it has a shared meaning; on the one hand, 
            the website is concerned with sharing and discovering music (tracks). On the other hand, the website is community-oriented,
            and about people discovering new friends through music. The phrase 'Cross Tracks' seemed to be effective, in line with this particular ethos.
         
-        2. The website's brand is displayed immediately upon landing on the website's Home Page, accompanied by a short lead paragraph,
+    2. The website's brand is displayed immediately upon landing on the website's Home Page, accompanied by a short lead paragraph,
            "Make new connections through new music". This lead paragraph is intended to further re-inforce the intention of the website
            to the user.
 
-        3. A button is also presented immediately to the user, inviting them to find tracks, using the website's 'Browse Tracks' page.
+    3. A button is also presented immediately to the user, inviting them to find tracks, using the website's 'Browse Tracks' page.
 
     
 
