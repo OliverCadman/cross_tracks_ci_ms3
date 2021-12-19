@@ -2759,10 +2759,10 @@ li.page-item.active .page-link {
     }
 }
 
-/* 'Common' viewport size */
+/* Macbook Pro 2013 13in - 'Common' viewport size */
 /* https://reviewspapa.com/1366x768-a-common-screen-resolution/ */
 
-@media only screen and (min-width: 1366px) and (max-width: 1366px) {
+@media only screen and (min-width: 1280px) and (max-width: 1366px) {
 
     /* ----- Home Page ------ */
 
