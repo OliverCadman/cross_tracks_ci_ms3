@@ -60,15 +60,15 @@ label {
 nav .brand-logo {
     padding-left: 25px;
     font-family: "Alata", sans-serif;
-    color: #fafafa;
+    color: #ffffff
 
 }
 
 nav li a {
     font-family: "Quicksand", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     color: #fafafa;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 }
 
 .domestic-links {
@@ -177,7 +177,7 @@ nav li a {
     justify-content: center;
     height: 300px;
     align-items: center;
-    background: url('../images/crosstracks-logo.png') no-repeat;
+    background: url('../images/crosstracks-webp.') no-repeat;
     background-size: contain;
     background-position: center;
 }
@@ -925,7 +925,7 @@ li.page-item.active .page-link {
 
 .more-info-btn a {
     background-color: #E0C0AC;
-    color: #5d6ca7;
+    color: #3c4c8b;
 
 }
 
@@ -949,6 +949,7 @@ li.page-item.active .page-link {
 .artist-check {
     margin-right: 5px;
 }
+
 /* Track Modals */
 
 .modal.track-modal {
@@ -1385,15 +1386,20 @@ li.page-item.active .page-link {
 }
 
 .build-profile-form button,
-.btn span {
+.build-profile-form.btn span {
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
 }
 
-.build-profile-form
-.btn {
+.build-profile-form .btn {
     width: 100%;
     margin-bottom: .75rem;
+}
+
+.build-profile-form .btn label {
+    color: #eee;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .datepicker-table td.is-selected {
@@ -1652,7 +1658,7 @@ li.page-item.active .page-link {
 
 
     .hero-section {
-        background-image: url(../images/crosstracks-logo.png), url(../images/home-login-bg.jpg);
+        background-image: url(../images/crosstracks-logo.webp), url(../images/home-login-bg.jpg);
         background-size: 85%, cover;
         background-position: 50% 20%, 75%;
         background-repeat: no-repeat, no-repeat;
@@ -2387,7 +2393,7 @@ li.page-item.active .page-link {
         width: 250px;
         top: 20px;
     }
-    
+
 
     /* ------ Login Page ------ */
 
@@ -2680,7 +2686,7 @@ li.page-item.active .page-link {
 
 
     .my-tracks-container,
-    .liked-tracks-container{
+    .liked-tracks-container {
         width: 100% !important;
     }
 
@@ -2700,10 +2706,7 @@ li.page-item.active .page-link {
         font-size: 1.75rem;
     }
 
-    .liked-tracks-container
-    .track-container
-    .card.horizontal
-    .card-image {
+    .liked-tracks-container .track-container .card.horizontal .card-image {
         max-width: 30%;
     }
 
@@ -2739,7 +2742,7 @@ li.page-item.active .page-link {
         top: 100px;
         left: 300px;
     }
-    
+
     .register-page-container,
     .login-page-container {
         height: 84vh;
