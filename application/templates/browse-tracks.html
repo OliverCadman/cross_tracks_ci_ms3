@@ -1261,19 +1261,21 @@
 <script src="{{url_for('static', filename='js/search-bar.js')}}"></script>
 <script src="{{url_for('static', filename='js/edit-comment.js')}}"></script>
 <script src="{{url_for('static', filename='js/like-button-ajax.js')}}"></script>
-{% endblock %}
 
+<!-- AJAX Call to 'search_tracks() view in application/tracks/views.py'
+     Inline JavaScript is used to overcome bug regarding encoding of 
+     'searchTrackURL', when code is contained in seperate JS file.
+     Write up of bug can be found in TESTING.md file.
+-->
 <script>
-  let submitButton = document.getElementById("search-submit-btn");
-
   function searchTracks() {
     inputField = document.getElementById("search_input");
 
     searchTrackURL = "{{url_for('tracks.search_track')}}";
-    console.log(JSON.stringify(inputField.value));
 
     let resultsWrapper = document.getElementsByClassName("results-wrapper")[0];
 
+    // AJAX Call
     $.ajax({
       url: searchTrackURL,
       type: "POST",
@@ -1282,6 +1284,10 @@
         data: inputField.value,
       },
       success: function (res) {
+        /* Empties results wrapper with each letter 
+        input to the search input field, ready for 
+        new results.
+        */
         empty(resultsWrapper);
 
         let results = res.results_list;
@@ -1292,7 +1298,7 @@
         if (results) {
           results.map((item, index) => {
             if (item) {
-              console.log(item.likes.includes(user));
+              // Append results to result window
               resultDisplay = `
                             <div class="col s12 hide-on-small-only">
                                 <div class="card horizontal z-depth-5">
@@ -1384,6 +1390,7 @@
       },
     });
 
+    // Avoids duplicate results when search input field is being filled, and results predicted
     // https://stackoverflow.com/questions/27108725/ajax-jquery-live-search-is-duplicating-the-output-results
     function empty(element) {
       let children = Array.prototype.slice.call(element.childNodes);
@@ -1394,5 +1401,5 @@
     }
   }
 </script>
-
+{% endblock %}
 {% endblock %}
