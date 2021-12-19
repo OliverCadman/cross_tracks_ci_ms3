@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block meta %}
+    {% endblock %}
     <!--FontAwesome CDN-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+         type="text/css">
     <!--MaterializeCSS CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
@@ -163,46 +164,10 @@
                 </div>
             </div>
         </div>
-
     </footer>
-    <!--Register Modal-->
-    <div id="register-modal" class="modal bottom-sheet">
-        <div class="modal-content">
-            <h4>Register</h4>
-            <form action="{{url_for('users.register_user')}}" method="POST">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12 username-input">
-                            <label for="username">Choose a Username:</label>
-                            <input type="text" id="username" name="username" class="validate" required>
-                        </div>
-                        <div class="col s12 email-input">
-                            <label for="email-address">Choose an email address:</label>
-                            <input type="email" id="email_address" name="email_address" class="validate" required>
-                        </div>
-                        <div class=" col s6 password-input">
-                            <label for="password">Choose a password:</label>
-                            <input type="password" id="password" name="password" pattern="^[a-zA-Z0-9]{8,18}$"
-                                class="validate" required
-                                autocomplete="on">
-                        </div>
-                        <div class="col s6 confirm-password-input">
-                            <label for="confirm-password">Confirm your password:</label>
-                            <input type="password" id="confirm_password" name="confirm_password" class="validate" required
-                            autocomplete="on">
-                        </div>
-                        <div class="col s12 submit-button">
-                            <button type="submit" class="btn-large">Sign Up</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
     <!--jQuery-->
-   <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256- 
-    DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
-   </script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!--MaterializeCSS JavaScript-->
     <script src="{{url_for('static', filename='js/initialization.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

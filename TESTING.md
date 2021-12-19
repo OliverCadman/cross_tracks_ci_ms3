@@ -459,6 +459,182 @@ Manual testing was undertaken on the following browser platforms:
     4. Type a genre into the search bar, to confirm that correct results are retrieved immediately, without refreshing page.
     5. Type a genre which isn't found in the database, to confirm that the 'No Results' message is displayed.
 
+### Add a Track Page
+
+1. Navbar 
+    1. Repeat verification steps taken in home page testing.
+
+2. Design/Layout
+    1. Collapse to mobile device size to confirm that the vector graphic and background images are not displayed.
+
+3. Form
+    1. Collapse to mobile device size to confirm that the first four input fields collapse to full-width columns.
+    2. Fill in the form and click reset button, to confirm that all input fields are cleared and un-focused.
+    3. Fill one input and click submit, and repeat process, to confirm all 'required' attributes are functioning correctly.
+    4. Enter a number higher than 2021 into the year-of-release field, to confirm the max number attribute functions correctly.
+    5. Enter all required data and click submit, to confirm that:
+        1. The data is in the correct collection in the database.
+        2. The 'Browse Tracks' page is rendered, with the appropriate flash message.
+
+4. Footer
+    1. Repeat verification steps taken in home page testing.
+
+ 
+### Login Page
+
+1. Navbar 
+    1. Repeat verification steps taken in home page testing.
+
+2. Design/Layout
+    1. Collapse to mobile screen size to confirm that the background and vector are not displayed, and that the page spans the full height of the viewport on all mobile device sizes.
+    2. Adjust to all screen sizes to confirm that the page content is centered correctly.
+
+3. Form
+    1. Click submit without entering any information, to check that both 'required' attributes function correctly.
+    2. Enter a correct username with an incorrect password and click submit, to confirm that the appropriate error message is thrown.
+    3. Enter an incorrect username with a correct password and click submit, to confirm that the approptiate error message is thrown.
+    4. Enter all correct information and click submit, to confirm that the user is logged in, and taken to the home page with the appropriate flash message.
+
+4. Footer
+    1. Repeat verification steps taken in home page testing.
+
+### Contact Page
+
+1. Navbar 
+    1. Repeat verification steps taken in home page testing.
+
+2. Design/Layout
+    1. Confirm that the text wraps around the vector image without and overlapping, or unattractive word-breaks, on all device sizes.
+    2. Confirm that the header and lead paragraph are clearly visible, with good colour contrast, on all device sizes.
+    3. Collapse to mobile device size to confirm that the background is not displayed.
+
+3. Form
+    1. Click submit without entering any information, to check that both 'required' attributes function correctly.
+    2. Enter information in all fields and click submit, to confirm that:
+        1. An email is sent to the website owner's inbox.
+        2. The page is refreshed with the appropriate flash message, and the form is cleared.
+
+4. Footer
+    1. Repeat verification steps taken in home page testing.
+
+### 404 Page
+
+1. Enter an incorrect URL to confirm that Flask's error handler works correctly, and throws the 404 page.
+2. Confirm that the vector is present on all device sizes, and sufficiently sized.
+3. Confirm the background is dimmed on all device sizes.
+4. Click the link to the home page, to confirm that the link directs the user back home successfully.
+
+### 500 Page
+
+1. Confirm that the header message is present on all device sizes, and sufficiently sized.
+2. Confirm that the background is dimmed on all device sizes.
+3. CLick the link to the home page, to confirm that the link directs the user back home successfully.
+
+### Admin Pages
+
+1. Login as admin to confirm that both 'Manage Tracks' and 'Manage Genres' are present in the navbar.
+
+#### Manage Tracks Page
+
+1. Confirm that all tracks are present in the manage tracks page.
+2. Confirm that both the edit and delete buttons are present on all track cards.
+3. Click on both edit and delete buttons to confirm that the appropriate modal windows are opened.
+4. Enter edited data into a modal to edit a track and click submit, to confirm that the tracks can be edited successfully.
+5. Open delete-track modal and click 'Cancel' button, to confirm that the modal window closes.
+6. Click 'Delete' button, to confirm that:
+    1. The track is removed from the database.
+    2. The page is refreshed with the appropriate flash message, and the deleted track is not displayed.
+
+#### Manage Genres Page
+
+1. Confirm that all genres are listed, displayed on Materialize 'chips'.
+2. Click the FontAwesome 'times' icon, to confirm that the 'delete-genre' modal is opened.
+3. With 'delete-genre' modal open, click 'Cancel' button to confirm that the modal closes.
+4. With 'delete-genre' modal open, click 'Delete' button to confirm that:
+    1. The genre is removed from the database
+    2. The page is refreshed with the appropriate flash message, and the deleted genre is not displayed.
+5. Enter genre name into 'Add Genre' form and click submit, to confirm that:
+    1. The genre is added to the database.
+    2. The page is refreshed with the appropriate flash message, and the genre is added to the genre list.
+
+## Lighthouse Testing
+
+Google Chrome’s ‘Lighthouse’ extension for its DevTools feature was used to test the website’s Performance, Accessibility, Best Practices and Search Engine Optimisation. Listed below are the latest reports from Lighthouse’s run of testing:
+
+### Home Page
+
+![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-index.png)
+
+### Register Page
+
+![Screenshot of lighthouse results for Register Page](documentation/lighthouse-screenshots/lighthouse-register.png)
+
+### Build Profile Page
+
+![Screenshot of lighthouse results for Build Profile Page](documentation/lighthouse-screenshots/lighthouse-build-profile.png)
+
+### Profile Page
+
+![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-user-profile.png)
+
+### Browse Tracks Page
+
+![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-browse-tracks.png)
+
+### Add a Track Page
+
+![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-add-track.png)
+
+### Contact Page
+
+![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-contact.png)
+
+### Manage Genres Page
+
+![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-manage-genres.png)
+
+### Manage Tracks Page
+
+![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-manage-tracks.png)
+
+
+### Issues
+
+#### Accessibility Errors
+
+It was particularly worrying to discover that, for the 'Browse Tracks' page, Lighthouse's Accessibility Score threw an error, when testing the 'Browse Tracks' page.
+Lighthouse advised to adjust the background/foreground ratio of the content. The page was cross-referenced against the 'WAVE' accessibility tool
+to try and determine why Lighthouse was throwing this error. However, 'WAVE' didn't take into account the CSS that was added to the page, so
+their accessibility score was judged based on the MaterializeCSS styling. 
+
+Throughout the development of the project, of course care and attention was made into making sure that the text was sufficiently contrasted against all 
+backgrounds on all elements and features of the website. It is therefore deeply concerning that this issue has been raised, as time constraints have resulted in difficulty
+to rectify this issue, and find a way to improve this Lighthouse score before project submission.
+
+#### Background/Foreground ratio of Nav-Links
+
+On all pages of the website, Lighthouse advises to adjust the colour contrast of the navigation links, which are the off-white "#fafafa" hex colour.
+Care was given to ensure that all text could be clearly seen and interpreted throughout the website, so it's particularly worrying (and quite frustrating) 
+to discover that the text may contrast sufficiently, according to Google Lighthouse. Due to time constraints, it's difficult to re-design the website to accommodate
+for the Lighthouse score in this regard.
+
+### Best Practice Issues
+
+Lighthouse has thrown some issues concerning best practices, specifically the absence of `https` when linking JavaScript, CSS and image files. 
+It is not within the developer's scope of skills to rectify these errors at this present moment. As the developer builds on their skills, 
+it is their determination to be able to navigate issues such as this in the future.
+
+## Bugs
+
+### Fixed Bugs
+
+### Unfixed Bugs
+
+
+
+
+
+
 
 
 
