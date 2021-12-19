@@ -177,7 +177,7 @@ nav li a {
     justify-content: center;
     height: 300px;
     align-items: center;
-    background: url('../images/crosstracks-webp.') no-repeat;
+    background: url('../images/crosstracks-logo.webp') no-repeat;
     background-size: contain;
     background-position: center;
 }
