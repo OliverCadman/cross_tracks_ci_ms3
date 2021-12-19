@@ -624,7 +624,7 @@ Lighthouse has thrown some issues concerning best practices, specifically the ab
 It is not within the developer's scope of skills to rectify these errors at this present moment. As the developer builds on their skills, 
 it is their determination to be able to navigate issues such as this in the future.
 
-## Bugs
+## Known Bugs
 
 ### Fixed Bugs
 
@@ -652,43 +652,113 @@ The functionality used to pull the user details in this view relies on a class m
 As this method is a class method, only instance methods can be utilised on the 'user' object pulled from the database.
 
 Initially I used the instance method `get_user_info()` to prepare the 'liked' track data, ready to be pushed to the database.
-However, it was discovered that this method was invoking Werkzeug's `generate_password_hash()` function, resulting in the password
+However, since all fields of the user document are prepared in this method,
+it was discovered that this method was invoking Werkzeug's `generate_password_hash()` function, resulting in the password
 being changed to something impossible to determine. 
 
 Therefore, a seperate instance method `prepare_liked_track()` was created, which handled only data relating to the `liked_tracks` array in the user document.
 The User object created calls on this method to update the user document in the database, which rectified this silent bug.
 
+#### Search Window, Duplicate Results
+
+The search window in the 'Browse Tracks' page utilizes the 'oninput' JavaScript attribute, used in conjunction with an AJAX call
+to render results immediately to the client. To test the search window in the 'Browse Tracks' page, a genre was typed into the search input, 
+and upon each input of a letter (when the genre name was near to completion), a duplicate track would be displayed when a new letter was added.
+
+It was quickly determined that this was being caused by the database 'predicting' the outcome of the search input, and therefore returning
+the result before the genre name had been completed.
+
+Research was made into how to overcome this issue, and a post on [Stack Overflow](https://stackoverflow.com/questions/27108725/ajax-jquery-live-search-is-duplicating-the-output-results)
+was found:
+
+```
+function empty(element) {
+      let children = Array.prototype.slice.call(element.childNodes);
+
+      children.forEach(function (child) {
+        element.removeChild(child);
+      });
+    }
+```
+
+This function serves to clear the list of results with each key that's typed into the search bar. I added this function to the code, and
+invoked it before the AJAX call, to make sure that the results list was cleared before every AJAX call was made, and thus avoiding duplicate results.
+
+This function served to rectify the bug.
+
+#### MaterializeCSS
+
+##### Card Images
+
+MaterializeCSS was utilised to display the track information on 'cards' in the 'Browse Tracks', and 'User Profile' pages. This caused some 
+issues, particularly in relation to the presentation of the images.
+
+MaterializeCSS has it's own custom `card-image` class, to use on their `card horizontal` cards. This was utilized in the first instance, but it resulted in
+an inflexibility to resize the image to allow room for text content. Text content would be too squashed, and any attempts to resize the images resulted in the cards
+becoming distorted.
+
+To overcome this, the developer removed the `card-image` wrapper div, and created their own div with absolute positioning, relative to the card.
+This rectified this issue.
+
+##### Card Heights
+
+A further MaterializeCSS issue involved a discrepancy in the height of horizontal track cards.
+
+Laptop and Tablet screen sizes display the cards horizontally, with 3 per row for laptop, and 2 per row for tablet. However, upon
+initial testing, the first card of each row would be pushed to the row below, resulting in an area of white space, where a card should be.
+The developer of course inspected the page in an attempt to find any word-breaks (as this would be a likely cause), but none were found.
+
+To rectify this, the horizontal cards were given an explicit height through custom CSS.
+
 ### Unfixed Bugs
 
+#### Jinja URL encoding 
 
+A number of issues were encountered when using Javascript to communicate to Flask, using the `url_for()` method.
 
+With regards to the results found in the search window, it was the developers intention to maintain the same functionality featured on the search
+result cards, as are on the main 'Browse Tracks' page. The anchor tag to 'like' a track uses this href:
 
+`{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}`
 
+The developer used template literals in their JavaScript to render the HTML from generated from the search results. However,
+when adding this url to the anchor tag within template literals, this resulted in the URL being encoded:
 
+`7Burl_for(%27tracks.like_track%27%2C%20track_id%3Dtrack._id%2C%20username%3Dsession%5B%27user%27%5D)%7D%7D`
 
+Flask/Jinja was unable to decode and interpret this URL string, and would throw a 500 error. Much research was made to find a way
+to avoid the URL being encoded, such as adding the `| safe ` attribute following the URL itself. However, this didn't result in rectifying
+the issue. Unfortunately, the developer had to remove the icon to 'like' a track from the cards displayed in search results.
 
+#### JSON Web Tokens - Password Reset
 
+Great effort was made to implement functionality to allow the user to reset their password. Upon research, it was discovered that the
+process of resetting a user's password involved authentication, by way of the `JSON Web Token` (imported as `jwt` in python files). 
+The process involves generating a web token, with the user's username encoded within, and passing it into the URL which is used to generate the HTML for the email which is sent
+to the user. The user then clicks the link in the email, and is taken to the page to reset their password, with the JSON Web Token again in the URL, to be decoded in the backend
+and allow authentication.
 
+With all email functionality in place, the developer was generating and receiving the user information from the web token successfully. However 
+the final step to reset the password couldn't be overcome, due to this error:
 
+`Bad Signature: <signature> does not match`
 
+Due to time constraints, it was out of the developer's current skillset to rectify this issue in time. Unfortunately, password reset functionality
+would have to be implemented at a later date. It is the developer's intention to learn more about the correct implementation of web tokens,
+and web authentication in general.
 
+#### Pagination/Search Results
 
+When testing the opening of track modals, from the track cards displayed as search results, an inconsistency was discovered, in relation
+to some modals opening, and others not opening. After some consideration, it was discovered that this was due to the implementation of pagination 
+on the 'Browse Tracks' page. Since the pagination works by refreshing the page with the tracks of a new page, and there are only 6 tracks per page,
+only 6 IDs are available to the buttons in the search window. Therefore, only the buttons that match the 6 IDs in the paginated tracks list
+can open the modal windows, which is the cause of this inconsistency.
 
+Due to time constraints, it is not currently possible to rectify this issue. Unfortunately, until this issue can be rectified, the search bar will only serve to show the track cards. To compensate, all 
+track information (track name, artist name, album, genre and year-of-release), will be displayed on these track cards.
 
+## Further Testing
 
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
+1. Website has been tested for responsivity using mobile phone, laptop, and large screen monitor, as well as [Google Chrome Devtools](https://developer.chrome.com/docs/devtools/), and [AmIResponsive](http://ami.responsivedesign.is/).
+2. The developer asked family, friends and the Slack community to test the website on their own devices. No major issues were found.
