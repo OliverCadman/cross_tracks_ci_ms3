@@ -39,14 +39,14 @@ As a visitor using the website for the first time, I want...
 3. To view tracks without having to register, so I can determine whether the website suits my needs.
 4. To be able to search for tracks based on different criteria (Genre, Artist Name, Year of Release), so I can search for tracks more granularly.
 5. To view comments on a particular track, so I find out what other users have to say about the music and engage with the community.
-6. To see a description of how to use the service, so I can be aware of all features on offer.
+6. To view how many likes a particular track has, so I can determine which tracks are popular.
 
 
 As a returning visitor, I want...
 
-1. To be able to read and write comments on tracks which have been shared by others, so I can communicate and build relationships with other users of the website.
+1. To be able to write and edit comments on tracks which have been shared by others, so I can communicate and build relationships with other users of the website.
 2. The details of users who share a particular track to be clearly visible, so I can browse their profile and find out more about their musical tastes.
-3. To register and build my own profile, so I am able to locate my saved tracks.
+3. To be able to Add, Edit and Delete my own profile, so I can manage my personal information with ease.
 4. To be able to Add, Edit and Delete my own track information, so I can share tracks with other users of the website.
 5. To be able to save/like tracks which I come across when browsing, so they are saved to my profile.
 6. To be able to contact the site owner, so I can leave feedback. 
@@ -55,9 +55,8 @@ As a returning visitor, I want...
 As a musician using the website, I want...
 
 1. To be able to display that I am an artist to other users of the platform, so I can market myself and grow my fanbase.
-2. To view and edit my tracks easily, so I can manage my online presence.
-3. A filter option for 'Cross//Tracks Artists', so users can easily find tracks added by me.
-4. View how many 'likes' my tracks have, so I can determine how well my fanbase is growing.
+2. To display my artist status on track cards, so users can easily find tracks added by me.
+3. View how many 'likes' my tracks have, so I can determine how well my fanbase is growing.
 
 #### In or Out?
 
@@ -72,6 +71,7 @@ Below is a table to weight the importance of features in first release, against 
 | Display tracks on cards |  5 | 5 | In |
 | Click button on card to visit user's profile | 4 | 4 | In |
 | Search/Filter by Genre/Artist Functionality | 5 | 4 | In |
+| Add/Edit/Delete Comments | 5 | 4 | In |
 | Profile Page for Users | 5 | 4 | In |
 | 'Like Button' for Tracks | 4 | 4 | In |
 | Upload and display profile picture | 3 | 3 | Out |
@@ -98,13 +98,14 @@ Until then, below are the main features required for a Minimal Viable Product:
 4. A page for users to add tracks to the platform.
 5. Cards to display tracks, with button to open modal/dropdown
 6. Modal window/dropdown to display more information and comments left about relative tracks.
-7. Search/Filter functionality
-8. "Like Button", with likes displayed on track cards.
-9. Profile Page for Users
-10. Functionality for users to edit profile
-11. Contact Page
-12. 404 Page
-13. Admin Priveleges (to manage Genres and Tracks)
+7. Functionality for users to leave comments
+8. Search/Filter functionality
+9. "Like Button", with likes displayed on track cards.
+10. Profile Page for Users
+11. Functionality for users to edit profile
+12. Contact Page
+13. 404 Page
+14. Admin Priveleges (to manage Genres and Tracks)
 
 Features for future releases:
 
@@ -484,7 +485,9 @@ The primary languages used throughout the development of this project are:
 
 * [SendInBlue](https://www.sendinblue.com/) - The STMP service SendInBlue is in conjunction with Flask-Mail, to handle emails sent through the website's Contact form, and Reset Password modal.
 
+## Testing
 
+Testing information can be found in a seperate [TESTING.md](TESTING.md) file.
 
 
 
