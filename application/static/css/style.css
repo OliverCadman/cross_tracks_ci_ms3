@@ -572,6 +572,20 @@ nav li a {
     min-height: 500px;
 }
 
+.likes-count-profile {
+    font-family: "Alata", sans-serif;
+    margin: 0 0 10px 10px;
+}
+
+.likes-count-profile span {
+    font-size: 1.2rem;
+}
+
+.likes-count-profile i {
+    color: #E0C0AC;
+    font-size: 1.4rem;
+}
+
 /* Track Info Modal */
 
 .album-cover-modal {
@@ -823,6 +837,7 @@ li.page-item.active .page-link {
 
 .card-title {
     font-family: 'Alata', sans-serif;
+    display: block;
 }
 
 .artist-name,
@@ -919,6 +934,17 @@ li.page-item.active .page-link {
     color: rgba(26, 25, 25, 0.815)
 }
 
+.artist-status {
+    font-family: "Quicksand", sans-serif;
+    color: #D4AF37;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 1.15rem;
+}
+
+.artist-check {
+    margin-right: 5px;
+}
 /* Track Modals */
 
 .modal.track-modal {
@@ -1251,7 +1277,7 @@ li.page-item.active .page-link {
 .login-page-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
 .login-page-header,
@@ -1325,6 +1351,10 @@ li.page-item.active .page-link {
     font-family: "Quicksand", sans-serif;
 }
 
+.build-profile-form>.row>.input-field {
+    margin-top: 2rem;
+}
+
 .build-profile-form .submit-btn {
     display: flex;
     justify-content: center;
@@ -1337,6 +1367,7 @@ li.page-item.active .page-link {
     color: #eee;
 }
 
+
 .build-profile-form button:hover {
     background-color: #3c4c8b;
 }
@@ -1345,6 +1376,12 @@ li.page-item.active .page-link {
 .btn span {
     font-family: "Quicksand", sans-serif;
     font-weight: 600;
+}
+
+.build-profile-form
+.btn {
+    width: 100%;
+    margin-bottom: .75rem;
 }
 
 .datepicker-table td.is-selected {
@@ -1698,6 +1735,10 @@ li.page-item.active .page-link {
 
     .build-profile-container {
         height: 80vh;
+    }
+
+    .build-profile-form .btn {
+        width: 50%;
     }
 
     /* ------ Add Track Page ------ */
@@ -2062,6 +2103,18 @@ li.page-item.active .page-link {
         background-color: #3c4c8b;
     }
 
+    .login-page-header {
+        position: relative;
+    }
+
+    .login-vector {
+        width: 300px;
+        position: absolute;
+        left: -285px;
+        top: -20px;
+    }
+
+
     .login-form {
         width: 75%;
     }
@@ -2319,6 +2372,11 @@ li.page-item.active .page-link {
 
     .close-modal-icon {
         font-size: 1.3rem;
+    }
+
+    .login-vector {
+        left: -350px;
+        width: 325px;
     }
 
     /* ------ Profile Page ------- */
@@ -2659,7 +2717,6 @@ li.page-item.active .page-link {
     .register-vector {
         top: 100px;
         left: 300px;
-        width: 400px;
     }
     
     .register-page-container,
@@ -2756,6 +2813,10 @@ li.page-item.active .page-link {
     /* ----- Login/Register Pages */
 
     .login-page-container {
+        min-height: 76vh;
+    }
+
+    .add-track-body {
         min-height: 76vh;
     }
 }
