@@ -108,6 +108,10 @@ def register_user():
             flash("Username already exists")
             return redirect(request.referrer)
 
+        if User.find_user_by_email(email_address):
+            flash("Email already exists")
+            return redirect(request.referrer)
+
         new_user = User(username, password, email_address)
 
         new_user.register()
@@ -277,13 +281,25 @@ def edit_profile(username):
 @users.route("/logout")
 def logout():
     """
+    If user is logged in:
+
     Removes "user" session cookie, and
     logs user out, redirecting to website's
     home page.
+
+    If user is already logged out, appropriate
+    flash message is displayed.
     """
-    session.pop("user")
-    flash("You have been logged out")
-    return redirect(url_for('main.index'))
+
+    # Custom error handling in the case that
+    # the user is already logged out.
+    if session.get("user"):    
+        session.pop("user")
+        flash("You have been logged out")
+        return redirect(url_for("main.index"))
+    else:
+        flash("You are already logged out!")
+        return redirect(url_for("main.index"))
 
 
 @users.route("/file/<path:filename>")
@@ -470,7 +486,13 @@ def request_password_reset():
         msg.html = render_template('password-reset-email.html',
                                    token=token,
                                    user=user["first_name"].title())
-        mailing.send(msg)
+        try:
+            mailing.send(msg)
+            flash("Email sent. Please check your inbox.")
+            return redirect(url_for("users.login"))
+        except:
+            flash("Sorry, something went wrong. Please try again.")
+            return redirect(url_for("users.login"))
 
     return render_template('login.html')
 
@@ -486,7 +508,9 @@ def verify_reset_token(token):
     page.
     """
 
-    SECRET_KEY = "/G..;U7|cf1>^B&"
+    print(token)
+
+    SECRET_KEY = "4t7w!z%C*F-JaNdRgUjXn2r5u8x/A?D("
 
     s = Serializer('SECRET_KEY')
     user_id = None
@@ -501,7 +525,8 @@ def verify_reset_token(token):
     return found_user
 
 
-@users.route("/reset-password/<token>", methods=["GET", "POST"])
+@users.route("/reset-password/<token>")
+@users.route("/reset-password")
 def reset_password(token):
     """
     Renders "reset-password.html"
@@ -519,29 +544,35 @@ def reset_password(token):
     # Grabs user ID returned from verify_reset_token()
     user = verify_reset_token(token)
     print(user)
+    print("Block")
+    if request.method == "POST":
+        print('Block One')
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
 
-    # if request.method == "POST":
+        if not User.validate_password_format(password):
+            flash(("Please include at least one",
+                  "capital letter, one number and one special character"))
+            return redirect(url_for('users.reset_password'))
 
-    #     password = request.form.get("password")
-    #     confirm_password = request.form.get("confirm_password")
+        if not User.validate_password_match(password, confirm_password):
+            flash("Passwords do not match!")
+            return redirect(url_for('users.reset_password'))
 
-    #     if not User.validate_password_format(password):
-    #         flash(("Please include at least one",
-    #               " capital letter and one number"))
-    #         return render_template('reset-password.html')
+        username = user["username"]
+        edited_password = {
+            "password": generate_password_hash(password)
+        }
 
-    #     if not User.validate_password_match(password, confirm_password):
-    #         flash("Passwords do not match!")
-    #         return render_template('reset-password.html')
+        print("Block Two")
 
-    #     username = user["username"]
-    #     edited_password = {
-    #         "password": generate_password_hash(password)
-    #     }
-
-    #     User.edit_profile(username, edited_password)
-    #     flash("Password changed successfully!")
-    #     return redirect("main.index")
+        try:
+            User.edit_profile(username, edited_password)
+            flash("Password changed successfully!")
+            return redirect(url_for("users.login"))
+        except:
+            flash("Sorry, something went wrong. Please try again")
+            return redirect(url_for("users.reset_password"))
 
     return render_template('reset-password.html')
 
