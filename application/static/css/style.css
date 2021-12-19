@@ -694,7 +694,6 @@ nav li a {
 .user-option-list {
     display: flex;
     justify-content: center;
-
 }
 
 .user-option-list ul li {
@@ -919,6 +918,11 @@ li.page-item.active .page-link {
     margin-left: 15px;
 }
 
+.comment-count,
+.likes-count {
+    font-family: "Quicksand", sans-serif;
+}
+
 .more-info-btn a {
     background-color: #E0C0AC;
     color: #5d6ca7;
@@ -1090,7 +1094,7 @@ li.page-item.active .page-link {
 }
 
 .submit-comment-form {
-    background-color: #eee;
+    background-color: #F1EDE6;
     padding: 0 1rem;
     margin-bottom: .25rem;
     padding-bottom: 1rem;
@@ -1239,6 +1243,10 @@ li.page-item.active .page-link {
     border-radius: 20px;
 }
 
+.register-form input {
+    font-family: "Quicksand", sans-serif;
+}
+
 .register-form button {
     background-color: #3c4c8b;
     font-family: "Quicksand", sans-serif;
@@ -1302,6 +1310,10 @@ li.page-item.active .page-link {
 
 .login-form small {
     font-family: "Roboto", sans-serif;
+}
+
+.login-form input {
+    font-family: "Quicksand", sans-serif;
 }
 
 .login-form button {
@@ -1509,6 +1521,10 @@ li.page-item.active .page-link {
     color: #555555;
 }
 
+.delete-genre-modal a {
+    color: #eee;
+}
+
 
 .delete-genre-wrapper,
 .add-genre-wrapper {
@@ -1550,6 +1566,11 @@ li.page-item.active .page-link {
 
 .add-genre-form {
     padding: 2rem;
+}
+
+.add-genre-btn {
+    background-color: #eee;
+    color: #333;
 }
 
 .add-genre-wrapper {
@@ -1792,13 +1813,13 @@ li.page-item.active .page-link {
     .user-option {
         font-size: 1.4rem;
         color: #eeeeee;
+        font-weight: bold;
     }
 
     .user-option-list ul li {
         display: inline-block;
         margin: 0 30px;
         font-family: 'Quicksand', sans-serif;
-        font-weight: 600;
     }
 
     .user-option-list ul li:hover {
@@ -2727,6 +2748,12 @@ li.page-item.active .page-link {
 
     .register-page-header h1 {
         font-size: 5rem;
+    }
+
+    /* ----- Manage Genres/Manage Tracks ----- */
+
+    .manage-genre-container {
+        min-height: 79vh;
     }
 }
 
