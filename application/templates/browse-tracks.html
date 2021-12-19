@@ -1,6 +1,11 @@
-{% extends "base.html" %} {% block content %}
-<section>
-  <div class="row">
+{% extends "base.html" %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Browse Tracks page">
+<meta name="keywords" content="Cross//Tracks, browse tracks, like, comment, latest tracks, all tracks">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
+ {% block content %}
+<div class="row">
     <div class="col s12 user-option-list top-level-background">
       <ul>
         <li>
@@ -27,7 +32,6 @@
       </ul>
     </div>
   </div>
-</section>
 <div class="browse-background">
   <div id="opaque-overlay"></div>
   <aside>
@@ -92,19 +96,19 @@
                   <span
                     ><a
                       href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"
+                      class="modal-trigger like_track_med" name="like-button-filled"
                       ><i class="fas fa-star"></i></a></span
                   ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                   {% else %}
                   <span
                     ><a
                       href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"
+                      class="modal-trigger like_track_med" name="like-button-outlined"
                       ><i class="far fa-star"></i></a></span
                   ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                   {% endif %} {% else %}
                   <span
-                    ><a href="{{url_for('users.login')}}" class="modal-trigger"
+                    ><a href="{{url_for('users.login')}}" class="modal-trigger" name="login-redirect"
                       ><i class="far fa-star"></i></a></span
                   ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                   {% endif %} {% if track.comments|length > 0 %}
@@ -126,7 +130,7 @@
                         />
                         {% else %}
                         <img
-                          src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                          src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                           alt="Image of Cover Art for Track"
                           class="track-image"
                         />
@@ -161,18 +165,18 @@
                       <div class="more-info-btn">
                         <a
                           href="#track_modal_{{track._id}}"
-                          class="btn modal-trigger"
+                          class="btn modal-trigger" name="track-information-button"
                           ><i class="fas fa-info-circle card-btn"></i
                         ></a>
                         {% if username == session["user"] %}
                         <a
                           href="#edit_track_modal_{{track._id}}"
-                          class="btn modal-trigger"
+                          class="btn modal-trigger" name="edit-track-button"
                           ><i class="fas fa-edit card-btn"></i
                         ></a>
                         <a
                           href="#delete_track_modal_{{track._id}}"
-                          class="btn modal-trigger"
+                          class="btn modal-trigger" name="delete-track-button"
                           ><i class="fas fa-trash-alt card-btn"></i
                         ></a>
                         {% endif %}
@@ -194,7 +198,7 @@
                 />
                 {% else %}
                 <img
-                  src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                  src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                   alt="Image of Cover Art for Track"
                   class="track-image-mobile"
                 />
@@ -207,19 +211,19 @@
               <span
                 ><a
                   href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                  class="modal-trigger like_track_mob"
+                  class="modal-trigger like_track_mob" name="mobile-like-track-button-filled"
                   ><i class="fas fa-star"></i></a></span
               ><span>{{track.likes_count if track.likes_count}}</span>
               {% else %}
               <span
                 ><a
                   href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                  class="modal-trigger like_track_mob"
+                  class="modal-trigger like_track_mob" name="mobile-like-track-button-outlined"
                   ><i class="far fa-star"></i></a></span
               ><span>{{track.likes_count if track.likes_count}}</span>
               {% endif %} {% else %}
               <span
-                ><a href="{{url_for('users.login')}}" class="modal-trigger"
+                ><a href="{{url_for('users.login')}}" class="modal-trigger" name="mobile-login-redirect"
                   ><i class="far fa-star"></i></a></span
               ><span>{{track.likes_count if track.likes_count}}</span>
               {% endif %} {% if track.comments|length > 0 %}
@@ -248,7 +252,7 @@
                   </a>
                   {% else %}
                   <a
-                    href="{{url_for('users.user_profile', username=username)}}"
+                    href="{{url_for('users.user_profile', username=username)}}" name="link-to-user-profile-from-mobile-card"
                   >
                     <img
                       src="{{url_for('static', filename='images/default-user-image.png')}}"
@@ -260,17 +264,20 @@
                 </p>
                 <div class="more-info-btn">
                   <a href="#track_modal_{{track._id}}" class="btn modal-trigger"
+                  name="mobile-track-information-button"
                     ><i class="fas fa-info-circle card-btn"></i
                   ></a>
                   {% if username == session["user"] %}
                   <a
                     href="#edit_track_modal_{{track._id}}"
                     class="btn modal-trigger"
+                    name="mobile-track-edit-button"
                     ><i class="fas fa-edit card-btn"></i
                   ></a>
                   <a
                     href="#delete_track_modal_{{track._id}}"
                     class="btn modal-trigger"
+                    name="mobile-track-delete-button"
                     ><i class="fas fa-trash-alt card-btn"></i
                   ></a>
                   {% endif %}
@@ -281,10 +288,7 @@
           <aside>
             <!--Track Info Modal-->
             <div class="modal track-modal" id="track_modal_{{track._id}}">
-              <i
-                class="fas fa-times-circle modal-close close-modal-icon"
-                data-group="close-modal"
-              ></i>
+              <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
               <div class="modal-content">
                 <div class="modal-header">
                   <div class="row">
@@ -326,7 +330,7 @@
                       />
                       {% else %}
                       <img
-                        src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                        src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                         alt="Image of Cover Art for Track"
                         class="album-cover"
                       />
@@ -657,7 +661,7 @@
                   />
                   {% else %}
                   <img
-                    src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                    src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                     alt="Image of Cover Art for Track"
                     class="album-cover"
                   />
@@ -667,7 +671,6 @@
             </div>
           </div>
           {% endfor %}
-          <!-- Track Modal -->
           {% endif %}
         </div>
       </div>
@@ -676,7 +679,7 @@
   <section>
     <div class="row">
       <div class="col s12 section-header">
-        <h1>Latest Tracks</h1>
+        <h2>Latest Tracks</h2>
       </div>
       <div class="row track-card-container">
         {% if latest_tracks %} {% for track in latest_tracks %} {% set username
@@ -692,7 +695,7 @@
               />
               {% else %}
               <img
-                src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                 alt="Image of Cover Art for Track"
                 class="track-image-mobile"
               />
@@ -707,19 +710,19 @@
                 href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
                 class="like_track_mob"
                 ><i class="fas fa-star"></i></a></span
-            ><span>{{track.likes_count if track.likes_count}}</span>
+            ><span class="likes-count">{{track.likes_count if track.likes_count}}</span>
             {% else %}
             <span
               ><a
                 href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                class="like_track_mob"
+                class="like_track_mob" 
                 ><i class="far fa-star"></i></a></span
-            ><span>{{track.likes_count if track.likes_count}}</span>
+            ><span class="likes-count">{{track.likes_count if track.likes_count}}</span>
             {% endif %} {% else %}
             <span
               ><a href="{{url_for('users.login')}}" class="modal-trigger"
                 ><i class="far fa-star"></i></a></span
-            ><span>{{track.likes_count if track.likes_count}}</span>
+            ><span class="likes-count">{{track.likes_count if track.likes_count}}</span>
             {% endif %} {% if track.comments|length > 0 %}
             <span class="comment-count"
               ><i class="fas fa-comment"></i
@@ -751,6 +754,9 @@
                   />
                 </a>
                 {% endif %}
+                {% if track["user"][0]["is_artist"] == "on" %}
+                <span class="artist-status"><i class="fas fa-check-circle artist-check"></i>artist</span>
+                {% endif %}
               </p>
             </div>
             <div class="more-info-btn">
@@ -772,27 +778,26 @@
             <div class="card-stacked">
               <div class="card-content">
                 <span class="card-title no-wordbreak"
-                  >{{ track.track_name }}</span
-                >
+                  >{{ track.track_name }}</span>
                 {% if session.user %} {% if session.user in track.likes %}
                 <span
                   ><a
                     href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                    class="modal-trigger like_track_med"
+                    class="modal-trigger like_track_med" name="like-track-button-filled"
                     ><i class="fas fa-star"></i></a></span
-                ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                ><span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
                 {% else %}
                 <span
                   ><a
                     href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                    class="modal-trigger like_track_med"
+                    class="modal-trigger like_track_med" name="like-track-button-outlined"
                     ><i class="far fa-star"></i></a></span
-                ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                ><span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
                 {% endif %} {% else %}
                 <span
-                  ><a href="{{url_for('users.login')}}" class="modal-trigger"
+                  ><a href="{{url_for('users.login')}}"
                     ><i class="far fa-star"></i></a></span
-                ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                ><span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
                 {% endif %} {% if track.comments|length > 0 %}
                 <span class="comment-count"
                   ><i class="fas fa-comment"></i
@@ -812,7 +817,7 @@
                       />
                       {% else %}
                       <img
-                        src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                        src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                         alt="Image of Cover Art for Track"
                         class="track-image"
                       />
@@ -821,8 +826,8 @@
                   </div>
                   <div class="card-action">
                     <p>
-                      <small>Added by:</small> {{username}} {% if
-                      track['user'][0]['profile_image'] %}
+                      <small>Added by:</small> {{username}} 
+                      {% if track['user'][0]['profile_image'] %}
                       <a
                         href="{{url_for('users.user_profile', username=username)}}"
                       >
@@ -833,9 +838,7 @@
                         />
                       </a>
                       {% else %}
-                      <a
-                        href="{{url_for('users.user_profile', username=username)}}"
-                      >
+                      <a href="{{url_for('users.user_profile', username=username)}}">
                         <img
                           src="{{url_for('static', filename='images/default-user-image.png')}}"
                           alt="User profile image"
@@ -843,6 +846,9 @@
                         />
                       </a>
                       {% endif %}
+                      {% if track["user"][0]["is_artist"] == "on" %}
+                        <span class="artist-status"><i class="fas fa-check-circle artist-check"></i>artist</span>
+                            {% endif %}
                     </p>
                     <div class="more-info-btn">
                       <a
@@ -872,10 +878,7 @@
         <aside>
           <!--Track Info Modal-->
           <div class="modal track-modal" id="track_modal_{{track._id}}">
-            <i
-              class="fas fa-times-circle modal-close close-modal-icon"
-              data-group="close-modal"
-            ></i>
+            <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="modal-content">
               <div class="modal-header">
                 <div class="row">
@@ -917,7 +920,7 @@
                     />
                     {% else %}
                     <img
-                      src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                      src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                       alt="Image of Cover Art for Track"
                       class="album-cover"
                     />
@@ -952,10 +955,10 @@
                         rows="2"
                         cols="10"
                         name="comment_body"
-                        id="comment_body_{{loop.index}}"
+                        id="comment_body_0{{loop.index}}"
                         class="materialize-textarea"
                       ></textarea>
-                      <label for="comment_body_{{loop.index}}"
+                      <label for="comment_body_0{{loop.index}}"
                         >Leave a comment:</label
                       >
                       <div class="submit-comment-btn">
@@ -1020,11 +1023,7 @@
                                 value="{{comment_object['comment']}}"
                                 name="edit_comment"
                                 class="edit-comment-input"
-                                id="edit_comment_{{loop.index}}"
                               />
-                              <label for="edit_comment_{{loop.index}}"
-                                >Leave a comment:</label
-                              >
                               <button
                                 type="submit"
                                 class="btn submit-comment-edit"
@@ -1114,6 +1113,7 @@
               </div>
             </div>
           </div>
+
           <!-- Track Edit Modal -->
           <div
             class="modal edit-track-modal"
@@ -1136,7 +1136,7 @@
                         type="text"
                         value="{{track.track_name}}"
                         name="track_name"
-                        id="track_name_{{loop.index}}"
+                        id="track_name_0{{loop.index}}"
                         required
                       />
                       <label for="track_name_{{loop.index}}">Track Name</label>
@@ -1146,7 +1146,7 @@
                         type="text"
                         value="{{track.artist_name}}"
                         name="artist_name"
-                        id="artist_name_{{loop.index}}"
+                        id="artist_name_0{{loop.index}}"
                         required
                       />
                       <label for="artist_name_{{loop.index}}">Artist</label>
@@ -1156,13 +1156,13 @@
                         type="text"
                         value="{{track.album_name}}"
                         name="album_name"
-                        id="album_name_{{loop.index}}"
+                        id="album_name_0{{loop.index}}"
                         required
                       />
                       <label for="album_name_{{loop.index}}">Album</label>
                     </div>
                     <div class="input-field col s12 m6">
-                      <select name="genre" id="genre_{{loop.index}}">
+                      <select name="genre" id="genre_0{{loop.index}}">
                         <option>{{track.genre}}</option>
                         {% for genre in genre_list %}
                         <option value="{{genre}}">{{genre}}</option>
@@ -1174,7 +1174,7 @@
                         type="number"
                         value="{{track.year_of_release}}"
                         name="year_of_release"
-                        id="year_of_release_{{loop.index}}"
+                        id="year_of_release_0{{loop.index}}"
                         required
                       />
                       <label for="year_of_release_{{loop.index}}"
@@ -1186,7 +1186,7 @@
                         type="text"
                         value="{{track.image_url}}"
                         name="image_url"
-                        id="image_url_{{loop.index}}"
+                        id="image_url_0{{loop.index}}"
                       />
                       <label for="image_url_{{loop.index}}">Image URL</label>
                     </div>
@@ -1241,7 +1241,7 @@
                   />
                   {% else %}
                   <img
-                    src="{{url_for('static', filename='images/crosstracks-logo.png')}}"
+                    src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
                     alt="Image of Cover Art for Track"
                     class="album-cover"
                   />
@@ -1301,38 +1301,15 @@
                                             <span class="card-title">${
                                               item.track_name
                                             }</span>
-                                             ${
-                                               item.likes.includes(String(user))
-                                                 ? ` <span><a
-                                                     href="{{url_for('tracks.like_track', track_id='${
-                                                       item._id
-                                                     }', username=session['user'])}}"
-                                                     class="modal-trigger like_track"><i class="fas fa-star"
-                                                         id="like-track-icon"></i></a></span><span>&nbsp;${
-                                                           item.likes_count
-                                                             ? `${item.likes_count}`
-                                                             : ""
-                                                         }</span>`
-                                                 : ` <span><a
-                                                         href="{{url_for('tracks.like_track', track_id='${
-                                                           item._id
-                                                         }', username=session['user'])}}"
-                                                         class="modal-trigger like_track"><i class="far fa-star"
-                                                             id="like-track-icon"></i></a></span><span>&nbsp;${
-                                                               item.likes_count
-                                                                 ? `${item.likes_count}`
-                                                                 : ""
-                                                             }</span>`
-                                             }
                                             <div class="card-information-wrapper">
                                         <div class="track-card-information">
                                             <p class="artist-name">${
                                               item.artist_name
                                             }</p>
                                             <p class="album-name">
-                                                <p>${item.album_name}</p>
+                                            ${item.album_name}</p>
                                         </div>
-                                        <p>${item.genre}</p>
+                                        <p class="genre-name">${item.genre}</p>
                                 </div>
                                 <div class="card-action">
                                 <div class="more-info-btn search-result">
@@ -1363,19 +1340,19 @@
                              ${
                                item.image_url
                                  ? `<img src=${item.image_url} alt="Image of Cover Art for Track"
-                                 class="track-image search-result">`
+                                 class="track-image-mobile search-result">`
                                  : `<img
                                  src="{{url_for('static', filename='images/default-track-image.png')}}"
-                                 alt="Image of Cover Art for Track" class="track-image search-result">`
+                                 alt="Image of Cover Art for Track" class="track-image-mobile search-result">`
                              }
                         </div>
                         <div class="card-title">
                             <span>${item.track_name}</span>
                         </div>
                         <div class="card-content">
-                            <p>${item.artist_name}</p>
-                            <p>${item.album_name}</p>
-                            <p>${item.genre}</p>
+                            <p class="artist-name">${item.artist_name}</p>
+                            <p class="album-name">${item.album_name}</p>
+                            <p class="genre-name">${item.genre}</p>
                         </div>
                         <div class="card-action">
                         </div>

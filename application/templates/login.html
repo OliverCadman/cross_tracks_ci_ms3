@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Login Page">
+<meta name="keywords" content="Cross//Tracks, music, sharing, community, login">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% block content %}
 <div class="login-page-container">
 <div class="row">
@@ -19,12 +24,12 @@
                         <div class="card-panel col s12">
                             <div class="input-field">
                                 <i class="fas fa-user prefix login-window-icon"></i>
-                                <input type="text" id="username" name="username">
+                                <input type="text" id="username" name="username" required>
                                 <label for="username">Username</label>
                             </div>
                             <div class="input-field">
                                 <i class="fas fa-lock prefix login-window-icon"></i>
-                                <input type="password" id="password" name="password">
+                                <input type="password" id="password" name="password" required>
                                 <label for="password">Password</label>
                             </div>
                             <button type="submit" class="btn">Login</button>

@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Register Page">
+<meta name="keywords" content="Cross//Tracks, register">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% block content %}
 <section>
     <div class="register-page-container">
@@ -12,7 +17,6 @@
             </div>
         </div>
         <div class="register-wrapper">
-
             <hr class="block-divider">
             <p class="signin-message">Already have an account? <a href="{{url_for('users.login')}}">Login Here</a></p>
             <div class="container">
@@ -37,7 +41,7 @@
                                                 pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                             class="validate" required autocomplete="on">
                                             <label for="password">Choose a password:</label>
-                                            <small>Eight or more characters, with one uppercase letter, a number, and a special character.</small>
+                                            <small>Eight or more characters, with at least one uppercase letter, number, and special character.</small>
                                         </div>
                                         <div class="col s12 m6 input-field confirm-password-input">
                                             <i class="fas fa-lock prefix login-window-icon"></i>

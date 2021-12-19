@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Manage Genres Page">
+<meta name="keywords" content="Cross//Tracks, admin, manage genres, edit">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% block content %}
     <div class="manage-genre-container">
         <h1>Manage Genres</h1>
@@ -14,7 +19,7 @@
                             <i class="fas fa-times-circle remove-genre"></i>
                         </a>
                     </div>
-                    <div class="modal" id="remove_genre_modal_{{genre._id}}">
+                    <div class="modal delete-genre-modal" id="remove_genre_modal_{{genre._id}}">
                         <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                         <div class="modal-content">
                             <div class="row">

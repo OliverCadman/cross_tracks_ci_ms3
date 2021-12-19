@@ -155,10 +155,11 @@
             <div class="row social-links-row center-align">
                 <div class="col s12">
                     <ul class="social-links">
-                        <li><a href="https://www.spotify.com" target="_blank"><i class="fab fa-spotify"></i></a></li>
-                        <li><a href="https://www.github.com/OliverCadman" target="_blank"><i
+                        <li><a href="https://www.spotify.com" target="_blank" rel="noopener"><i class="fab fa-spotify"></i></a></li>
+                        <li><a href="https://www.github.com/OliverCadman" target="_blank" rel="noopener"><i
                                     class="fab fa-github"></i></a></li>
-                        <li><a href="https://www.soundcloud.com" target="_blank"><i class="fab fa-soundcloud"></i></a>
+                        <li><a href="https://www.soundcloud.com" target="_blank" rel="noopener"><i
+                                    class="fab fa-soundcloud"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -173,6 +174,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{url_for('static', filename='js/toast.js')}}"></script>
 
+    <!-- Flash Messages displayed through Materialize 'toasts'-->
+    <!-- displayToast() function found in toast.js file -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         <script>

@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Contact Page">
+<meta name="keywords" content="Cross//Tracks, contact, contact form, email">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% block content %}
 <section>
     <div class="contact-body">
@@ -13,7 +18,8 @@
             <div class="col s12">
                 <div class="contact-vector-wrapper">
                     <figure>
-                        <img src="{{url_for('static', filename='images/contact-vector.png')}}" class="contact-vector" alt="">
+                        <img src="{{url_for('static', filename='images/contact-vector.png')}}" class="contact-vector" 
+                        alt="Vector graphic for contact page">
                     </figure>
                 </div>
                 <div class="contact-lead">
@@ -27,15 +33,15 @@
                 <div class="contact-form-wrapper">
                 <form action="{{url_for('main.send_email')}}" method="POST" class="contact-form card-panel">
                         <div class="input-field">
-                            <input type="text" name="full_name" id="full_name">
+                            <input type="text" name="full_name" id="full_name" required>
                             <label for="full_name">Please enter your name</label>
                         </div>
                         <div class="input-field">
-                            <input type="email" name="email_address" id="email_address">
+                            <input type="email" name="email_address" id="email_address" required>
                             <label for="email_address">Please enter your email address</label>
                         </div>
                         <div class="input-field">
-                            <textarea name="questions_comments" id="questions_comments" cols="30" rows="10" class="materialize-textarea"></textarea>
+                            <textarea name="questions_comments" id="questions_comments" cols="30" rows="10" class="materialize-textarea" required></textarea>
                             <label for="questions_comments">Let us know what you think!</label>
                         </div>
                         <div class="submit-btn">

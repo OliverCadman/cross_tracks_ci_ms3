@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. 404 Page">
+<meta name="keywords" content="Cross//Tracks, 404, error, page not found">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% block content %}
-<div class="page-not-found-container">
-    <div class="row">
-        <div class="col s12 page-not-found-wrapper">
-            <figure>
-                <img src="{{url_for('static', filename='images/page-not-found-vector.png')}}" alt="404 error, page not found" class="page-not-found-vector">
-            </figure>
-            <h1 class="center-align page-not-found-header">
-                Page not found
-            </h1>
-            <a href="{{url_for('main.index')}}" class="btn back-home-btn">Take me Home</a>
+<section>
+    <div class="page-not-found-container">
+        <div class="row">
+            <div class="col s12 page-not-found-wrapper">
+                <figure>
+                    <img src="{{url_for('static', filename='images/page-not-found-vector.png')}}" alt="404 error, page not found" class="page-not-found-vector">
+                </figure>
+                <h1 class="center-align page-not-found-header">
+                    Page not found
+                </h1>
+                <a href="{{url_for('main.index')}}" class="btn back-home-btn">Take me Home</a>
+            </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

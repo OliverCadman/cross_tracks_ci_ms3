@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Build Profile Page">
+<meta name="keywords" content="Cross//Tracks, build profile, user details, name, age, date of birth, description">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% block content %}
 <section>
     <div class="build-profile-container">
@@ -48,7 +53,7 @@
                                 </div>
                                 <div class="file-field input-field col s12 m6">
                                     <div class="btn">
-                                        <span>Profile Image</span>
+                                        <label for="profile_image">Profile Image</label>
                                         <input type="file" name="profile_image" id="profile_image">
                                     </div>
                                     <div class="file-path-wrapper">

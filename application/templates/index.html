@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Home Page">
+<meta name="keywords" content="Cross//Tracks, music, sharing, community, social media">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% if not session.user %}
 <aside>
     <div class="card-panel login-window hide-on-med-and-down">
         <form action="{{url_for('users.login')}}" method="POST">
             <div class="input-field">
                 <i class="fas fa-user prefix login-window-icon"></i>
-                <input type="text" name="username" id="username" class="login-window-input">
+                <input type="text" name="username" id="username" class="login-window-input" required>
                 <label for="username">Username</label>
             </div>
             <div class="input-field">
                 <i class="fas fa-lock prefix login-window-icon"></i>
-                <input type="password" name="password" id="password" class="login-window-input">
+                <input type="password" name="password" id="password" class="login-window-input" required>
                 <label for="password">Password</label>
             </div>
             <div class="login-button-wrapper">
@@ -41,7 +46,7 @@
                 <h2 class="info-header">About Us</h2>
                 <p class="about-lead">Cross//Tracks is an online community.</p>
                 <figure>
-                    <img src="{{url_for('static', filename='images/about-crosstracks-vector.png')}}"
+                    <img src="{{url_for('static', filename='images/about-crosstracks-vector.webp')}}"
                         alt="Vector graphic of two people listening to music from iPhone"
                         class="about-crosstracks-vector">
                 </figure>

@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block meta %}
+<meta name="description" content="Cross//Tracks, track sharing website. Manage Tracks page">
+<meta name="keywords" content="Cross//Tracks, manage tracks, admin, edit">
+<meta name="author" content="Oliver Cadman">
+{% endblock %}
 {% block content %}
 <div class="manage-track-container">
     <h1>Manage Tracks</h1>
@@ -88,33 +93,35 @@
                                  method="POST" class="edit-track-form">
                                  <div class="row">
                                      <div class="input-field col s12 m6">
-                                         <input type="text" value="{{track.track_name}}" name="track_name" required>
-                                         <label for="track_name">Track Name</label>
+                                         <input type="text" value="{{track.track_name}}" name="track_name" id="track_name_{{loop.index}}" required>
+                                         <label for="track_name_{{loop.index}}">Track Name</label>
                                      </div>
                                      <div class="input-field col s12 m6">
-                                         <input type="text" value="{{track.artist_name}}" name="artist_name" required>
-                                         <label for="artist_name">Artist</label>
+                                         <input type="text" value="{{track.artist_name}}" name="artist_name" id="artist_name_{{loop.index}}" required>
+                                         <label for="artist_name_{{loop.index}}">Artist</label>
                                      </div>
                                      <div class="input-field col s12 m6">
-                                         <input type="text" value="{{track.album_name}}" name="album_name" required>
-                                         <label for="album_name">Album</label>
+                                         <input type="text" value="{{track.album_name}}" name="album_name" id="album_name_{{loop.index}}" required>
+                                         <label for="album_name_{{loop.index}}">Album</label>
                                      </div>
                                      <div class="input-field col s12 m6">
-                                         <select name="genre">
+                                         <select name="genre" id="genre_{{loop.index}}">
                                              <option>{{track.genre}}</option>
-                                             {% for genre in genre_list %}
-                                             <option value="{{genre}}">{{genre}}</option>
-                                             {% endfor %}
+                                             {% if all_genres %}
+                                                {% for genre in all_genres %}
+                                                <option value="{{genre.genre_name}}">{{genre.genre_name}}</option>
+                                                {% endfor %}
+                                             {% endif %}
                                          </select>
                                      </div>
                                      <div class="input-field col s12 m6">
-                                         <input type="number" value="{{track.year_of_release}}" name="year_of_release"
+                                         <input type="number" value="{{track.year_of_release}}" name="year_of_release" id="year_of_release_{{loop.index}}"
                                              required>
-                                         <label for="year_of_release">Year of Release</label>
+                                         <label for="year_of_release_{{loop.index}}">Year of Release</label>
                                      </div>
                                      <div class="input-field col s12 m6">
-                                         <input type="text" value={{track.image_url}} name="image_url">
-                                         <label for="image_url">Image URL</label>
+                                         <input type="text" value={{track.image_url}} name="image_url" id="image_url_{{loop.index}}">
+                                         <label for="image_url_{{loop.index}}">Image URL</label>
                                      </div>
 
                                      <div class="col s12 submit-btn">
