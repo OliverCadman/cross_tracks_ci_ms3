@@ -292,6 +292,9 @@ Manual testing was undertaken on the following browser platforms:
     
 ### Build Profile Page
 
+1. Navbar 
+    1. Repeat verification steps taken in home page testing.
+
 1. Design
     1. Collapse to mobile screen size to confirm that background isn't displayed.
 
@@ -311,6 +314,9 @@ Manual testing was undertaken on the following browser platforms:
     10. Fill all inputs of the form and click submit, to confirm that the user is taken to their profile page, with additional information displayed.
 
 ### Profile Page
+
+1. Navbar 
+    1. Repeat verification steps taken in home page testing.
 
 1. Header/User Details
     
@@ -338,7 +344,13 @@ Manual testing was undertaken on the following browser platforms:
 3. Delete Profile Modal
     1. Click both the icon to close the modal and page outside the modal, to confirm it closes correctly.
     2. Click the button which reads 'No, I Change My Mind!' to confirm it closes the modal.
-    3. Click the 'Yes I'm Sure' button, to confirm that the account is deleted successfully, and the user is logged out and taken to the home page, with relevant flash message.
+    3. Click the 'Yes I'm Sure' button, to confirm that:
+        1. The user's document is removed from the 'users' collection in the database.
+        2. All tracks related to the user are removed from the 'tracks' collection in the database.
+        3. All instances of the deleted user's tracks in all user document's 'liked_tracks' arrays are removed from the database.
+        4. The instance of the user is removed from the 'likes' array of all track documents in 'tracks' collection in the database.
+        3. File information relating to profile image (if any) are removed from fs.files and fs.chunks collections.
+        4. The deleted user is then logged out and taken to the home page, with the relevant flash message displayed.
     
 4. 'My Tracks'
     
@@ -351,15 +363,31 @@ Manual testing was undertaken on the following browser platforms:
     7. Log out and visit own profile page, to confirm that the edit and delete icons are hidden.
     8. Click on both edit and delete icons, to confirm that the relevant modal windows are opened.
     9. Collapse to mobile device size, to confirm that columns collapse to full-width.
-    
 
+5. Edit Track Modal
+    1. Click both the icon to close the modal and page outside the modal, to confirm it closes correctly.
+    2. Submit the form with edited information, to confirm that the track is updated in the database, and rendered onto the screen correctly.
+    3. When submitted, confirm that the relevant flash message is displayed.
+
+6. Delete Track Modal
+    1. Click both the icon to close the modal and page outside the modal, to confirm it closes correctly.
+    2. Confirm that the `{{track.track_name}}` variable renders the correct track name.
+    3. Click 'Cancel' button, to confirm that the modal window closes.
+    4. Click 'Delete' button, to confirm that:
+        1. The track is removed from the 'tracks' collection in database.
+        2. All instances of track in all user's 'liked_tracks' arrays are removed from database.
+        3. The user is taken back to their user profile page, with the relevant flash message displayed.
+    
 5. 'Liked Tracks'
     1. If no tracks present, confirm that the message 'No Tracks' is displayed, both with accompanying vector.
     2. Log in and like a track, to confirm that it is displayed in the section.
     3. If tracks are present, confirm that the relevant images and track names are displayed.
     4. If there are tracks present, click on the button with FontAwesome 'info' icon, to confirm that it opens the relevant modal.
     5. Log in, like a track and navigate to own profile, to confirm that a button to remove liked track is present.
-    6. Click on button to remove liked track, to confirm that the track is removed.
+    6. Click on button to remove liked track, to confirm that:
+        1. The track is removed from the user document's 'liked_tracks' array in MongoDB.
+        2. The username is removed the the track document's 'likes' array in MongoDB.
+        3. The track is removed from the DOM.
     7. If deleting the last liked track from the section, confirm that the page reloads, and the 'No Tracks' message is displayed, with accompanying vector.
     8. Collapse to tablet/mobile screen size, to confirm that the columns span full-width.
 
@@ -367,6 +395,79 @@ Manual testing was undertaken on the following browser platforms:
     1. Supply an image URL for the track, to confirm that the image is displayed in the modal.
     2. Confirm that the relevant track name, artist name, album name, genre and year-of-release are displayed correctly.
     3. Click both the icon to close the modal and page outside the modal, to confirm it closes correctly.
+
+
+### Browse Tracks Page
+
+1. Navbar 
+    1. Repeat verification steps taken in home page testing.
+
+2. Links to Search Tracks/Add a Track/User Profile
+    1. Log out and visit page, to confirm that only the search link is displayed.
+    2. Log in and visit page, to confirm that Search, Add a Track and My Profile links are displayed.
+    1. Collapse to mobile screen size to confirm that only the icons are displayed, without text content.
+    2. Hover over links on laptop screen size, to confirm they scale up as intended.
+    3. Click the 'Search' link, to confirm that the search window expands.
+    4. Click the 'Add a Track' and 'User Profile' links, to confirm they take the user to the correct pages.
+
+3. All Tracks
+    1. Cross reference the pagination information against database, to confirm that the information is accurate.
+    2. Confirm that there are 6 tracks displayed per page.
+    3. Click on the pagination links, to confirm that pagination functions correctly.
+    4. Add a track without an image URL, to confirm that the image defaults to the Cross//Tracks logo.
+    5. Add a track with an image URL, to confirm it displays on the cards correctly.
+    6. Add a track with all information, to confirm it all relevant information is displayed on cards.
+    7. Log in as user with 'artist' status and add a track, to confirm that the 'artist' status is displayed on track cards.
+    8. Log in and like a track, to confirm the AJAX functions correctly, the icon is colour-filled, and the likes count is incremented.
+    9. Log in and leave a comment on a track, to confirm the speech icon is displayed, accompanied with the comment count of the track.
+    10. Click on the button with 'info' icon, to confirm it opens the correct track modal window.
+    11. Click the user's profile image at the bottom of the card, to confirm that the user is taken to the correct user's profile.
+    12. Collapse to mobile device size, to confirm that the mobile-specific track card displays correctly, and full-column-width.
+    13. Log in and add a track, to confirm that the edit and delete buttons are present on relevant track card, on all device sizes.
+
+4. Latest Tracks
+    1. Repeat verification steps 4-13 taken in 'All Tracks' testing.
+    2. Cross-reference 'tracks' collection in MongoDB, to confirm that the six tracks on display are indeed the six latest tracks.
+
+5. Track Info Modal
+    1. Confirm that the image is present, and defaulted to Cross//Tracks logo if no image URL is supplied.
+    2. Confirm that track, artist, album and genre names are present, as well as year-of-release.
+    3. Log in and open a track info modal, to confirm that a form is displayed, to submit a comment.
+    4. Log in and submit a comment with no content, to confirm that the relevant error message is displayed.
+    5. Log in and submit a comment with content, to confirm that the comment is submitted successfully, and the Browse Tracks page is rendered with relevant flash message.
+    6. After submitting comment, confirm that the username of the comment author is displayed, along with the date the comment was added.
+    7. After submitting comment, confirm that the edit and delete icons are present.
+    8. Click the edit icon, to confirm:
+        1. The comment is replaced with an input field to edit the comment.
+        2. Two buttons, 'Edit' and 'Cancel' are displayed.
+        3. Click cancel to confirm that the input field and buttons are replaced with the comment.
+        4. Edit comment and click submit, to confirm that the comment is edited successfully, and the Browse Tracks page is rendered with relevant flash message.
+    9. Click the delete icon, to confirm that:
+        1. The comment is removed from the database.
+        2. The Browse Tracks page is rendered with relevant flash message.
+
+6. Track Edit Modal
+    1. Repeat steps 1-3 taken in 'Track Edit Modal' testing on User Profile.
+
+7. Track Delete Modal
+    1. Repeat steps 1-4 taken in 'Track Edit Modal' testing on User Profile. However, confirm that the user is taken back to the 'Browse Tracks' page when the track is deleted.
+
+8. Search Window
+    1. Open search window on tablet and laptop/desktop to confirm that the search window spans 50% of the viewport.
+    2. Open search window on mobile to confirm that the search window spans full-width.
+    3. Click both the FontAwesome 'times' icon and the search icon, to confirm that they both close the search window.
+    4. Type a genre into the search bar, to confirm that correct results are retrieved immediately, without refreshing page.
+    5. Type a genre which isn't found in the database, to confirm that the 'No Results' message is displayed.
+
+
+
+
+
+
+
+
+
+
 
 
 
