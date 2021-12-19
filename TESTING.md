@@ -628,6 +628,36 @@ it is their determination to be able to navigate issues such as this in the futu
 
 ### Fixed Bugs
 
+#### Unintended Password Change when 'liking' a track
+
+Upon testing the 'like' functionality in the Browse Tracks page, a silent bug was discovered when logging out, then logging back in as the user who 'liked' the track.
+When attempting to log in, the error message 'Invalid Username/Password' kept being displayed, despite me carefully typing in the password to ensure that it was
+indeed correct. Upon examination of the code, it was found that this was being caused when pulling the user details in the `like_track()` view.
+
+The functionality used to pull the user details in this view relies on a class method, located in `application/tracks/classes.py`:
+
+```
+@classmethod
+    def get_user(cls, username):
+
+        user_data = mongo.db.users.find_one({"username": username.lower()})
+
+        if user_data is not None:
+            return cls(**user_data)
+        else:
+            user_data = None
+            return False
+```
+
+As this method is a class method, only instance methods can be utilised on the 'user' object pulled from the database.
+
+Initially I used the instance method `get_user_info()` to prepare the 'liked' track data, ready to be pushed to the database.
+However, it was discovered that this method was invoking Werkzeug's `generate_password_hash()` function, resulting in the password
+being changed to something impossible to determine. 
+
+Therefore, a seperate instance method `prepare_liked_track()` was created, which handled only data relating to the `liked_tracks` array in the user document.
+The User object created calls on this method to update the user document in the database, which rectified this silent bug.
+
 ### Unfixed Bugs
 
 
