@@ -3,6 +3,95 @@ Cross//Tracks is an online music sharing platform, where music lovers around the
 
 The platform will allow users to browse a complete list of shared tracks, search/filter tracks by Genre, Artist Name or Year of Release, leave comments, and give tracks a star rating.
 
+## Table of Contents
+
+* [UX](#UX)
+    * [Strategy](#Strategy)
+        * [Vision](#Vision)
+        * [Site Owner Goals](#Site-Owner-Goals)
+        * [Target Audience](#Target-Audience)
+        * [User Stories](#User-Stories)
+        * [In or Out?](#In-or-Out)
+    * [Scope](#Scope)
+    * [Structure](#Structure)
+        * [Database](#Database)
+    * [Skeleton](#Skeleton)
+        * [Wireframes](#Wireframes)
+    * [Surface](#Surface)
+        * [Design](#Design)
+            * [General Considerations](#General-Considerations)
+            * [Colour Palette](#Colour-Palette)
+            * [Typography](#Typography)
+            * [Icons](#Icons)
+            * [Images](#Images)
+* [Features](#Features)
+    * [Global Features](#Global-Features)
+        * [Navbar](#Navbar)
+        * [Footer](#Footer)
+    * [Home Page](#Home-Page)
+    * [Register Page](#Register-Page)
+    * [Login Page](#Login-Page)
+    * [Build Profile Page](#Build-Profile-Page)
+    * [Browse Tracks Page](#Browse-Tracks-Page)
+        * [Latest Tracks/All Tracks](#Latest-Tracks/All-Tracks)
+        * [Like Tracks](#Like-Tracks)
+        * [Comments](#Comments)
+        * [Search Tracks](#Search-Tracks)
+        * [Edit and Delete Modals](#Edit-and-Delete-Modals)
+    * [Add a Track Page](#Add-a-Track-Page)
+    * [Contact Page](#Contact-Page)
+    * [404 Page](#404-Page)
+    * [500 Page](#500-Page)
+    * [Manage Genres (as admin)](#Manage-Genres-as-admin)
+    * [Manage Tracks (as admin)](#Manage-Tracks-as-admin)
+    * [Features for future implementation](#Features-for-future-implementation)
+* [Technologies Used](#Technologies-Used)
+    * [Languages](#Languages)
+    * [Integrated Development Environment](#Integrated-Development-Environment)
+    * [Database](#Database)
+    * [Backend Libraries/Frameworks](#Backend-Libraries/Frameworks)
+    * [Frontend Libraries/Frameworks](#Frontend-Libraries/Frameworks)
+    * [Other Technologies](#Other-Technologies)
+* [Application Structure](#Application-Structure)
+* [Testing](#Testing)
+* [Credits](#Credits)
+    * [Code](#Code)
+        * [Application Structure](#Application-Architecture)
+        * [Flask Factory](#Flask-Factory)
+        * [Profile Image Validation/Upload/Saving to MongoDB fs.files and fs.chunks](#Profile-Image-Validation/Upload/Saving-to-MongoDB-fs.files-and-fs.chunks)
+        * [Search Window - Empty Results when typing search query](#Search-Window---Empty-Results-when-typing-search-query)
+        * ['Like' back-end functionality](#'Like'-back-end-functionality)
+        * [Calculate User's Age](#Calculate-User's-Age)
+        * [Flask Mail](#Flask-Mail)
+        * [Pagination](#Pagination)
+    * [Text Content](#Text-Content)
+    * [Image Media](#Image-Media)
+        * [Cross//Tracks Logo](#Cross//Tracks-Logo)
+        * [Page Background/Section Header Background](#Page-Background/Section-Header-Background)
+        * [Vector Graphics](#Vector-Graphics)
+        * [Iconography](#Iconography)
+        * [Favicon](#Favicon)
+* [Deployment](#Deployment)
+    * [Running the Project Locally](#Running-the-Project-Locally)
+        * [Gitpod](#Gitpod)
+        * [Using your own IDE](#Using-your-own-IDE)
+        * [Forking the project](#Forking-the-project)
+    * [Deployment to Heroku](#Deployment-to-Heroku)
+    * [Connect MongoDB to the application](#Connect-MongoDB-to-the-application)
+    * [Configure your environment variables](#Configure-your-environment-variables)
+    * [requirements.txt and Procfile](#requirements.txt-and-Procfile)
+    * [Deploy to Heroku](#Deploy-to-Heroku)
+* [Acknowledgements](#Acknowledgements)
+* [Disclaimer](#Disclaimer)
+
+
+
+
+
+
+
+
+
 
 ## UX
 ### Strategy
@@ -167,16 +256,21 @@ The ERD (Entity Relationship Diagram) below depicts the data, and the relationsh
 ### Skeleton
 #### Wireframes
 
-Links to the wireframes are below:
+The wireframes were made during the planning stages of the project. As the project evolved during the life-cycle of the project's development, 
+some aspects of the final website's design may differ from those featured in the wireframes.
 
 * [Home Page](documentation/wireframes/cross-tracks-homepage.pdf)
 * [Register Page](documentation/wireframes/cross-tracks-register.pdf)
+* [Build Profile Page](documentation/wireframes/cross-tracks-build-profile.pdf)
 * [Login Page](documentation/wireframes/cross-tracks-login.pdf)
 * [Add Track Page](documentation/wireframes/cross-tracks-add-track.pdf)
 * [Browse Tracks Page](documentation/wireframes/cross-tracks-search-tracks.pdf)
 * [User Profile](documentation/wireframes/cross-tracks-user-profile.pdf)
 * [User Profile (editable)](documentation/wireframes/cross-tracks-editable-profile.pdf)
 * [Edit Profile](documentation/wireframes/cross-tracks-profile-edit.pdf)
+* [Contact Page](documentation/wireframes/cross-tracks-contact.pdf)
+* [Manage Tracks](documentation/wireframes/cross-tracks-manage-tracks.pdf)
+* [Manage Genres](documentation/wireframes/cross-tracks-manage-genres.pdf)
 
 ### Surface
 
@@ -333,6 +427,11 @@ Below, tracks are presented on materializeCSS cards, featuring an image of the t
 A FontAwesome star is present on all track cards. If clicked, the data is sent to the mongoDB database, and the track is added to the user's list of "liked_tracks", and the amount of likes the track has increases by one. This functionality is achieved through AJAX, as without it, the page would refresh and would scroll to the top, which isn't great UX.
 
 At the bottom of the cards, information on the user who added the track is present, along with their profile picture. Users can click on the profile picture to visit their profile. 
+
+#### Like Tracks
+
+If logged in, users have the option to 'like' a track, by clicking the FontAwesome 'star' icon featured on each track card. If clicked, the icon is filled with colour, and the number of likes to the right of the icon is incremented.
+All tracks that a user 'likes' are saved to their profile, to be browsed at the user's will.
 
 #### Comments
 
@@ -524,7 +623,7 @@ Testing information can be found in a seperate [TESTING.md](TESTING.md) file.
 
 ### Code
 
-#### Application Structure
+#### Application Architecture
 
 When embarking on the project, research was made into the most ideal way to structure the application; to adhere to seperation of concerns, but also to generally gain a deeper understanding of python classes through challenge and practice.
 I consulted Code Institute Alumni/Mentor Ben Kavanagh (BAK2K3) through the Slack Community after browsing his code for his MS3 project 'WYSPA', to consult about application structuring. After speaking to him, 
@@ -627,7 +726,7 @@ https://github.com/Edb83/self-isolution/blob/master/app.py
 
 All text content throughout the website was created by the developer (apart from any text content pulled from the database, of course).
 
-### Images
+### Image Media
 
 #### Cross//Tracks Logo
 
