@@ -647,6 +647,172 @@ The vector graphics used in the website's Home, Login, Register, User Profile an
 
 All icons used throughout the website were supplied by the [FontAwesome](https://fontawesome.com/) library.
 
+#### Favicon
+
+The website's favicon was made using the [Real Favicon Generator](https://realfavicongenerator.net/)
+
+## Deployment
+
+This project was developed using the Visual Studio Code 2 IDE, and committed and pushed to GitHub using the VSCode2 integrated terminal.
+
+The project is deployed on Heroku, using the code from the Github repository.
+
+In order to deploy this project, you would need to have an account for these platforms:
+
+* [MongoDB](https://www.mongodb.com/)
+* [Github](https://github.com/)
+* [SendInBlue](https://www.sendinblue.com/)
+
+### Running the project locally
+
+#### Gitpod
+
+In order to run this project on GitPod, you will need:
+
+* A GitHub account. If you don't have one already, [you can create one here](https://github.com/).
+* A Google Chrome Browser
+
+If you are using GitPod for the first time, you will need to then follow these steps:
+
+* Install the GitPod browser extension for Google Chrome.
+* Login to GitPod using your GitHub account details.
+* Navigate to the project's GitHub repository.
+* Click the green 'Gitpod' button to the right hand of the page.
+* This will open your Gitpod workspace, where you can start working on the repository's files on your local machine.
+
+#### Using your own IDE
+
+For those who would rather use their own local IDE (such as VSCode, Sublime Text or PyCharm), follow these steps:
+
+* [Navigate to the project repository](https://github.com/olivercadman/cross_tracks_ci_ms3)
+
+![Screenshot of instructions to clone project](documentation/readme-images/crosstracks-clone.png)
+
+* In the list of buttons above the collection of the repository's files, select 'Code'.
+* Copy the HTTPS URL to your clipboard.
+* Open your integrated terminal inside your preferred IDE.
+* Change directory "cd" or make a new directory "mkdir DIRECTORY-NAME" to contain the repository's files.
+* Type 'git clone', then paste the URL that you copied to your clipboard in step 3.
+* Hit Enter, and the repository's folders and files will be cloned into your chosen directory.
+
+#### Forking the project
+
+Alternatively, you may choose to fork this project. To this you need to:
+
+* Signup/Login to Github
+* [Navigate to the project repository](https://github.com/olivercadman/cross_tracks_ci_ms3)
+
+![Screenshot of instructions to fork project](documentation/readme-images/crosstracks-fork.png)
+
+* Click the fork button in on the top right hand side of the project repository.
+* If prompted, choose the repository to where you would like to fork.
+* Once these steps are completed, you should now be able to find the project in your own repository.
+
+### Deployment to Heroku
+
+#### Connect MongoDB to the application
+
+To deploy to the project, there are a number of steps to take to prepare the project for deployment:
+
+* Navigate to MongoDB and sign up/log in 
+* Navigate to your 'cluster'
+
+![Screenshot of instructions to select MongoDB 'connect'](documentation/readme-images/mongodb-connect.png)
+
+* Click the 'connect' button to open the connection menu
+
+![Screenshot of instructions to connect MongoDB to application](documentation/readme-images/mongodb-connect-application.png)
+
+* Select 'Connect Your Application'
+
+![Screenshot of instructions to copy MongoDB connection string](documentation/readme-images/mongodb-connection-string.png)
+
+* Copy the connection string and replace the `<username>`, `<password>`, and database name with your details (make sure you use the password to access the database, not your password to log in).
+
+#### Configure your environment variables
+
+Since the `env.py` file contains sensitive information, it should not be stored in the Github repository. Therefore, you must create your own, and store the environment variables required to configure the application.
+
+Create an `env.py` file, and add the following environment variables:
+
+```
+import os
+
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY","your_secret_key")
+os.environ.setdefault("MONGO_URI", "your_mongodb_connection_string")
+os.environ.setdefault("MONGO_DBNAME", "your_database_name")
+os.environ.setdefault("UPLOAD_FOLDER", "/Users/olivercadman/Documents/workspace/cross_tracks_ci_ms3/application/static/images/uploads")
+os.environ.setdefault("MAIL_SERVER", "smtp-relay.sendinblue.com")
+os.environ.setdefault("MAIL_PORT", "587")
+os.environ.setdefault("MAIL_USE_TLS", "True")
+os.environ.setdefault("MAIL_USERNAME", "your_email")
+os.environ.setdefault("MAIL_PASSWORD", "your_sendinblue_password")
+os.environ.setdefault("SENDINBLUE_API_KEY", "your_sendinblue_api_key")
+```
+Remember to add your `env.py` file and `pycache/` directory to .gitignore. 
+
+#### requirements.txt and Procfile
+
+The forked/cloned repository should contain a `requirements.txt` file, which contains all the dependencies used in the application.
+To install the dependencies on your own machine, type the following into your command line and press enter:
+
+`$ pip install -r requirements.txt`
+
+This should run the installation of all dependencies required for the application to function.
+
+A Procfile is also required, in order for Heroku to interpret the type of code to compile. 
+
+To create a Procfile, type the following into your command line and press enter:
+
+`$ echo web: python app.py > Procfile` 
+
+(Make your the word 'Procfile' contains a capital 'P')
+
+Open your Procfile, and make sure there are no blank lines.
+
+Add both your `requirements.txt` and `Procfile`, and commit to your Github repository.
+
+#### Deploy to Heroku
+
+* Navigate to [Heroku](https://www.heroku.com/), and sign up/log in
+
+![Screenshot of instructions to create new app in Heroku](documentation/readme-images/heroku-new-app.png)
+
+* Click the button reading 'New', and in the dropdown, click 'Create New App'
+
+![Screenshot of instructions to create app name and select region](documentation/readme-images/heroku-app-name-region.png)
+
+* Choose a name for your app, and select the region closest to you.
+
+![Screenshot of instructions to deploy from Github](documentation/readme-images/heroku-github-deploy.png)
+
+* In the list of deployment methods, click 'Github' and follow instructions to link Heroku to your Gitub repository.
+* Once connected to Github, you can choose 'Automatic Deploy', to deploy your application automatically each time your push code to your repository.
+
+![Screenshot of instructions to set Heroku config vars](documentation/readme-images/heroku-config-vars.png)
+
+* Since the `env.py` is unknown to Heroku, you will need to add the same variables to the list of your Heroku app's 'config vars'.
+* Click on the settings tab, and then scroll down until your find 'Reveal Config Vars'.
+* Click that button, and add your variables (without quotes).
+
+Congratulations, your project should be deployed to Heroku, and will be found at URL 'https://my-bodacious-app.herokuapp.com'.
+
+## Acknowledgements
+
+* Many thanks to Ben Kavanagh for help in visualising the structure of the application, and for the code referenced in a few parts of the website.
+* Many thanks to my mentor Adegbenga Adeye, for guiding me through the design of the website.
+* My thanks and love to my girlfriend Dani, who has supported me when the going has become tough in the development of this project.
+
+Thankyou for looking at my work. I wish you all the best.
+
+## Disclaimer
+
+This website is for educational purposes only.
+
+
+
 
 
 
