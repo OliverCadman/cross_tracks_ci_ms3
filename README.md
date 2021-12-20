@@ -503,7 +503,7 @@ The structure of the `application` folder is such that it handles the three main
 * `tracks`
 * `comments`
 
-Each of these sub-folders contain an `__init__.py` and `classes.py` file, as well as  a `views.py` file (except for the `comments` sub-folder). Each `classes.py` contains a Class representing a 'Track', 'User' and 'Comment' object, 
+Each of these sub-folders contain an `__init__.py` and `classes.py` file, as well as  a `views.py` file (except for the `comments` sub-folder). Each `classes.py` file contains a Class representing a 'Track', 'User' and 'Comment' object, 
 each containing instance and static methods concerned with creating, reading, updating and deleting documents to the relevant collections in the MongoDB database.
 
 The `User` class also handles form validation for registering, login, and file upload (for profile images).
@@ -519,6 +519,110 @@ There are three additional sub-folders:
 ## Testing
 
 Testing information can be found in a seperate [TESTING.md](TESTING.md) file.
+
+## Credits
+
+### Code
+
+#### Application Structure
+
+When embarking on the project, research was made into the most ideal way to structure the application; to adhere to seperation of concerns, but also to generally gain a deeper understanding of python classes through challenge and practice.
+I consulted Code Institute Alumni/Mentor Ben Kavanagh (BAK2K3) through the Slack Community after browsing his code for his MS3 project 'WYSPA', to consult about application structuring. After speaking to him, 
+I decided to employ his method of file organisation for the website. 
+
+The repository for this project [can be found here](https://github.com/BAK2K3/WYSPA)
+
+#### Flask Factory 
+
+Initialization of the Flask Factory, including Blueprints, Flask Mail and Application Config was referenced from an article:
+
+https://www.section.io/engineering-education/structuring-large-applications-with-blueprints-and-application-factory-in-flask/
+
+#### Profile Image Validation/Upload/Saving to MongoDB fs.files and fs.chunks
+
+Functionality to validate, upload and save a profile image to MongoDB was referenced from a YouTube tutorial:
+
+* Title: Uploading files with Flask - Python on the web - Learning Flask Series Pt. 13
+* Link : https://www.youtube.com/watch?v=6WruncSoCdI&t=1677s
+
+#### Search Window - Empty Results when typing search query
+
+AJAX was used in conjunction with the search input's `oninput` attribute, to provide instant results when searching for tracks.
+When testing, a bug was found resulting in duplicate results being returned with each key press. 
+
+Code to empty the wrapper before each AJAX call was referenced from here:
+
+https://barker.codes/blog/how-to-empty-an-element-in-vanilla-js/
+
+#### 'Like' back-end functionality
+
+Functionality to enable the user to 'like' a track and update the `track` document's 'likes' array and 'likes_count' fields was referenced from Ben Kavanagh's (BAK2K3) WYSPA project. The two code blocks that were referenced are detailed below (with comments removed):
+
+```
+ def add_listen(self, listener):
+
+        self.listens.append(listener)
+        self.listen_count += 1
+        mongo.db.messages.update_one({"_id": ObjectId(self._id)},
+                                     {"$set": self.get_info()})
+
+@classmethod
+    def get_by_id(cls, _id):
+
+        if ObjectId.is_valid(_id):
+            data = mongo.db.messages.find_one({"_id": ObjectId(_id)})
+            if data is not None:
+                return cls(**data)
+        # Return False if message not in DB or if ID is not valid ObjectID
+        data = False
+        return data
+
+
+```
+
+The code can be found here, on lines 316 and 368:
+
+https://github.com/BAK2K3/WYSPA/blob/master/wyspa/messages/classes.py 
+
+#### Calculate User's Age
+
+Code to calculate a user's age from their date of birth was referenced from this Stack Overflow post:
+
+https://stackoverflow.com/questions/2217488/age-from-birthdate-in-python
+
+
+#### Flask Mail
+
+Flask Mail is used to send emails from the website's contact form, via the SendInBlue STMP server. Code to set up and initialize/instanatiate Flask Mail was referenced from this article:
+
+https://mailtrap.io/blog/flask-email-sending/
+
+#### Pagination
+
+The Slack Community was consulted in regards to achieve effective pagination of tracks in the 'All Tracks' section of the website's 'Browse Tracks' page. The code was referenced from Slack user/Code Institute Alumni 'Ed B_alum':
+
+```
+def paginated(activities):
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page')
+    offset = page * PER_PAGE - PER_PAGE
+
+    return activities[offset: offset + PER_PAGE]
+
+
+def pagination_args(activities):
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page')
+    total = len(activities)
+
+    return Pagination(page=page, per_page=PER_PAGE, total=total)
+```
+
+
+The code can be found here, on lines 55 and 63:
+
+https://github.com/Edb83/self-isolution/blob/master/app.py
+
 
 
 
