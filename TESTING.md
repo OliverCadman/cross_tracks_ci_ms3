@@ -712,6 +712,21 @@ To rectify this, the horizontal cards were given an explicit height through cust
 
 ### Unfixed Bugs
 
+#### 'Browse Tracks' page on Firefox (laptop screen size)
+
+When testing the arrangement of track cards in the website's 'Browse Tracks' page on Google Chrome and Apple Safari browsers (on laptop screen size), the testing results are as expected; the cards are three-per-row,
+and arranged in a uniform style. However, when testing on the Firefox browser, the first two cards of the second row are pushed down, as if there is some invisible box-sizing added by the MaterializeCSS cards, which is 
+making the cards not fit neatly in a row. Or alternatively, some text content on the first row of cards is word breaking, making one card two large for them all to fit on one row. 
+
+The developer examined the cards for any word breaks, and used Firefox's devtools to alter the padding of the Materialize 'col' divs. This did result in the cards fitting on two rows. However, when adding this style rule into
+CSS and testing the page again, the cards returned to their original, incorrect, and unsightly layout. This leads me to believe that only the top row of cards should have a specific class to adjust the padding of the containing divs.
+
+However, since the cards are paginated, the developer visited the second page of the track cards, which were all positioned as expected; two rows, with three cards per row. This is also the case for the rest of the pages. The text content, or size of the cards, in no way differs
+to that in the first page of cards, which makes matters ever more confusing. 
+
+It is of course not a good or aesthetic/visually pleasing look to have these cards displayed in such away. Should the developer have time before project submission, they will of course
+endeavour to rectify this.
+
 #### Jinja URL encoding 
 
 A number of issues were encountered when using Javascript to communicate to Flask, using the `url_for()` method.
