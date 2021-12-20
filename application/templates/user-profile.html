@@ -174,7 +174,7 @@
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="modal-content modal-body">
                                 <div class="row">
-                                    <p class="track-name">{{track.track_name}}</p>
+                                    <p class="track-modal-header">{{track.track_name}}</p>
                                     <div class="row">
                                         <div class="col s12 m6 album-cover-modal">
                                             {% if not track.image_url == '' %}
@@ -451,6 +451,7 @@
             </div>
         </div>
 </aside>
+<!-- JavaScript Files -->
 {% block scripts %}
 <!-- <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script> -->
 <script src="{{url_for('static', filename='js/remove-like-ajax.js')}}"></script>
