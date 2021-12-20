@@ -50,6 +50,19 @@ label {
     text-align: center;
 }
 
+/* Change colour of all MaterializeCSS Inputs when focused */
+
+ /* label focus color */
+ .input-field input[type=text]:focus+label+i {
+     color: purple !important;
+ }
+
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+ }
+
 /* Navbar and Footer styling */
 
 .top-level-background,
@@ -966,6 +979,7 @@ li.page-item.active .page-link {
 
 }
 
+
 .modal-body p span {
     font-family: 'Alata', sans-serif;
 }
@@ -974,7 +988,7 @@ li.page-item.active .page-link {
     font-family: 'Quicksand', sans-serif;
     color: #eee;
     font-weight: 600;
-    font-size: 1.35rem;
+    font-size: 1.2rem;
 }
 
 .modal-user-details {
