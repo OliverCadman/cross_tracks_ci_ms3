@@ -485,9 +485,42 @@ The primary languages used throughout the development of this project are:
 
 * [SendInBlue](https://www.sendinblue.com/) - The STMP service SendInBlue is in conjunction with Flask-Mail, to handle emails sent through the website's Contact form, and Reset Password modal.
 
+## Application Structure
+
+From the outset of the project, the application was developed following the Flask Factory pattern, in an effort to adhere to seperation of concerns, and to
+minimise bugs and circular import errors. The factory structure is as follows:
+
+* `config.py` - Contains a 'Config' class that sets the Flask configuration variables supplied from `env.py`
+* `__init__.py` - Creates instance of the Flask app, with configuration from config.py. Also handles instantiation/initialisition of PyMongo, Flask Mail, BluePrints and Error Page handlers.
+                  Also contains error handler views, serving 404 and 500 pages.
+* `run.py` - Runs the application instantiated in `__init__.py` file.
+
+The `application` folder contains all classes, views, static files and templates concerning the project, along with the `config.py` and `__init__.py` files.
+
+The structure of the `application` folder is such that it handles the three main objects which comprise of the website, which are grouped into three sub-folders:
+
+* `users`
+* `tracks`
+* `comments`
+
+Each of these sub-folders contain an `__init__.py` and `classes.py` file, as well as  a `views.py` file (except for the `comments` sub-folder). Each `classes.py` contains a Class representing a 'Track', 'User' and 'Comment' object, 
+each containing instance and static methods concerned with creating, reading, updating and deleting documents to the relevant collections in the MongoDB database.
+
+The `User` class also handles form validation for registering, login, and file upload (for profile images).
+
+Each `views.py` file handles the templating of the data handled in the `classes.py` files, to be served to the browser through HTML and Jinja.
+
+There are three additional sub-folders:
+
+* `main` - contains an `__init.py__` and `views.py` folder. Serves the home and contact pages, as well as handling email dispatch from the contact page's contact form.
+* `admin` - also containing only an `__init__.py` and `views.py` folder. Handles the pages to Manage Genres and Manage Tracks.
+* `helpers` - contains an `__init__.py` and `users.py` folder. Handles only one function which calculates the user's age from their date-of-birth.
+
 ## Testing
 
 Testing information can be found in a seperate [TESTING.md](TESTING.md) file.
+
+
 
 
 
