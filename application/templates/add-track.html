@@ -7,11 +7,13 @@
 {% block content %}
 <section>
     <div class="add-track-body">
+        <!-- Add Track Header -->
         <div id="add-track-header">
             <h1>Add Your Track</h1>
         </div>
         <hr class="block-divider hide-on-med-and-up">
         <div>
+            <!-- Add Track Form -->
             <div class="row add-track-container">
                 <div class="col s12 l6 add-track-form-wrapper">
                     <form action="{{url_for('tracks.add_track', username=session['user'])}}" method="POST" class="add-track-form card-panel z-depth-5">
@@ -29,8 +31,9 @@
                                 <label for="album_name">Album</label>
                             </div>
                             <div class="input-field col s12 m6">
-                                <select name="genre" id="genre" required>
-                                <option>Choose a Genre:</option>
+                                <select name="genre" id="genre">
+                                <!-- Value '' avoids genre name defaulting to 'Choose a Genre:' if no value is selected -->
+                                <option value="">Choose a Genre:</option>
                                 {% for genre in genres %}
                                     <option value="{{genre.genre_name}}">{{genre.genre_name}}</option>
                                 {% endfor %}
@@ -53,6 +56,7 @@
                         </div>
                     </form>
                 </div>
+                <!-- Vector Graphic -->
                 <div class="col m12 l6 hide-on-med-and-down">
                     <figure>
                         <img src="{{url_for('static', filename='images/contact-vector.png')}}" alt="Hero image for Add-Track page">
