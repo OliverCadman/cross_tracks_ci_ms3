@@ -276,13 +276,11 @@
                   <a
                     href="#edit_track_modal_{{track._id}}"
                     class="btn modal-trigger"
-                    name="mobile-track-edit-button"
                     ><i class="fas fa-edit card-btn"></i
                   ></a>
                   <a
                     href="#delete_track_modal_{{track._id}}"
                     class="btn modal-trigger"
-                    name="mobile-track-delete-button"
                     ><i class="fas fa-trash-alt card-btn"></i
                   ></a>
                   {% endif %}
@@ -341,6 +339,7 @@
                       />
                       {% endif %}
                     </div>
+                    <!-- Track Details -->
                     <div class="col s12 m6">
                       <div class="track-info-modal-details">
                         <p>
@@ -360,7 +359,6 @@
                           {{track.year_of_release}}
                         </p>
                       </div>
-
                       <!-- Comment Form -->
                       {% if session.user %}
                       <form
@@ -542,21 +540,13 @@
               </div>
             </div>
             <!-- Track Edit Modal -->
-            <div
-              class="modal edit-track-modal"
-              id="edit_track_modal_{{track._id}}"
-            >
-              <i
-                class="fas fa-times-circle modal-close close-modal-icon"
-                data-group="close-modal"
-              ></i>
+            <div class="modal edit-track-modal" id="edit_track_modal_{{track._id}}">
+              <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
               <div class="row">
                 <div class="col s12">
-                  <form
-                    action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
-                    method="POST"
-                    class="edit-track-form"
-                  >
+                  <h5 class="edit-track-header">Edit Your Track</h5>
+                  <form action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
+                    method="POST" class="edit-track-form">
                     <div class="row">
                       <div class="input-field col s12 m6">
                         <input
@@ -566,9 +556,7 @@
                           id="track_name_{{loop.index}}"
                           required
                         />
-                        <label for="track_name_{{loop.index}}"
-                          >Track Name</label
-                        >
+                        <label for="track_name_{{loop.index}}">Track Name</label>
                       </div>
                       <div class="input-field col s12 m6">
                         <input
@@ -772,7 +760,7 @@
             </div>
             <div class="more-info-btn">
               <a href="#track_modal_{{track._id}}" class="btn modal-trigger"
-                ><i class="fas fa-info-circle"><i class="fas fa-comment"></i></i
+                ><i class="fas fa-info-circle"></i
               ></a>
               {% if username == session["user"] %}
               <a
@@ -780,6 +768,8 @@
                 class="btn modal-trigger"
                 ><i class="fas fa-edit card-btn"></i
               ></a>
+               <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                   class="fas fa-trash-alt card-btn"></i></a>
               {% endif %}
             </div>
           </div>
@@ -937,23 +927,26 @@
                     />
                     {% endif %}
                   </div>
+                  <!-- Track Details -->
                   <div class="col s12 m6">
-                    <p>
-                      <span class="track-modal-info">Artist:</span>
-                      {{track.artist_name}}
-                    </p>
-                    <p>
-                      <span class="track-modal-info">Album:</span>
-                      {{track.album_name}}
-                    </p>
-                    <p>
-                      <span class="track-modal-info">Genre:</span>
-                      {{track.genre}}
-                    </p>
-                    <p>
-                      <span class="track-modal-info">Year of Release:</span>
-                      {{track.year_of_release}}
-                    </p>
+                    <div class="track-info-modal-details">
+                      <p>
+                        <span class="track-modal-info">Artist:</span>
+                        {{track.artist_name}}
+                      </p>
+                      <p>
+                        <span class="track-modal-info">Album:</span>
+                        {{track.album_name}}
+                      </p>
+                      <p>
+                        <span class="track-modal-info">Genre:</span>
+                        {{track.genre}}
+                      </p>
+                      <p>
+                        <span class="track-modal-info">Year of Release:</span>
+                        {{track.year_of_release}}
+                      </p>
+                    </div>
 
                     <!-- Comment Form -->
                     {% if session.user %}
@@ -1138,6 +1131,7 @@
             ></i>
             <div class="row">
               <div class="col s12">
+                <h5 class="edit-track-header">Edit Your Track</h5>
                 <form
                   action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
                   method="POST"
@@ -1407,7 +1401,7 @@
     });
 
     // Avoids duplicate results when search input field is being filled, and results predicted
-    // https://barker.codes/blog/how-to-empty-an-element-in-vanilla-js/
+    // https://stackoverflow.com/questions/27108725/ajax-jquery-live-search-is-duplicating-the-output-results
     function empty(element) {
       let children = Array.prototype.slice.call(element.childNodes);
 
