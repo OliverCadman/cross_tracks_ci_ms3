@@ -4,6 +4,72 @@
 
 ## Table of Contents
 
+* [Testing](#Testing)
+    * [Markup Validation](#Markup-Validation)
+        * [HTML](#HTML)
+            * [Issues](#HTML-Issues)
+        * [CSS](#CSS)
+        * [CSS-Issues](#CSS-Issues)
+    * [Python PEP8 Compliancy](#Python-PEP8-Compliancy)
+    * [JSHint Validation](#JSHint-Validation)
+        * [JSHint Issues](#JSHint-Issues)
+            * [Undefined/Unused Variables](#Undefined/Unused-Variables)
+    * [Paths through the Website](#Paths-through-the-Website)
+        * [Browsing](#Browsing)
+        * [Registration](#Registration)
+    * [Testing User Stories from UX Section of README.md](#Testing-User-Stories-from-UX-Section-of-README.md)
+        * [New Visitors](#New-Visitors)
+        * [Returning-Visitors](#Returning-Visitors)
+        * [Musicians](#Musicians)
+    * [Manual Testing of Features on all Pages](#Manual-Testing-of-features-on-all-pages)
+        * [Home Page](#Home-Page)
+        * [Register Page](#Register-Page)
+        * [Build Profile Page](#Build-Profile-Page)
+        * [Profile Page](#Profile-Page)
+        * [Browse Tracks Page](#Browse-Tracks-Page)
+        * [Add a Track Page](#Add-a-Track-Page)
+        * [Login Page](#Login-Page)
+        * [Contact Page](#Contact-Page)
+        * [404 Page](#404-Page)
+        * [500 Page](#500-Page)
+        * [Admin Pages](#Admin-Pages)
+            * [Manage Tracks Page](#Manage-Tracks-Page)
+            * [Manage Genres Page](#Manage-Genres-Page)
+    * [Lighthouse Testing](#Lighthouse-Testing)
+        * [Home Page Results](#Home-Page-Results)
+        * [Register Page Results](#Register-Page-Results)
+        * [Build Profile Results](#Build-Profile-Page-Results)
+        * [Profile Results](#Profile-Page-Results)
+        * [Browse Tracks Results](#Browse-Tracks-Page-Results)
+        * [Add a Track Results](#Add-a-Track-Page-Results)
+        * [Contact Results](#Contact-Page-Results)
+        * [Manage Tracks Page Results](#Manage-Tracks-Page-Results)
+        * [Manage Genres Page Results](#Manage-Genres-Page-Results)
+        * [Issues](#Issues)
+            * [Accessibility Errors](#Accessibility-Errors)
+            * [Background/Foreground ratio of Nav-Links](#Background/Foreground-ratio-of-Nav-Links)
+            * [Best Practice Issues](#Best-Practice-Issues)
+        * [Known Bugs](#Known-Bugs)
+            * [Fixed Bugs](#Fixed-Bugs)
+                * [Unintended Password Change when 'liking' a track](#Unintended-Password-Change-when-'liking'-a-track)
+                * [Search Window, Duplicate Results](#Search-Window,-Duplicate-Results)
+                * [MaterializeCSS](#MaterializeCSS)
+                    * [Card Images](#Card-Images)
+                    * [Card Heights](#Card-Heights)
+            * [Unfixed Bugs](#Unfixed-Bugs)
+                * ['Browse Tracks' page on Firefox (laptop screen size)](#'Browse-Tracks'-page-on-Firefox-(laptop-screen-size))
+                [Jinja URL encoding](#Jinja-URL-Encoding)
+                * [JSON Web Tokens - Password Reset](#JSON-Web-Tokens---Password-Reset)
+                * [Pagination/Search Results](#Pagination/Search-Results)
+    * [Further Testing](#Further-Testing)
+
+            
+            
+
+
+
+
+
 ## Testing 
 
 ### Markup Validation
@@ -15,7 +81,7 @@ The [W3C HTML Validator](https://validator.w3.org/) was used to check the validi
 All pages passed through the validator with no errors or warnings to show, apart from one error regarding the MaterializeCSS select dropdown. Details of the error are 
 outlined below.
 
-##### Issues
+##### HTML Issues
 
 There is one persistent error being thrown by the W3C HTML Validator, which is thrown on all pages that contain a form to add or edit tracks.
 The error reads:
@@ -32,7 +98,7 @@ to rectify this error seem quite unclear.
 
 The W3C Jigsaw validator was used to validate the website's CSS source code.
 
-##### Issues
+##### CSS Issues
 
 Some errors were thrown when using certain CSS properties on some elements of the page.
 
@@ -63,7 +129,7 @@ check if the code is PEP8 compliant. No errors or warnings are shown.
 
 The JSHint service was used to lint and validate the JavaScript source code used to develop some features of this project.
 
-#### Issues
+#### JS Hint Issues
 
 ##### Undefined/Unused Variables
 
@@ -77,13 +143,11 @@ The issues in these images pertain to the instantiation of Materialize Toasts (`
 Though these functions/variables may not be invoked in the same file as they are instantiated (and therefore interpreted as being undefined/unused),
  they are included through script tags, in HTML files that contain the the JavaScript files which use the variables/functions, and therefore define/use them.
 
-## User Stories Testing
-
-### Paths Through The Website
+## Paths Through The Website
 
 There are multiple options the user can take in navigating the website, dependent on their intentions when using the service.
 
-#### Browsing
+### Browsing
 
 Upon landing on the website's Home Page, the user is presented with a button 'Find Me A Track', which is linked to the Browse Tracks page.
 The inclusion of this button is to re-inforce the website's intention to the user, and to maximise ease-of-use. 
@@ -94,7 +158,7 @@ If the user simply wants to browse and search for tracks, the user can take this
 
 The User Profile can be reached by clicking on their profile image at the bottom of the track cards, displayed on the Browse Tracks page.
 
-#### Registration
+### Registration
 
 The Home page features options for the user to sign up. On laptop/desktop sizes, this is presented as a small message in the Home Page's Login window.
 A login window was deemed to large for the lack of real-estate on tablet and mobile screens. Therefore, a button is featured at the bottom of the page, accompanied
@@ -561,39 +625,39 @@ Manual testing was undertaken on the following browser platforms:
 
 Google Chrome’s ‘Lighthouse’ extension for its DevTools feature was used to test the website’s Performance, Accessibility, Best Practices and Search Engine Optimisation. Listed below are the latest reports from Lighthouse’s run of testing:
 
-### Home Page
+### Home Page Results
 
 ![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-index.png)
 
-### Register Page
+### Register Page Results
 
 ![Screenshot of lighthouse results for Register Page](documentation/lighthouse-screenshots/lighthouse-register.png)
 
-### Build Profile Page
+### Build Profile Page Results
 
 ![Screenshot of lighthouse results for Build Profile Page](documentation/lighthouse-screenshots/lighthouse-build-profile.png)
 
-### Profile Page
+### Profile Page Results
 
 ![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-user-profile.png)
 
-### Browse Tracks Page
+### Browse Tracks Page Results
 
 ![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-browse-tracks.png)
 
-### Add a Track Page
+### Add a Track Page Results
 
 ![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-add-track.png)
 
-### Contact Page
+### Contact Page Results
 
 ![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-contact.png)
 
-### Manage Genres Page
+### Manage Genres Page Results
 
 ![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-manage-genres.png)
 
-### Manage Tracks Page
+### Manage Tracks Page Results
 
 ![Screenshot of lighthouse results for Home Page](documentation/lighthouse-screenshots/lighthouse-manage-tracks.png)
 
@@ -618,7 +682,7 @@ Care was given to ensure that all text could be clearly seen and interpreted thr
 to discover that the text may contrast sufficiently, according to Google Lighthouse. Due to time constraints, it's difficult to re-design the website to accommodate
 for the Lighthouse score in this regard.
 
-### Best Practice Issues
+#### Best Practice Issues
 
 Lighthouse has thrown some issues concerning best practices, specifically the absence of `https` when linking JavaScript, CSS and image files. 
 It is not within the developer's scope of skills to rectify these errors at this present moment. As the developer builds on their skills, 
