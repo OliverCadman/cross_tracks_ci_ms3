@@ -668,7 +668,7 @@ and upon each input of a letter (when the genre name was near to completion), a 
 It was quickly determined that this was being caused by the database 'predicting' the outcome of the search input, and therefore returning
 the result before the genre name had been completed.
 
-Research was made into how to overcome this issue, and a post on [Stack Overflow](https://stackoverflow.com/questions/27108725/ajax-jquery-live-search-is-duplicating-the-output-results)
+Research was made into how to overcome this issue, and [this article](https://barker.codes/blog/how-to-empty-an-element-in-vanilla-js/) was found.
 was found:
 
 ```
@@ -716,6 +716,14 @@ To rectify this, the horizontal cards were given an explicit height through cust
 
 A number of issues were encountered when using Javascript to communicate to Flask, using the `url_for()` method.
 
+The developer used AJAX for their search functionality, enabling the user to get instant results when searching for a track.
+However, when an attempt was made to put the JavaScript code in a seperate file, it was discovered that the 'POST' request for the search
+was returning a 500 (internal server) error. It was quickly discovered that the reason behind this was due to the URL being encoded between
+JavaScript and Jinja, resulting in Flask not being able to interpret the URL string, and thus throwing the error. Research was made into how
+to decode the URL before Jinja interpretation, such as the `decodeURI` or `decodeURIComponent` methods. However, these efforts didn't achieve any
+results. Unfortunately, until the developer's skill set is such that this bug can be squashed, the JavaScript for this functionality needed to be 
+added inline, within script tags at the bottom of the `browse-tracks.html` file.
+
 With regards to the results found in the search window, it was the developers intention to maintain the same functionality featured on the search
 result cards, as are on the main 'Browse Tracks' page. The anchor tag to 'like' a track uses this href:
 
@@ -729,6 +737,7 @@ when adding this url to the anchor tag within template literals, this resulted i
 Flask/Jinja was unable to decode and interpret this URL string, and would throw a 500 error. Much research was made to find a way
 to avoid the URL being encoded, such as adding the `| safe ` attribute following the URL itself. However, this didn't result in rectifying
 the issue. Unfortunately, the developer had to remove the icon to 'like' a track from the cards displayed in search results.
+
 
 #### JSON Web Tokens - Password Reset
 
