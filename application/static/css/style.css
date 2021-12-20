@@ -291,10 +291,11 @@ nav li a {
 }
 
 .profile-image {
-    width: 100%;
+    width: 90px;
+    height: 90px;
     border: 2px solid #222222;
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .is-artist-wrapper {
@@ -564,11 +565,12 @@ nav li a {
     padding: 30px 0;
     text-align: center;
     font-size: 2.8rem;
+    margin: 2.3733333333rem 0 1.424rem 0;
 }
 
 .track-container {
     background: #ddd;
-    min-height: 500px;
+    min-height: 600px;
 }
 
 .likes-count-profile {
@@ -1996,10 +1998,6 @@ li.page-item.active .page-link {
         border-right: 8px solid #B8B5BF;
     }
 
-    .profile-image {
-        width: 100%;
-    }
-
     .is-artist-wrapper {
         bottom: -25px;
         right: -50px;
@@ -2753,7 +2751,7 @@ li.page-item.active .page-link {
 
     .register-page-container,
     .login-page-container {
-        height: 84vh;
+        min-height: 79vh;
         justify-content: center;
     }
 
@@ -2764,6 +2762,12 @@ li.page-item.active .page-link {
     /* ----- Manage Genres/Manage Tracks ----- */
 
     .manage-genre-container {
+        min-height: 79vh;
+    }
+
+    /* ----- Contact Page ----- */
+
+    .contact-body {
         min-height: 79vh;
     }
 }
@@ -2781,6 +2785,7 @@ li.page-item.active .page-link {
     }
 
 }
+
 /* iPhone 5 Devices */
 
 @media only screen and (min-width: 320px) and (max-width: 320px) {
@@ -2809,10 +2814,6 @@ li.page-item.active .page-link {
 
     .profile-image-wrapper {
         margin: 10px 0;
-    }
-
-    .profile-image {
-        width: 100px;
     }
 
     .username-wrapper h1 {
