@@ -616,6 +616,7 @@ nav li a {
 
 .delete-track-modal {
     background-color: #F1EDE6;
+    border-radius: 20px;
 }
 
 .confirm-delete-message {
@@ -841,6 +842,11 @@ li.page-item.active .page-link {
 }
 
 /* Track Cards */
+
+.card.horizontal
+.card-image img {
+    width: inherit;
+}
 
 .card {
     background: #5d6ca7;
@@ -1117,6 +1123,7 @@ li.page-item.active .page-link {
     padding: 0 1rem;
     margin-bottom: .25rem;
     padding-bottom: 1rem;
+    border-radius: 10px;
 }
 
 .submit-comment-btn button {
@@ -1148,6 +1155,12 @@ li.page-item.active .page-link {
 .edit-track-modal {
     background-color: #d8d8d8;
     border-radius: 14px;
+}
+
+.edit-track-header {
+    font-family: "Alata", sans-serif;
+    text-align: center;
+    font-size: 2rem;
 }
 
 .edit-track-modal button {
@@ -1658,6 +1671,7 @@ li.page-item.active .page-link {
         font-size: 2rem;
     }
 
+    /* Shared background for all pages */
     .login-page-container,
     .register-page-container,
     .build-profile-container,
@@ -2104,6 +2118,10 @@ li.page-item.active .page-link {
 
     /* Edit Track Modal */
 
+    .edit-track-header {
+        font-size: 2rem;
+    }
+
     .edit-track-modal .submit-btn {
         display: flex;
         justify-content: center;
@@ -2243,10 +2261,15 @@ li.page-item.active .page-link {
         min-height: 80vh;
     }
 
+    .manage-genre-container h1 {
+        font-size: 4rem;
+    }
+
     /* ----- Manage Tracks Page ----- */
 
     .manage-track-container h1 {
         font-size: 4rem;
+        margin-left: 2rem;
     }
 
 
@@ -2382,6 +2405,16 @@ li.page-item.active .page-link {
 
     .track-image {
         width: 132px;
+    }
+
+    /* Delete Track Modal Buttons */
+
+    .delete-track-btn:hover {
+        background-color: #3c4c8b;
+    }
+
+    .cancel-delete-btn:hover {
+        background-color: rgb(255, 232, 158);
     }
 
     /* ------ Add A Track Page ------ */
