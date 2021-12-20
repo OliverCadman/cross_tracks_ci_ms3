@@ -1352,6 +1352,8 @@ li.page-item.active .page-link {
     background-color: #3c4c8b;
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
+    margin-bottom: 1.5rem;
+    margin-left: 2.5rem;
 }
 
 #reset-password-modal p {
