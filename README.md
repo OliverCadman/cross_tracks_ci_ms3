@@ -623,6 +623,34 @@ The code can be found here, on lines 55 and 63:
 
 https://github.com/Edb83/self-isolution/blob/master/app.py
 
+### Text Content
+
+All text content throughout the website was created by the developer (apart from any text content pulled from the database, of course).
+
+### Images
+
+#### Cross//Tracks Logo
+
+The website's logo was created by the developer, via a module from this course, provided by Bruno Imbrizi with Domestika:
+
+[Creative Coding - Making Visuals with JavaScript](https://www.domestika.org/en/courses/2729-creative-coding-making-visuals-with-javascript)
+
+#### Page Background/Section Header Background
+
+The background used throughout the pages of the website, as well as section headers, were licensed from [vecteezy](https://www.vecteezy.com/)
+
+#### Vector Graphics
+
+The vector graphics used in the website's Home, Login, Register, User Profile and Contact Pages were licensed from [shutterstock](https://www.shutterstock.com/search/banner+background)
+
+#### Iconography
+
+All icons used throughout the website were supplied by the [FontAwesome](https://fontawesome.com/) library.
+
+
+
+
+
 
 
 
