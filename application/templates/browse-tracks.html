@@ -100,19 +100,19 @@
                   <span
                     ><a
                       href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med" name="like-button-filled"
+                      class="modal-trigger like_track_med"
                       ><i class="fas fa-star"></i></a></span
                   ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                   {% else %}
                   <span
                     ><a
                       href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med" name="like-button-outlined"
+                      class="modal-trigger like_track_med"
                       ><i class="far fa-star"></i></a></span
                   ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                   {% endif %} {% else %}
                   <span
-                    ><a href="{{url_for('users.login')}}" class="modal-trigger" name="login-redirect"
+                    ><a href="{{url_for('users.login')}}" class="modal-trigger"
                       ><i class="far fa-star"></i></a></span
                   ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                   {% endif %} {% if track.comments|length > 0 %}
@@ -169,18 +169,18 @@
                       <div class="more-info-btn">
                         <a
                           href="#track_modal_{{track._id}}"
-                          class="btn modal-trigger" name="track-information-button"
+                          class="btn modal-trigger"
                           ><i class="fas fa-info-circle card-btn"></i
                         ></a>
                         {% if username == session["user"] %}
                         <a
                           href="#edit_track_modal_{{track._id}}"
-                          class="btn modal-trigger" name="edit-track-button"
+                          class="btn modal-trigger"
                           ><i class="fas fa-edit card-btn"></i
                         ></a>
                         <a
                           href="#delete_track_modal_{{track._id}}"
-                          class="btn modal-trigger" name="delete-track-button"
+                          class="btn modal-trigger"
                           ><i class="fas fa-trash-alt card-btn"></i
                         ></a>
                         {% endif %}
@@ -216,19 +216,19 @@
               <span
                 ><a
                   href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                  class="modal-trigger like_track_mob" name="mobile-like-track-button-filled"
+                  class="modal-trigger like_track_mob"
                   ><i class="fas fa-star"></i></a></span
               ><span>{{track.likes_count if track.likes_count}}</span>
               {% else %}
               <span
                 ><a
                   href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                  class="modal-trigger like_track_mob" name="mobile-like-track-button-outlined"
+                  class="modal-trigger like_track_mob"
                   ><i class="far fa-star"></i></a></span
               ><span>{{track.likes_count if track.likes_count}}</span>
               {% endif %} {% else %}
               <span
-                ><a href="{{url_for('users.login')}}" class="modal-trigger" name="mobile-login-redirect"
+                ><a href="{{url_for('users.login')}}" class="modal-trigger"
                   ><i class="far fa-star"></i></a></span
               ><span>{{track.likes_count if track.likes_count}}</span>
               {% endif %} {% if track.comments|length > 0 %}
@@ -257,7 +257,7 @@
                   </a>
                   {% else %}
                   <a
-                    href="{{url_for('users.user_profile', username=username)}}" name="link-to-user-profile-from-mobile-card"
+                    href="{{url_for('users.user_profile', username=username)}}"
                   >
                     <img
                       src="{{url_for('static', filename='images/default-user-image.png')}}"
@@ -269,7 +269,6 @@
                 </p>
                 <div class="more-info-btn">
                   <a href="#track_modal_{{track._id}}" class="btn modal-trigger"
-                  name="mobile-track-information-button"
                     ><i class="fas fa-info-circle card-btn"></i
                   ></a>
                   {% if username == session["user"] %}
@@ -791,7 +790,7 @@
                 <span
                   ><a
                     href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                    class="modal-trigger like_track_med" name="like-track-button-outlined"
+                    class="modal-trigger like_track_med"
                     ><i class="far fa-star"></i></a></span
                 ><span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
                 {% endif %} {% else %}
