@@ -970,10 +970,11 @@ li.page-item.active .page-link {
     font-family: 'Alata', sans-serif;
 }
 
-.modal-body p {
+.track-info-modal-details p {
     font-family: 'Quicksand', sans-serif;
     color: #eee;
     font-weight: 600;
+    font-size: 1.35rem;
 }
 
 .modal-user-details {
@@ -999,7 +1000,7 @@ li.page-item.active .page-link {
 }
 
 .track-modal-header {
-    font-size: 1.4rem;
+    font-size: 1.75rem;
     color: #eee;
     font-family: 'Alata', sans-serif;
     font-weight: bold;
@@ -1621,7 +1622,7 @@ li.page-item.active .page-link {
 
     .block-divider-home {
         width: 50%;
-        border-top: 5px solid #DDD;
+        border: 5px solid #DDD;
     }
 
     .sidenav {
@@ -1988,12 +1989,6 @@ li.page-item.active .page-link {
 
     /* ------ User Profile ------ */
 
-    .my-tracks-header-wrapper h5,
-    .liked-tracks-header-wrapper h5 {
-        font-size: 3rem;
-    }
-
-
     .profile-image-email {
         border-right: 8px solid #B8B5BF;
     }
@@ -2012,13 +2007,14 @@ li.page-item.active .page-link {
         font-size: 1.5rem;
     }
 
-    /* 'My Tracks' cards */
-    /* 
-     .user-tracks-section-bg {
-         background: url("../images/home-login-bg.jpg") no-repeat;
-         background-size: cover;
-         background-position: center;
-     } */
+    .my-tracks-header-wrapper h5,
+    .liked-tracks-header-wrapper h5 {
+        font-size: 3rem;
+    }
+
+    .track-modal-header {
+        font-size: 2.5rem;
+    }
 
     /* User's Liked Tracks Section */
 
