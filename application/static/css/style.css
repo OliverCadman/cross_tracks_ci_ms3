@@ -2733,6 +2733,15 @@ li.page-item.active .page-link {
 /* Large Desktop devices */
 @media only screen and (min-width: 1600px) {
 
+    /* ----- Home Page ----- */
+
+    /* Background hero image positioning */
+    .hero-section {
+        background-position: 50% 35%;
+    }
+
+    /* ----- Register/Login Pages ----- */
+
     .register-page-container {
         display: flex;
     }
