@@ -4,35 +4,32 @@
 <meta name="keywords" content="Cross//Tracks, browse tracks, like, comment, latest tracks, all tracks">
 <meta name="author" content="Oliver Cadman">
 {% endblock %}
- {% block content %}
- <!-- Links to Search, Add a Track, and User Profile-->
+{% block content %}
+<!-- Links to Search, Add a Track, and User Profile-->
 <div class="row">
-    <div class="col s12 user-option-list top-level-background">
-      <ul>
-        <li>
-          <i
-            class="fas fa-search user-option-icon search-bar-icon"
-            id="search-bar-icon"
-          ></i>
-          <p class="user-option hide-on-small-only">Search Tracks</p>
-        </li>
-        {% if session.user %}
-        <li>
-          <a href="{{url_for('tracks.add_track', username=session['user'])}}"
-            ><i class="fas fa-plus-square user-option-icon"></i>
-            <p class="user-option hide-on-small-only">Add Your Tracks</p>
-          </a>
-        </li>
-        <li>
-          <a href="{{url_for('users.user_profile', username=session['user'])}}"
-            ><i class="fas fa-user-circle user-option-icon"></i>
-            <p class="user-option hide-on-small-only">Your Profile</p>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
+  <div class="col s12 user-option-list top-level-background">
+    <ul>
+      <li>
+        <i class="fas fa-search user-option-icon search-bar-icon" id="search-bar-icon"></i>
+        <p class="user-option hide-on-small-only">Search Tracks</p>
+      </li>
+      {% if session.user %}
+      <li>
+        <a href="{{url_for('tracks.add_track', username=session['user'])}}"><i
+            class="fas fa-plus-square user-option-icon"></i>
+          <p class="user-option hide-on-small-only">Add Your Tracks</p>
+        </a>
+      </li>
+      <li>
+        <a href="{{url_for('users.user_profile', username=session['user'])}}"><i
+            class="fas fa-user-circle user-option-icon"></i>
+          <p class="user-option hide-on-small-only">Your Profile</p>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
   </div>
+</div>
 <div class="browse-background">
   <div id="opaque-overlay"></div>
   <!-- Search Bar with form input and results wrapper -->
@@ -41,28 +38,16 @@
       <div class="row">
         <div class="col s12">
           <span>
-            <i
-              class="fas fa-times-circle close-modal-icon"
-              id="close-search-wrapper"
-            ></i>
+            <i class="fas fa-times-circle close-modal-icon" id="close-search-wrapper"></i>
           </span>
         </div>
       </div>
       <div class="row">
         <div class="col s12">
-          <form
-            action="{{url_for('tracks.search_track')}}"
-            method="POST"
-            id="search-tracks-form"
-          >
+          <form action="{{url_for('tracks.search_track')}}" method="POST" id="search-tracks-form">
             <div class="input-field">
-              <input
-                type="text"
-                name="search_input"
-                id="search_input"
-                class="search-input-mobile"
-                oninput="searchTracks()"
-              />
+              <input type="text" name="search_input" id="search_input" class="search-input-mobile"
+                oninput="searchTracks()" />
               <label for="search_input">Search by Genre or Username</label>
             </div>
           </form>
@@ -87,31 +72,31 @@
       <div id="all-tracks-container">
         <div id="track-results">
           {% if all_tracks_list %}
-           {% for track in all_tracks_list %}
-            {% set username = track['user'][0]['username'] %}
-          <!-- Track Cards (Tablet Devices and Up)-->
-          <div class="col m6 l4 hide-on-small-only track-card">
+          {% for track in all_tracks_list %}
+          {% set username = track['user'][0]['username'] %}
+
+          <div class="col m12 l6 hide-on-small-only track-card">
             <div class="card horizontal z-depth-5">
               <div class="card-stacked">
                 <div class="card-content">
                   <span class="track-name card-title no-wordbreak">{{track.track_name}}</span>
                   {% if session.user %} {% if session.user in track.likes %}
-                  <span><a
-                      href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"><i class="fas fa-star"></i></a></span>
-                      <span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                  <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                      class="modal-trigger like_track_med"><i class="fas fa-star like-comment-icons"></i></a></span>
+                  <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                   {% else %}
-                  <span><a
-                      href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"><i class="far fa-star"></i></a></span>
-                      <span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                  <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                      class="modal-trigger like_track_med"><i class="far fa-star like-comment-icons"></i></a></span>
+                  <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                   {% endif %}
                   {% else %}
-                    <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i class="far fa-star"></i></a></span>
-                    <span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                  <span><a href="{{url_for('users.login')}}" class="modal-trigger like-comment-icons"><i
+                        class="far fa-star"></i></a></span>
+                  <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                   {% endif %}
                   {% if track.comments|length > 0 %}
-                    <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
+                  <span class="comment-count"><i
+                      class="fas fa-comment like-comment-icons"></i>&nbsp;{{track.comments|length}}</span>
                   {% endif %}
                   <div class="card-information-wrapper">
                     <div class="track-card-information">
@@ -119,55 +104,37 @@
                       <p class="album-name">{{track.album_name}}</p>
                       <div class="card-image-wrapper">
                         {% if not track.image_url == '' %}
-                        <img
-                          src="{{track.image_url}}"
-                          alt="Image of Cover Art for Track"
-                          class="track-image"
-                        />
+                        <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image" />
                         {% else %}
-                        <img
-                          src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                          alt="Image of Cover Art for Track"
-                          class="track-image"
-                        />
+                        <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                          alt="Image of Cover Art for Track" class="track-image" />
                         {% endif %}
                       </div>
                     </div>
                     <div class="card-action">
-                      <p>
-                        <small>Added by:</small> {{username}} {% if
+                      <p class="addedby-username">
+                        <small class="addedby-small">Added by:</small> {{username}} {% if
                         track['user'][0]['profile_image'] %}
                         <a href="{{url_for('users.user_profile', username=username)}}">
                           <img
                             src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                            alt="User profile image"
-                            class="user-image-card"
-                          />
+                            alt="User profile image" class="user-image-card" />
                         </a>
                         {% else %}
                         <a href="{{url_for('users.user_profile', username=username)}}">
-                          <img
-                            src="{{url_for('static', filename='images/default-user-image.png')}}"
-                            alt="User profile image"
-                            class="user-image-card"
-                          />
+                          <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                            alt="User profile image" class="user-image-card" />
                         </a>
                         {% endif %}
                       </p>
                       <div class="more-info-btn">
-                        <a
-                          href="#track_modal_{{track._id}}"
-                          class="btn modal-trigger"
-                          ><i class="fas fa-info-circle card-btn"></i></a>
+                        <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
+                            class="fas fa-info-circle card-btn"></i></a>
                         {% if username == session["user"] %}
-                        <a
-                          href="#edit_track_modal_{{track._id}}"
-                          class="btn modal-trigger"
-                          ><i class="fas fa-edit card-btn"></i></a>
-                        <a
-                          href="#delete_track_modal_{{track._id}}"
-                          class="btn modal-trigger"
-                          ><i class="fas fa-trash-alt card-btn"></i></a>
+                        <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                            class="fas fa-edit card-btn"></i></a>
+                        <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                            class="fas fa-trash-alt card-btn"></i></a>
                         {% endif %}
                       </div>
                     </div>
@@ -176,43 +143,31 @@
               </div>
             </div>
           </div>
-          <!-- Track Cards (Mobile Devices Only)-->
           <div class="col s12 hide-on-med-and-up">
             <div class="card z-depth-4">
               <div class="card-image">
                 {% if not track.image_url == '' %}
-                <img
-                  src="{{track.image_url}}"
-                  alt="Image of Cover Art for Track"
-                  class="track-image-mobile"
-                />
+                <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image-mobile" />
                 {% else %}
-                <img
-                  src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                  alt="Image of Cover Art for Track"
-                  class="track-image-mobile"
-                />
+                <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                  alt="Image of Cover Art for Track" class="track-image-mobile" />
                 {% endif %}
               </div>
               <div class="card-title">
                 <span>{{track.track_name}}</span>
               </div>
               {% if session.user %} {% if session.user in track.likes %}
-              <span><a
-                  href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                  class="modal-trigger like_track_mob"
-                  ><i class="fas fa-star"></i></a></span>
-                  <span>{{track.likes_count if track.likes_count}}</span>
+              <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                  class="modal-trigger like_track_mob"><i class="fas fa-star"></i></a></span>
+              <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
               {% else %}
-              <span><a
-                  href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                  class="modal-trigger like_track_mob"
-                  ><i class="far fa-star"></i></a></span>
-                  <span>{{track.likes_count if track.likes_count}}</span>
+              <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                  class="modal-trigger like_track_mob"><i class="far fa-star"></i></a></span>
+              <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
               {% endif %} {% else %}
               <span><a href="{{url_for('users.login')}}" class="modal-trigger">
-                <i class="far fa-star"></i></a></span>
-                <span>{{track.likes_count if track.likes_count}}</span>
+                  <i class="far fa-star"></i></a></span>
+              <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
               {% endif %}
               {% if track.comments|length > 0 %}
               <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
@@ -227,19 +182,13 @@
                   <small>Added by:</small> {{username}} {% if
                   track['user'][0]['profile_image'] %}
                   <a href="{{url_for('users.user_profile', username=username)}}">
-                    <img
-                      src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                      alt="User profile image"
-                      class="user-image-card"
-                    />
+                    <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                      alt="User profile image" class="user-image-card" />
                   </a>
                   {% else %}
                   <a href="{{url_for('users.user_profile', username=username)}}">
-                    <img
-                      src="{{url_for('static', filename='images/default-user-image.png')}}"
-                      alt="User profile image"
-                      class="user-image-card"
-                    />
+                    <img src="{{url_for('static', filename='images/default-user-image.png')}}" alt="User profile image"
+                      class="user-image-card" />
                   </a>
                   {% endif %}
                 </p>
@@ -247,15 +196,11 @@
                   <a href="#track_modal_{{track._id}}" class="btn modal-trigger">
                     <i class="fas fa-info-circle card-btn"></i></a>
                   {% if username == session["user"] %}
-                  <a
-                    href="#edit_track_modal_{{track._id}}"
-                    class="btn modal-trigger"
-                    ><i class="fas fa-edit card-btn"></i>
+                  <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                      class="fas fa-edit card-btn"></i>
                   </a>
-                  <a
-                    href="#delete_track_modal_{{track._id}}"
-                    class="btn modal-trigger"
-                    ><i class="fas fa-trash-alt card-btn"></i>
+                  <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                      class="fas fa-trash-alt card-btn"></i>
                   </a>
                   {% endif %}
                 </div>
@@ -275,17 +220,12 @@
                       <a href="{{url_for('users.user_profile', username=username)}}">
                         <img
                           src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                          alt="User profile image"
-                          class="user-image-card"
-                        />
+                          alt="User profile image" class="user-image-card" />
                       </a>
                       {% else %}
                       <a href="{{url_for('users.user_profile', username=username)}}">
-                        <img
-                          src="{{url_for('static', filename='images/default-user-image.png')}}"
-                          alt="User profile image"
-                          class="user-image-card"
-                        />
+                        <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                          alt="User profile image" class="user-image-card" />
                       </a>
                       {% endif %}
                     </div>
@@ -296,17 +236,10 @@
                     <div class="col s12 m6 album-cover-modal">
                       <h4 class="track-modal-header">{{track.track_name}}</h4>
                       {% if not track.image_url == '' %}
-                      <img
-                        src="{{track.image_url}}"
-                        alt="Image of Cover Art for Track"
-                        class="album-cover"
-                      />
+                      <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover" />
                       {% else %}
-                      <img
-                        src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                        alt="Image of Cover Art for Track"
-                        class="album-cover"
-                      />
+                      <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                        alt="Image of Cover Art for Track" class="album-cover" />
                       {% endif %}
                     </div>
                     <!-- Track Details -->
@@ -331,18 +264,10 @@
                       </div>
                       <!-- Comment Form -->
                       {% if session.user %}
-                      <form
-                        action="{{url_for('comments.add_comment', track_id=track._id, username=session['user'])}}"
-                        method="POST"
-                        class="submit-comment-form"
-                      >
-                        <textarea
-                          rows="2"
-                          cols="10"
-                          name="comment_body"
-                          id="comment_body_{{loop.index}}"
-                          class="materialize-textarea"
-                        ></textarea>
+                      <form action="{{url_for('comments.add_comment', track_id=track._id, username=session['user'])}}"
+                        method="POST" class="submit-comment-form">
+                        <textarea rows="2" cols="10" name="comment_body" id="comment_body_{{loop.index}}"
+                          class="materialize-textarea"></textarea>
                         <label for="comment_body_{{loop.index}}">Leave a comment:</label>
                         <div class="submit-comment-btn">
                           <button type="submit" class="btn right-align">
@@ -350,7 +275,7 @@
                           </button>
                         </div>
                       </form>
-                      {% endif %} 
+                      {% endif %}
                       <!-- Comments (Tablet Devices and Up) -->
                       {% if track["comments"] %}
                       <div class="comments-container hide-on-small-only">
@@ -370,45 +295,31 @@
                                       btn
                                       edit-delete-comment-btn
                                       remove-comment-btn
-                                    "
-                                    ><i class="fas fa-trash-alt"></i></a>
+                                    "><i class="fas fa-trash-alt"></i></a>
                                 </span>
                                 {% endif %}
                               </p>
                               <div class="comment-details">
                                 <p class="comment-author">
                                   <a href="{{url_for('users.user_profile', username=comment_object['author'])}}">
-                                      <small>{{comment_object["author"]}}</small>
+                                    <small>{{comment_object["author"]}}</small>
                                   </a>
                                 </p>
-                                <span class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M%Y-%m-%d')}}</small></span>
+                                <span
+                                  class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M%Y-%m-%d')}}</small></span>
                               </div>
                             </div>
                             {% if comment_object["author"] == session.user %}
-                            <form
-                              action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
-                              method="POST"
-                              class="comment-edit-form"
-                            >
+                            <form action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
+                              method="POST" class="comment-edit-form">
                               <div class="input-field">
-                                <input
-                                  type="text"
-                                  value="{{comment_object['comment']}}"
-                                  name="edit_comment"
-                                  class="edit-comment-input"
-                                  id="edit_comment_{{loop.index}}"
-                                />
+                                <input type="text" value="{{comment_object['comment']}}" name="edit_comment"
+                                  class="edit-comment-input" id="edit_comment_{{loop.index}}" />
                                 <label for="edit_comment_{{loop.index}}">Leave a comment:</label>
-                                <button
-                                  type="submit"
-                                  class="btn submit-comment-edit"
-                                >
+                                <button type="submit" class="btn submit-comment-edit">
                                   Submit
                                 </button>
-                                <button
-                                  type="button"
-                                  class="btn cancel-comment-edit"
-                                >
+                                <button type="button" class="btn cancel-comment-edit">
                                   Cancel
                                 </button>
                               </div>
@@ -425,55 +336,38 @@
                   </div>
                   <!-- Comments (Mobile devices only)-->
                   {% for comment_object in track["comments"]%}
-                  <div class="col s12 m6 hide-on-med-and-up">
+                  <div class="col s12 hide-on-med-and-up">
                     <div class="comments-wrapper">
                       <div class="comment-content">
                         <div class="comment">
                           <p>{{comment_object["comment"]}}</p>
                           <p class="comment-author">
                             <a href="{{url_for('users.user_profile', username=comment_object['author'])}}">
-                                <small>{{comment_object["author"]}}</small>
+                              <small>{{comment_object["author"]}}</small>
                             </a>
-                            <span class="date-comment-added"
-                              ><small
-                                >{{comment_object["date_added"].strftime('%H:%M
-                                %Y-%m-%d')}}</small
-                              ></span
-                            >
+                            <span class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M
+                                %Y-%m-%d')}}</small></span>
                           </p>
                         </div>
                         {% if comment_object["author"] == session.user %}
                         <div class="edit-delete-comment-btns">
-                          <button
-                            class="btn edit-delete-comment-btn edit-comment-btn"
-                          >
+                          <button class="btn edit-delete-comment-btn edit-comment-btn">
                             <i class="fas fa-edit"></i>
                           </button>
-                          <a
-                            href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
-                            class="
+                          <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}" class="
                               btn
                               edit-delete-comment-btn
                               remove-comment-btn
-                            "
-                            ><i class="fas fa-trash-alt"></i
-                          ></a>
+                            "><i class="fas fa-trash-alt"></i></a>
                         </div>
                         {% endif %}
                       </div>
                       {% if comment_object["author"] == session.user %}
-                      <form
-                        action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
-                        method="POST"
-                        class="comment-edit-form"
-                      >
+                      <form action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
+                        method="POST" class="comment-edit-form">
                         <div class="input-field">
-                          <input
-                            type="text"
-                            value="{{comment_object['comment']}}"
-                            name="edit_comment"
-                            class="edit-comment-input"
-                          />
+                          <input type="text" value="{{comment_object['comment']}}" name="edit_comment"
+                            class="edit-comment-input" />
                           <button type="submit" class="btn submit-comment-edit">
                             Submit
                           </button>
@@ -503,33 +397,18 @@
                     method="POST" class="edit-track-form">
                     <div class="row">
                       <div class="input-field col s12 m6">
-                        <input
-                          type="text"
-                          value="{{track.track_name}}"
-                          name="track_name"
-                          id="track_name_{{loop.index}}"
-                          required
-                        />
+                        <input type="text" value="{{track.track_name}}" name="track_name" id="track_name_{{loop.index}}"
+                          required />
                         <label for="track_name_{{loop.index}}">Track Name</label>
                       </div>
                       <div class="input-field col s12 m6">
-                        <input
-                          type="text"
-                          value="{{track.artist_name}}"
-                          name="artist_name"
-                          id="artist_name_{{loop.index}}"
-                          required
-                        />
+                        <input type="text" value="{{track.artist_name}}" name="artist_name"
+                          id="artist_name_{{loop.index}}" required />
                         <label for="artist_name_{{loop.index}}">Artist</label>
                       </div>
                       <div class="input-field col s12 m6">
-                        <input
-                          type="text"
-                          value="{{track.album_name}}"
-                          name="album_name"
-                          id="album_name_{{loop.index}}"
-                          required
-                        />
+                        <input type="text" value="{{track.album_name}}" name="album_name" id="album_name_{{loop.index}}"
+                          required />
                         <label for="album_name_{{loop.index}}">Album</label>
                       </div>
                       <div class="input-field col s12 m6">
@@ -541,24 +420,12 @@
                         </select>
                       </div>
                       <div class="input-field col s12 m6">
-                        <input
-                          type="number"
-                          value="{{track.year_of_release}}"
-                          name="year_of_release"
-                          id="year_of_release_{{loop.index}}"
-                          required
-                        />
-                        <label for="year_of_release_{{loop.index}}"
-                          >Year of Release</label
-                        >
+                        <input type="number" value="{{track.year_of_release}}" name="year_of_release"
+                          id="year_of_release_{{loop.index}}" required />
+                        <label for="year_of_release_{{loop.index}}">Year of Release</label>
                       </div>
                       <div class="input-field col s12 m6">
-                        <input
-                          type="text"
-                          value="{{track.image_url}}"
-                          name="image_url"
-                          id="image_url_{{loop.index}}"
-                        />
+                        <input type="text" value="{{track.image_url}}" name="image_url" id="image_url_{{loop.index}}" />
                         <label for="image_url_{{loop.index}}">Image URL</label>
                       </div>
 
@@ -575,14 +442,8 @@
             </div>
           </aside>
           <!-- Track Delete Modal -->
-          <div
-            class="modal delete-track-modal"
-            id="delete_track_modal_{{track._id}}"
-          >
-            <i
-              class="fas fa-times-circle modal-close close-modal-icon"
-              data-group="close-modal"
-            ></i>
+          <div class="modal delete-track-modal" id="delete_track_modal_{{track._id}}">
+            <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="modal-content">
               <div class="row">
                 <div class="col s12 m6 confirm-delete-container">
@@ -591,32 +452,19 @@
                   </div>
                   <div class="confirm-delete-wrapper center-align">
                     <p>Are you sure you want to continue?</p>
-                    <a
-                      href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}"
-                      class="btn delete-track-btn"
-                      >Delete</a
-                    >
-                    <button
-                      type="button"
-                      class="btn modal-close cancel-delete-btn"
-                    >
+                    <a href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}"
+                      class="btn delete-track-btn">Delete</a>
+                    <button type="button" class="btn modal-close cancel-delete-btn">
                       Cancel
                     </button>
                   </div>
                 </div>
                 <div class="col m6 delete-track-modal-image">
                   {% if not track.image_url == '' %}
-                  <img
-                    src="{{track.image_url}}"
-                    alt="Image of Cover Art for Track"
-                    class="album-cover"
-                  />
+                  <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover" />
                   {% else %}
-                  <img
-                    src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                    alt="Image of Cover Art for Track"
-                    class="album-cover"
-                  />
+                  <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                    alt="Image of Cover Art for Track" class="album-cover" />
                   {% endif %}
                 </div>
               </div>
@@ -635,54 +483,35 @@
         <h2>Latest Tracks</h2>
       </div>
       <div class="row track-card-container">
-        {% if latest_tracks %} 
+        {% if latest_tracks %}
         {% for track in latest_tracks %}
-         {% set username = track['user'][0]['username'] %}
-         <!-- Track cards (tablet devices and up)-->
+        {% set username = track['user'][0]['username'] %}
         <div class="col s12 hide-on-med-and-up">
           <div class="card z-depth-4">
             <div class="card-image">
               {% if not track.image_url == '' %}
-              <img
-                src="{{track.image_url}}"
-                alt="Image of Cover Art for Track"
-                class="track-image-mobile"
-              />
+              <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image-mobile" />
               {% else %}
-              <img
-                src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                alt="Image of Cover Art for Track"
-                class="track-image-mobile"
-              />
+              <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                alt="Image of Cover Art for Track" class="track-image-mobile" />
               {% endif %}
             </div>
             <div class="card-title">
               <span>{{track.track_name}}</span>
             </div>
             {% if session.user %} {% if session.user in track.likes %}
-            <span
-              ><a
-                href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                class="like_track_mob"
-                ><i class="fas fa-star"></i></a></span
-            ><span class="likes-count">{{track.likes_count if track.likes_count}}</span>
+            <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                class="like_track_mob"><i class="fas fa-star"></i></a></span><span
+              class="likes-count">{{track.likes_count if track.likes_count}}</span>
             {% else %}
-            <span
-              ><a
-                href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                class="like_track_mob" 
-                ><i class="far fa-star"></i></a></span
-            ><span class="likes-count">{{track.likes_count if track.likes_count}}</span>
+            <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                class="like_track_mob"><i class="far fa-star"></i></a></span><span
+              class="likes-count">{{track.likes_count if track.likes_count}}</span>
             {% endif %} {% else %}
-            <span
-              ><a href="{{url_for('users.login')}}" class="modal-trigger"
-                ><i class="far fa-star"></i></a></span
-            ><span class="likes-count">{{track.likes_count if track.likes_count}}</span>
+            <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i class="far fa-star"></i></a></span><span
+              class="likes-count">{{track.likes_count if track.likes_count}}</span>
             {% endif %} {% if track.comments|length > 0 %}
-            <span class="comment-count"
-              ><i class="fas fa-comment"></i
-              >&nbsp;{{track.comments|length}}</span
-            >
+            <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
             {% endif %}
             <div class="card-content">
               <p class="artist-name">{{track.artist_name}}</p>
@@ -694,19 +523,13 @@
                 <small>Added by:</small> {{username}} {% if
                 track['user'][0]['profile_image'] %}
                 <a href="{{url_for('users.user_profile', username=username)}}">
-                  <img
-                    src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                    alt="User profile image"
-                    class="user-image-card"
-                  />
+                  <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                    alt="User profile image" class="user-image-card" />
                 </a>
                 {% else %}
                 <a href="{{url_for('users.user_profile', username=username)}}">
-                  <img
-                    src="{{url_for('static', filename='images/default-user-image.png')}}"
-                    alt="User profile image"
-                    class="user-image-card"
-                  />
+                  <img src="{{url_for('static', filename='images/default-user-image.png')}}" alt="User profile image"
+                    class="user-image-card" />
                 </a>
                 {% endif %}
                 {% if track["user"][0]["is_artist"] == "on" %}
@@ -715,43 +538,34 @@
               </p>
             </div>
             <div class="more-info-btn">
-              <a href="#track_modal_{{track._id}}" class="btn modal-trigger"
-                ><i class="fas fa-info-circle"></i
-              ></a>
+              <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i class="fas fa-info-circle"></i></a>
               {% if username == session["user"] %}
-              <a
-                href="#edit_track_modal_{{track._id}}"
-                class="btn modal-trigger"
-                ><i class="fas fa-edit card-btn"></i
-              ></a>
-               <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
-                   class="fas fa-trash-alt card-btn"></i></a>
+              <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                  class="fas fa-edit card-btn"></i></a>
+              <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                  class="fas fa-trash-alt card-btn"></i></a>
               {% endif %}
             </div>
           </div>
         </div>
-        <!-- Track Cards (mobile only)-->
-        <div class="col m6 l4 hide-on-small-only track-card">
+        <div class="col m12 l6 hide-on-small-only track-card">
           <div class="card horizontal z-depth-5">
             <div class="card-stacked">
               <div class="card-content">
-                <span class="card-title no-wordbreak"
-                  >{{ track.track_name }}</span>
+                <span class="card-title no-wordbreak">{{ track.track_name }}</span>
                 {% if session.user %} {% if session.user in track.likes %}
-                  <span><a
-                      href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"><i class="fas fa-star"></i></a></span>
-                    <span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
+                <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                    class="modal-trigger like_track_med"><i class="fas fa-star like-comment-icons"></i></a></span>
+                <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                 {% else %}
-                  <span><a
-                      href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"><i class="far fa-star"></i></a></span>
-                      <span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
-                {% endif %} 
+                <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                    class="modal-trigger like_track_med"><i class="far fa-star like-comment-icons"></i></a></span>
+                <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
+                {% endif %}
                 {% else %}
-                  <span><a href="{{url_for('users.login')}}"><i class="far fa-star"></i></a></span>
-                  <span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
-                {% endif %} 
+                <span><a href="{{url_for('users.login')}}"><i class="far fa-star like-comment-icons"></i></a></span>
+                <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
+                {% endif %}
                 {% if track.comments|length > 0 %}
                 <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
                 {% endif %}
@@ -761,63 +575,40 @@
                     <p class="album-name">{{track.album_name}}</p>
                     <div class="card-image-wrapper">
                       {% if not track.image_url == '' %}
-                      <img
-                        src="{{track.image_url}}"
-                        alt="Image of Cover Art for Track"
-                        class="track-image"
-                      />
+                      <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="track-image" />
                       {% else %}
-                      <img
-                        src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                        alt="Image of Cover Art for Track"
-                        class="track-image"
-                      />
+                      <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                        alt="Image of Cover Art for Track" class="track-image" />
                       {% endif %}
                     </div>
                   </div>
                   <div class="card-action">
-                    <p>
-                      <small>Added by:</small> {{username}} 
+                    <p class="addedby-username">
+                      <small class="addedby-small">Added by:</small> {{username}}
                       {% if track['user'][0]['profile_image'] %}
-                      <a
-                        href="{{url_for('users.user_profile', username=username)}}"
-                      >
+                      <a href="{{url_for('users.user_profile', username=username)}}">
                         <img
                           src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                          alt="User profile image"
-                          class="user-image-card"
-                        />
+                          alt="User profile image" class="user-image-card" />
                       </a>
                       {% else %}
                       <a href="{{url_for('users.user_profile', username=username)}}">
-                        <img
-                          src="{{url_for('static', filename='images/default-user-image.png')}}"
-                          alt="User profile image"
-                          class="user-image-card"
-                        />
+                        <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                          alt="User profile image" class="user-image-card" />
                       </a>
                       {% endif %}
                       {% if track["user"][0]["is_artist"] == "on" %}
-                        <span class="artist-status"><i class="fas fa-check-circle artist-check"></i>artist</span>
-                            {% endif %}
+                      <span class="artist-status"><i class="fas fa-check-circle artist-check"></i>artist</span>
+                      {% endif %}
                     </p>
                     <div class="more-info-btn">
-                      <a
-                        href="#track_modal_{{track._id}}"
-                        class="btn modal-trigger"
-                        ><i class="fas fa-info-circle card-btn"></i
-                      ></a>
+                      <a href="#track_modal_{{track._id}}" class="btn modal-trigger"><i
+                          class="fas fa-info-circle card-btn"></i></a>
                       {% if username == session["user"] %}
-                      <a
-                        href="#edit_track_modal_{{track._id}}"
-                        class="btn modal-trigger"
-                        ><i class="fas fa-edit card-btn"></i
-                      ></a>
-                      <a
-                        href="#delete_track_modal_{{track._id}}"
-                        class="btn modal-trigger"
-                        ><i class="fas fa-trash-alt card-btn"></i
-                      ></a>
+                      <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                          class="fas fa-edit card-btn"></i></a>
+                      <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                          class="fas fa-trash-alt card-btn"></i></a>
                       {% endif %}
                     </div>
                   </div>
@@ -836,24 +627,14 @@
                   <div class="col s12 modal-user-details">
                     <p><small>Added by:</small> {{username}}</p>
                     {% if track['user'][0]['profile_image'] %}
-                    <a
-                      href="{{url_for('users.user_profile', username=username)}}"
-                    >
-                      <img
-                        src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
-                        alt="User profile image"
-                        class="user-image-card"
-                      />
+                    <a href="{{url_for('users.user_profile', username=username)}}">
+                      <img src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
+                        alt="User profile image" class="user-image-card" />
                     </a>
                     {% else %}
-                    <a
-                      href="{{url_for('users.user_profile', username=username)}}"
-                    >
-                      <img
-                        src="{{url_for('static', filename='images/default-user-image.png')}}"
-                        alt="User profile image"
-                        class="user-image-card"
-                      />
+                    <a href="{{url_for('users.user_profile', username=username)}}">
+                      <img src="{{url_for('static', filename='images/default-user-image.png')}}"
+                        alt="User profile image" class="user-image-card" />
                     </a>
                     {% endif %}
                   </div>
@@ -864,17 +645,10 @@
                   <div class="col s12 m6 album-cover-modal">
                     <h4 class="track-modal-header">{{track.track_name}}</h4>
                     {% if not track.image_url == '' %}
-                    <img
-                      src="{{track.image_url}}"
-                      alt="Image of Cover Art for Track"
-                      class="album-cover"
-                    />
+                    <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover" />
                     {% else %}
-                    <img
-                      src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                      alt="Image of Cover Art for Track"
-                      class="album-cover"
-                    />
+                    <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                      alt="Image of Cover Art for Track" class="album-cover" />
                     {% endif %}
                   </div>
                   <!-- Track Details -->
@@ -900,21 +674,11 @@
 
                     <!-- Comment Form -->
                     {% if session.user %}
-                    <form
-                      action="{{url_for('comments.add_comment', track_id=track._id, username=session['user'])}}"
-                      method="POST"
-                      class="submit-comment-form"
-                    >
-                      <textarea
-                        rows="2"
-                        cols="10"
-                        name="comment_body"
-                        id="comment_body_0{{loop.index}}"
-                        class="materialize-textarea"
-                      ></textarea>
-                      <label for="comment_body_0{{loop.index}}"
-                        >Leave a comment:</label
-                      >
+                    <form action="{{url_for('comments.add_comment', track_id=track._id, username=session['user'])}}"
+                      method="POST" class="submit-comment-form">
+                      <textarea rows="2" cols="10" name="comment_body" id="comment_body_0{{loop.index}}"
+                        class="materialize-textarea"></textarea>
+                      <label for="comment_body_0{{loop.index}}">Leave a comment:</label>
                       <div class="submit-comment-btn">
                         <button type="submit" class="btn right-align">
                           Submit
@@ -932,63 +696,41 @@
                               {{comment_object["comment"]}} {% if
                               comment_object["author"] == session.user%}
                               <span class="edit-delete-comment-btns">
-                                <button
-                                  class="
+                                <button class="
                                     btn
                                     edit-delete-comment-btn edit-comment-btn
-                                  "
-                                >
+                                  ">
                                   <i class="fas fa-edit"></i>
                                 </button>
-                                <a
-                                  href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
+                                <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
                                   class="
                                     btn
                                     edit-delete-comment-btn
                                     remove-comment-btn
-                                  "
-                                  ><i class="fas fa-trash-alt"></i
-                                ></a>
+                                  "><i class="fas fa-trash-alt"></i></a>
                               </span>
                               {% endif %}
                             </p>
                             <div class="comment-details">
                               <p class="comment-author">
                                 <a href="{{url_for('users.user_profile', username=comment_object['author'])}}">
-                                    <small>{{comment_object["author"]}}</small>
+                                  <small>{{comment_object["author"]}}</small>
                                 </a>
                               </p>
-                              <span class="date-comment-added"
-                                ><small
-                                  >{{comment_object["date_added"].strftime('%H:%M
-                                  %Y-%m-%d')}}</small
-                                ></span
-                              >
+                              <span class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M
+                                  %Y-%m-%d')}}</small></span>
                             </div>
                           </div>
                           {% if comment_object["author"] == session.user %}
-                          <form
-                            action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
-                            method="POST"
-                            class="comment-edit-form"
-                          >
+                          <form action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
+                            method="POST" class="comment-edit-form">
                             <div class="input-field">
-                              <input
-                                type="text"
-                                value="{{comment_object['comment']}}"
-                                name="edit_comment"
-                                class="edit-comment-input"
-                              />
-                              <button
-                                type="submit"
-                                class="btn submit-comment-edit"
-                              >
+                              <input type="text" value="{{comment_object['comment']}}" name="edit_comment"
+                                class="edit-comment-input" />
+                              <button type="submit" class="btn submit-comment-edit">
                                 Submit
                               </button>
-                              <button
-                                type="button"
-                                class="btn cancel-comment-edit"
-                              >
+                              <button type="button" class="btn cancel-comment-edit">
                                 Cancel
                               </button>
                             </div>
@@ -1012,44 +754,28 @@
                         <p>{{comment_object["comment"]}}</p>
                         <p class="comment-author">
                           <a href="{{url_for('users.user_profile', username=comment_object['author'])}}">
-                              <small>{{comment_object["author"]}}</small>
+                            <small>{{comment_object["author"]}}</small>
                           </a>
-                          <span class="date-comment-added"
-                            ><small
-                              >{{comment_object["date_added"].strftime('%H:%M
-                              %Y-%m-%d')}}</small
-                            ></span
-                          >
+                          <span class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M
+                              %Y-%m-%d')}}</small></span>
                         </p>
                       </div>
                       {% if comment_object["author"] == session.user %}
                       <div class="edit-delete-comment-btns">
-                        <button
-                          class="btn edit-delete-comment-btn edit-comment-btn"
-                        >
+                        <button class="btn edit-delete-comment-btn edit-comment-btn">
                           <i class="fas fa-edit"></i>
                         </button>
-                        <a
-                          href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
-                          class="btn edit-delete-comment-btn remove-comment-btn"
-                          ><i class="fas fa-trash-alt"></i
-                        ></a>
+                        <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
+                          class="btn edit-delete-comment-btn remove-comment-btn"><i class="fas fa-trash-alt"></i></a>
                       </div>
                       {% endif %}
                     </div>
                     {% if comment_object["author"] == session.user %}
-                    <form
-                      action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}"
-                      method="POST"
-                      class="comment-edit-form"
-                    >
+                    <form action="{{url_for('comments.edit_comment', comment_id=comment_object['_id'])}}" method="POST"
+                      class="comment-edit-form">
                       <div class="input-field">
-                        <input
-                          type="text"
-                          value="{{comment_object['comment']}}"
-                          name="edit_comment"
-                          class="edit-comment-input"
-                        />
+                        <input type="text" value="{{comment_object['comment']}}" name="edit_comment"
+                          class="edit-comment-input" />
                         <button type="submit" class="btn submit-comment-edit">
                           Submit
                         </button>
@@ -1071,51 +797,27 @@
           </div>
 
           <!-- Track Edit Modal -->
-          <div
-            class="modal edit-track-modal"
-            id="edit_track_modal_{{track._id}}"
-          >
-            <i
-              class="fas fa-times-circle modal-close close-modal-icon"
-              data-group="close-modal"
-            ></i>
+          <div class="modal edit-track-modal" id="edit_track_modal_{{track._id}}">
+            <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="row">
               <div class="col s12">
                 <h5 class="edit-track-header">Edit Your Track</h5>
-                <form
-                  action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
-                  method="POST"
-                  class="edit-track-form"
-                >
+                <form action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
+                  method="POST" class="edit-track-form">
                   <div class="row">
                     <div class="input-field col s12 m6">
-                      <input
-                        type="text"
-                        value="{{track.track_name}}"
-                        name="track_name"
-                        id="track_name_0{{loop.index}}"
-                        required
-                      />
+                      <input type="text" value="{{track.track_name}}" name="track_name" id="track_name_0{{loop.index}}"
+                        required />
                       <label for="track_name_{{loop.index}}">Track Name</label>
                     </div>
                     <div class="input-field col s12 m6">
-                      <input
-                        type="text"
-                        value="{{track.artist_name}}"
-                        name="artist_name"
-                        id="artist_name_0{{loop.index}}"
-                        required
-                      />
+                      <input type="text" value="{{track.artist_name}}" name="artist_name"
+                        id="artist_name_0{{loop.index}}" required />
                       <label for="artist_name_{{loop.index}}">Artist</label>
                     </div>
                     <div class="input-field col s12 m6">
-                      <input
-                        type="text"
-                        value="{{track.album_name}}"
-                        name="album_name"
-                        id="album_name_0{{loop.index}}"
-                        required
-                      />
+                      <input type="text" value="{{track.album_name}}" name="album_name" id="album_name_0{{loop.index}}"
+                        required />
                       <label for="album_name_{{loop.index}}">Album</label>
                     </div>
                     <div class="input-field col s12 m6">
@@ -1127,24 +829,12 @@
                       </select>
                     </div>
                     <div class="input-field col s12 m6">
-                      <input
-                        type="number"
-                        value="{{track.year_of_release}}"
-                        name="year_of_release"
-                        id="year_of_release_0{{loop.index}}"
-                        required
-                      />
-                      <label for="year_of_release_{{loop.index}}"
-                        >Year of Release</label
-                      >
+                      <input type="number" value="{{track.year_of_release}}" name="year_of_release"
+                        id="year_of_release_0{{loop.index}}" required />
+                      <label for="year_of_release_{{loop.index}}">Year of Release</label>
                     </div>
                     <div class="input-field col s12 m6">
-                      <input
-                        type="text"
-                        value="{{track.image_url}}"
-                        name="image_url"
-                        id="image_url_0{{loop.index}}"
-                      />
+                      <input type="text" value="{{track.image_url}}" name="image_url" id="image_url_0{{loop.index}}" />
                       <label for="image_url_{{loop.index}}">Image URL</label>
                     </div>
 
@@ -1160,14 +850,8 @@
             </div>
           </div>
           <!-- Track Delete Modal -->
-          <div
-            class="modal delete-track-modal"
-            id="delete_track_modal_{{track._id}}"
-          >
-            <i
-              class="fas fa-times-circle modal-close close-modal-icon"
-              data-group="close-modal"
-            ></i>
+          <div class="modal delete-track-modal" id="delete_track_modal_{{track._id}}">
+            <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
             <div class="modal-content">
               <div class="row">
                 <div class="col s12 m6 confirm-delete-container">
@@ -1176,39 +860,26 @@
                   </div>
                   <div class="confirm-delete-wrapper center-align">
                     <p>Are you sure you want to continue?</p>
-                    <a
-                      href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}"
-                      class="btn delete-track-btn"
-                      >Delete</a
-                    >
-                    <button
-                      type="button"
-                      class="btn modal-close cancel-delete-btn"
-                    >
+                    <a href="{{url_for('tracks.delete_track', track_id = track._id, username=session['user'])}}"
+                      class="btn delete-track-btn">Delete</a>
+                    <button type="button" class="btn modal-close cancel-delete-btn">
                       Cancel
                     </button>
                   </div>
                 </div>
                 <div class="col m6 delete-track-modal-image">
                   {% if not track.image_url == '' %}
-                  <img
-                    src="{{track.image_url}}"
-                    alt="Image of Cover Art for Track"
-                    class="album-cover"
-                  />
+                  <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover" />
                   {% else %}
-                  <img
-                    src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
-                    alt="Image of Cover Art for Track"
-                    class="album-cover"
-                  />
+                  <img src="{{url_for('static', filename='images/crosstracks-logo.webp')}}"
+                    alt="Image of Cover Art for Track" class="album-cover" />
                   {% endif %}
                 </div>
               </div>
             </div>
           </div>
         </aside>
-        {% endfor %} 
+        {% endfor %}
         {% endif %}
       </div>
     </div>

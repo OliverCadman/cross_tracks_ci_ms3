@@ -554,7 +554,6 @@ nav li a {
     font-family: "Quicksand", sans-serif;
 }
 
-
 .row.no-margin {
     margin: 0 !important;
 }
@@ -843,8 +842,7 @@ li.page-item.active .page-link {
 
 /* Track Cards */
 
-.card.horizontal
-.card-image img {
+.card.horizontal .card-image img {
     width: inherit;
 }
 
@@ -863,6 +861,11 @@ li.page-item.active .page-link {
 .album-name,
 .genre-name {
     font-family: "Quicksand", sans-serif;
+}
+
+.artist-name {
+    font-size: 1.3rem;
+    font-weight: 400;
 }
 
 .no-wordbreak {
@@ -885,7 +888,7 @@ li.page-item.active .page-link {
 }
 
 .like-comment-icons {
-    margin: 10px;
+    margin: .2rem;
 }
 
 .card-content a,
@@ -1897,8 +1900,8 @@ li.page-item.active .page-link {
         background-color: #e5e8ec;
         background-size: cover;
         background-position: top;
-
     }
+
 
     .track-card {
         padding: 1rem 0.75rem !important;
@@ -1909,9 +1912,18 @@ li.page-item.active .page-link {
     }
 
     .card .card-title {
-        font-size: 18px;
+        font-size: 1.6rem;
+        margin-left: 0;
     }
 
+    .like-comment-icons {
+        font-size: 1.4rem;
+    }
+
+    .likes-count,
+    .comment-count {
+        font-size: 1.25rem;
+    }
 
     .card-image-wrapper {
         position: absolute;
@@ -1928,11 +1940,22 @@ li.page-item.active .page-link {
     }
 
     .track-name {
-        font-size: 1.5rem;
         text-align: left;
     }
 
-    .track-image,
+    .artist-name {
+        font-size: 1.55rem;
+        font-weight: 400;
+    }
+
+    .album-name {
+        font-size: 1.25rem;
+    }
+
+    .track-image {
+        width: 200px;
+
+    }
     .track-image.search-result {
         width: 118px;
         border-radius: 0 20px 0 0;
@@ -1953,8 +1976,18 @@ li.page-item.active .page-link {
         margin-left: 12px;
     }
 
+    .addedby-small {
+        font-size: 1.1rem;
+    }
+
+    .addedby-username {
+        font-family: "Quicksand", sans-serif;
+        font-size: 1.5rem;
+    }
+
     .artist-status {
         display: inline-block;
+        font-size: 1.5rem;
     }
 
     .modal-body {
@@ -2053,6 +2086,11 @@ li.page-item.active .page-link {
         font-size: 1.75rem;
     }
 
+    .track-container {
+        height: 500px;
+        overflow: auto;
+    }
+
     /* User's Liked Tracks Section */
 
     .liked-tracks-container .track-container .card {
@@ -2070,7 +2108,7 @@ li.page-item.active .page-link {
     }
 
     .my-tracks-track-name {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .my-tracks-artist-name {
@@ -2376,26 +2414,22 @@ li.page-item.active .page-link {
     }
 
     /* ------ Browse Tracks Page ------ */
+
     /* Top-level links displaying user options */
-
-
-    /* Style the buttons that are used to open the tab content */
-    .tabs button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
-    }
 
     .user-option-icon {
         margin: 0 10px 0 30px;
     }
 
-    .card-title {
+    /* Latest Tracks */
+
+    .track-name {
         /* white-space: nowrap; */
+        font-size: 1.4rem;
+    }
+
+    .track-card-information {
+        padding-bottom: .75rem;
         font-size: 1.1rem;
     }
 
@@ -2403,10 +2437,12 @@ li.page-item.active .page-link {
         margin-top: .75rem;
     }
 
-    /* Latest Tracks */
+    .card .card-action {
+        position: static;
+    }
 
     .track-image {
-        width: 132px;
+        width: 200px;
     }
 
     /* Delete Track Modal Buttons */
@@ -2562,11 +2598,6 @@ li.page-item.active .page-link {
 
     .liked-tracks-header-wrapper {
         background-position: top;
-    }
-
-    .track-container {
-        height: 500px;
-        overflow: auto;
     }
 
     .my-tracks-container .section-header,
@@ -2762,7 +2793,7 @@ li.page-item.active .page-link {
     /* ----- Browse Tracks Page ----- */
 
     .track-image {
-        width: 90px;
+        width: 165px;
     }
 
     /* ----- Contact Page ----- */
