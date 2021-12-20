@@ -25,50 +25,52 @@
         <li><a href="{{url_for('users.logout')}}">Logout</a></li>
     </ul>
     <!--Navbar for Laptop/Desktop devices-->
-    <nav class="nav-extended">
-        <div class="nav-wrapper browser-default">
-            <a href="{{url_for('main.index')}}" class="brand-logo">
-                Cross//Tracks
-            </a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>
-                    <a href="{{url_for('main.index')}}">Home</a>
-                </li>
-                <li>
-                    <a href="{{url_for('tracks.browse_tracks')}}">Browse All Tracks</a>
-                </li>
-                {% if session.user %}
-                <li>
-                    <a href="{{url_for('tracks.add_track', username=session['user'])}}">Add A Track</a>
-                </li>
-                {% endif %}
-                {% if not session.user %}
-                <li>
-                    <a href="{{url_for('users.register_user')}}" class="modal-trigger">Register</a>
-                </li>
-                <li>
-                    <a href="{{url_for('users.login')}}">Login</a>
-                </li>
-                {% endif %}
-                {% if session.user %}
-                <li>
-                    <a class="dropdown-trigger" href="#!" data-target="account-dropdown-desktop">My Account</a>
-                </li>
-                {% endif %}
-                 {% if session.user|lower == "admin"|lower %}
-                 <!-- Links for Admin -->
-                 <li>
-                     <a href="{{url_for('admin.manage_genres')}}">Manage Genres</a>
-                 </li>
-                 <li>
-                     <a href="{{url_for('admin.manage_tracks')}}">Manage Tracks</a>
-                 </li>
-                 {% endif %}
-
-            </ul>
-        </div>
-         </nav>
+    <div class="navbar-fixed">
+        <nav class="nav-extended">
+            <div class="nav-wrapper browser-default">
+                <a href="{{url_for('main.index')}}" class="brand-logo">
+                    Cross//Tracks
+                </a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a href="{{url_for('main.index')}}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('tracks.browse_tracks')}}">Browse All Tracks</a>
+                    </li>
+                    {% if session.user %}
+                    <li>
+                        <a href="{{url_for('tracks.add_track', username=session['user'])}}">Add A Track</a>
+                    </li>
+                    {% endif %}
+                    {% if not session.user %}
+                    <li>
+                        <a href="{{url_for('users.register_user')}}" class="modal-trigger">Register</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('users.login')}}">Login</a>
+                    </li>
+                    {% endif %}
+                    {% if session.user %}
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="account-dropdown-desktop">My Account</a>
+                    </li>
+                    {% endif %}
+                     {% if session.user|lower == "admin"|lower %}
+                     <!-- Links for Admin -->
+                     <li>
+                         <a href="{{url_for('admin.manage_genres')}}">Manage Genres</a>
+                     </li>
+                     <li>
+                         <a href="{{url_for('admin.manage_tracks')}}">Manage Tracks</a>
+                     </li>
+                     {% endif %}
+    
+                </ul>
+            </div>
+             </nav>
+    </div>
         <!--Navbar for Mobile Devices -->
         <ul id="mobile-demo" class="sidenav">
             <li>
