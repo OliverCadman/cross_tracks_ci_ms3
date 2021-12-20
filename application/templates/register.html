@@ -7,28 +7,31 @@
 {% block content %}
 <section>
     <div class="register-page-container">
-    <div class="row">
-        <div class="col s12 register-page-header">
-            <h1>Register</h1>
-            <figure>
-                <img src="{{url_for('static', filename='images/register-vector.png')}}" alt="Vector graphic of woman registering to website" 
+        <div class="row">
+            <!-- Register Header -->
+            <div class="col s12 register-page-header">
+                <h1>Register</h1>
+                <!-- Vector Graphic -->
+                <figure>
+                    <img src="{{url_for('static', filename='images/register-vector.png')}}" alt="Vector graphic of woman registering to website" 
                      class="register-vector hide-on-small-only">
-            </figure>
+                </figure>
             </div>
         </div>
         <div class="register-wrapper">
             <hr class="block-divider">
-            <p class="signin-message">Already have an account? <a href="{{url_for('users.login')}}">Login Here</a></p>
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 register-form-wrapper">
-                        <form action="{{url_for('users.register_user')}}" method="POST">
-                                    <div class="col s12 card-panel z-depth-5 register-form">
-                                        <div class="col s12 input-field username-input">
-                                            <i class="fas fa-user prefix login-window-icon"></i>
-                                            <input type="text" id="username" name="username" class="validate" required>
-                                            <label for="username">Choose a Username:</label>
-                                        </div>
+                <p class="signin-message">Already have an account? <a href="{{url_for('users.login')}}">Login Here</a></p>
+                <div class="container">
+                    <div class="row">
+                        <!-- Register Form -->
+                        <div class="col s12 register-form-wrapper">
+                            <form action="{{url_for('users.register_user')}}" method="POST">
+                                        <div class="col s12 card-panel z-depth-5 register-form">
+                                            <div class="col s12 input-field username-input">
+                                                <i class="fas fa-user prefix login-window-icon"></i>
+                                                    <input type="text" id="username" name="username" class="validate" required>
+                                                <label for="username">Choose a Username:</label>
+                                            </div>
                                         <div class="col s12 input-field email-input">
                                             <i class="fas fa-envelope prefix login-window-icon"></i>
                                             <input type="email" id="email_address" name="email_address" class="validate"
@@ -39,10 +42,10 @@
                                             <i class="fas fa-lock prefix login-window-icon"></i>
                                             <input type="password" id="password" name="password"
                                                 pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-                                            class="validate" required autocomplete="on">
-                                            <label for="password">Choose a password:</label>
-                                            <small>Eight or more characters, with at least one uppercase letter, number, and special character.</small>
-                                        </div>
+                                                class="validate" required autocomplete="on">
+                                                <label for="password">Choose a password:</label>
+                                                <small>Eight or more characters, with at least one uppercase letter, number, and special character.</small>
+                                            </div>
                                         <div class="col s12 m6 input-field confirm-password-input">
                                             <i class="fas fa-lock prefix login-window-icon"></i>
                                             <input type="password" id="confirm_password" name="confirm_password"
@@ -57,7 +60,7 @@
                                 
                             </div>
                         </div>
-        </div>
-        </div>
+                    </div>
+                </div>
 </section>
 {% endblock %}

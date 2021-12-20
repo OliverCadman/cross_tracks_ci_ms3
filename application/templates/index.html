@@ -6,6 +6,7 @@
 <meta name="author" content="Oliver Cadman">
 {% endblock %}
 {% if not session.user %}
+<!-- Login Window (laptop devices and up)-->
 <aside>
     <div class="card-panel login-window hide-on-med-and-down">
         <form action="{{url_for('users.login')}}" method="POST">
@@ -27,9 +28,9 @@
     </div>
 </aside>
 {% endif %}
+<!-- Hero section -->
 <section>
     <div class="full-height-background">
-
         <div class="hero-section background-main hero-container">
             <div class="row">
                 <div class="col s12 hero-header">
@@ -41,6 +42,7 @@
                 </div>
             </div>
         </div>
+        <!-- Lead paragraph -->
         <div class="row about-crosstracks-background">
             <div class="col s12 l6 about-crosstracks-wrapper">
                 <h2 class="info-header">About Us</h2>
@@ -56,6 +58,7 @@
                     to share your passion, expand your library, and quench your thirst for new music.
                 </p>
             </div>
+            <!-- Bulleted list of how to use website -->
             <div class="col s12 l6 using-crosstracks-wrapper">
                 <hr class="block-divider-home">
                 <h2 class="info-header">Using Cross//Tracks</h2>
@@ -85,6 +88,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- Sign Up Button -->
             <div class="col s12 hide-on-med-and-up signup-btn-wrapper">
                 <p>Ready to Discover?</p>
                 <a href="{{url_for('users.register_user')}}" class="btn">Sign Up Here</a>

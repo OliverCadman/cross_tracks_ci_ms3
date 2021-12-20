@@ -86,40 +86,32 @@
       {{pagination.info}} {{pagination.links}}
       <div id="all-tracks-container">
         <div id="track-results">
-          {% if all_tracks_list %} {% for track in all_tracks_list %} {% set
-          username = track['user'][0]['username'] %}
+          {% if all_tracks_list %}
+           {% for track in all_tracks_list %}
+            {% set username = track['user'][0]['username'] %}
           <!-- Track Cards (Tablet Devices and Up)-->
           <div class="col m6 l4 hide-on-small-only track-card">
             <div class="card horizontal z-depth-5">
               <div class="card-stacked">
                 <div class="card-content">
-                  <span class="track-name card-title no-wordbreak"
-                    >{{track.track_name}}</span
-                  >
+                  <span class="track-name card-title no-wordbreak">{{track.track_name}}</span>
                   {% if session.user %} {% if session.user in track.likes %}
-                  <span
-                    ><a
+                  <span><a
                       href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"
-                      ><i class="fas fa-star"></i></a></span
-                  ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                      class="modal-trigger like_track_med"><i class="fas fa-star"></i></a></span>
+                      <span>&nbsp;{{track.likes_count if track.likes_count}}</span>
                   {% else %}
-                  <span
-                    ><a
+                  <span><a
                       href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"
-                      ><i class="far fa-star"></i></a></span
-                  ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
-                  {% endif %} {% else %}
-                  <span
-                    ><a href="{{url_for('users.login')}}" class="modal-trigger"
-                      ><i class="far fa-star"></i></a></span
-                  ><span>&nbsp;{{track.likes_count if track.likes_count}}</span>
-                  {% endif %} {% if track.comments|length > 0 %}
-                  <span class="comment-count"
-                    ><i class="fas fa-comment"></i
-                    >&nbsp;{{track.comments|length}}</span
-                  >
+                      class="modal-trigger like_track_med"><i class="far fa-star"></i></a></span>
+                      <span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                  {% endif %}
+                  {% else %}
+                    <span><a href="{{url_for('users.login')}}" class="modal-trigger"><i class="far fa-star"></i></a></span>
+                    <span>&nbsp;{{track.likes_count if track.likes_count}}</span>
+                  {% endif %}
+                  {% if track.comments|length > 0 %}
+                    <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
                   {% endif %}
                   <div class="card-information-wrapper">
                     <div class="track-card-information">
@@ -145,9 +137,7 @@
                       <p>
                         <small>Added by:</small> {{username}} {% if
                         track['user'][0]['profile_image'] %}
-                        <a
-                          href="{{url_for('users.user_profile', username=username)}}"
-                        >
+                        <a href="{{url_for('users.user_profile', username=username)}}">
                           <img
                             src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
                             alt="User profile image"
@@ -155,9 +145,7 @@
                           />
                         </a>
                         {% else %}
-                        <a
-                          href="{{url_for('users.user_profile', username=username)}}"
-                        >
+                        <a href="{{url_for('users.user_profile', username=username)}}">
                           <img
                             src="{{url_for('static', filename='images/default-user-image.png')}}"
                             alt="User profile image"
@@ -170,19 +158,16 @@
                         <a
                           href="#track_modal_{{track._id}}"
                           class="btn modal-trigger"
-                          ><i class="fas fa-info-circle card-btn"></i
-                        ></a>
+                          ><i class="fas fa-info-circle card-btn"></i></a>
                         {% if username == session["user"] %}
                         <a
                           href="#edit_track_modal_{{track._id}}"
                           class="btn modal-trigger"
-                          ><i class="fas fa-edit card-btn"></i
-                        ></a>
+                          ><i class="fas fa-edit card-btn"></i></a>
                         <a
                           href="#delete_track_modal_{{track._id}}"
                           class="btn modal-trigger"
-                          ><i class="fas fa-trash-alt card-btn"></i
-                        ></a>
+                          ><i class="fas fa-trash-alt card-btn"></i></a>
                         {% endif %}
                       </div>
                     </div>
@@ -213,29 +198,24 @@
                 <span>{{track.track_name}}</span>
               </div>
               {% if session.user %} {% if session.user in track.likes %}
-              <span
-                ><a
+              <span><a
                   href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
                   class="modal-trigger like_track_mob"
-                  ><i class="fas fa-star"></i></a></span
-              ><span>{{track.likes_count if track.likes_count}}</span>
+                  ><i class="fas fa-star"></i></a></span>
+                  <span>{{track.likes_count if track.likes_count}}</span>
               {% else %}
-              <span
-                ><a
+              <span><a
                   href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
                   class="modal-trigger like_track_mob"
-                  ><i class="far fa-star"></i></a></span
-              ><span>{{track.likes_count if track.likes_count}}</span>
+                  ><i class="far fa-star"></i></a></span>
+                  <span>{{track.likes_count if track.likes_count}}</span>
               {% endif %} {% else %}
-              <span
-                ><a href="{{url_for('users.login')}}" class="modal-trigger"
-                  ><i class="far fa-star"></i></a></span
-              ><span>{{track.likes_count if track.likes_count}}</span>
-              {% endif %} {% if track.comments|length > 0 %}
-              <span class="comment-count"
-                ><i class="fas fa-comment"></i
-                >&nbsp;{{track.comments|length}}</span
-              >
+              <span><a href="{{url_for('users.login')}}" class="modal-trigger">
+                <i class="far fa-star"></i></a></span>
+                <span>{{track.likes_count if track.likes_count}}</span>
+              {% endif %}
+              {% if track.comments|length > 0 %}
+              <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
               {% endif %}
               <div class="card-content">
                 <p class="artist-name">{{track.artist_name}}</p>
@@ -246,9 +226,7 @@
                 <p>
                   <small>Added by:</small> {{username}} {% if
                   track['user'][0]['profile_image'] %}
-                  <a
-                    href="{{url_for('users.user_profile', username=username)}}"
-                  >
+                  <a href="{{url_for('users.user_profile', username=username)}}">
                     <img
                       src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
                       alt="User profile image"
@@ -256,9 +234,7 @@
                     />
                   </a>
                   {% else %}
-                  <a
-                    href="{{url_for('users.user_profile', username=username)}}"
-                  >
+                  <a href="{{url_for('users.user_profile', username=username)}}">
                     <img
                       src="{{url_for('static', filename='images/default-user-image.png')}}"
                       alt="User profile image"
@@ -268,20 +244,19 @@
                   {% endif %}
                 </p>
                 <div class="more-info-btn">
-                  <a href="#track_modal_{{track._id}}" class="btn modal-trigger"
-                    ><i class="fas fa-info-circle card-btn"></i
-                  ></a>
+                  <a href="#track_modal_{{track._id}}" class="btn modal-trigger">
+                    <i class="fas fa-info-circle card-btn"></i></a>
                   {% if username == session["user"] %}
                   <a
                     href="#edit_track_modal_{{track._id}}"
                     class="btn modal-trigger"
-                    ><i class="fas fa-edit card-btn"></i
-                  ></a>
+                    ><i class="fas fa-edit card-btn"></i>
+                  </a>
                   <a
                     href="#delete_track_modal_{{track._id}}"
                     class="btn modal-trigger"
-                    ><i class="fas fa-trash-alt card-btn"></i
-                  ></a>
+                    ><i class="fas fa-trash-alt card-btn"></i>
+                  </a>
                   {% endif %}
                 </div>
               </div>
@@ -297,9 +272,7 @@
                     <div class="col s12 modal-user-details">
                       <p><small>Added by:</small> {{username}}</p>
                       {% if track['user'][0]['profile_image'] %}
-                      <a
-                        href="{{url_for('users.user_profile', username=username)}}"
-                      >
+                      <a href="{{url_for('users.user_profile', username=username)}}">
                         <img
                           src="{{url_for('users.display_profile_image', filename=track['user'][0]['profile_image'])}}"
                           alt="User profile image"
@@ -307,9 +280,7 @@
                         />
                       </a>
                       {% else %}
-                      <a
-                        href="{{url_for('users.user_profile', username=username)}}"
-                      >
+                      <a href="{{url_for('users.user_profile', username=username)}}">
                         <img
                           src="{{url_for('static', filename='images/default-user-image.png')}}"
                           alt="User profile image"
@@ -372,9 +343,7 @@
                           id="comment_body_{{loop.index}}"
                           class="materialize-textarea"
                         ></textarea>
-                        <label for="comment_body_{{loop.index}}"
-                          >Leave a comment:</label
-                        >
+                        <label for="comment_body_{{loop.index}}">Leave a comment:</label>
                         <div class="submit-comment-btn">
                           <button type="submit" class="btn right-align">
                             Submit
@@ -393,23 +362,16 @@
                                 {{comment_object["comment"]}} {% if
                                 comment_object["author"] == session.user%}
                                 <span class="edit-delete-comment-btns">
-                                  <button
-                                    class="
-                                      btn
-                                      edit-delete-comment-btn edit-comment-btn
-                                    "
-                                  >
+                                  <button class="btn edit-delete-comment-btn edit-comment-btn">
                                     <i class="fas fa-edit"></i>
                                   </button>
-                                  <a
-                                    href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
+                                  <a href="{{url_for('comments.delete_comment', comment_id=comment_object['_id'])}}"
                                     class="
                                       btn
                                       edit-delete-comment-btn
                                       remove-comment-btn
                                     "
-                                    ><i class="fas fa-trash-alt"></i
-                                  ></a>
+                                    ><i class="fas fa-trash-alt"></i></a>
                                 </span>
                                 {% endif %}
                               </p>
@@ -419,12 +381,7 @@
                                       <small>{{comment_object["author"]}}</small>
                                   </a>
                                 </p>
-                                <span class="date-comment-added"
-                                  ><small
-                                    >{{comment_object["date_added"].strftime('%H:%M
-                                    %Y-%m-%d')}}</small
-                                  ></span
-                                >
+                                <span class="date-comment-added"><small>{{comment_object["date_added"].strftime('%H:%M%Y-%m-%d')}}</small></span>
                               </div>
                             </div>
                             {% if comment_object["author"] == session.user %}
@@ -441,9 +398,7 @@
                                   class="edit-comment-input"
                                   id="edit_comment_{{loop.index}}"
                                 />
-                                <label for="edit_comment_{{loop.index}}"
-                                  >Leave a comment:</label
-                                >
+                                <label for="edit_comment_{{loop.index}}">Leave a comment:</label>
                                 <button
                                   type="submit"
                                   class="btn submit-comment-edit"
@@ -680,8 +635,10 @@
         <h2>Latest Tracks</h2>
       </div>
       <div class="row track-card-container">
-        {% if latest_tracks %} {% for track in latest_tracks %} {% set username
-        = track['user'][0]['username'] %}
+        {% if latest_tracks %} 
+        {% for track in latest_tracks %}
+         {% set username = track['user'][0]['username'] %}
+         <!-- Track cards (tablet devices and up)-->
         <div class="col s12 hide-on-med-and-up">
           <div class="card z-depth-4">
             <div class="card-image">
@@ -773,6 +730,7 @@
             </div>
           </div>
         </div>
+        <!-- Track Cards (mobile only)-->
         <div class="col m6 l4 hide-on-small-only track-card">
           <div class="card horizontal z-depth-5">
             <div class="card-stacked">
@@ -780,29 +738,22 @@
                 <span class="card-title no-wordbreak"
                   >{{ track.track_name }}</span>
                 {% if session.user %} {% if session.user in track.likes %}
-                <span
-                  ><a
-                    href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                    class="modal-trigger like_track_med"
-><i class="fas fa-star"></i></a></span
-                ><span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
+                  <span><a
+                      href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                      class="modal-trigger like_track_med"><i class="fas fa-star"></i></a></span>
+                    <span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
                 {% else %}
-                <span
-                  ><a
-                    href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                    class="modal-trigger like_track_med"
-                    ><i class="far fa-star"></i></a></span
-                ><span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
-                {% endif %} {% else %}
-                <span
-                  ><a href="{{url_for('users.login')}}"
-                    ><i class="far fa-star"></i></a></span
-                ><span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
-                {% endif %} {% if track.comments|length > 0 %}
-                <span class="comment-count"
-                  ><i class="fas fa-comment"></i
-                  >&nbsp;{{track.comments|length}}</span
-                >
+                  <span><a
+                      href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
+                      class="modal-trigger like_track_med"><i class="far fa-star"></i></a></span>
+                      <span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
+                {% endif %} 
+                {% else %}
+                  <span><a href="{{url_for('users.login')}}"><i class="far fa-star"></i></a></span>
+                  <span class="likes-count">&nbsp;{{track.likes_count if track.likes_count}}</span>
+                {% endif %} 
+                {% if track.comments|length > 0 %}
+                <span class="comment-count"><i class="fas fa-comment"></i>&nbsp;{{track.comments|length}}</span>
                 {% endif %}
                 <div class="card-information-wrapper">
                   <div class="track-card-information">
@@ -1257,7 +1208,8 @@
             </div>
           </div>
         </aside>
-        {% endfor %} {% endif %}
+        {% endfor %} 
+        {% endif %}
       </div>
     </div>
   </section>

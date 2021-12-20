@@ -99,6 +99,7 @@
                     <div class="row no-margin">
                         {% if users_tracks %}
                         {% for track in users_tracks %}
+                        <!-- Track cards for tablet devices and up -->
                         <div class="col m12 hide-on-small-only">
                             <div class="card horizontal profile">
                                 <div class="card-image profile">
@@ -133,6 +134,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Track Cards for mobile only -->
                         <div class="col s12 hide-on-med-and-up">
                             <div class="card z-depth-4">
                                 <div class="card-image">
@@ -170,6 +172,7 @@
                             </div>
                         </div>
                         <!-- Track Info Modal -->
+                        <aside>
                         <div class="modal track-info-modal user-profile" id="more_info_modal_{{track._id}}">
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="modal-content modal-body">
@@ -281,7 +284,7 @@
                         {% endfor %}
                         {% endif %}
                     </div>
-
+                    </aside>
                     {% if not users_tracks %}
                     <div class="col s12 m6 no-tracks-found">
                         <h1>No Tracks</h1>
@@ -293,6 +296,7 @@
                     {% endif %}
                 </div>
             </div>
+            <!-- User's 'Liked' Tracks -->
             <div class="col s12 l6 liked-tracks-container">
                 <div class="col s12 liked-tracks-header-wrapper">
                     <h3 class="liked-tracks-header">Liked Tracks</h3>
@@ -328,11 +332,13 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Track Info Modal -->
+                        <aside>
                         <div class="modal track-info-modal user-profile" id="more_info_modal_{{track._id}}">
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="modal-content modal-body">
                                 <div class="row">
-                                    <p class="track-name">{{track.track_name}}</p>
+                                    <p class="track-modal-header">{{track.track_name}}</p>
                                     <div class="row">
                                         <div class="col s12 m6 album-cover-modal">
                                             {% if not track.image_url == '' %}
@@ -355,7 +361,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        </aside>
                         {% endfor %}
                         {% else %}
                         <div class="col s12 m6 no-tracks-found">
@@ -373,8 +379,8 @@
     </div>
     </div>
 </section>
-<aside>
     <!-- Edit Profile Modal -->
+    <aside>
     <div class="modal" id="edit-profile">
         <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
         <div class="row">

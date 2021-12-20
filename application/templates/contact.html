@@ -8,6 +8,7 @@
 <section>
     <div class="contact-body">
         <div class="row">
+            <!-- Contact Header -->
             <div class="col s12">
             <div class="contact-header">
                     <h1>Contact</h1>
@@ -16,6 +17,7 @@
         </div>
         <div class="row contact-lead-container">
             <div class="col s12">
+                <!-- Vector Graphic -->
                 <div class="contact-vector-wrapper">
                     <figure>
                         <img src="{{url_for('static', filename='images/contact-vector.png')}}" class="contact-vector" 
@@ -30,6 +32,7 @@
         </div>
         <div class="row">
             <div class="col s12">
+                <!-- Contact Form -->
                 <div class="contact-form-wrapper">
                 <form action="{{url_for('main.send_email')}}" method="POST" class="contact-form card-panel">
                         <div class="input-field">
