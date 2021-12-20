@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,13 +11,14 @@
          type="text/css">
     <!--MaterializeCSS CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- Favicon -->
     <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon/favicon.ico')}}">
     <title>Cross//Tracks</title>
 </head>
-
 <body>
-    <!-- Dropdown Menu for Account Link -->
+    <!-- Dropdown Menu for Account Links -->
     <ul id="account-dropdown-desktop" class="dropdown-content">
         <li><a href="{{url_for('users.user_profile', username=session['user'])}}">My Profile</a></li>
         <li class="divider"></li>
@@ -27,7 +27,6 @@
     <!--Navbar for Laptop/Desktop devices-->
     <nav class="nav-extended">
         <div class="nav-wrapper browser-default">
-
             <a href="{{url_for('main.index')}}" class="brand-logo">
                 Cross//Tracks
             </a>
@@ -58,6 +57,7 @@
                 </li>
                 {% endif %}
                  {% if session.user|lower == "admin"|lower %}
+                 <!-- Links for Admin -->
                  <li>
                      <a href="{{url_for('admin.manage_genres')}}">Manage Genres</a>
                  </li>
@@ -96,6 +96,7 @@
             </li>
             {% endif %}
             {% if session.user|lower == "admin"|lower %}
+            <!-- Links for Admin -->
              <li>
                  <a href="{{url_for('admin.manage_genres')}}">Manage Genres</a>
              </li>
@@ -104,22 +105,18 @@
              </li>
             {% endif %}
         </ul>
-      
+      <!-- Dropdown for logged in users -->
         <ul id="account-dropdown-mobile" class="dropdown-content">
             <li><a href="{{url_for('users.user_profile', username=session['user'])}}">My Profile</a></li>
             <li class="divider"></li>
             <li><a href="{{url_for('users.logout')}}">Logout</a></li>
         </ul>
-
     <main>
-        <div class="row top-level-background">
-            <div class="col s12">
-                
-            </div>
-        </div>
+            <!-- All other page content -->
             {% block content %}
             {% endblock %}
     </main>
+    <!-- Footer -->
     <footer class="page-footer">
         <div class="container">
             <div class="row center-align">
