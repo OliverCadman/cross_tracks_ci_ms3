@@ -1769,6 +1769,16 @@ li.page-item.active .page-link {
         background: #3c4c8b;
     }
 
+    /* Footer */
+
+    .domestic-links li a {
+        font-size: 1.35rem;
+    }
+
+    .social-links li a i {
+        font-size: 2.35rem;
+    }
+
     /* ------ Register Page ------ */
 
     .register-page-container {
