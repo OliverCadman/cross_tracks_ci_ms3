@@ -31,8 +31,9 @@ function addRemoveLikeMed(e) {
     success: function (res) {
       // Update the DOM element displaying number of likes
       let numLikesContainer =
-        e.target.parentElement.parentElement.parentElement.childNodes[4];
+        e.target.parentElement.parentElement.parentElement.children[2]
 
+      // Display no number if it's 0
       if (res.num_of_likes === 0) {
         numLikesContainer.innerHTML = "";
       } else {
