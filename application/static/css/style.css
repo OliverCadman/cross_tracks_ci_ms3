@@ -2104,6 +2104,12 @@ li.page-item.active .page-link {
         font-size: 1.5rem;
     }
 
+    .user-info .block-divider {
+        width: 100%;
+    }
+
+    /* My Tracks */
+
     .my-tracks-header-wrapper h5,
     .liked-tracks-header-wrapper h5 {
         font-size: 3rem;
