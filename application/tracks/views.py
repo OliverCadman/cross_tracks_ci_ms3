@@ -71,10 +71,18 @@ def add_track(username):
         image_url = request.form.get("image_url")
         added_by = user_id
 
+        # Grabs value from initial option
+        # in select dropdown, 'Choose a Genre:'
+        # Genre name defaults to 'N/A' if not selected.
+        if genre == '':
+            genre = 'N/A'
+
         try:
+            # Create Track object
             new_track = Track(track_name, artist_name, album_name,
                               genre, year_of_release, added_by, image_url)
 
+            # Instance method of Track object
             new_track.add_track()
             flash('Track added successfully')
             return redirect(url_for('tracks.browse_tracks', username=username))
@@ -90,7 +98,7 @@ def browse_tracks():
     """
     Renders 'browse-tracks.html' template.
     """
-    
+
     latest_tracks = Track.get_latest_tracks()
     genres = Track.get_genres()
     all_users = User.get_all_users()
@@ -106,12 +114,9 @@ def browse_tracks():
     if request.headers.get("Content-Type") == "application/json":
         return jsonify(genre_list=genre_list, user_list=user_list)
 
-
     tracks_to_paginate = Track.get_all_tracks()
     paginated_tracks = Track.paginate(tracks_to_paginate)
     pagination = Track.pagination_args(tracks_to_paginate)
-    
-    
 
     return render_template("browse-tracks.html",
                            all_tracks_list=paginated_tracks,
@@ -145,23 +150,22 @@ def like_track(track_id, username):
 
     current_user = User.get_user(username)
 
-    if current_user.liked_tracks or current_user.liked_tracks == []:
-        users_liked_tracks = current_user.liked_tracks
+    users_liked_tracks = current_user.liked_tracks
 
-        if selected_track in users_liked_tracks:
+    if selected_track in users_liked_tracks:
 
-            current_user.remove_liked_track(track_id)
-            selected_track_object.remove_like(username)
+        current_user.remove_liked_track(track_id)
+        selected_track_object.remove_like(username)
 
-            return jsonify(num_of_likes=selected_track_object.likes_count,
-                           likes_list=selected_track_object.likes,
-                           username=current_user.username)
-        else:
-            try:
-                current_user.add_liked_track(track_id)
-                selected_track_object.add_like(username)
-            except Exception as e:
-                print(e)
+        return jsonify(num_of_likes=selected_track_object.likes_count,
+                       likes_list=selected_track_object.likes,
+                       username=current_user.username)
+    else:
+        try:
+            current_user.add_liked_track(track_id)
+            selected_track_object.add_like(username)
+        except Exception as e:
+            print(e)
 
         return jsonify(num_of_likes=selected_track_object.likes_count,
                        likes_list=selected_track_object.likes,
