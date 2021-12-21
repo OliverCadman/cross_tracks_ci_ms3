@@ -121,13 +121,13 @@
                                     <span class="likes-count-profile"><i class="fas fa-star"></i>
                                             <span>&nbsp;{{track.likes_count if track.likes_count else "No Likes"}}</span></span>
                                     <div class="card-action action-buttons">
-                                        <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger">
+                                        <a href="#more_info_modal_0{{track._id}}" class="btn modal-trigger">
                                             <i class="fas fa-info-circle"></i>
                                         </a>
                                         {% if username["username"] == session.user %}
-                                        <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger">
+                                        <a href="#edit_track_modal_0{{track._id}}" class="btn modal-trigger">
                                             <i class="fas fa-edit"></i>
-                                        <a href="#delete_track_modal_{{track._id}}"
+                                        <a href="#delete_track_modal_0{{track._id}}"
                                             class="btn modal-trigger"><i class="fas fa-trash-alt"></i></a>
                                         {% endif %}
                                     </div>
@@ -158,13 +158,13 @@
                                 <span>&nbsp;{{track.likes_count if track.likes_count else "No Likes"}}</span></span>
                                 <div class="card-action">
                                     <div class="more-info-btn">
-                                        <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger"><i
+                                        <a href="#more_info_modal_0{{track._id}}" class="btn modal-trigger"><i
                                                 class="fas fa-info-circle"></i></a>
                                         {% if username["username"] == session.user %}
-                                        <a href="#edit_track_modal_{{track._id}}" class="btn modal-trigger">
+                                        <a href="#edit_track_modal_0{{track._id}}" class="btn modal-trigger">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#delete_track_modal_{{track._id}}" class="btn modal-trigger"><i
+                                        <a href="#delete_track_modal_0{{track._id}}" class="btn modal-trigger"><i
                                                 class="fas fa-trash-alt"></i></a>
                                         {% endif %}
                                     </div>
@@ -173,7 +173,7 @@
                         </div>
                         <!-- Track Info Modal -->
                         <aside>
-                        <div class="modal track-info-modal user-profile" id="more_info_modal_{{track._id}}">
+                        <div class="modal track-info-modal user-profile" id="more_info_modal_0{{track._id}}">
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="modal-content modal-body">
                                 <div class="row">
@@ -202,10 +202,11 @@
                             </div>
                         </div>
                         <!-- Track Edit Modal -->
-                        <div class="modal edit-track-modal" id="edit_track_modal_{{track._id}}">
+                        <div class="modal edit-track-modal" id="edit_track_modal_0{{track._id}}">
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="row">
                                 <div class="col s12">
+                                    <h5 class="edit-track-header">Edit Your Track</h5>
                                     <form
                                         action="{{url_for('tracks.edit_track', track_id=track._id, username=session['user'])}}"
                                         method="POST" class="edit-track-form">
@@ -253,7 +254,7 @@
                             </div>
                         </div>
                         <!-- Track Delete Modal -->
-                        <div class="modal delete-track-modal" id="delete_track_modal_{{track._id}}">
+                        <div class="modal delete-track-modal" id="delete_track_modal_0{{track._id}}">
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="modal-content">
                                 <div class="row">
@@ -321,7 +322,7 @@
                                         <p class="liked-tracks-track-name">{{track.track_name}}</p>
                                     </div>
                                     <div class="card-action action-buttons">
-                                        <a href="#more_info_modal_{{track._id}}" class="btn modal-trigger">
+                                        <a href="#more_info_modal_00{{track._id}}" class="btn modal-trigger">
                                             <i class="fas fa-info-circle"></i>
                                         </a>
                                         {% if username["username"] == session.user %}
@@ -334,7 +335,7 @@
                         </div>
                         <!-- Track Info Modal -->
                         <aside>
-                        <div class="modal track-info-modal user-profile" id="more_info_modal_{{track._id}}">
+                        <div class="modal track-info-modal user-profile" id="more_info_modal_00{{track._id}}">
                             <i class="fas fa-times-circle modal-close close-modal-icon" data-group="close-modal"></i>
                             <div class="modal-content modal-body">
                                 <div class="row">
@@ -461,7 +462,6 @@
 {% block scripts %}
 <!-- <script src="{{url_for('static', filename='js/profile_image_filesize_checker.js')}}"></script> -->
 <script src="{{url_for('static', filename='js/remove-like-ajax.js')}}"></script>
-<script src="{{url_for('static', filename='js/fit-card-title.js')}}"></script>
 <script src="{{url_for('static', filename='js/update-profile-image.js')}}"></script>
 {% endblock %}
 {% endblock %}
