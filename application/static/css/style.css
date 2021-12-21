@@ -269,6 +269,8 @@ nav li a {
 
 /* -------- User Profile Page --------- */
 
+/* User Details/Profile Picture */
+
 .profile-banner {
     background-color: #3c4c8b;
     display: flex;
@@ -475,6 +477,10 @@ nav li a {
 }
 
 /* Delete Profile Modal */
+
+.delete-modal-alert-wrapper h4 {
+    font-family: "Alata", sans-serif;
+}
 
 
 .delete-account-modal {
@@ -708,6 +714,7 @@ nav li a {
 .user-option-list {
     display: flex;
     justify-content: center;
+    background-color: #3c4c8b;
 }
 
 .user-option-list ul li {
@@ -1808,11 +1815,17 @@ li.page-item.active .page-link {
     /* ------ Build Profile Page ------- */
 
     .build-profile-container {
-        height: 80vh;
+        min-height: 80vh;
     }
 
     .build-profile-form .btn {
         width: 50%;
+    }
+
+    .build-profile-form .btn label {
+        color: #eee;
+        font-size: .885rem;
+        font-weight: 500;
     }
 
     /* ------ Add Track Page ------ */
@@ -1857,6 +1870,10 @@ li.page-item.active .page-link {
 
     /* ------ Browse Tracks Page ------ */
     /* Top-level links displaying user options */
+
+    .user-option-list {
+        padding: 2rem 0;
+    }
 
     .user-option-icon {
         margin: 0 10px 0 10px;
@@ -2434,7 +2451,6 @@ li.page-item.active .page-link {
     /* Latest Tracks */
 
     .track-name {
-        /* white-space: nowrap; */
         font-size: 1.4rem;
     }
 
@@ -2642,7 +2658,6 @@ li.page-item.active .page-link {
         align-items: center;
         justify-content: center;
         height: 415px;
-
     }
 
     /* ----- Contact Page ----- */
@@ -2707,6 +2722,7 @@ li.page-item.active .page-link {
 
 /* iPad Pro Devices */
 @media only screen and (min-width: 1024px) and (max-width: 1024px) {
+
     /* ----- Home Page ----- */
 
     .login-window {
@@ -2867,7 +2883,6 @@ li.page-item.active .page-link {
 
 /* Macbook Pro 2013 13in - 'Common' viewport size */
 /* https://reviewspapa.com/1366x768-a-common-screen-resolution/ */
-
 @media only screen and (min-width: 1280px) and (max-width: 1366px) {
 
     /* ----- Home Page ------ */
@@ -2880,7 +2895,6 @@ li.page-item.active .page-link {
 }
 
 /* iPhone 5 Devices */
-
 @media only screen and (min-width: 320px) and (max-width: 320px) {
 
     /* ------ Home Page ------ */
@@ -2919,6 +2933,7 @@ li.page-item.active .page-link {
 
 }
 
+/* iPhone 6/7/8 */
 @media only screen and (min-width: 375px) and (max-width: 375px) and (min-height: 667px) and (max-height: 667px) {
     .login-page-container {
         min-height: 71vh;
@@ -2929,14 +2944,14 @@ li.page-item.active .page-link {
     }
 }
 
+/* iPhone X */
 @media only screen and (min-width: 375px) and (max-width: 375px) and (min-height: 812px) and (max-height: 812px) {
     .login-page-container {
         min-height: 76vh;
     }
 }
 
-/* iPhone X Device */
-
+/* Pixel 2 Device */
 @media only screen and (min-width: 411px) and (max-width: 411px) {
     /* ------ User Profile Page ------ */
 
@@ -2966,6 +2981,7 @@ li.page-item.active .page-link {
     }
 }
 
+/* iPhone 6/7/8 Plus */
 @media only screen and (min-width: 414px) and (max-width: 414px) {
 
     /* ------ User Profile Page ------ */
@@ -2993,7 +3009,7 @@ li.page-item.active .page-link {
 
 }
 
-/* Huaweu Mate20 Pro Device*/
+/* Huaweu Mate20 Pro */
 @media only screen and (min-width: 360px) and (max-width: 360px) {
 
     /* ------ Home Page ------ */
