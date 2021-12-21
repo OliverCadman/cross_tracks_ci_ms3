@@ -15,9 +15,11 @@ from application.config import Config
 
 app = create_app()
 
+# Run the app with IP and PORT variables from 
+# env.py file
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
 
 
