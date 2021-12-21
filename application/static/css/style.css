@@ -1346,6 +1346,10 @@ li.page-item.active .page-link {
     border-radius: 20px;
 }
 
+.login-window-icon {
+    color: rgb(155, 155, 155);
+}
+
 .login-form small {
     font-family: "Roboto", sans-serif;
 }
