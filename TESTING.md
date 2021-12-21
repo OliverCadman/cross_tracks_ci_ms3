@@ -55,12 +55,13 @@
                 * [Search Window, Duplicate Results](#Search-Window,-Duplicate-Results)
                 * [MaterializeCSS](#MaterializeCSS)
                     * [Card Images](#Card-Images)
-                    * [Card Heights](#Card-Heights)
+                    * ['Browse Tracks' Page cards](#'Browse-Tracks'-Page-cards)
             * [Unfixed Bugs](#Unfixed-Bugs)
                 * ['Browse Tracks' page on Firefox (laptop screen size)](#'Browse-Tracks'-page-on-Firefox-(laptop-screen-size))
                 [Jinja URL encoding](#Jinja-URL-Encoding)
                 * [JSON Web Tokens - Password Reset](#JSON-Web-Tokens---Password-Reset)
                 * [Pagination/Search Results](#Pagination/Search-Results)
+                * ["$ is not defined"](#"$-is-not-defined")
     * [Further Testing](#Further-Testing)
 
             
@@ -764,32 +765,23 @@ becoming distorted.
 To overcome this, the developer removed the `card-image` wrapper div, and created their own div with absolute positioning, relative to the card.
 This rectified this issue.
 
-##### Card Heights
+#### 'Browse Tracks' Page cards
 
-A further MaterializeCSS issue involved a discrepancy in the height of horizontal track cards.
-
-Laptop and Tablet screen sizes display the cards horizontally, with 3 per row for laptop, and 2 per row for tablet. However, upon
-initial testing, the first card of each row would be pushed to the row below, resulting in an area of white space, where a card should be.
-The developer of course inspected the page in an attempt to find any word-breaks (as this would be a likely cause), but none were found.
-
-To rectify this, the horizontal cards were given an explicit height through custom CSS.
-
-### Unfixed Bugs
-
-#### 'Browse Tracks' page on Firefox (laptop screen size)
-
-When testing the arrangement of track cards in the website's 'Browse Tracks' page on Google Chrome and Apple Safari browsers (on laptop screen size), the testing results are as expected; the cards are three-per-row,
-and arranged in a uniform style. However, when testing on the Firefox browser, the first two cards of the second row are pushed down, as if there is some invisible box-sizing added by the MaterializeCSS cards, which is 
+When testing the arrangement of track cards in the website's 'Browse Tracks' page on Google Chrome, Firefox and Apple Safari (on laptop screen size), the testing results are as expected; the cards are three-per-row,
+and arranged in a uniform style. However, in later testing, the first two cards of the second row are pushed down, as if there is some invisible box-sizing added by the MaterializeCSS cards, which is 
 making the cards not fit neatly in a row. Or alternatively, some text content on the first row of cards is word breaking, making one card two large for them all to fit on one row. 
 
-The developer examined the cards for any word breaks, and used Firefox's devtools to alter the padding of the Materialize 'col' divs. This did result in the cards fitting on two rows. However, when adding this style rule into
+The developer examined the cards for any word breaks, and used Chrome/Firefox devtools to alter the padding of the Materialize 'col' divs. This did result in the cards fitting on two rows. However, when adding this style rule into
 CSS and testing the page again, the cards returned to their original, incorrect, and unsightly layout. This leads me to believe that only the top row of cards should have a specific class to adjust the padding of the containing divs.
 
 However, since the cards are paginated, the developer visited the second page of the track cards, which were all positioned as expected; two rows, with three cards per row. This is also the case for the rest of the pages. The text content, or size of the cards, in no way differs
 to that in the first page of cards, which makes matters ever more confusing. 
 
-It is of course not a good or aesthetic/visually pleasing look to have these cards displayed in such away. Should the developer have time before project submission, they will of course
-endeavour to rectify this.
+It is of course not a good or aesthetic/visually pleasing look to have these cards displayed in such a way. Although it was the developer's desire to have three tracks per row on laptop and desktop, the developer made the decision
+to arrange the cards in two per row on laptop/desktop monitors, and full-width on iPad devices.
+
+
+### Unfixed Bugs
 
 #### Jinja URL encoding 
 
@@ -845,6 +837,14 @@ can open the modal windows, which is the cause of this inconsistency.
 
 Due to time constraints, it is not currently possible to rectify this issue. Unfortunately, until this issue can be rectified, the search bar will only serve to show the track cards. To compensate, all 
 track information (track name, artist name, album, genre and year-of-release), will be displayed on these track cards.
+
+#### "$ is not defined"
+
+When testing the AJAX functionality (or any areas of the website that use jQuery), the console would throw an error "Uncaught ReferenceError: $ is not defined". This was confusing,
+as all the features that relied on AJAX were functional and working as expected. The developer looked into the arrangement of the offending JavaScript files,
+to determine if they were being loaded before the jQuery file, but in all cases, the jQuery is being loaded before the JavaScript files that rely on it.
+The developer considered it may be due to Jinja templating, but was unable to find away to rid the console of this error. However, all JavaScript functionality
+is in place.
 
 ## Further Testing
 
