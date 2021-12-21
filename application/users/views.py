@@ -25,14 +25,6 @@ Functions:
 
     edit_profile_img()
 
-    get_reset_token()
-
-    request_password_reset()
-
-    verify_reset_token()
-
-    reset_password()
-
     delete_profile()
 """
 
@@ -179,10 +171,14 @@ def build_profile(username):
                 "profile_image": profile_image.filename
                 }
 
-            User.complete_user_profile(username, profile_info)
-
-            return redirect(url_for("users.user_profile",
-                                    username=username))
+            try:
+                User.complete_user_profile(username, profile_info)
+                flash("Thanks. We hope you enjoy Cross//Tracks!")
+                return redirect(url_for("users.user_profile",
+                                        username=username))
+            except:
+                flash("Sorry, something went wrong, please try again.")
+                return redirect(url_for("users.build_profile"))
 
     return render_template('build-profile.html')
 
@@ -293,7 +289,7 @@ def logout():
 
     # Custom error handling in the case that
     # the user is already logged out.
-    if session.get("user"):    
+    if session.get("user"):
         session.pop("user")
         flash("You have been logged out")
         return redirect(url_for("main.index"))
@@ -370,7 +366,7 @@ def user_profile(username):
 
     return render_template("user-profile.html", username=current_user,
                            user_age=user_age, users_tracks=users_tracks,
-                           liked_tracks=liked_tracks, genres=genres)
+                           liked_tracks=liked_tracks, genre_list=genres)
 
 
 @users.route('/edit_profile_img/<username>', methods=["GET", "POST"])
@@ -428,153 +424,6 @@ def edit_profile_img(username):
                     flash('Sorry, something went wrong. Please try again.')
                     return redirect(url_for('users.user_profile',
                                             username=username))
-
-
-# https://medium.com/@stevenrmonaghan/password-reset-with-flask-mail-protocol-ddcdfc190968
-def get_reset_token(email, expires_sec=500):
-    """
-    Generates and returns JSON Web Token to be used for authorization
-    """
-
-    user = User.find_user_by_email(email)
-    user_id = str(user["_id"])
-
-    SECRET_KEY = "/G..;U7|cf1>^B&"
-
-    s = Serializer('SECRET_KEY', expires_sec)
-    token = s.dumps({"user_id": user_id}).decode('utf-8')
-    return token
-
-
-@users.route('/request-password-reset', methods=["GET", "POST"])
-def request_password_reset():
-    """
-    Handles form on modal in login.html
-    =========================================
-    Checks email input against User collection in MongoDB.
-    If successful, creates JSON web token using get_user_token()
-    Instance of Flask mail is created with properties:
-
-    Subject
-    Sender - Environment variable
-    Recipients - The email provided by the user
-    HTML - 'password-reset-email.html'
-           Called from render_template().
-           Takes in JWT and user's first name as argument
-
-    Email is then sent with a link provided to visit
-    'reset-password.html', with the token included in
-    GET request.
-    """
-
-    if request.method == "POST":
-
-        email_input = request.form.get("email_address")
-
-        # Query MongoDB to check user input against email address in DB
-        user = User.find_user_by_email(email_input)
-        if not user:
-            flash("We're sorry, we couldn't find your email.")
-            return redirect("users.login")
-
-        token = get_reset_token(email_input)
-
-        msg = Message()
-        msg.subject = "Cross//Tracks: Reset your Password"
-        msg.sender = os.environ.get("MAIL_USERNAME")
-        msg.recipients = [user["email_address"]]
-        msg.html = render_template('password-reset-email.html',
-                                   token=token,
-                                   user=user["first_name"].title())
-        try:
-            mailing.send(msg)
-            flash("Email sent. Please check your inbox.")
-            return redirect(url_for("users.login"))
-        except:
-            flash("Sorry, something went wrong. Please try again.")
-            return redirect(url_for("users.login"))
-
-    return render_template('login.html')
-
-
-def verify_reset_token(token):
-    """
-    Decodes the JSON web token
-    and return's user email address
-    if successful. If unsuccessful,
-    (primarily due to the token timing out),
-    Flash message is displayed with relevant
-    error message and User is redirected to login
-    page.
-    """
-
-    print(token)
-
-    SECRET_KEY = "4t7w!z%C*F-JaNdRgUjXn2r5u8x/A?D("
-
-    s = Serializer('SECRET_KEY')
-    user_id = None
-
-    try:
-        user_id = s.loads(token)["user_id"]
-    except Exception as e:
-        print(e)
-        return None
-
-    found_user = User.find_user_by_id(user_id)
-    return found_user
-
-
-@users.route("/reset-password/<token>")
-@users.route("/reset-password")
-def reset_password(token):
-    """
-    Renders "reset-password.html"
-
-    Handles data submitted in form in Reset Password
-    page.
-
-    Checks that the password matches the correct format,
-    and the first password matches the confirmed password.
-
-    If all checks are passed, the new password is updated in
-    user collection, and user is redirected to home page.
-    """
-
-    # Grabs user ID returned from verify_reset_token()
-    user = verify_reset_token(token)
-    print(user)
-    print("Block")
-    if request.method == "POST":
-        print('Block One')
-        password = request.form.get("password")
-        confirm_password = request.form.get("confirm_password")
-
-        if not User.validate_password_format(password):
-            flash(("Please include at least one",
-                  "capital letter, one number and one special character"))
-            return redirect(url_for('users.reset_password'))
-
-        if not User.validate_password_match(password, confirm_password):
-            flash("Passwords do not match!")
-            return redirect(url_for('users.reset_password'))
-
-        username = user["username"]
-        edited_password = {
-            "password": generate_password_hash(password)
-        }
-
-        print("Block Two")
-
-        try:
-            User.edit_profile(username, edited_password)
-            flash("Password changed successfully!")
-            return redirect(url_for("users.login"))
-        except:
-            flash("Sorry, something went wrong. Please try again")
-            return redirect(url_for("users.reset_password"))
-
-    return render_template('reset-password.html')
 
 
 @users.route('/delete_profile/<username>')
