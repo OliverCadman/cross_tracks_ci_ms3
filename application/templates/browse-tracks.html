@@ -80,13 +80,15 @@
               <div class="card-stacked">
                 <div class="card-content">
                   <span class="track-name card-title no-wordbreak">{{track.track_name}}</span>
-                  {% if session.user %} {% if session.user in track.likes %}
+                  {% if session.user %} 
+                  {% if session.user in track.likes %}
+                  <!-- Like Buttons (tablet and up) -->
                   <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"><i class="fas fa-star like-comment-icons"></i></a></span>
+                      class="like_track_med"><i class="fas fa-star like-comment-icons"></i></a></span>
                   <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                   {% else %}
                   <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                      class="modal-trigger like_track_med"><i class="far fa-star like-comment-icons"></i></a></span>
+                      class="like_track_med"><i class="far fa-star like-comment-icons"></i></a></span>
                   <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                   {% endif %}
                   {% else %}
@@ -156,7 +158,9 @@
               <div class="card-title">
                 <span>{{track.track_name}}</span>
               </div>
-              {% if session.user %} {% if session.user in track.likes %}
+              {% if session.user %} 
+              {% if session.user in track.likes %}
+              <!-- Like Buttons (Mobile)-->
               <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
                   class="modal-trigger like_track_mob"><i class="fas fa-star"></i></a></span>
               <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
@@ -234,6 +238,7 @@
                 <div class="modal-body">
                   <div class="row">
                     <div class="col s12 m6 album-cover-modal">
+                      <!-- Track Modal Header -->
                       <h4 class="track-modal-header">{{track.track_name}}</h4>
                       {% if not track.image_url == '' %}
                       <img src="{{track.image_url}}" alt="Image of Cover Art for Track" class="album-cover" />
@@ -378,7 +383,8 @@
                       </form>
                       {% endif %}
                     </div>
-
+                    <!-- Horizontal rule underneath each comment,
+                    (apart from last comment displayed)-->
                     {% if not loop.last %}
                     <hr class="comment-divider" />
                     {% endif %}
@@ -499,7 +505,8 @@
             <div class="card-title">
               <span>{{track.track_name}}</span>
             </div>
-            {% if session.user %} {% if session.user in track.likes %}
+            {% if session.user %} 
+            {% if session.user in track.likes %}
             <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
                 class="like_track_mob"><i class="fas fa-star"></i></a></span><span
               class="likes-count">{{track.likes_count if track.likes_count}}</span>
@@ -555,11 +562,11 @@
                 <span class="card-title no-wordbreak">{{ track.track_name }}</span>
                 {% if session.user %} {% if session.user in track.likes %}
                 <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                    class="modal-trigger like_track_med"><i class="fas fa-star like-comment-icons"></i></a></span>
+                    class="like_track_med"><i class="fas fa-star like-comment-icons"></i></a></span>
                 <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                 {% else %}
                 <span><a href="{{url_for('tracks.like_track', track_id=track._id, username=session['user'])}}"
-                    class="modal-trigger like_track_med"><i class="far fa-star like-comment-icons"></i></a></span>
+                    class="like_track_med"><i class="far fa-star like-comment-icons"></i></a></span>
                 <span class="likes-count">{{track.likes_count if track.likes_count}}</span>
                 {% endif %}
                 {% else %}
