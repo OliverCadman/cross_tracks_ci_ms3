@@ -135,7 +135,7 @@
                 </div>
                 <div class="col s4">
                     <ul class="domestic-links">
-                        <li><a href="{{url_for('main.contact')}}">Contact Us</a></li>
+                        <li><a href="{{url_for('main.contact')}}">Contact</a></li>
                     </ul>
                 </div>
                 {% else %}
@@ -146,7 +146,7 @@
                  </div>
                  <div class="col s6">
                      <ul class="domestic-links">
-                         <li><a href="{{url_for('main.contact')}}">Contact Us</a></li>
+                         <li><a href="{{url_for('main.contact')}}">Contact</a></li>
                      </ul>
                  </div>
                 {% endif %}
@@ -183,6 +183,7 @@
 
     {% endif %}
     {% endwith %}
+    <!-- Scripts for other pages -->
     {% block scripts %}
     {% endblock %}
 </body>
