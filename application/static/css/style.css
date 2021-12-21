@@ -2845,6 +2845,13 @@ li.page-item.active .page-link {
     .hero-section {
         background-size: 48%, cover;
     }
+
+    /* ----- Register/Login Pages */
+
+    .register-page-container,
+    .login-page-container {
+        min-height: 72vh;
+    }
 }
 
 
@@ -2871,7 +2878,7 @@ li.page-item.active .page-link {
 
     .register-page-container,
     .login-page-container {
-        min-height: 79vh;
+        min-height: 80vh;
         justify-content: center;
     }
 
