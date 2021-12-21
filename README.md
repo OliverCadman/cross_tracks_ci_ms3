@@ -1,4 +1,7 @@
 # Cross//Tracks
+
+![Cross Tracks 'AmIResponsive' Screenshot](documentation/readme-images/crosstracks-amiresponsive.png)
+
 Cross//Tracks is an online music sharing platform, where music lovers around the world can share their favourite tracks, and expand on their own collection of music with new discoveries shared by the Cross//Tracks community.
 
 The platform will allow users to browse a complete list of shared tracks, search/filter tracks by Genre, Artist Name or Year of Release, leave comments, and give tracks a star rating.
