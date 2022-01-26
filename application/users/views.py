@@ -482,6 +482,7 @@ def delete_profile(username):
             # Remove user data from track's "likes" list
             # and decrement the 'likes' count of all
             # relative tracks.
+            Track.delete_users_tracks(user_id)
             Track.decrement_likes_count(username)
             Track.remove_user_from_likes_list(username)
         except Exception as e:
